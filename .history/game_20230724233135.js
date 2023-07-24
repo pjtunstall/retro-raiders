@@ -38,8 +38,6 @@ let seconds = 0;
 let minutes = 0;
 let formattedMinutes = "00";
 let formattedSeconds = "00";
-let currentPage = 0;
-
 let scoreBoardPressAnyKey = document.querySelector(".press-any-key");
 const scoreElement = document.getElementById("score");
 const levelElement = document.getElementById("level");
@@ -1119,7 +1117,6 @@ function reset(restart) {
   scoreBoardPressAnyKey.classList.add("hidden");
   player.classList.remove("player-beam");
   source.playbackRate.value = 1;
-  currentPage = 0;
 
   // To deal with the possibility that the player is hit by an alien bullet while
   // the last alien is still exploding.
@@ -2029,9 +2026,9 @@ function handleKeyDown(event) {
 
   if (
     isGameOver &&
-    (key === "n" || key === "N") &&
     isScoreBoardShowing &&
-    gameOverTime + gameOverDelay < Date.now()
+    gameOverTime + gameOverDelay < Date.now() &&
+    (key === "n" || key === "N")
   ) {
     document.querySelector("#end-game-scoreboard-container").innerHTML = "";
     gameContainer.style.visibility = "visible";
@@ -2052,19 +2049,6 @@ function handleKeyDown(event) {
     isScoreBoardShowing = false;
     return;
   }
-
-  if (isGameOver && isScoreBoardShowing && (key === "p" || key === "P")) {
-    if (currentPage == 1) {
-      currentPage--;
-      displayScoreboard(scores, message);
-    } else {
-      currentPage++;
-      displayScoreboard(scores, message);
-    }
-
-    return;
-  }
-
   if (key === "p" || key === "P") {
     togglePauseThrottled();
   }
@@ -2177,7 +2161,7 @@ const showAndAddGameoverMenue = () => {
     "beforeend",
     `
 <div><span id="n">[N]ew game</span></div>
-<div class="hidden" ><span id="any"> [P] toggle page</span></div> 
+<div class="hidden" ><span id="any"> [p] toggle page</span></div> 
 `
   );
   pauseMenu.style.visibility = "visible";
@@ -2354,12 +2338,11 @@ const sendScoreView = (callback) => {
 
 //  default sendScoreView;
 
+let currentPage = 0;
 // Function to display the scoreboard
 function displayScoreboard(scores, message) {
-  if (currentPage > 1) return;
-  console.log(score);
-  const start = currentPage * 10 + 1;
-  const end = start + 9;
+  console.log(scores);
+  if (currentPage > 2) return;
   // Get the scoreboard container
   const container = document.getElementById("end-game-scoreboard-container");
   // Clear the current scoreboard display
@@ -2376,6 +2359,8 @@ function displayScoreboard(scores, message) {
   text.classList.add("message");
   container.appendChild(text);
   // Determine the start and end indices for the scores on the current page
+  const start = currentPage * 10 + 1;
+  const end = start + 9;
 
   // Create and append a new div for each score on the current page
   for (let i = start; i <= end; i++) {
@@ -2407,5 +2392,27 @@ function displayScoreboard(scores, message) {
     entry.appendChild(playerTime);
 
     container.appendChild(entry);
+  }
+
+  const div = document.createElement("div");
+
+  if (currentPage > 0) {
+    const prevButton = document.createElement("button");
+    prevButton.textContent = "Previous";
+    prevButton.addEventListener("click", () => {
+      currentPage--;
+      displayScoreboard(scores, message);
+    });
+    container.appendChild(prevButton);
+  }
+
+  if (end <= 20) {
+    const nextButton = document.createElement("button");
+    nextButton.textContent = "Next";
+    nextButton.id = nextButton.addEventListener("click", () => {
+      currentPage++;
+      displayScoreboard(scores, message);
+    });
+    container.appendChild(nextButton);
   }
 }

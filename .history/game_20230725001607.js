@@ -2356,10 +2356,8 @@ const sendScoreView = (callback) => {
 
 // Function to display the scoreboard
 function displayScoreboard(scores, message) {
-  if (currentPage > 1) return;
+  if (currentPage > 2) return;
   console.log(score);
-  const start = currentPage * 10 + 1;
-  const end = start + 9;
   // Get the scoreboard container
   const container = document.getElementById("end-game-scoreboard-container");
   // Clear the current scoreboard display

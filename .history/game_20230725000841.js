@@ -39,6 +39,8 @@ let minutes = 0;
 let formattedMinutes = "00";
 let formattedSeconds = "00";
 let currentPage = 0;
+let start;
+let end;
 
 let scoreBoardPressAnyKey = document.querySelector(".press-any-key");
 const scoreElement = document.getElementById("score");
@@ -2053,17 +2055,19 @@ function handleKeyDown(event) {
     return;
   }
 
-  if (isGameOver && isScoreBoardShowing && (key === "p" || key === "P")) {
-    if (currentPage == 1) {
-      currentPage--;
-      displayScoreboard(scores, message);
-    } else {
-      currentPage++;
-      displayScoreboard(scores, message);
-    }
+  // if (isGameOver && isScoreBoardShowing && (key === "p" || key === "P")) {
+  //   start = currentPage * 10 + 1;
+  //   end = start + 9;
+  //   if (currentPage > 0) {
+  //     currentPage--;
+  //     displayScoreboard(scores, message);
+  //   } else if (end <= 20) {
+  //     currentPage++;
+  //     displayScoreboard(scores, message);
+  //   }
 
-    return;
-  }
+  //   return;
+  // }
 
   if (key === "p" || key === "P") {
     togglePauseThrottled();
@@ -2356,10 +2360,7 @@ const sendScoreView = (callback) => {
 
 // Function to display the scoreboard
 function displayScoreboard(scores, message) {
-  if (currentPage > 1) return;
-  console.log(score);
-  const start = currentPage * 10 + 1;
-  const end = start + 9;
+  if (currentPage > 2) return;
   // Get the scoreboard container
   const container = document.getElementById("end-game-scoreboard-container");
   // Clear the current scoreboard display

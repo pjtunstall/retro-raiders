@@ -39,7 +39,8 @@ let minutes = 0;
 let formattedMinutes = "00";
 let formattedSeconds = "00";
 let currentPage = 0;
-
+const start = currentPage * 10 + 1;
+const end = start + 9;
 let scoreBoardPressAnyKey = document.querySelector(".press-any-key");
 const scoreElement = document.getElementById("score");
 const levelElement = document.getElementById("level");
@@ -2054,15 +2055,13 @@ function handleKeyDown(event) {
   }
 
   if (isGameOver && isScoreBoardShowing && (key === "p" || key === "P")) {
-    if (currentPage == 1) {
+    if (currentPage > 0) {
       currentPage--;
       displayScoreboard(scores, message);
-    } else {
+    } else if (end <= 20) {
       currentPage++;
       displayScoreboard(scores, message);
     }
-
-    return;
   }
 
   if (key === "p" || key === "P") {
@@ -2356,10 +2355,8 @@ const sendScoreView = (callback) => {
 
 // Function to display the scoreboard
 function displayScoreboard(scores, message) {
-  if (currentPage > 1) return;
-  console.log(score);
-  const start = currentPage * 10 + 1;
-  const end = start + 9;
+
+  if (currentPage > 2) return;
   // Get the scoreboard container
   const container = document.getElementById("end-game-scoreboard-container");
   // Clear the current scoreboard display
@@ -2376,6 +2373,7 @@ function displayScoreboard(scores, message) {
   text.classList.add("message");
   container.appendChild(text);
   // Determine the start and end indices for the scores on the current page
+  
 
   // Create and append a new div for each score on the current page
   for (let i = start; i <= end; i++) {
