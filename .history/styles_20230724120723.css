@@ -238,7 +238,7 @@ body {
   top: 40px;
   left: 50%;
   transform: translateX(-50%);
-  width: 4px;
+  width: 45px;
   height: 0;
   background-color: yellow;
   clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
