@@ -1540,10 +1540,6 @@ function update(frameDuration) {
     (ufoDirection === -1 &&
       ufoLeft + ufoWidth / 2 > playerLeft + playerWidth / 2);
 
-  if (!ufoToggleBeam && ufoGetPlayer && !ufoTakenPlayer) {
-    ufoLeft = playerLeft + playerWidth / 2 - ufoWidth / 2;
-  }
-
   // if (this.active && this.toggoleBeam && this.gettingPlayer) {
   // Move UFO.
   if (ufoActive && ufoToggleBeam && ufoGetPlayer) {
