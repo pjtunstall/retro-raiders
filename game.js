@@ -40,7 +40,61 @@ let formattedMinutes = "00";
 let formattedSeconds = "00";
 let currentPage = 0;
 let storyMode = false;
+let storyPageNumber = 0;
 const storyTestArr = [
+  [
+    `./1.jpg`,
+
+    `The Emperor of Grumium,
+the Grand Eskalir,
+was on campaign in Orion Arm,
+cut down in his thousandth year.
+
+A faulty teleportation pad
+left him in 64 bits,
+strewn across Orion's belt,
+jibbering and in fits.
+
+Three warlike tribes he did unite,
+invaders one, two, three,
+held together by fear and greed
+and his personality.
+
+His offspring fought till one was left,
+a hatchling from the brood.
+The only way to prove her power
+was spilling yet more blood.
+
+A babe in arms, but sharp and sly,
+her rivals bit the dust.
+They crowned her eskalir that day.
+For conquest she did lust.
+
+"Where shall we invade today?"
+Her lip it slowly curled.
+"Turn left at Barnard's Star," she said.
+"I know a world."`
+  ],
+
+  [
+    `./28.jpg`,
+
+    `"I know a world called Planet Earth
+with little for defense.
+"A lone gunner guards their towns.
+Let's teleport us hence."
+
+"Let's teleport our tribes all three
+and a Mystery Ship to boot.
+Paris and New York wil fall.
+We'll divvy up the loot."
+
+"Meteors we'll knock off course
+their cities for to wreck.
+From off the starcharts well will wipe
+that Pale Blue Speck."`
+  ],
+
   [
     `./storyimage2.jpeg`,
 
@@ -1844,6 +1898,14 @@ const cutScene = () => {
   statsBar.style.display = "none";
 };
 
+const unCutScene = () => {
+  pauseMenu.style.display = "flex";
+  title.style.display = "flex";
+  gameContainer.style.display = "block";
+  statsBar.style.display = "flex";
+  storyEl.classList.add('hidden');
+};
+
 const renderStory = (arr) => {
   storyEl.innerHTML = "";
   storyEl.classList.remove("hidden");
@@ -2077,6 +2139,14 @@ function handleKeyDown(event) {
   const key = event.key;
 
   if (storyMode) {
+    storyPageNumber++;
+    if (storyPageNumber > 2) {
+      storyMode = false;
+      unCutScene();
+      togglePauseThrottled();
+    } else {
+      renderStory(storyTestArr[storyPageNumber]);
+    }
     return;
   }
 
@@ -2129,6 +2199,7 @@ function handleKeyDown(event) {
       cutScene();
       renderStory(storyTestArr[0]);
       storyMode = true;
+      storyPageNumber = 0;
       return;
     }
 
