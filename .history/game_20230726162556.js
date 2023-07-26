@@ -44,7 +44,7 @@ const storyTestArr = [
   [
     `./storyimage2.jpeg`,
 
-    `From the memoirs of Exentius Persei, Ambassador of the Hmadian Macrostates, on concluding his negotiations with FnrRa Gfgfgg (2<sup>1024</sup> -1)st Grand Eskalir of Grumium.
+    `From the memoirs of Exentius Persei, Ambassador of the Hmadian Macrostates, on concluding his negotiations with FnrRa Gfgfgg (2^1024 - 1)st Grand Eskalir of Grumium.
 
     Following my embassy to the Grand Eskalir--Oh, I could hardly believe it, she'd walked right into my trap!--I happened upon a contingent of mercenaries, one of them of species I didn't recognise. Crisscrossed with laser scars and plasma burns, it had a curious bilateral symmetry, and wore a breastplate in the Orion style, much like those of its comrades. As I approached, it looked up from darning its pressure suit, squinting under the harsh starlight, and flapped its arms at me. I returned this traditional Invader salute and enquired, "Where are you from, sir?"
     
@@ -76,7 +76,7 @@ const chapter = [
   "A Spoonful of Syntactic Sugar",
   "Djanko Undjanked",
   "Repo Man",
-  "ASCII Not for Whom<br>the Bell Labs Toll",
+  "ASCII Not for Whom the Bell Labs Toll",
   "Render Unto Caesar",
   "Layer Cake",
   "Not (Just) a Number",
@@ -89,7 +89,7 @@ const chapter = [
   "Gain of Function",
   "JSON and the Arguments",
   "Romanes eunt DOMus",
-  "There's Node Business<br>Like Show Business",
+  "There's Node Business Like Show Business",
   "That Asyncing Feeling",
   "To Summon His Array",
   "Regex Quandam, Regex Futurusque",
@@ -109,7 +109,7 @@ const chapter = [
   "Tupenny 'APIenny",
   "Bitwise and Pound Foolish",
   "Lookit, Log it, Lockett",
-  "Nully the Element Packed Her Math.trunc<br>and ...Spread Goodbye For the Circus",
+  "Nully the Element Packed Her Math.trunc and ...Spread Goodbye For the Circus",
   "Lookbehind in Anger",
   "Home, Home on the Range Loop",
   "Yield, Sir Knight!",
@@ -2076,10 +2076,6 @@ function removeRightColumn() {
 function handleKeyDown(event) {
   const key = event.key;
 
-  if (storyMode) {
-    return;
-  }
-
   if (
     isGameOver &&
     (key === "n" || key === "N") &&
@@ -2119,12 +2115,9 @@ function handleKeyDown(event) {
     return;
   }
 
-  if (key === "p" || key === "P") {
-    togglePauseThrottled();
-    return;
-  }
+ 
 
-  if (paused) {
+  if (paused ) {
     if (key === "S" || key === "s") {
       cutScene();
       renderStory(storyTestArr[0]);
@@ -2145,6 +2138,12 @@ function handleKeyDown(event) {
 
       togglePauseThrottled();
     }
+  }
+
+
+  if (key === "p" || key === "P" && !storyMode) {
+    togglePauseThrottled();
+    return;
   }
   switch (key) {
     case "ArrowLeft":

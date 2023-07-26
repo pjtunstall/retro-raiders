@@ -76,7 +76,7 @@ const chapter = [
   "A Spoonful of Syntactic Sugar",
   "Djanko Undjanked",
   "Repo Man",
-  "ASCII Not for Whom<br>the Bell Labs Toll",
+  "ASCII Not for Whom\nthe Bell Labs Toll",
   "Render Unto Caesar",
   "Layer Cake",
   "Not (Just) a Number",
