@@ -43,7 +43,7 @@ let storyMode = false;
 let storyPageNumber = 0;
 const storyTestArr = [
   [
-    `./1.jpg`,
+    `./24.jpg`,
 
     `The Emperor of Grumium,
 the Grand Eskalir,
@@ -67,7 +67,7 @@ was spilling yet more blood.
 
 A babe in arms, but sharp and sly,
 her rivals bit the dust.
-They crowned her eskalir that day.
+They crowned her emperor that day.
 For conquest she did lust.
 
 "Where shall we invade today?"
@@ -81,28 +81,66 @@ Her lip it slowly curled.
 
     `"I know a world called Planet Earth
 with little for defense.
-"A lone gunner guards their towns.
+A lone gunner guards their towns.
 Let's teleport us hence."
 
 "Let's teleport our tribes all three
 and a Mystery Ship to boot.
-Paris and New York wil fall.
+Paris and New York will fall.
 We'll divvy up the loot."
 
 "Meteors we'll knock off course
 their cities for to wreck.
-From off the starcharts well will wipe
+From off the starcharts we will wipe
 that Pale Blue Speck."`
+  ],
+
+  [
+    `./26.jpg`,
+
+    `You heard it in the street.
+You heard it in the news.
+You didn't believe at first,
+but that was no excuse.
+
+The politicians said keep calm.
+Ten times they did meet.
+No help were they when in orbit sat
+one whole alien fleet.
+
+The quintuplet presidents discussed
+the issue long and hard.
+They squabbled and fought and then they asked
+Chat and Bing and Bard.
+
+Those mutant clones decided then
+on the counsel of such wise minds
+to send out their messengers
+a hero for to find.
+
+That summer morning, messengers came.
+Messengers there were three.
+"Leave your sheep and goats," they said,
+"A gunner you must be."
+
+"A gunner you must be for us,
+defending PLanet Earth.
+A plasma cannon you must steer
+and shoot for all you're worth."`
   ],
 
   [
     `./storyimage2.jpeg`,
 
-    `From the memoirs of Exentius Persei, Ambassador of the Hmadian Macrostates, on concluding his negotiations with FnrRa Gfgfgg (2<sup>1024</sup> -1)st Grand Eskalir of Grumium.
+    `<i>From the Memoirs of Exaptia Tabbani, Ambassador of the Hmadian Macrostates, on concluding her negotiations with Emperor FnrRa Gfgfgg (II<sup>MXXIV</sup>-I)st, Lord of Orion, Grand Eskalir of Grumium, and Admiral of the High Reaches:</i>
 
-    Following my embassy to the Grand Eskalir--Oh, I could hardly believe it, she'd walked right into my trap!--I happened upon a contingent of mercenaries, one of them of species I didn't recognise. Crisscrossed with laser scars and plasma burns, it had a curious bilateral symmetry, and wore a breastplate in the Orion style, much like those of its comrades. As I approached, it looked up from darning its pressure suit, squinting under the harsh starlight, and flapped its arms at me. I returned this traditional Invader salute and enquired, "Where are you from, sir?"
-    
-    `,
+Following my embassy to the barbarian emperor&mdash;Oh, I could hardly believe it, she'd walked right into my trap!&mdash;I happened upon a contingent of mercenaries, busy darning their space suits for the next invasion.
+
+One caught my eye.
+
+Crisscrossed with laser scars and plasma burns, it had a curious bilateral symmetry, and wore a breastplate in the Orion style, much like those of its comrades.
+
+As I approached, it looked up and flapped its arms at me.`,
   ],
 ];
 
@@ -163,7 +201,7 @@ const chapter = [
   "Tupenny 'APIenny",
   "Bitwise and Pound Foolish",
   "Lookit, Log it, Lockett",
-  "Nully the Element Packed Her Math.trunc<br>and ...Spread Goodbye For the Circus",
+  "Nully the Element Packed Her Math.trunc<br>and ...Spread Goodbye to the Circus",
   "Lookbehind in Anger",
   "Home, Home on the Range Loop",
   "Yield, Sir Knight!",
@@ -375,7 +413,7 @@ let rightCol = 10;
 
 // Alien bullet variables.
 let alienBulletsArray = [];
-let alienFireRate = 8;
+let alienFireRate = level;
 let alienBulletDue = Date.now() + (5000 * Math.random()) / alienFireRate;
 let maxAlienBullets = 16;
 const bulletWidth = 10;
@@ -1278,7 +1316,6 @@ function reset(restart) {
     aliensRemaining = alienGridHeight * alienGridWidth;
     alienFireRate = level;
 
-    // alienFireRate = level;
     alienAnimationDuration = 1;
     aliensToRemove = [];
 
@@ -1450,6 +1487,9 @@ function reset(restart) {
 }
 
 function updateTimer() {
+  if (ufoToggleBeam || ufoGetPlayer || ufoTakenPlayer) {
+    return;
+  }
   if (Date.now() - startTime > 3600000) {
     startTime = Date.now();
   }
@@ -1678,8 +1718,6 @@ function playerDeath(final) {
     // document.removeEventListener("keyup", handleKeyUp);
     playerDirection = 0;
     player.classList.add("explosion");
-    // setTimeout(reset, 360, true);
-
     isGameOver = true;
     setTimeout(() => {
       updatesGameOver();
@@ -1711,7 +1749,8 @@ function render() {
   // DOM are batched.
   document.documentElement.style.display = "none";
 
-  if (incrementScore) {
+  if (
+    incrementScore) {
     scoreElement.textContent = `${score}`.padStart(5, "0");
     incrementScore = false;
   }
@@ -2312,7 +2351,7 @@ const showAndAddGameoverMenue = () => {
     "beforeend",
     `
 <div><span id="n">[N]ew game</span></div>
-<div class="hidden" ><span id="any"> [P] toggle page</span></div> 
+<div class="hidden" ><span id="any"> [P]age toggle</span></div> 
 `
   );
   pauseMenu.style.visibility = "visible";
