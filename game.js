@@ -1324,10 +1324,6 @@ function turnPage() {
       if (storyPart === 'londonSaved') {
         reset(false);
       }
-      if (storyEndInProgress) {
-        storyEndInProgress = false;
-        updatesGameOver();
-      }
     } else {
       renderStory(story[storyPart][storyPageNumber]);
     }
@@ -1995,17 +1991,18 @@ function playerDeath(final, fireball) {
     isGameOver = true;
     setTimeout(() => {
       player.classList.remove("explosion");
-      if (!storyMode) {
+      if (storyMode) {
+        storyPart = final ? 'aliensReachEarth' : 'playerShot';
+        if (fireball) {
+          storyPart = 'fireballEnding';
+        }
+        cutScene();
+        storyPageNumber = -1;
+        turnPageThrottled();
+        storyEndInProgress = true;
+      } else {
         updatesGameOver();
       }
-      storyPart = final ? 'aliensReachEarth' : 'playerShot';
-      if (fireball) {
-        storyPart = 'fireballEnding';
-      }
-      cutScene();
-      storyPageNumber = -1;
-      turnPageThrottled();
-      storyEndInProgress = true;
     }, 360);
   } else {
     player.classList.add(`life-${4 - lives}`);
@@ -2249,6 +2246,13 @@ const unCutScene = () => {
     togglePauseThrottled();
   }
   isInCutScene = false;
+  if (storyPart === 'playerShot' ||
+    storyPart === 'fireballEnding' ||
+    storyPart === 'aliensReachEarth'
+  ) {
+    storyEndInProgress = false;
+    updatesGameOver();
+  }
 };
 
 const renderStory = (arr) => {
