@@ -44,7 +44,13 @@ let isInCutScene = false;
 let storyPart = 'beginning';
 let storyPageNumber = 0;
 let storyEndInProgress = false;
-let story = { beginning: [], ufoShot: [], londonSaved: [], playerShot: [], aliensReachEarth: [] };
+let story = {
+  beginning: [],
+  ufoShot: [],
+  londonSaved: [],
+  playerShot: [],
+  fireballEnding: [],
+  aliensReachEarth: [] };
 story.beginning = [
   [
     `./24.jpg`,
@@ -211,7 +217,7 @@ Accept this medal for his pluck
 and a broodling of our own."
 
 "Another a gift we'd like give
-to help round the house from hence,
+to help you out from hence,
 as slaves to serve your every need:
 your quintuplet presidents."
 
@@ -221,7 +227,38 @@ To compensate you for your loss
 we'll do our alien dance."
 
 "Our dance we shall perform for you.
-We flap our arnm like so.
+We flap our arms like so.
+Your child was brave, we honour him.
+We thought you'd like to know."`
+  ]
+];
+
+story.fireballEnding = [
+  [
+    `./0.jpg`,
+
+    `The gunner's mother heard the knock,
+three aliens at the door.
+Not much to say to blunt that shock:
+"Your hatchling is no more."
+
+"A meteor took him out at once.
+For him, there's no tomorrow.
+Accept this antique gaming set
+in token of our sorrow."
+
+"Another a gift we'd like give
+to help you out from hence,
+as slaves to serve your every need:
+your quintuplet presidents."
+
+"We are the rulers of your world.
+He didn't stand a chance.
+To compensate you for your loss
+we'll do our alien dance."
+
+"Our dance we shall perform for you.
+We flap our arms like so.
 Your child was brave, we honour him.
 We thought you'd like to know."`
   ]
@@ -635,7 +672,6 @@ let alienBulletDue = Date.now() + (5000 * Math.random()) / alienFireRate;
 let maxAlienBullets = 16;
 const bulletWidth = 10;
 const bulletHeight = 30;
-let fireballHit = false;
 
 // Uncomment to test level parameters: background image and difficulty parameters,
 // but not selection of alien types or choice or black vs white aliens.
@@ -1498,6 +1534,7 @@ function reset(restart) {
   setTimeout(() => {
     if (restart) {
       storyMode = false;
+      hasUfoBeenShot = false;
       level = 1;
       lives = 3;
       score = 0;
@@ -1840,7 +1877,8 @@ function update(frameDuration) {
         bullet.left <= playerLeft + playerWidth
       ) {
         bullet.removeMe = true;
-        playerDeath(true);
+        lives = 1;
+        playerDeath(false, true);
         break;
       } else if (
         bullet.top + bulletHeight >= playerTop &&
@@ -1930,7 +1968,7 @@ function update(frameDuration) {
   }
 }
 
-function playerDeath(final) {
+function playerDeath(final, fireball) {
   if (playerDeathInProgress) {
     return;
   }
@@ -1952,14 +1990,15 @@ function playerDeath(final) {
     for (let i = 0; i < 3; i++) {
       lifeCounter[i].style.visibility = "hidden";
     }
-    // document.removeEventListener("keydown", handleKeyDown);
-    // document.removeEventListener("keyup", handleKeyUp);
     playerDirection = 0;
     player.classList.add("explosion");
     isGameOver = true;
     setTimeout(() => {
       player.classList.remove("explosion");
       storyPart = final ? 'aliensReachEarth' : 'playerShot';
+      if (fireball) {
+        storyPart = 'fireballEnding';
+      }
       cutScene();
       storyPageNumber = -1;
       turnPageThrottled();
