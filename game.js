@@ -378,6 +378,7 @@ let playerName = "";
 
 const scores = [];
 await getScores();
+
 // Chapter titles.
 const chapter = [
   "Truthy or Dare",
@@ -401,7 +402,7 @@ const chapter = [
   "That Asyncing Feeling",
   "To Summon His Array",
   "Regex Quandam, Regex Futurusque",
-  "Snug as a Bug",
+  "Snug as a Bug in a Rug",
   "Here We Go Loopy Loo",
   "Needle in a Callstack",
   "Burning Chrome",
@@ -410,9 +411,9 @@ const chapter = [
   "ES6 Girl",
   "Promises, Promises",
   "Awaiting for Godot",
-  "Workers' Playtime",
+  "Web Workers of the World, Unite!",
   "R(est) I(n) P(arameters)",
-  "You Shall Not Parse",
+  "None Shall Parse",
   "Adam and eval()",
   "Tupenny 'APIenny",
   "Bitwise and Pound Foolish",
@@ -420,7 +421,6 @@ const chapter = [
   "Nully the Element Packed Her Math.trunc<br>and ...Spread Goodbye to the Circus",
   "Lookbehind in Anger",
   "Home, Home on the Range Loop",
-  "Yield, Sir Knight!",
 ];
 let chapterNumber = Math.floor(chapter.length * Math.random());
 title.innerHTML = `Chapter ${level}:<br>${chapter[chapterNumber]}`;
