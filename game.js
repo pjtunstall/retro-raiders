@@ -43,6 +43,7 @@ let storyMode = false;
 let isInCutScene = false;
 let storyPart = 'beginning';
 let storyPageNumber = 0;
+let storyEndInProgress = false;
 let story = { beginning: [], ufoShot: [], londonSaved: [], playerShot: [], aliensReachEarth: [] };
 story.beginning = [
   [
@@ -142,9 +143,9 @@ explodes across the sky!
 A cheer goes up from Planet Earth.
 Perhaps they will not die.
 
-The five-fold presidential twins
+Overjoyed, the presidential quints
 award you points galore.
-The quintuplets promise you, if Earth wins,
+Those mutants promise you, if Earth wins,
 fame, XP, and more.
 
 The Invader generals, one, two, three,
@@ -175,7 +176,7 @@ story.londonSaved = [
 
     `One swarm destroyed, a glimpse of hope,
 London's skies were free!
-For a time it seemd that they might leave,
+For a time it seemed the horde might leave,
 but that was not to be.
 
 For a while it seemed you'd won the day,
@@ -185,7 +186,7 @@ Chicago and New York.
 
 The alien lords were not dismayed.
 They'd conquered worlds before.
-If a city proved too hard to take,
+If a planet proved too hard to take,
 they'd just attack it more.
 
 Their strategists devised a plan.
@@ -226,7 +227,7 @@ We thought you'd like to know."`
   ]
 ];
 
-story.aliensReachearth = [
+story.aliensReachEarth = [
   [
     `./1.jpg`,
 
@@ -1287,6 +1288,10 @@ function turnPage() {
       if (storyPart === 'londonSaved') {
         reset(false);
       }
+      if (storyEndInProgress) {
+        storyEndInProgress = false;
+        updatesGameOver();
+      }
     } else {
       renderStory(story[storyPart][storyPageNumber]);
     }
@@ -1492,6 +1497,7 @@ function reset(restart) {
 
   setTimeout(() => {
     if (restart) {
+      storyMode = false;
       level = 1;
       lives = 3;
       score = 0;
@@ -1952,8 +1958,12 @@ function playerDeath(final) {
     player.classList.add("explosion");
     isGameOver = true;
     setTimeout(() => {
-      updatesGameOver();
       player.classList.remove("explosion");
+      storyPart = final ? 'aliensReachEarth' : 'playerShot';
+      cutScene();
+      storyPageNumber = -1;
+      turnPageThrottled();
+      storyEndInProgress = true;
     }, 360);
   } else {
     player.classList.add(`life-${4 - lives}`);
@@ -2457,6 +2467,7 @@ function handleKeyDown(event) {
     <div><span id="c">[C]redits</span></div>
     <div><span id="f">[F]lash effect toggle</span></div>
     <div><span id="any">[ANY OTHER KEY] to continue</span></div>
+    <div><span id="s">[S]tory</span></div>
     `
     );
     reset(true);
@@ -2483,7 +2494,7 @@ function handleKeyDown(event) {
   }
 
   if (paused) {
-    if (key === "S" || key === "s") {
+    if (!storyMode && (key === "S" || key === "s")) {
       storyPart = 'beginning';
       cutScene();
       storyMode = true;
