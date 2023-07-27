@@ -1431,7 +1431,7 @@ function fireAlienBullet(col) {
   const bulletX = aliensLeft + (alienWidth + gap) * (col + 0.5);
   let bulletY =
     aliensTop + alienHeight * (lowestInColumn[col] + 1) - scaledHeight / 2;
-  if (r < 0.5 && !fireballPresent) {
+  if (r < 0.01 && !fireballPresent) {
     fireballPresent = true;
     newAlienBullet.classList.add("fireball");
     type = "fireball";
