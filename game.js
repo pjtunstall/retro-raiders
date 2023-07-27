@@ -1431,7 +1431,7 @@ function fireAlienBullet(col) {
   const bulletX = aliensLeft + (alienWidth + gap) * (col + 0.5);
   let bulletY =
     aliensTop + alienHeight * (lowestInColumn[col] + 1) - scaledHeight / 2;
-  if (r < 0.01 && !fireballPresent) {
+  if (r < 0.5 && !fireballPresent) {
     fireballPresent = true;
     newAlienBullet.classList.add("fireball");
     type = "fireball";
@@ -1985,13 +1985,15 @@ function playerDeath(final, fireball) {
       lifeCounter[i].style.visibility = "hidden";
     }
   }
+  if (lives < 1) {
+    player.classList.add("explosion");
+  }
   if (final || lives < 1) {
     source.playbackRate.value = 1;
     for (let i = 0; i < 3; i++) {
       lifeCounter[i].style.visibility = "hidden";
     }
     playerDirection = 0;
-    player.classList.add("explosion");
     isGameOver = true;
     setTimeout(() => {
       player.classList.remove("explosion");
