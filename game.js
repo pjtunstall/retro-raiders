@@ -1341,10 +1341,6 @@ function newGame() {
   reset(true);
 }
 
-// const beginning = ()=>{
-
-// }
-
 function togglePause() {
   paused = !paused;
   if (paused) {
@@ -1878,6 +1874,7 @@ function update(frameDuration) {
       ) {
         bullet.removeMe = true;
         lives = 1;
+        player.className = 'player';
         playerDeath(false, true);
         break;
       } else if (
@@ -1987,6 +1984,7 @@ function playerDeath(final, fireball) {
   }
   if (lives < 1) {
     player.classList.add("explosion");
+    console.log(player.classList);
   }
   if (final || lives < 1) {
     source.playbackRate.value = 1;
@@ -1997,6 +1995,9 @@ function playerDeath(final, fireball) {
     isGameOver = true;
     setTimeout(() => {
       player.classList.remove("explosion");
+      if (!storyMode) {
+        updatesGameOver();
+      }
       storyPart = final ? 'aliensReachEarth' : 'playerShot';
       if (fireball) {
         storyPart = 'fireballEnding';
@@ -2255,7 +2256,7 @@ const renderStory = (arr) => {
   storyEl.classList.remove("hidden");
   const html = `
   <div class="img"> 
-  <img src="${arr[0]}" alt="something">
+  <img src="${arr[0]}" alt="image of space conflict">
   </div>
   <div class="text">
   ${arr[1].split("\n\n").reduce((acc, el) => (acc += `<p>${el}</p>`), "")}
