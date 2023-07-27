@@ -41,7 +41,7 @@ let formattedSeconds = "00";
 let currentPage = 0;
 let storyMode = false;
 let storyPageNumber = 0;
-const storyTestArr = [
+const storyArray = [
   [
     `./24.jpg`,
 
@@ -130,11 +130,152 @@ and shoot for all you're worth."`
   ],
 
   [
-    `./storyimage2.jpeg`,
+    `./2b.jpg`,
+
+    `A well-aimed shot, the Mystery Ship
+explodes across the sky!
+A cheer goes up from Planet Earth.
+Perhaps they will not die.
+
+The five-fold presidential twins
+award you points galore.
+The quintuplets promise you, if Earth wins,
+fame, XP, and more.
+
+The Invader generals, one, two, three,
+meet in a foul mood.
+This is a point of honour now.
+It's a slight against their brood.
+
+The generals of the alien force,
+admirals one, two, three,
+those monsters meet to plot their course,
+to seal their victory.
+
+New swarms appear, they will not rest
+till Earth is all ablaze.
+The human race must suffer now.
+Its cities they will raze.
+
+New swarms appear, they will not stop
+till Earth is laid to waste
+and a certain lone laser gunner
+his final end has faced.`
+  ],
+
+  [
+    `./4.jpg`,
+
+    `One swarm destroyed, a glimpse of hope,
+London's skies were free!
+For a time it seemd that they might leave,
+but that was not to be.
+
+For a while it seemed you'd won the day,
+but that was premature talk.
+Soon new swarms descended on
+Chicago and New York.
+
+The alien lords were not dismayed.
+They'd conquered worlds before.
+If a city proved too hard to take,
+they'd just attack it more.
+
+Their strategists devised a plan.
+They were determined now.
+On a certain lone plasma gunner
+vengeance they did vow.`
+  ],
+
+  [
+    `./25.jpg`,
+
+    `The gunner's mother heard the knock,
+three aliens at the door.
+Not much to say to blunt that shock:
+"Your hatchling is no more."
+
+"A third and fatal blast he took.
+Our plasma bolts struck home.
+Accept this medal for his pluck
+and a broodling of our own."
+
+"Another a gift we'd like give
+to help round the house from hence,
+as slaves to serve your every need:
+your quintuplet presidents."
+
+"We are the rulers of your world.
+He didn't stand a chance.
+To compensate you for your loss
+we'll do our alien dance."
+
+"Our dance we shall perform for you.
+We flap our arnm like so.
+Your child was brave, we honour him.
+We thought you'd like to know."`
+  ],
+
+  [
+    `./1.jpg`,
+
+    `"O brave defender, gunner bold,
+though human you are in form,
+you've proved your worth, so take your place
+in our great invader swarm."
+
+"Your worth you've shown, O earthling bold,
+so join our conquering host.
+Your world's a cinder, nothing left.
+Of our offer make the most."
+
+"You seas sublimed, the land ablaze,
+there's notning left for thee.
+If I were you, I'd gladly leap
+at this opportunity."
+
+An apprenticeship in space invading
+we offer you this day.
+Accept it now or perish too.
+It is the only way.`
+  ],
+
+  [
+    `./11.jpg`,
+
+    `So it was and so it went
+and what could you do?
+Now many years and light years hence,
+your an Invader through and through.
+
+So many worlds you've laid to waste
+on a mercenary's pay.
+Do you ever think of Planet Earth.
+That is hard to say.
+
+A rover, you, a treasure trover,
+you keep the loot you find.
+Alien wives, you have three,
+one of each kind.
+
+From Algol the Demon Star
+to the shepherd moons of Hrao,
+you're the last of Earth, you're one of the swarm.
+You're freefalling now.
+
+A retro raider, a space invader,
+it's all the same to you.
+Among laser blasts and plasma bolts,
+you look out for your crew.`
+  ],
+
+  [
+    `./21.jpg`,
 
     `<i>From the Memoirs of Exaptia Tabbani, Ambassador of the Hmadian Macrostates, on concluding her negotiations with Emperor FnrRa Gfgfgg (II<sup>MXXIV</sup>-I)st, Lord of Orion, Grand Eskalir of Grumium, and Admiral of the High Reaches:</i>
 
-Following my embassy to the barbarian emperor&mdash;Oh, I could hardly believe it, she'd walked right into my trap!&mdash;I happened upon a contingent of mercenaries, busy darning their space suits for the next invasion.
+
+Following my embassy to the barbarian emperor&mdash;Oh, I could hardly believe it, she'd walked right into my trap!&mdash;, as I walked back to my teleport pad, I happened upon a contingent of mercenaries, busy darning their space suits for the next invasion.
 
 One caught my eye.
 
@@ -142,6 +283,70 @@ Crisscrossed with laser scars and plasma burns, it had a curious bilateral symme
 
 As I approached, it looked up and flapped its arms at me.`,
   ],
+
+  [
+    `./storyimage2.jpeg`,
+
+    `I returned this traditional Invader salute and enquired, "Where are you from, sir?"
+
+"Earth," it grunted.
+
+"Earth Angiedi?"
+
+"No, Earth Solis."
+
+I looked blank.
+
+"It's one of the Behenian Earths. Was. All burnt now."
+
+A faraway look crossed the alien's face.
+
+"You live as one of these barbarous rogues, raiding other planets?"
+
+"It's a fine life," the mercenary grinned. "I have treasures aplenty, the spoils of half the galaxy and three alien wives. One of each kind."
+
+"But you are a civilized being, sir. Are you not ashamed?"`
+  ],
+
+  [
+    `./7.jpg`,
+
+    `"I have all the best spice, mister. I feel nothing."
+
+I politely declined the smouldering baby-bone pipe it offered. It took a long drag and a glazed smile replaced the bitter look on its face. Its comrades cackled.
+
+"Just look at yourself, sir! Think of what you've lost. This is no life. You'll be run through with a plasmic glaive or shot down sooner or later by a defender such as you once were. Did you not have a family on, what did you call it, Earth? What would your mother think to see you now?"
+
+For the briefest moment, its face twisted with a wild-eyed look.
+
+"What do you know about such things?" the mercenary muttered and a single tear dripped off its laser-scarred chin.`
+  ],
+
+  [
+    `./5.jpg`,
+
+    `But it quickly took another long drag on the pipe and went back to patching its space suit.
+
+Its comrades snickered and flapped their arms in empty glee.
+
+So I left them there and trudged back to the teleport sheds.
+
+A bad moon was rising.
+
+I'd write up my notes on the needle ship on the way to the wormhole. With the alliances I'd arranged on my mission, and the false intelligence I'd shared with the Eskalir, it would not go well for the Grumian Empire. Such is the way of the High Reaches.`
+  ],
+
+  [
+    `./13.jpg`,
+
+    `I sometimes wonder what became of that lone laser gunner from Earth. Almost certainly he was killed when the empire fell, shortly after my return.
+
+Any chance he escaped? Not really. But who knows?
+
+Maybe he found some way out through the chaos of all those years, got himself cloned, and founded a new Earth somewhere out in the quiet backwaters of Orion.
+
+I like to think he did.`
+  ]
 ];
 
 console.log(window.innerWidth);
@@ -2179,12 +2384,12 @@ function handleKeyDown(event) {
 
   if (storyMode) {
     storyPageNumber++;
-    if (storyPageNumber > 2) {
+    if (storyPageNumber >= storyArray.length) {
       storyMode = false;
       unCutScene();
       togglePauseThrottled();
     } else {
-      renderStory(storyTestArr[storyPageNumber]);
+      renderStory(storyArray[storyPageNumber]);
     }
     return;
   }
@@ -2236,7 +2441,7 @@ function handleKeyDown(event) {
   if (paused) {
     if (key === "S" || key === "s") {
       cutScene();
-      renderStory(storyTestArr[0]);
+      renderStory(storyArray[0]);
       storyMode = true;
       storyPageNumber = 0;
       return;
