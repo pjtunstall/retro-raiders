@@ -40,8 +40,11 @@ let formattedMinutes = "00";
 let formattedSeconds = "00";
 let currentPage = 0;
 let storyMode = false;
+let isInCutScene = false;
+let storyPart = 'beginning';
 let storyPageNumber = 0;
-const storyArray = [
+let story = { beginning: [], ufoShot: [], londonSaved: [], playerShot: [], aliensReachEarth: [] };
+story.beginning = [
   [
     `./24.jpg`,
 
@@ -127,8 +130,10 @@ Messengers there were three.
 defending PLanet Earth.
 A plasma cannon you must steer
 and shoot for all you're worth."`
-  ],
+  ]
+];
 
+story.ufoShot = [
   [
     `./2b.jpg`,
 
@@ -161,8 +166,10 @@ New swarms appear, they will not stop
 till Earth is laid to waste
 and a certain lone laser gunner
 his final end has faced.`
-  ],
+  ]
+];
 
+story.londonSaved = [
   [
     `./4.jpg`,
 
@@ -173,7 +180,7 @@ but that was not to be.
 
 For a while it seemed you'd won the day,
 but that was premature talk.
-Soon new swarms descended on
+Soon new swarms descended upon
 Chicago and New York.
 
 The alien lords were not dismayed.
@@ -185,8 +192,10 @@ Their strategists devised a plan.
 They were determined now.
 On a certain lone plasma gunner
 vengeance they did vow.`
-  ],
+  ]
+];
 
+story.playerShot = [
   [
     `./25.jpg`,
 
@@ -214,8 +223,10 @@ we'll do our alien dance."
 We flap our arnm like so.
 Your child was brave, we honour him.
 We thought you'd like to know."`
-  ],
+  ]
+];
 
+story.aliensReachearth = [
   [
     `./1.jpg`,
 
@@ -349,7 +360,6 @@ I like to think he did.`
   ]
 ];
 
-console.log(window.innerWidth);
 let scoreBoardPressAnyKey = document.querySelector(".press-any-key");
 const storyEl = document.querySelector(".story-container");
 const scoreElement = document.getElementById("score");
@@ -480,6 +490,7 @@ const html = `
     <div class="beam hidden"></div>
     `;
 ufo.insertAdjacentHTML("beforeend", html);
+let hasUfoBeenShot = false;
 
 gameContainer.appendChild(ufo);
 let ufoBeam = document.querySelector(".beam");
@@ -1269,6 +1280,18 @@ function throttle(callback, delay) {
   };
 }
 
+function turnPage() {
+  storyPageNumber++;
+    if (storyPageNumber >= story[storyPart].length) {
+      unCutScene();
+      if (storyPart === 'londonSaved') {
+        reset(false);
+      }
+    } else {
+      renderStory(story[storyPart][storyPageNumber]);
+    }
+}
+
 function newGame() {
   if (displayCredits) {
     toggleCreditsThrottled();
@@ -1349,6 +1372,7 @@ const toggleFlashEffectThrottled = throttle(toggleFlashEffect, 256);
 const togglePauseThrottled = throttle(togglePause, 256);
 const firePlayerBulletThrottled = throttle(firePlayerBullet, 128);
 const newGameThrottled = throttle(newGame, 256);
+const turnPageThrottled = throttle(turnPage, 512);
 
 function fireAlienBullet(col) {
   if (resetInProgress) {
@@ -1500,6 +1524,9 @@ function reset(restart) {
     }
     title.innerHTML = `Chapter ${level}:<br>${chapter[chapterNumber]}`;
 
+    if (storyMode && storyPart === 'londonSaved') {
+      togglePause;
+    }
     togglePauseThrottled();
 
     levelElement.textContent = level;
@@ -2004,7 +2031,14 @@ function render() {
       alienElements[poorDoomedAlien.row][poorDoomedAlien.col].style.visibility =
         "hidden";
       if (poorDoomedAlien.isLastOne) {
-        reset(false);
+        if (storyMode && level === 2) {
+          storyPart = 'londonSaved';
+          cutScene();
+          renderStory(story.londonSaved[0]);
+          storyPageNumber = 0;
+        } else {
+          reset(false);
+        }
       }
     }, 180);
   }
@@ -2053,6 +2087,13 @@ function render() {
       }, 500);
       setTimeout(() => {
         gameContainer.classList.remove("fade-red");
+        if (storyMode && !hasUfoBeenShot) {
+          storyPart = 'ufoShot';
+          cutScene();
+          renderStory(story.ufoShot[0]);
+          storyPageNumber = 0;
+          hasUfoBeenShot = true;
+        }
       }, 1000);
     }
     if (removeUfo) {
@@ -2136,6 +2177,10 @@ function render() {
 }
 
 const cutScene = () => {
+  if (storyPart === 'ufoShot' || storyPart == 'londonSaved') {
+    togglePauseThrottled();
+  }
+  isInCutScene = true;
   pauseMenu.style.display = "none";
   title.style.display = "none";
   gameContainer.style.display = "none";
@@ -2148,6 +2193,10 @@ const unCutScene = () => {
   gameContainer.style.display = "block";
   statsBar.style.display = "flex";
   storyEl.classList.add('hidden');
+  if (storyPart === 'ufoShot') {
+    togglePauseThrottled();
+  }
+  isInCutScene = false;
 };
 
 const renderStory = (arr) => {
@@ -2382,14 +2431,9 @@ function removeRightColumn() {
 function handleKeyDown(event) {
   const key = event.key;
 
-  if (storyMode) {
-    storyPageNumber++;
-    if (storyPageNumber >= storyArray.length) {
-      storyMode = false;
-      unCutScene();
-      togglePauseThrottled();
-    } else {
-      renderStory(storyArray[storyPageNumber]);
+  if (isInCutScene) {
+    if (key === 't' || key === 'T') {
+      turnPageThrottled();
     }
     return;
   }
@@ -2440,10 +2484,11 @@ function handleKeyDown(event) {
 
   if (paused) {
     if (key === "S" || key === "s") {
+      storyPart = 'beginning';
       cutScene();
-      renderStory(storyArray[0]);
       storyMode = true;
-      storyPageNumber = 0;
+      storyPageNumber = -1;
+      turnPageThrottled();
       return;
     }
 
