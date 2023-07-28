@@ -271,7 +271,7 @@ story.aliensReachEarth = [
     `"O brave defender, gunner bold,
 though human you are in form,
 you've proved your worth, so take your place
-in our great invader swarm."
+in our invader swarm."
 
 "Your worth you've shown, O earthling bold,
 so join our conquering host.
