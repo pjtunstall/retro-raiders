@@ -458,6 +458,7 @@ const chapter = [
   "Nully the Element Packed Her Math.trunc<br>and ...Spread Goodbye to the Circus",
   "Lookbehind in Anger",
   "Home, Home on the Range Loop",
+  "The Markup of the Beast"
 ];
 let chapterNumber = Math.floor(chapter.length * Math.random());
 title.innerHTML = `Chapter ${level}:<br>${chapter[chapterNumber]}`;
@@ -1459,6 +1460,7 @@ function launchUfo() {
   if (ufoActive) {
     return;
   }
+  voltage.currentTime = 0;
   voltage.play();
   ufoActive = true;
   ufoScorePointer++;
@@ -1571,10 +1573,9 @@ function reset(restart) {
     }
     title.innerHTML = `Chapter ${level}:<br>${chapter[chapterNumber]}`;
 
-    if (storyMode && storyPart === 'londonSaved') {
-      togglePause;
+    if (!storyMode || level !== 2) {
+      togglePauseThrottled();
     }
-    togglePauseThrottled();
 
     levelElement.textContent = level;
     aliensStep = startHeight + 100;
@@ -1846,16 +1847,21 @@ function update(frameDuration) {
       playerLeft = event.data.player.left;
       // playerBulletTop = event.data.player.bullet.top;
       if (event.data.player.dead) {
-        hiddenElementsOnBeam();
-        ufoGetPlayer = true;
-        if (!ufoActive) {
-          launchUfo();
-        } else {
-          if (ufoLeft + ufoWidth / 2 <= playerLeft + playerWidth) {
-            ufoDirection = 1;
+        if (storyMode) {
+          audioContext.suspend();
+          hiddenElementsOnBeam();
+          ufoGetPlayer = true;
+          if (!ufoActive) {
+            launchUfo();
           } else {
-            ufoDirection = -1;
+            if (ufoLeft + ufoWidth / 2 <= playerLeft + playerWidth) {
+              ufoDirection = 1;
+            } else {
+              ufoDirection = -1;
+            }
           }
+          } else {
+            playerDeath(true);
         }
       }
       aliensTop = event.data.aliens.top;
@@ -2094,6 +2100,7 @@ function render() {
       if (poorDoomedAlien.isLastOne) {
         if (storyMode && level === 2) {
           storyPart = 'londonSaved';
+          source.playbackRate.value = 1;
           cutScene();
           renderStory(story.londonSaved[0]);
           storyPageNumber = 0;
@@ -2257,7 +2264,7 @@ const unCutScene = () => {
   statsBar.style.display = "flex";
   storyEl.classList.add('hidden');
   if (storyPart === 'ufoShot') {
-    togglePauseThrottled();
+    togglePause();
   }
   isInCutScene = false;
   if (storyPart === 'playerShot' ||
