@@ -1494,6 +1494,19 @@ function reset(restart) {
     return;
   }
   resetInProgress = true;
+
+  if (restart) {
+    level = 1;
+    lives = 3;
+    score = 0;
+  }
+
+  chapterNumber++;
+  if (chapterNumber >= chapter.length) {
+    chapterNumber = 0;
+  }
+  title.innerHTML = `Chapter ${level}:<br>${chapter[chapterNumber]}`;
+
   showElementsOnBeam();
   ufoGetPlayer = false;
   ufoToggleBeam = false;
@@ -1566,12 +1579,6 @@ function reset(restart) {
         startHeight += 20;
       }
     }
-
-    chapterNumber++;
-    if (chapterNumber >= chapter.length) {
-      chapterNumber = 0;
-    }
-    title.innerHTML = `Chapter ${level}:<br>${chapter[chapterNumber]}`;
 
     if (!storyMode || level !== 2) {
       togglePauseThrottled();
