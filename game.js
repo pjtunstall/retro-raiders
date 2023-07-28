@@ -1361,8 +1361,12 @@ function togglePause() {
     pauseMenu.style.visibility = "hidden";
     title.style.visibility = "hidden";
     wind.pause();
+    if (resetInProgress) {
+      pauseStartTime = Date.now();
+      pausedTime = audioContext.currentTime - musicStartTime;
+    }
     startTime += Date.now() - pauseStartTime;
-    ufoTimeUp += Date.now() - pauseStartTime;
+    ufoTimeUp = ufoTimeUp = Date.now() + 20000 + Math.random() * 10000;
     if (ufoActive) {
       voltage.play();
     }
@@ -1963,10 +1967,10 @@ function update(frameDuration) {
   }
 
   ufoToggleBeam =
-    (ufoDirection === 1 &&
-      ufoLeft + ufoWidth / 2 < playerLeft + playerWidth / 2) ||
-    (ufoDirection === -1 &&
-      ufoLeft + ufoWidth / 2 > playerLeft + playerWidth / 2);
+  (ufoDirection === 1 &&
+    ufoLeft + ufoWidth / 2 < playerLeft + playerWidth / 2) ||
+  (ufoDirection === -1 &&
+    ufoLeft + ufoWidth / 2 > playerLeft + playerWidth / 2);
 
   if (!ufoToggleBeam && ufoGetPlayer && !ufoTakenPlayer) {
     ufoLeft = playerLeft + playerWidth / 2 - ufoWidth / 2;
