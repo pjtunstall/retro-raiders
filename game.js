@@ -1525,6 +1525,18 @@ function reset(restart) {
 
   setTimeout(() => {
     if (restart) {
+      if (storyMode) {
+        // Restore story option on pause menu if we were previously in story mode.
+        pauseMenu.innerHTML = "";
+        pauseMenu.insertAdjacentHTML(
+          "beforeend",
+          `<div><span id="n">[N]ew game</span></div>
+          <div><span id="c">[C]redits</span></div>
+          <div><span id="f">[F]lash effect toggle</span></div>
+          <div><span id="a">[ANY OTHER KEY] to continue</span></div>
+          <div><span id="s">[S]tory</span></div>`
+        );
+      }
       storyMode = false;
       hasUfoBeenShot = false;
       level = 1;
@@ -2512,7 +2524,7 @@ function handleKeyDown(event) {
     <div><span id="n">[N]ew game</span></div>
     <div><span id="c">[C]redits</span></div>
     <div><span id="f">[F]lash effect toggle</span></div>
-    <div><span id="any">[ANY OTHER KEY] to continue</span></div>
+    <div><span id="a">[ANY OTHER KEY] to continue</span></div>
     <div><span id="s">[S]tory</span></div>
     `
     );
@@ -2541,6 +2553,16 @@ function handleKeyDown(event) {
 
   if (paused) {
     if (!storyMode && (key === "S" || key === "s")) {
+      pauseMenu.innerHTML = "";
+      pauseMenu.insertAdjacentHTML(
+        "beforeend",
+        `
+      <div><span id="n">[N]ew game</span></div>
+      <div><span id="c">[C]redits</span></div>
+      <div><span id="f">[F]lash effect toggle</span></div>
+      <div><span id="any">[ANY OTHER KEY] to continue</span></div>
+      `
+      );
       storyPart = 'beginning';
       cutScene();
       storyMode = true;
