@@ -56,7 +56,7 @@ story.beginning = [
     `./24.jpg`,
 
     `The Emperor of Grumium,
-the Grand Eskalir,
+that galactic buccaneer,
 was on campaign in Orion Arm,
 cut down in his thousandth year.
 
@@ -66,7 +66,7 @@ strewn across Orion's belt,
 jibbering and in fits.
 
 Three warlike tribes he did unite,
-invaders one, two, three,
+Invaders one, two, three,
 held together by fear and greed
 and his personality.
 
@@ -77,7 +77,7 @@ was spilling yet more blood.
 
 A babe in arms, but sharp and sly,
 her rivals bit the dust.
-They crowned her emperor that day.
+They crowned her Emperess that day.
 For conquest she did lust.
 
 "Where shall we invade today?"
@@ -99,9 +99,9 @@ and a Mystery Ship to boot.
 Paris and New York will fall.
 We'll divvy up the loot."
 
-"Meteors we'll knock off course
+"Asteroids we'll ram off course
 their cities for to wreck.
-From off the starcharts we will wipe
+From off the starcharts let us wipe
 that Pale Blue Speck."`
   ],
 
@@ -114,18 +114,18 @@ You didn't believe at first,
 but that was no excuse.
 
 The politicians said keep calm.
-Ten times they did meet.
-No help were they when in orbit sat
-one whole alien fleet.
+Panicked they did meet.
+Precious little help against
+a rampaging alien fleet.
 
-The quintuplet presidents discussed
+Quintuplet presidents discussed
 the issue long and hard.
-They squabbled and fought and then they asked
+They squabbled, fought, and then they asked
 Chat and Bing and Bard.
 
 Those mutant clones decided then
 on the counsel of such wise minds
-to send out their messengers
+to send out messengers far and wide
 a hero for to find.
 
 That summer morning, messengers came.
@@ -169,9 +169,9 @@ till Earth is all ablaze.
 The human race must suffer now.
 Its cities they will raze.
 
-New swarms appear, they will not stop
+New swarms appear, they will not cease
 till Earth is laid to waste
-and a certain lone laser gunner
+and a certain lone defender
 his final end has faced.`
   ]
 ];
@@ -197,7 +197,7 @@ they'd just attack it more.
 
 Their strategists devised a plan.
 They were determined now.
-On a certain lone plasma gunner
+On a certain lone defender
 vengeance they did vow.`
   ]
 ];
@@ -221,10 +221,10 @@ to help you out from hence,
 as slaves to serve your every need:
 your quintuplet presidents."
 
-"We are the rulers of your world.
+"Now we're the rulers of your world.
 He didn't stand a chance.
-To compensate you for your loss
-we'll do our alien dance."
+To compensate you further, look!
+We'll do our alien dance."
 
 "Our dance we shall perform for you.
 We flap our arms like so.
@@ -242,19 +242,19 @@ three aliens at the door.
 Not much to say to blunt that shock:
 "Your hatchling is no more."
 
-"A meteor took him out at once.
+"A fireball took his life away.
 For him, there's no tomorrow.
-Accept this antique gaming set
+Please take a gift this tragic day
 in token of our sorrow."
 
-"Another a gift we'd like give
-to help you out from hence,
-as slaves to serve your every need:
-your quintuplet presidents."
+"Accept now, Mrs. Gunner, please,
+since we've achieved our goal,
+as consolation in your grief
+this antique games console.
 
-"We are the rulers of your world.
-He didn't stand a chance.
-To compensate you for your loss
+"A video game is always fun.
+(He didn't stand a chance.)
+To compensate you further now,
 we'll do our alien dance."
 
 "Our dance we shall perform for you.
@@ -1491,11 +1491,11 @@ function reset(restart) {
   if (resetInProgress) {
     return;
   }
+  resetInProgress = true;
   showElementsOnBeam();
   ufoGetPlayer = false;
   ufoToggleBeam = false;
   ufoTakenPlayer = false;
-  resetInProgress = true;
   scoreBoardPressAnyKey.classList.add("hidden");
   player.classList.remove("player-beam");
   source.playbackRate.value = 1;
@@ -2238,7 +2238,9 @@ function render() {
 }
 
 const cutScene = () => {
-  if (storyPart === 'ufoShot' || storyPart == 'londonSaved') {
+  if (storyPart === 'beginning') {
+    audioContext.suspend();
+  } else {
     togglePauseThrottled();
   }
   isInCutScene = true;
@@ -2546,6 +2548,10 @@ function handleKeyDown(event) {
     return;
   }
 
+  if (isGameOver) {
+    return;
+  }
+
   if (key === "p" || key === "P") {
     togglePauseThrottled();
     return;
@@ -2691,6 +2697,8 @@ async function updatesGameOver() {
   audioContext.suspend();
 
   gameContainer.style.visibility = "hidden";
+  title.style.visibility = "hidden";
+  pauseMenu.innerHTML = "";
   statsBar.style.display = "none";
   playerBullet.style.visibility = "hidden";
   gameOverView();
