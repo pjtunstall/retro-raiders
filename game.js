@@ -463,7 +463,6 @@ const chapter = [
   "Home, Home on the Range Loop",
   "The Markup of the Beast",
   "Cache Only",
-  "<div>ide and Conquer</div>",
   "Who requestAnimationFrame(edRogerRabbit?)"
 ];
 let chapterNumber = Math.floor(chapter.length * Math.random());
