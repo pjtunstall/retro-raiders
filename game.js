@@ -150,7 +150,7 @@ explodes across the sky!
 A cheer goes up from Planet Earth.
 Perhaps they will not die.
 
-Overjoyed, the presidential quints
+Thrilled, the presidential quints
 award you points galore.
 Those mutants promise you, if Earth wins,
 fame, XP, and more.
