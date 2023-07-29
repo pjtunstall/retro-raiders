@@ -669,7 +669,7 @@ let rightCol = 10;
 
 // Alien bullet variables.
 let alienBulletsArray = [];
-let alienFireRate = level;
+let alienFireRate = ;
 let alienBulletDue = Date.now() + (5000 * Math.random()) / alienFireRate;
 let maxAlienBullets = 16;
 const bulletWidth = 10;
@@ -2118,7 +2118,6 @@ function render() {
           renderStory(story.londonSaved[0]);
           storyPageNumber = 0;
         } else {
-          console.log("poorDoomedAlien");
           reset(false);
         }
       }
@@ -2262,9 +2261,7 @@ const cutScene = () => {
   if (storyPart === "beginning") {
     audioContext.suspend();
   } else {
-    if (!isGameOver) {
-      togglePauseThrottled();
-    }
+    togglePauseThrottled();
   }
   isInCutScene = true;
   pauseMenu.style.display = "none";
@@ -2302,8 +2299,8 @@ const renderStory = (arr) => {
   </div>
   <div class="text">
   ${arr[1].split("\n\n").reduce((acc, el) => (acc += `<p>${el}</p>`), "")}
+  
   </div>
-  <div class="turnPage" >[T]urn page</div>
   `;
 
   storyEl.insertAdjacentHTML("beforeend", html);
@@ -2555,7 +2552,6 @@ function handleKeyDown(event) {
     `
     );
     reset(true);
-    // newGameThrottled();
     isGameOver = false;
     isScoreBoardShowing = false;
     return;

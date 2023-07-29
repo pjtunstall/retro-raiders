@@ -669,7 +669,7 @@ let rightCol = 10;
 
 // Alien bullet variables.
 let alienBulletsArray = [];
-let alienFireRate = level;
+let alienFireRate = 16;
 let alienBulletDue = Date.now() + (5000 * Math.random()) / alienFireRate;
 let maxAlienBullets = 16;
 const bulletWidth = 10;

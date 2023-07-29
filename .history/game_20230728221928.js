@@ -41,7 +41,7 @@ let formattedSeconds = "00";
 let currentPage = 0;
 let storyMode = false;
 let isInCutScene = false;
-let storyPart = "beginning";
+let storyPart = 'beginning';
 let storyPageNumber = 0;
 let storyEndInProgress = false;
 let story = {
@@ -50,8 +50,7 @@ let story = {
   londonSaved: [],
   playerShot: [],
   fireballEnding: [],
-  aliensReachEarth: [],
-};
+  aliensReachEarth: [] };
 story.beginning = [
   [
     `./24.jpg`,
@@ -84,7 +83,7 @@ For conquest she did lust.
 "Where shall we invade today?"
 Her lip it slowly curled.
 "Turn left at Barnard's Star," she said.
-"I know a world."`,
+"I know a world."`
   ],
 
   [
@@ -103,7 +102,7 @@ We'll divvy up the loot."
 "Asteroids we'll ram off course
 their cities for to wreck.
 From off the starcharts let us wipe
-that Pale Blue Speck."`,
+that Pale Blue Speck."`
   ],
 
   [
@@ -137,8 +136,8 @@ Messengers there were three.
 "A gunner you must be for us,
 defending PLanet Earth.
 A plasma cannon you must steer
-and shoot for all you're worth."`,
-  ],
+and shoot for all you're worth."`
+  ]
 ];
 
 story.ufoShot = [
@@ -173,8 +172,8 @@ Its cities they will raze.
 New swarms appear, they will not cease
 till Earth is laid to waste
 and a certain lone defender
-his final end has faced.`,
-  ],
+his final end has faced.`
+  ]
 ];
 
 story.londonSaved = [
@@ -199,8 +198,8 @@ they'd just attack it more.
 Their strategists devised a plan.
 They were determined now.
 On a certain lone defender
-vengeance they did vow.`,
-  ],
+vengeance they did vow.`
+  ]
 ];
 
 story.playerShot = [
@@ -230,8 +229,8 @@ We'll do our alien dance."
 "Our dance we shall perform for you.
 We flap our arms like so.
 Your child was brave, we honour him.
-We thought you'd like to know."`,
-  ],
+We thought you'd like to know."`
+  ]
 ];
 
 story.fireballEnding = [
@@ -261,8 +260,8 @@ we'll do our alien dance."
 "Our dance we shall perform for you.
 We flap our arms like so.
 Your child was brave, we honour him.
-We thought you'd like to know."`,
-  ],
+We thought you'd like to know."`
+  ]
 ];
 
 story.aliensReachEarth = [
@@ -287,7 +286,7 @@ at this opportunity."
 An apprenticeship in space invading
 we offer you this day.
 Accept it now or perish too.
-It is the only way.`,
+It is the only way.`
   ],
 
   [
@@ -316,7 +315,7 @@ You're freefalling now.
 A retro raider, a space invader,
 it's all the same to you.
 Among laser blasts and plasma bolts,
-you look out for your crew.`,
+you look out for your crew.`
   ],
 
   [
@@ -355,7 +354,7 @@ A faraway look crossed the alien's face.
 
 "It's a fine life," the mercenary grinned. "I have treasures aplenty, the spoils of half the galaxy and three alien wives. One of each kind."
 
-"But you are a civilized being, sir. Are you not ashamed?"`,
+"But you are a civilized being, sir. Are you not ashamed?"`
   ],
 
   [
@@ -369,7 +368,7 @@ I politely declined the smouldering baby-bone pipe it offered. It took a long dr
 
 For the briefest moment, its face twisted with a wild-eyed look.
 
-"What do you know about such things?" the mercenary muttered and a single tear dripped off its laser-scarred chin.`,
+"What do you know about such things?" the mercenary muttered and a single tear dripped off its laser-scarred chin.`
   ],
 
   [
@@ -383,7 +382,7 @@ So I left them there and trudged back to the teleport sheds.
 
 A bad moon was rising.
 
-I'd write up my notes on the needle ship on the way to the wormhole. With the alliances I'd arranged on my mission, and the false intelligence I'd shared with the Eskalir, it would not go well for the Grumian Empire. Such is the way of the High Reaches.`,
+I'd write up my notes on the needle ship on the way to the wormhole. With the alliances I'd arranged on my mission, and the false intelligence I'd shared with the Eskalir, it would not go well for the Grumian Empire. Such is the way of the High Reaches.`
   ],
 
   [
@@ -395,8 +394,8 @@ Any chance he escaped? Not really. But who knows?
 
 Maybe he found some way out through the chaos of all those years, got himself cloned, and founded a new Earth somewhere out in the quiet backwaters of Orion.
 
-I like to think he did.`,
-  ],
+I like to think he did.`
+  ]
 ];
 
 let scoreBoardPressAnyKey = document.querySelector(".press-any-key");
@@ -459,7 +458,7 @@ const chapter = [
   "Nully the Element Packed Her Math.trunc<br>and ...Spread Goodbye to the Circus",
   "Lookbehind in Anger",
   "Home, Home on the Range Loop",
-  "The Markup of the Beast",
+  "The Markup of the Beast"
 ];
 let chapterNumber = Math.floor(chapter.length * Math.random());
 title.innerHTML = `Chapter ${level}:<br>${chapter[chapterNumber]}`;
@@ -1321,14 +1320,14 @@ function throttle(callback, delay) {
 
 function turnPage() {
   storyPageNumber++;
-  if (storyPageNumber >= story[storyPart].length) {
-    unCutScene();
-    if (storyPart === "londonSaved") {
-      reset(false);
+    if (storyPageNumber >= story[storyPart].length) {
+      unCutScene();
+      if (storyPart === 'londonSaved') {
+        reset(false);
+      }
+    } else {
+      renderStory(story[storyPart][storyPageNumber]);
     }
-  } else {
-    renderStory(story[storyPart][storyPageNumber]);
-  }
 }
 
 function newGame() {
@@ -1485,14 +1484,13 @@ function launchUfo() {
 const hiddenElementsOnBeam = () => {
   aliens.style.opacity = 0;
   barrierGrids.forEach((el) => (el.style.opacity = 0));
-  alienBulletsArray.forEach((el) => (el.element.style.visibility = "visible"));
   playerBullet.style.opacity = 0;
 };
 
 const showElementsOnBeam = () => {
   aliens.style.opacity = 1;
   barrierGrids.forEach((el) => (el.style.opacity = 1));
-  alienBulletsArray.forEach((el) => (el.element.style.visibility = "hidden"));
+  alienBulletsArray.forEach(el => el.element.style.visibility = '')
   playerBullet.style.opacity = 1;
 };
 
@@ -1874,8 +1872,8 @@ function update(frameDuration) {
               ufoDirection = -1;
             }
           }
-        } else {
-          playerDeath(true);
+          } else {
+            playerDeath(true);
         }
       }
       aliensTop = event.data.aliens.top;
@@ -1902,7 +1900,7 @@ function update(frameDuration) {
       ) {
         bullet.removeMe = true;
         lives = 1;
-        player.className = "player";
+        player.className = 'player';
         playerDeath(false, true);
         break;
       } else if (
@@ -1970,10 +1968,10 @@ function update(frameDuration) {
   }
 
   ufoToggleBeam =
-    (ufoDirection === 1 &&
-      ufoLeft + ufoWidth / 2 < playerLeft + playerWidth / 2) ||
-    (ufoDirection === -1 &&
-      ufoLeft + ufoWidth / 2 > playerLeft + playerWidth / 2);
+  (ufoDirection === 1 &&
+    ufoLeft + ufoWidth / 2 < playerLeft + playerWidth / 2) ||
+  (ufoDirection === -1 &&
+    ufoLeft + ufoWidth / 2 > playerLeft + playerWidth / 2);
 
   if (!ufoToggleBeam && ufoGetPlayer && !ufoTakenPlayer) {
     ufoLeft = playerLeft + playerWidth / 2 - ufoWidth / 2;
@@ -2024,9 +2022,9 @@ function playerDeath(final, fireball) {
     setTimeout(() => {
       player.classList.remove("explosion");
       if (storyMode) {
-        storyPart = final ? "aliensReachEarth" : "playerShot";
+        storyPart = final ? 'aliensReachEarth' : 'playerShot';
         if (fireball) {
-          storyPart = "fireballEnding";
+          storyPart = 'fireballEnding';
         }
         cutScene();
         storyPageNumber = -1;
@@ -2062,7 +2060,8 @@ function render() {
   // DOM are batched.
   document.documentElement.style.display = "none";
 
-  if (incrementScore) {
+  if (
+    incrementScore) {
     scoreElement.textContent = `${score}`.padStart(5, "0");
     incrementScore = false;
   }
@@ -2112,13 +2111,12 @@ function render() {
         "hidden";
       if (poorDoomedAlien.isLastOne) {
         if (storyMode && level === 2) {
-          storyPart = "londonSaved";
+          storyPart = 'londonSaved';
           source.playbackRate.value = 1;
           cutScene();
           renderStory(story.londonSaved[0]);
           storyPageNumber = 0;
         } else {
-          console.log("poorDoomedAlien");
           reset(false);
         }
       }
@@ -2170,7 +2168,7 @@ function render() {
       setTimeout(() => {
         gameContainer.classList.remove("fade-red");
         if (storyMode && !hasUfoBeenShot) {
-          storyPart = "ufoShot";
+          storyPart = 'ufoShot';
           cutScene();
           renderStory(story.ufoShot[0]);
           storyPageNumber = 0;
@@ -2259,12 +2257,10 @@ function render() {
 }
 
 const cutScene = () => {
-  if (storyPart === "beginning") {
+  if (storyPart === 'beginning') {
     audioContext.suspend();
   } else {
-    if (!isGameOver) {
-      togglePauseThrottled();
-    }
+    togglePauseThrottled();
   }
   isInCutScene = true;
   pauseMenu.style.display = "none";
@@ -2278,15 +2274,14 @@ const unCutScene = () => {
   title.style.display = "flex";
   gameContainer.style.display = "block";
   statsBar.style.display = "flex";
-  storyEl.classList.add("hidden");
-  if (storyPart === "ufoShot") {
+  storyEl.classList.add('hidden');
+  if (storyPart === 'ufoShot') {
     togglePause();
   }
   isInCutScene = false;
-  if (
-    storyPart === "playerShot" ||
-    storyPart === "fireballEnding" ||
-    storyPart === "aliensReachEarth"
+  if (storyPart === 'playerShot' ||
+    storyPart === 'fireballEnding' ||
+    storyPart === 'aliensReachEarth'
   ) {
     storyEndInProgress = false;
     updatesGameOver();
@@ -2302,8 +2297,8 @@ const renderStory = (arr) => {
   </div>
   <div class="text">
   ${arr[1].split("\n\n").reduce((acc, el) => (acc += `<p>${el}</p>`), "")}
+  
   </div>
-  <div class="turnPage" >[T]urn page</div>
   `;
 
   storyEl.insertAdjacentHTML("beforeend", html);
@@ -2526,7 +2521,7 @@ function handleKeyDown(event) {
   const key = event.key;
 
   if (isInCutScene) {
-    if (key === "t" || key === "T") {
+    if (key === 't' || key === 'T') {
       turnPageThrottled();
     }
     return;
@@ -2555,7 +2550,6 @@ function handleKeyDown(event) {
     `
     );
     reset(true);
-    // newGameThrottled();
     isGameOver = false;
     isScoreBoardShowing = false;
     return;
@@ -2594,7 +2588,7 @@ function handleKeyDown(event) {
       <div><span id="any">[ANY OTHER KEY] to continue</span></div>
       `
       );
-      storyPart = "beginning";
+      storyPart = 'beginning';
       cutScene();
       storyMode = true;
       storyPageNumber = -1;

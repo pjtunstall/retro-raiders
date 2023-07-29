@@ -773,5 +773,5 @@ button:hover {
   color: red;
   font-size: 2rem;
   text-align: center;
-  grid-column: 2/-1;
+  grid-column: 1.5/-1;
 }

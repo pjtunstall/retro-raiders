@@ -770,6 +770,7 @@ button:hover {
 }
 
 .turnPage {
+  margin-top: 3rem;
   color: red;
   font-size: 2rem;
   text-align: center;

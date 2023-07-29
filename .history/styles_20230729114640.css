@@ -745,7 +745,7 @@ button:hover {
   height: 100vh;
   width: 100vw;
   display: grid;
-  grid-template-columns: 80% auto auto;
+  grid-template-columns: 80% auto;
   flex-wrap: nowrap;
 }
 
@@ -765,13 +765,19 @@ button:hover {
   font-size: clamp(1rem, 1.5vw, 1.7rem);
 }
 
+.text pre {
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  overflow-y: auto;
+}
+
 .hidden {
   display: none;
 }
 
 .turnPage {
+  margin-top:2rem ;
   color: red;
-  font-size: 2rem;
+  font-size: 1.6rem;
   text-align: center;
-  grid-column: 2/-1;
 }

@@ -669,7 +669,7 @@ let rightCol = 10;
 
 // Alien bullet variables.
 let alienBulletsArray = [];
-let alienFireRate = level;
+let alienFireRate = 16;
 let alienBulletDue = Date.now() + (5000 * Math.random()) / alienFireRate;
 let maxAlienBullets = 16;
 const bulletWidth = 10;
@@ -2301,9 +2301,11 @@ const renderStory = (arr) => {
   <img src="${arr[0]}" alt="image of space conflict">
   </div>
   <div class="text">
+  <div class="text-turnpage-container" >
   ${arr[1].split("\n\n").reduce((acc, el) => (acc += `<p>${el}</p>`), "")}
-  </div>
   <div class="turnPage" >[T]urn page</div>
+  </div>
+  </div>
   `;
 
   storyEl.insertAdjacentHTML("beforeend", html);
