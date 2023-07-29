@@ -2588,6 +2588,9 @@ function handleKeyDown(event) {
 
   if (paused) {
     if (!storyMode && (key === "S" || key === "s")) {
+      if (displayCredits) {
+        toggleCreditsThrottled();
+      }
       pauseMenu.innerHTML = "";
       pauseMenu.insertAdjacentHTML(
         "beforeend",
@@ -2616,7 +2619,6 @@ function handleKeyDown(event) {
       if (displayCredits) {
         toggleCreditsThrottled();
       }
-
       togglePauseThrottled();
     }
   }
