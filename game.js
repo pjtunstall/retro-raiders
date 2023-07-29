@@ -1569,6 +1569,7 @@ function reset(restart) {
       lives = 3;
       score = 0;
       startHeight = 40;
+      ufoScorePointer = -1;
       skyline.classList.remove(
         "chicago",
         "nyc",
@@ -1777,6 +1778,11 @@ function reset(restart) {
       player.classList.remove(`life-${4 - i}`);
     }
     player.classList.add(`life-${4 - lives}`);
+
+    if (restart) {
+      aliens.style.visibility = "visible";
+    }
+
     render();
 
     document.addEventListener("keydown", handleKeyDown);
@@ -2727,6 +2733,7 @@ async function updatesGameOver() {
   gameOverTime = Date.now();
   audioContext.suspend();
 
+  aliens.style.visibility = "hidden";
   gameContainer.style.visibility = "hidden";
   title.style.visibility = "hidden";
   pauseMenu.innerHTML = "";
