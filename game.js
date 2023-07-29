@@ -182,24 +182,24 @@ story.londonSaved = [
     `./4.jpg`,
 
     `One swarm destroyed, a glimpse of hope,
-London's skies were free!
-For a time it seemed the horde might leave,
-but that was not to be.
+London's skies are free!
+For a time it seems the horde might leave,
+but that is not to be.
 
-For a while it seemed you'd won the day,
-but that was premature talk.
-Soon new swarms descended upon
+For a while it seems you've won the day,
+but that is premature talk.
+Soon new swarms descend upon
 Chicago and New York.
 
-The alien lords were not dismayed.
-They'd conquered worlds before.
-If a planet proved too hard to take,
-they'd just attack it more.
+The alien lords are not dismayed.
+They've conquered worlds before.
+If a planet proves too hard to take,
+they just attack it more.
 
-Their strategists devised a plan.
-They were determined now.
+Their strategists devise a plan.
+They are determined now.
 On a certain lone defender
-vengeance they did vow.`,
+vengeance they do vow.`,
   ],
 ];
 
@@ -296,7 +296,7 @@ It is the only way.`,
     `So it was and so it went
 and what could you do?
 Now many years and light years hence,
-your an Invader through and through.
+you're an Invader through and through.
 
 So many worlds you've laid to waste
 on a mercenary's pay.
@@ -309,7 +309,7 @@ Alien wives, you have three,
 one of each kind.
 
 From Algol the Demon Star
-to the shepherd moons of Hrao,
+to Ceti Sigma and Tau,
 you're the last of Earth, you're one of the swarm.
 You're freefalling now.
 
@@ -329,7 +329,7 @@ Following my embassy to the barbarian emperor&mdash;Oh, I could hardly believe i
 
 One caught my eye.
 
-Crisscrossed with laser scars and plasma burns, it had a curious bilateral symmetry, and wore a breastplate in the Orion style, much like those of its comrades.
+Crisscrossed with laser scars and plasma burns, it had a curious bilateral symmetry and wore a breastplate in the Orion style, much like those of its comrades.
 
 As I approached, it looked up and flapped its arms at me.`,
   ],
@@ -383,7 +383,9 @@ So I left them there and trudged back to the teleport sheds.
 
 A bad moon was rising.
 
-I'd write up my notes on the needle ship on the way to the wormhole. With the alliances I'd arranged on my mission, and the false intelligence I'd shared with the Eskalir, it would not go well for the Grumian Empire. Such is the way of the High Reaches.`,
+I'd write up my notes on the needle ship on the way to the wormhole. With the alliances I'd arranged on my mission, and the false intelligence I'd shared with the Eskalir, it would not go well for the Grumian Empire.
+
+Such is the way of the High Reaches.`,
   ],
 
   [
@@ -460,6 +462,9 @@ const chapter = [
   "Lookbehind in Anger",
   "Home, Home on the Range Loop",
   "The Markup of the Beast",
+  "Cache Only",
+  "<div>ide and Conquer</div>",
+  "Who requestAnimationFrame(edRogerRabbit?)"
 ];
 let chapterNumber = Math.floor(chapter.length * Math.random());
 title.innerHTML = `Chapter ${level}:<br>${chapter[chapterNumber]}`;
