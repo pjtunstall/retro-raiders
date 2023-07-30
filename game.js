@@ -84,7 +84,7 @@ For conquest she did lust.
 "Where shall we invade today?"
 Her lip it slowly curled.
 "Turn left at Barnard's Star," she said.
-"I know a world."`,
+"I know a world." <font color="red">[T]urn page</font>`,
   ],
 
   [
@@ -103,7 +103,9 @@ We'll divvy up the loot."
 "Asteroids we'll ram off course
 their cities for to wreck.
 From off the starcharts let us wipe
-that Pale Blue Speck."`,
+that Pale Blue Speck."
+
+<font color="red">[T]urn page</font>`,
   ],
 
   [
@@ -129,7 +131,13 @@ on the counsel of such wise minds
 to send out messengers far and wide
 a hero for to find.
 
-That summer morning, messengers came.
+<font color="red">[T]urn page</font>`,
+  ],
+
+  [
+    `./8.jpg`,
+
+`That summer morning, messengers came.
 Messengers there were three.
 "Leave your sheep and goats," they said,
 "A gunner you must be."
@@ -137,7 +145,9 @@ Messengers there were three.
 "A gunner you must be for us,
 defending PLanet Earth.
 A plasma cannon you must steer
-and shoot for all you're worth."`,
+and shoot for all you're worth."
+
+<font color="red">[T]urn page</font>`,
   ],
 ];
 
@@ -173,7 +183,7 @@ Its cities they will raze.
 New swarms appear, they will not cease
 till Earth is laid to waste
 and a certain lone defender
-his final end has faced.`,
+his final end has faced. <font color="red">[T]urn page</font>`,
   ],
 ];
 
@@ -199,7 +209,9 @@ they just attack it more.
 Their strategists devise a plan.
 They are determined now.
 On a certain lone defender
-vengeance they do vow.`,
+vengeance they do vow.
+
+<font color="red">[T]urn page</font>`,
   ],
 ];
 
@@ -230,7 +242,9 @@ We'll do our alien dance."
 "Our dance we shall perform for you.
 We flap our arms like so.
 Your child was brave, we honour him.
-We thought you'd like to know."`,
+We thought you'd like to know."
+
+<font color="red">[T]urn page</font>`,
   ],
 ];
 
@@ -261,7 +275,9 @@ we'll do our alien dance."
 "Our dance we shall perform for you.
 We flap our arms like so.
 Your child was brave, we honour him.
-We thought you'd like to know."`,
+We thought you'd like to know."
+
+<font color="red">[T]urn page</font>`,
   ],
 ];
 
@@ -287,7 +303,9 @@ at this opportunity."
 An apprenticeship in space invading
 we offer you this day.
 Accept it now or perish too.
-It is the only way.`,
+It is the only way.
+
+<font color="red">[T]urn page</font>`,
   ],
 
   [
@@ -316,7 +334,9 @@ You're freefalling now.
 A retro raider, a space invader,
 it's all the same to you.
 Among laser blasts and plasma bolts,
-you look out for your crew.`,
+you look out for your crew.
+
+<font color="red">[T]urn page</font>`,
   ],
 
   [
@@ -331,13 +351,15 @@ One caught my eye.
 
 Crisscrossed with laser scars and plasma burns, it had a curious bilateral symmetry and wore a breastplate in the Orion style, much like those of its comrades.
 
-As I approached, it looked up and flapped its arms at me.`,
+<font color="red">[T]urn page</font>`,
   ],
 
   [
     `./storyimage2.jpeg`,
 
-    `I returned this traditional Invader salute and enquired, "Where are you from, sir?"
+    `As I approached, it looked up and flapped its arms at me.
+
+I returned the traditional Invader salute and enquired, "Where are you from, sir?"
 
 "Earth," it grunted.
 
@@ -355,13 +377,15 @@ A faraway look crossed the alien's face.
 
 "It's a fine life," the mercenary grinned. "I have treasures aplenty, the spoils of half the galaxy and three alien wives. One of each kind."
 
-"But you are a civilized being, sir. Are you not ashamed?"`,
+<font color="red">[T]urn page</font>`,
   ],
 
   [
     `./7.jpg`,
 
-    `"I have all the best spice, mister. I feel nothing."
+    `"But you are a civilized being, sir. Are you not ashamed?"
+
+"I have all the best spice, mister. I feel nothing."
 
 I politely declined the smouldering baby-bone pipe it offered. It took a long drag and a glazed smile replaced the bitter look on its face. Its comrades cackled.
 
@@ -369,23 +393,25 @@ I politely declined the smouldering baby-bone pipe it offered. It took a long dr
 
 For the briefest moment, its face twisted with a wild-eyed look.
 
-"What do you know about such things?" the mercenary muttered and a single tear dripped off its laser-scarred chin.`,
+<font color="red">[T]urn page</font>`,
   ],
 
   [
     `./5.jpg`,
 
-    `But it quickly took another long drag on the pipe and went back to patching its space suit.
+    `"What do you know about such things?" the mercenary muttered and a single tear dripped off its laser-scarred chin.
+
+But it quickly took another long drag on the pipe and went back to patching its space suit.
 
 Its comrades snickered and flapped their arms in empty glee.
 
-So I left them there and trudged back to the teleport sheds.
-
-A bad moon was rising.
+So I left them there and trudged back to the teleport sheds. A bad moon was rising.
 
 I'd write up my notes on the needle ship on the way to the wormhole. With the alliances I'd arranged on my mission, and the false intelligence I'd shared with the Eskalir, it would not go well for the Grumian Empire.
 
-Such is the way of the High Reaches.`,
+Such is the way of the High Reaches.
+
+<font color="red">[T]urn page</font>`,
   ],
 
   [
@@ -397,7 +423,9 @@ Any chance he escaped? Not really. But who knows?
 
 Maybe he found some way out through the chaos of all those years, got himself cloned, and founded a new Earth somewhere out in the quiet backwaters of Orion.
 
-I like to think he did.`,
+I like to think he did.
+
+<font color="red">[T]urn page</font>`,
   ],
 ];
 
@@ -2320,9 +2348,7 @@ const renderStory = (arr) => {
   </div>
   <div class="text">
   ${arr[1].split("\n\n").reduce((acc, el) => (acc += `<p>${el}</p>`), "")}
-  </div>
-  <div class="turnPage" >[T]urn page</div>
-  `;
+  </div>`;
 
   storyEl.insertAdjacentHTML("beforeend", html);
 };
