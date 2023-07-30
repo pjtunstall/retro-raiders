@@ -1453,7 +1453,7 @@ const newGameThrottled = throttle(newGame, 256);
 const turnPageThrottled = throttle(turnPage, 512);
 
 function fireAlienBullet(col) {
-  if (resetInProgress || isInUfoCutScene || isGameOver) {
+  if (resetInProgress || isInUfoCutScene || isGameOver || playerDeathInProgress) {
     return;
   }
   laserShot.time = 0;
