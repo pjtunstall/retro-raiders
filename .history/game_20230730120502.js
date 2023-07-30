@@ -440,6 +440,8 @@ let resetInProgress = false;
 let playerDeathInProgress = false;
 let isScoreBoardShowing = false;
 let isGameOver = false;
+let gameOverDelay = 2500;
+let gameOverTime;
 let playerName = "";
 
 const scores = [];
@@ -2763,6 +2765,7 @@ const showAndAddGameoverMenue = () => {
 };
 
 async function updatesGameOver() {
+  gameOverTime = Date.now();
   audioContext.suspend();
 
   gameContainer.style.visibility = "hidden";

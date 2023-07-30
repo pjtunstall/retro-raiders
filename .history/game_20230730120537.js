@@ -2763,6 +2763,7 @@ const showAndAddGameoverMenue = () => {
 };
 
 async function updatesGameOver() {
+  gameOverTime = Date.now();
   audioContext.suspend();
 
   gameContainer.style.visibility = "hidden";

@@ -137,7 +137,7 @@ a hero for to find.
   [
     `./8.jpg`,
 
-    `That summer morning, messengers came.
+`That summer morning, messengers came.
 Messengers there were three.
 "Leave your sheep and goats," they said,
 "A gunner you must be."
@@ -440,6 +440,8 @@ let resetInProgress = false;
 let playerDeathInProgress = false;
 let isScoreBoardShowing = false;
 let isGameOver = false;
+let gameOverDelay = 2500;
+let gameOverTime;
 let playerName = "";
 
 const scores = [];
@@ -489,7 +491,7 @@ const chapter = [
   "Home, Home on the Range Loop",
   "The Markup of the Beast",
   "Cache Only",
-  "Who requestAnimationFrame(edRogerRabbit?)",
+  "Who requestAnimationFrame(edRogerRabbit?)"
 ];
 let chapterNumber = Math.floor(chapter.length * Math.random());
 title.innerHTML = `Chapter ${level}:<br>${chapter[chapterNumber]}`;
@@ -2312,7 +2314,7 @@ const cutScene = () => {
     audioContext.suspend();
   } else {
     // if (!isGameOver) {
-    togglePauseThrottled();
+      togglePauseThrottled();
     // }
   }
   isInCutScene = true;
@@ -2579,7 +2581,12 @@ function handleKeyDown(event) {
     return;
   }
 
-  if (isGameOver && (key === "n" || key === "N") && isScoreBoardShowing) {
+  if (
+    isGameOver &&
+    (key === "n" || key === "N") &&
+    isScoreBoardShowing &&
+    gameOverTime + gameOverDelay < Date.now()
+  ) {
     document.querySelector("#end-game-scoreboard-container").innerHTML = "";
     gameContainer.style.visibility = "visible";
     statsBar.style.display = "flex";
@@ -2763,6 +2770,7 @@ const showAndAddGameoverMenue = () => {
 };
 
 async function updatesGameOver() {
+  gameOverTime = Date.now();
   audioContext.suspend();
 
   gameContainer.style.visibility = "hidden";
@@ -2775,9 +2783,9 @@ async function updatesGameOver() {
     document.getElementById("overlay").innerHTML = "";
     displayScoreboard(scores, message);
 
-    // setTimeout(() => {
-    showAndAddGameoverMenue();
-    // }, 2500);
+    setTimeout(() => {
+      showAndAddGameoverMenue();
+    }, 2500);
     isScoreBoardShowing = true;
   }
 
@@ -2794,8 +2802,8 @@ const controlScore = async (obj) => {
 
     displayScoreboard(scores, message);
     // setTimeout(() => {
-    showAndAddGameoverMenue();
-    // }, 2500);
+      showAndAddGameoverMenue();
+    }, 2500);
     isScoreBoardShowing = true;
     // togglePauseThrottled();
     // showScoreBoard();

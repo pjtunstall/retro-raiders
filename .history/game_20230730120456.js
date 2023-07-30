@@ -440,6 +440,8 @@ let resetInProgress = false;
 let playerDeathInProgress = false;
 let isScoreBoardShowing = false;
 let isGameOver = false;
+let gameOverDelay = 2500;
+let gameOverTime;
 let playerName = "";
 
 const scores = [];
@@ -2579,7 +2581,12 @@ function handleKeyDown(event) {
     return;
   }
 
-  if (isGameOver && (key === "n" || key === "N") && isScoreBoardShowing) {
+  if (
+    isGameOver &&
+    (key === "n" || key === "N") &&
+    isScoreBoardShowing &&
+    
+  ) {
     document.querySelector("#end-game-scoreboard-container").innerHTML = "";
     gameContainer.style.visibility = "visible";
     statsBar.style.display = "flex";
@@ -2763,6 +2770,7 @@ const showAndAddGameoverMenue = () => {
 };
 
 async function updatesGameOver() {
+  gameOverTime = Date.now();
   audioContext.suspend();
 
   gameContainer.style.visibility = "hidden";
