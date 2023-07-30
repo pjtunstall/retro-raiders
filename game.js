@@ -437,6 +437,7 @@ const livesElement = document.getElementById("lives");
 const timerElement = document.getElementById("timer");
 let spaceKeyDown = false;
 let resetInProgress = false;
+let restartInProgress = false;
 let playerDeathInProgress = false;
 let isScoreBoardShowing = false;
 let isGameOver = false;
@@ -1394,10 +1395,12 @@ function togglePause() {
     title.style.visibility = "hidden";
     wind.pause();
     if (resetInProgress) {
-      startTime = Date.now();
-      pauseStartTime = Date.now();
       pausedTime = audioContext.currentTime - musicStartTime;
-      ufoTimeUp = Date.now() + 20000 + Math.random() * 10000;
+      if (restartInProgress) {
+        startTime = Date.now();
+        pauseStartTime = Date.now();
+        ufoTimeUp = Date.now() + 20000 + Math.random() * 10000;
+      }
     } else {
       const pauseInterval = Date.now() - pauseStartTime;
       startTime += pauseInterval;
@@ -1538,6 +1541,7 @@ function reset(restart) {
   resetInProgress = true;
 
   if (restart) {
+    restartInProgress = true;
     level = 1;
     lives = 3;
     score = 0;
@@ -2054,6 +2058,9 @@ function playerDeath(final, fireball) {
     console.log(player.classList);
   }
   if (final || lives < 1) {
+    const alienBullets = document.querySelectorAll(".alien-bullet");
+    alienBullets.forEach((alienBullet) => alienBullet.remove());
+    alienBulletsArray = [];
     source.playbackRate.value = 1;
     for (let i = 0; i < 3; i++) {
       lifeCounter[i].style.visibility = "hidden";
@@ -2062,9 +2069,6 @@ function playerDeath(final, fireball) {
     isGameOver = true;
     setTimeout(() => {
       player.classList.remove("explosion");
-      const alienBullets = document.querySelectorAll(".alien-bullet");
-      alienBullets.forEach((alienBullet) => alienBullet.remove());
-      alienBulletsArray = [];
       for (let row = 0; row < alienGridHeight; row++) {
         for (let col = 0; col < alienGridWidth; col++) {
           let alien = alienElements[row][col];
