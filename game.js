@@ -1400,6 +1400,7 @@ function togglePause() {
         startTime = Date.now();
         pauseStartTime = Date.now();
         ufoTimeUp = Date.now() + 20000 + Math.random() * 10000;
+        restartInProgress = false;
       }
     } else {
       const pauseInterval = Date.now() - pauseStartTime;
