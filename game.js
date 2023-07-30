@@ -524,6 +524,7 @@ let ufoTop = 0;
 let ufoToggleBeam = false;
 let ufoGetPlayer = false;
 let ufoTakenPlayer = false;
+let isInUfoCutScene = false;
 const ufo = document.createElement("div");
 ufo.classList.add("ufo-container");
 let ufoLeft;
@@ -1418,7 +1419,7 @@ const newGameThrottled = throttle(newGame, 256);
 const turnPageThrottled = throttle(turnPage, 512);
 
 function fireAlienBullet(col) {
-  if (resetInProgress) {
+  if (resetInProgress || isInUfoCutScene || isGameOver) {
     return;
   }
   laserShot.time = 0;
@@ -1522,6 +1523,7 @@ function reset(restart) {
   ufoGetPlayer = false;
   ufoToggleBeam = false;
   ufoTakenPlayer = false;
+  isInUfoCutScene = false;
   scoreBoardPressAnyKey.classList.add("hidden");
   player.classList.remove("player-beam");
   source.playbackRate.value = 1;
@@ -1778,11 +1780,6 @@ function reset(restart) {
       player.classList.remove(`life-${4 - i}`);
     }
     player.classList.add(`life-${4 - lives}`);
-
-    if (restart) {
-      aliens.style.visibility = "visible";
-    }
-
     render();
 
     document.addEventListener("keydown", handleKeyDown);
@@ -1791,7 +1788,7 @@ function reset(restart) {
 }
 
 function updateTimer() {
-  if (ufoToggleBeam || ufoGetPlayer || ufoTakenPlayer) {
+  if (isInUfoCutScene) {
     return;
   }
   if (Date.now() - startTime > 3600000) {
@@ -1837,6 +1834,7 @@ function update(frameDuration) {
     ufoToggleBeam = false;
     ufoGetPlayer = false;
     ufoTakenPlayer = false;
+    isInUfoCutScene = false;
     playerDeath(true);
   }
 
@@ -1872,6 +1870,7 @@ function update(frameDuration) {
       // playerBulletTop = event.data.player.bullet.top;
       if (event.data.player.dead) {
         if (storyMode) {
+          isInUfoCutScene = true;
           audioContext.suspend();
           hiddenElementsOnBeam();
           ufoGetPlayer = true;
@@ -2033,6 +2032,15 @@ function playerDeath(final, fireball) {
     isGameOver = true;
     setTimeout(() => {
       player.classList.remove("explosion");
+      const alienBullets = document.querySelectorAll(".alien-bullet");
+      alienBullets.forEach((alienBullet) => alienBullet.remove());
+      alienBulletsArray = [];
+      for (let row = 0; row < alienGridHeight; row++) {
+        for (let col = 0; col < alienGridWidth; col++) {
+          let alien = alienElements[row][col];
+          alien.remove();
+        }
+      }
       if (storyMode) {
         storyPart = final ? "aliensReachEarth" : "playerShot";
         if (fireball) {
@@ -2733,7 +2741,6 @@ async function updatesGameOver() {
   gameOverTime = Date.now();
   audioContext.suspend();
 
-  aliens.style.visibility = "hidden";
   gameContainer.style.visibility = "hidden";
   title.style.visibility = "hidden";
   pauseMenu.innerHTML = "";
