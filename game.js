@@ -1368,7 +1368,7 @@ function newGame() {
   if (displayCredits) {
     toggleCreditsThrottled();
   }
-  togglePause();
+  togglePauseThrottled();
   reset(true);
 }
 
@@ -1396,11 +1396,15 @@ function togglePause() {
     title.style.visibility = "hidden";
     wind.pause();
     if (resetInProgress) {
+      startTime = Date.now();
       pauseStartTime = Date.now();
       pausedTime = audioContext.currentTime - musicStartTime;
+      ufoTimeUp = Date.now() + 20000 + Math.random() * 10000;
+    } else {
+      const pauseInterval = Date.now() - pauseStartTime;
+      startTime += pauseInterval;
+      ufoTimeUp += pauseInterval;
     }
-    startTime += Date.now() - pauseStartTime;
-    ufoTimeUp = ufoTimeUp = Date.now() + 20000 + Math.random() * 10000;
     if (ufoActive) {
       voltage.play();
     }
@@ -1495,7 +1499,7 @@ function fireAlienBullet(col) {
 }
 
 function launchUfo() {
-  if (ufoActive) {
+  if (ufoActive || paused || resetInProgress) {
     return;
   }
   voltage.currentTime = 0;
@@ -2079,6 +2083,7 @@ function playerDeath(final, fireball) {
         turnPageThrottled();
         storyEndInProgress = true;
       } else {
+        togglePauseThrottled();
         updatesGameOver();
       }
     }, 360);
@@ -2308,9 +2313,9 @@ const cutScene = () => {
   if (storyPart === "beginning") {
     audioContext.suspend();
   } else {
-    if (!isGameOver) {
+    // if (!isGameOver) {
       togglePauseThrottled();
-    }
+    // }
   }
   isInCutScene = true;
   pauseMenu.style.display = "none";
@@ -2598,6 +2603,7 @@ function handleKeyDown(event) {
     <div><span id="s">[S]tory</span></div>
     `
     );
+    togglePause();
     reset(true);
     // newGameThrottled();
     isGameOver = false;
