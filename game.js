@@ -143,7 +143,7 @@ Messengers there were three.
 "A gunner you must be."
 
 "A gunner you must be for us,
-defending PLanet Earth.
+defending Planet Earth.
 A plasma cannon you must steer
 and shoot for all you're worth."
 
@@ -165,7 +165,7 @@ award you points galore.
 Those mutants promise you, if Earth wins,
 fame, XP, and more.
 
-The Invader generals, one, two, three,
+Invader generals, one, two, three,
 meet in a foul mood.
 This is a point of honour now.
 It's a slight against their brood.
@@ -295,7 +295,7 @@ so join our conquering host.
 Your world's a cinder, nothing left.
 Of our offer make the most."
 
-"You seas sublimed, the land ablaze,
+"You rivers dry, your lands ablaze,
 there's notning left for thee.
 If I were you, I'd gladly leap
 at this opportunity."
@@ -399,7 +399,7 @@ For the briefest moment, its face twisted with a wild-eyed look.
   [
     `./5.jpg`,
 
-    `"What do you know about such things?" the mercenary muttered and a single tear dripped off its laser-scarred chin.
+    `"What do you know about such things?" the mercenary muttered and a single, spice-scented tear dripped off its laser-scarred chin.
 
 But it quickly took another long drag on the pipe and went back to patching its space suit.
 
@@ -1367,7 +1367,11 @@ function newGame() {
   if (displayCredits) {
     toggleCreditsThrottled();
   }
-  togglePauseThrottled();
+  if (!pauseOnStart) {
+    togglePause();
+  } else {
+    pauseOnStart = false;
+  }
   reset(true);
 }
 
@@ -1400,7 +1404,6 @@ function togglePause() {
         startTime = Date.now();
         pauseStartTime = Date.now();
         ufoTimeUp = Date.now() + 20000 + Math.random() * 10000;
-        restartInProgress = false;
       }
     } else {
       const pauseInterval = Date.now() - pauseStartTime;
@@ -1453,7 +1456,7 @@ const newGameThrottled = throttle(newGame, 256);
 const turnPageThrottled = throttle(turnPage, 512);
 
 function fireAlienBullet(col) {
-  if (resetInProgress || isInUfoCutScene || isGameOver || playerDeathInProgress) {
+  if (resetInProgress || isInUfoCutScene || isGameOver) {
     return;
   }
   laserShot.time = 0;
@@ -2653,7 +2656,7 @@ function handleKeyDown(event) {
       return;
     }
 
-    if (!pauseOnStart && (key === "n" || key === "N")) {
+    if (key === "n" || key === "N") {
       newGameThrottled();
     } else if (key === "f" || key === "F") {
       toggleFlashEffectThrottled();
