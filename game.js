@@ -48,6 +48,7 @@ let story = {
   beginning: [],
   ufoShot: [],
   londonSaved: [],
+  chicagoSaved: [],
   playerShot: [],
   fireballEnding: [],
   aliensReachEarth: [],
@@ -215,6 +216,34 @@ vengeance they do vow.
   ],
 ];
 
+story.chicagoSaved = [
+  [
+    `./22.jpg`,
+
+    `The windy city sighs relief,
+brief respite though it be.
+From Riverdale to Rogers park,
+Chicago too is free.
+
+There's fireworks on Navy Pier,
+a time to celebrate.
+Invader captains far above
+their next move contemplate.
+
+There's fireworks on Navy Pier.
+Perhaps it's not too late?
+Earth's saviour, though, has earned himself
+some hard alien hate.
+
+Galactic interlopers run
+while issuing a threat:
+"Never leave your laser gun.
+We haven't finished yet."
+
+<font color="red">[T]urn page</font>`,
+  ],
+];
+
 story.playerShot = [
   [
     `./25.jpg`,
@@ -295,8 +324,8 @@ so join our conquering host.
 Your world's a cinder, nothing left.
 Of our offer make the most."
 
-"You rivers dry, your lands ablaze,
-there's notning left for thee.
+"You oceans dry, your lands ablaze,
+there's nothing left for thee.
 If I were you, I'd gladly leap
 at this opportunity."
 
@@ -326,7 +355,7 @@ you keep the loot you find.
 Alien wives, you have three,
 one of each kind.
 
-From Algol the Demon Star
+From ALGOL the Demon Star
 to Ceti Sigma and Tau,
 you're the last of Earth, you're one of the swarm.
 You're freefalling now.
@@ -492,7 +521,11 @@ const chapter = [
   "The Markup of the Beast",
   "Cache Only",
   "Who requestAnimationFrame(edRogerRabbit?)",
-  "&lt;div&gt;ide &amp; Conquer&lt;/div&gt;"
+  "&lt;div&gt;ide &amp; Conquer&lt;/div&gt;",
+  "Escape (Sequence) from New York",
+  "ANSI Boys",
+  "join(\'The\' \'Army\') and C the Navy",
+  "Single or Carriage Return"
 ];
 let chapterNumber = Math.floor(chapter.length * Math.random());
 title.innerHTML = `Chapter ${level}:<br>${chapter[chapterNumber]}`;
@@ -1357,7 +1390,7 @@ function turnPage() {
   storyPageNumber++;
   if (storyPageNumber >= story[storyPart].length) {
     unCutScene();
-    if (storyPart === "londonSaved") {
+    if (storyPart === "londonSaved" || storyPart === "chicagoSaved") {
       reset(false);
     }
   } else {
@@ -2170,14 +2203,18 @@ function render() {
       alienElements[poorDoomedAlien.row][poorDoomedAlien.col].style.visibility =
         "hidden";
       if (poorDoomedAlien.isLastOne) {
-        if (storyMode && level === 2) {
-          storyPart = "londonSaved";
-          source.playbackRate.value = 1;
+        source.playbackRate.value = 1;
+        if (storyMode && (level === 2 || level ===3)) {
+          if (level === 2) {
+            storyPart = "londonSaved";
+          }
+          if (level === 3) {
+            storyPart = "chicagoSaved";
+          }
           cutScene();
-          renderStory(story.londonSaved[0]);
+          renderStory(story[storyPart][0]);
           storyPageNumber = 0;
         } else {
-          console.log("poorDoomedAlien");
           reset(false);
         }
       }
