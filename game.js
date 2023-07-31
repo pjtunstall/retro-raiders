@@ -25,6 +25,7 @@ const credits = document.querySelector(".credits");
 const title = document.querySelector(".title");
 
 // State variables.
+let starting = true;
 const statsBar = document.querySelector(".stats-bar");
 let fadeOption = true;
 let score = 0;
@@ -1433,12 +1434,14 @@ function togglePause() {
     pauseMenu.style.visibility = "hidden";
     title.style.visibility = "hidden";
     wind.pause();
-    if (resetInProgress) {
+    if (resetInProgress || starting) {
       pausedTime = audioContext.currentTime - musicStartTime;
-      if (restartInProgress) {
+      if (restartInProgress || starting) {
         startTime = Date.now();
         pauseStartTime = Date.now();
         ufoTimeUp = Date.now() + 20000 + Math.random() * 10000;
+        console.log(starting);
+        starting = false;
       }
     } else {
       const pauseInterval = Date.now() - pauseStartTime;
