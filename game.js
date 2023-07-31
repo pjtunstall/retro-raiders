@@ -470,6 +470,7 @@ const chapter = [
   "To Summon His Array",
   "Regex Quandam, Regex Futurusque",
   "Snug as a Bug in a Rug",
+  "A &lt;span&gt;iard in the Works&lt;/span&gt;",
   "Here We Go Loopy Loo",
   "Needle in a Callstack",
   "Burning Chrome",
@@ -491,6 +492,7 @@ const chapter = [
   "The Markup of the Beast",
   "Cache Only",
   "Who requestAnimationFrame(edRogerRabbit?)",
+  "&lt;div&gt;ide &amp; Conquer&lt;/div&gt;"
 ];
 let chapterNumber = Math.floor(chapter.length * Math.random());
 title.innerHTML = `Chapter ${level}:<br>${chapter[chapterNumber]}`;
@@ -1456,7 +1458,7 @@ const newGameThrottled = throttle(newGame, 256);
 const turnPageThrottled = throttle(turnPage, 512);
 
 function fireAlienBullet(col) {
-  if (resetInProgress || isInUfoCutScene || isGameOver) {
+  if (resetInProgress || isInUfoCutScene || isGameOver || playerDeathInProgress) {
     return;
   }
   laserShot.time = 0;
