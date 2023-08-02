@@ -50,40 +50,81 @@ let story = {
   ufoShot: [],
   londonSaved: [],
   chicagoSaved: [],
+  newYorkSaved: [],
   playerShot: [],
   fireballEnding: [],
   aliensReachEarth: [],
 };
 
-const sheepRandomizer = Math.random();
-let sheepPic = '98';
+let sheepPic;
+let lastPic;
+let beamPic;
 
-switch (true) {
-  case sheepRandomizer < 0.1:
-    sheepPic = '76'
-    break;
-  case sheepRandomizer < 0.2:
-    sheepPic = '82';
-    break;
-  case sheepRandomizer < 0.3:
-    sheepPic = '89';
-    break;
-  case sheepRandomizer < 0.4:
-    sheepPic = '97';
-  case sheepRandomizer < 0.5:
-    sheepPic = '105';
-    break;
-  case sheepRandomizer < 0.6:
-    sheepPic = '87';
-    break;
-  case sheepRandomizer < 0.7:
-    sheepPic = '91';
-    break;
-  case sheepRandomizer < 0.8:
-    sheepPic = '85';
-    break;
-  case sheepRandomizer < 0.9:
-    sheepPic = '79';
+randomizePics();
+
+function randomizePics() {
+  const sheepRandomizer = Math.random();
+  const beamRandomizer = Math.random();
+  const lastPicRandomizer = Math.random();
+
+  switch (true) {
+    case sheepRandomizer < 0.09:
+      sheepPic = '76'
+      break;
+    case sheepRandomizer < 0.18:
+      sheepPic = '82';
+      break;
+    case sheepRandomizer < 0.27:
+      sheepPic = '89';
+      break;
+    case sheepRandomizer < 0.36:
+      sheepPic = '97';
+    case sheepRandomizer < 0.45:
+      sheepPic = '105';
+      break;
+    case sheepRandomizer < 0.55:
+      sheepPic = '87';
+      break;
+    case sheepRandomizer < 0.7:
+      sheepPic = '91';
+      break;
+    case sheepRandomizer < 0.64:
+      sheepPic = '85';
+      break;
+    case sheepRandomizer < 0.82:
+      sheepPic = '79';
+      break;
+    case sheepRandomizer < 0.9:
+      sheepPic = '71'
+      break;
+    default:
+      sheepPic = '98';
+  }
+
+  if (beamRandomizer < 0.5) {
+    beamPic = '6';
+  } else {
+    beamPic = '1';
+  }
+
+  switch (true) {
+    case lastPicRandomizer < 0.25:
+      lastPic = '39';
+      break;
+    case lastPicRandomizer < 0.5:
+      lastPic = '11b';
+      break;
+    case lastPicRandomizer < 0.75:
+      lastPic = '38';
+    default:
+      lastPic = '13';
+  }
+}
+
+function modifyPics() {
+  story.beginning[3][0] = `./${sheepPic}.jpg`;
+  story.aliensReachEarth[0][0] = `./${beamPic}.jpg`;
+  story.aliensReachEarth[6][0] = `./${lastPic}.jpg`;
 }
 
 story.beginning = [
@@ -258,11 +299,6 @@ brief respite though it be.
 From Riverdale to Rogers park,
 Chicago too is free.
 
-There's fireworks on Navy Pier,
-a time to celebrate.
-Invader captains far above
-their next move contemplate.
-
 There's fireworks on Navy Pier.
 Perhaps it's not too late?
 Earth's saviour, though, has earned himself
@@ -275,6 +311,38 @@ We haven't finished yet."
 
 <font color="red">[T]urn page</font>`,
   ],
+];
+
+story.newYorkSaved = [
+  [
+    `./34.jpg`,
+
+    `Oh they were not happy to lose New York. That was a blow. How they cursed and swore vengeance. Their green blood boiled.
+
+And you? What of the victor? Feted and hailed a hero. A long way from your sheep farm now. How does it feel? Do you feel like a hero? Not really.
+
+How can time even pass?
+
+There was a time. And it was everything then, and real and sharp and impossible, as life is. And somehow it's gone. And long gone. And that band of misfits, how can they not be here?
+
+<font color="red">[T]urn page</font>`
+  ],
+
+  [
+    `8b.jpg`,
+
+    `Each morning, you'd run in Central Park to shake off the adrenaline of the night's battle, then home to toss and turn through the June heat in that sweltering brownstone they'd appointed for Earth's defenders. Misfits all. Aye, and a yellow bird.
+
+Sometimes alien allies would come to stay. Ever more often as human gunners fell or quit.
+
+One night, they offered you a toke of their Tralfamadorian spice and you saw it all, the whole mechanism laid bare.
+
+You stood outside of time that night. Absurd. The clockwork. The game! All of it, a game.
+
+But no time to think on that. A new attack. And they rush you across the ocean.
+
+<font color="red">[T]urn page</font>`
+  ]
 ];
 
 story.playerShot = [
@@ -345,7 +413,7 @@ We thought you'd like to know."
 
 story.aliensReachEarth = [
   [
-    `./1.jpg`,
+    `./${beamPic}.jpg`,
 
     `"O brave defender, gunner bold,
 though human you are in form,
@@ -477,7 +545,7 @@ Such is the way of the High Reaches.
   ],
 
   [
-    `./13.jpg`,
+    `./${lastPic}.jpg`,
 
     `I sometimes wonder what became of that lone laser gunner from Earth. Almost certainly he was killed when the empire fell, shortly after my return.
 
@@ -1423,7 +1491,11 @@ function turnPage() {
   storyPageNumber++;
   if (storyPageNumber >= story[storyPart].length) {
     unCutScene();
-    if (storyPart === "londonSaved" || storyPart === "chicagoSaved") {
+    if (
+      storyPart === "londonSaved" ||
+      storyPart === "chicagoSaved" ||
+      storyPart === "newYorkSaved"
+      ) {
       reset(false);
     }
   } else {
@@ -1619,6 +1691,8 @@ function reset(restart) {
     level = 1;
     lives = 3;
     score = 0;
+    randomizePics();
+    modifyPics();
   }
 
   chapterNumber++;
@@ -1702,7 +1776,7 @@ function reset(restart) {
       }
     }
 
-    if (!storyMode || level !== 2) {
+    if (!storyMode || (level < 2 && level > 4)) {
       togglePauseThrottled();
     }
 
@@ -2027,7 +2101,7 @@ function update(frameDuration) {
         bullet.left + bulletWidth >= playerLeft &&
         bullet.left <= playerLeft + playerWidth
       ) {
-        playerDeath(false);
+        // playerDeath(false);
         bullet.removeMe = true;
 
         break;
@@ -2239,12 +2313,15 @@ function render() {
         "hidden";
       if (poorDoomedAlien.isLastOne) {
         source.playbackRate.value = 1;
-        if (storyMode && (level === 2 || level ===3)) {
+        if (storyMode && (level > 1 && level < 5)) {
           if (level === 2) {
             storyPart = "londonSaved";
           }
           if (level === 3) {
             storyPart = "chicagoSaved";
+          }
+          if (level === 4) {
+            storyPart = "newYorkSaved";
           }
           cutScene();
           renderStory(story[storyPart][0]);
