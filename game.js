@@ -294,7 +294,7 @@ story.chicagoSaved = [
   [
     `./22.jpg`,
 
-    `The windy city sighs relief,
+    `The Windy City sighs relief,
 brief respite though it be.
 From Riverdale to Rogers park,
 Chicago too is free.
@@ -304,7 +304,7 @@ Perhaps it's not too late?
 Earth's saviour, though, has earned himself
 some hard alien hate.
 
-Galactic interlopers run
+The galactic interlopers run
 while issuing a threat:
 "Never leave your laser gun.
 We haven't finished yet."
