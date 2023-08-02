@@ -56,34 +56,34 @@ let story = {
 };
 
 const sheepRandomizer = Math.random();
-let sheepPic = "98";
+let sheepPic = '98';
 
 switch (true) {
   case sheepRandomizer < 0.1:
-    sheepPic = "76";
+    sheepPic = '76'
     break;
   case sheepRandomizer < 0.2:
-    sheepPic = "82";
+    sheepPic = '82';
     break;
   case sheepRandomizer < 0.3:
-    sheepPic = "89";
+    sheepPic = '89';
     break;
   case sheepRandomizer < 0.4:
-    sheepPic = "97";
+    sheepPic = '97';
   case sheepRandomizer < 0.5:
-    sheepPic = "105";
+    sheepPic = '105';
     break;
   case sheepRandomizer < 0.6:
-    sheepPic = "87";
+    sheepPic = '87';
     break;
   case sheepRandomizer < 0.7:
-    sheepPic = "91";
+    sheepPic = '91';
     break;
   case sheepRandomizer < 0.8:
-    sheepPic = "85";
+    sheepPic = '85';
     break;
   case sheepRandomizer < 0.9:
-    sheepPic = "79";
+    sheepPic = '79';
 }
 
 story.beginning = [
@@ -557,8 +557,8 @@ const chapter = [
   "&lt;div&gt;ide &amp; Conquer&lt;/div&gt;",
   "Escape \\Sequence from New York",
   "ANSI Boys",
-  "join('The' 'Army') and C the Navy",
-  "Single or Carriage Return",
+  "join(\'The\' \'Army\') and C the Navy",
+  "Single or Carriage Return"
 ];
 let chapterNumber = Math.floor(chapter.length * Math.random());
 title.innerHTML = `Chapter ${level}:<br>${chapter[chapterNumber]}`;
@@ -1526,12 +1526,7 @@ const newGameThrottled = throttle(newGame, 256);
 const turnPageThrottled = throttle(turnPage, 512);
 
 function fireAlienBullet(col) {
-  if (
-    resetInProgress ||
-    isInUfoCutScene ||
-    isGameOver ||
-    playerDeathInProgress
-  ) {
+  if (resetInProgress || isInUfoCutScene || isGameOver || playerDeathInProgress) {
     return;
   }
   laserShot.time = 0;
@@ -1603,14 +1598,14 @@ const hiddenElementsOnBeam = () => {
   aliens.style.opacity = 0;
   barrierGrids.forEach((el) => (el.style.opacity = 0));
   alienBulletsArray.forEach((el) => (el.element.style.visibility = "hidden"));
-
+  alienBulletsArray.forEach((el) => (el.element.style.visibility = "visible"));
   playerBullet.style.opacity = 0;
 };
 
 const showElementsOnBeam = () => {
   aliens.style.opacity = 1;
   barrierGrids.forEach((el) => (el.style.opacity = 1));
-  alienBulletsArray.forEach((el) => (el.element.style.visibility = "visible"));
+  
   playerBullet.style.opacity = 1;
 };
 
@@ -2245,7 +2240,7 @@ function render() {
         "hidden";
       if (poorDoomedAlien.isLastOne) {
         source.playbackRate.value = 1;
-        if (storyMode && (level === 2 || level === 3)) {
+        if (storyMode && (level === 2 || level ===3)) {
           if (level === 2) {
             storyPart = "londonSaved";
           }
