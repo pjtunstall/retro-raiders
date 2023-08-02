@@ -2107,7 +2107,7 @@ function update(frameDuration) {
         bullet.left + bulletWidth >= playerLeft &&
         bullet.left <= playerLeft + playerWidth
       ) {
-        // playerDeath(false);
+        playerDeath(false);
         bullet.removeMe = true;
 
         break;
