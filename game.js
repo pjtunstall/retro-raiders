@@ -59,17 +59,31 @@ const sheepRandomizer = Math.random();
 let sheepPic = '98';
 
 switch (true) {
-  case sheepRandomizer < 0.2:
+  case sheepRandomizer < 0.1:
     sheepPic = '76'
     break;
-  case sheepRandomizer < 0.4:
+  case sheepRandomizer < 0.2:
     sheepPic = '82';
     break;
-  case sheepRandomizer < 0.6:
+  case sheepRandomizer < 0.3:
     sheepPic = '89';
     break;
-  case sheepRandomizer < 0.8:
+  case sheepRandomizer < 0.4:
     sheepPic = '97';
+  case sheepRandomizer < 0.5:
+    sheepPic = '105';
+    break;
+  case sheepRandomizer < 0.6:
+    sheepPic = '87';
+    break;
+  case sheepRandomizer < 0.7:
+    sheepPic = '91';
+    break;
+  case sheepRandomizer < 0.8:
+    sheepPic = '85';
+    break;
+  case sheepRandomizer < 0.9:
+    sheepPic = '79';
 }
 
 story.beginning = [
