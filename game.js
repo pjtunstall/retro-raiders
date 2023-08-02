@@ -54,6 +54,24 @@ let story = {
   fireballEnding: [],
   aliensReachEarth: [],
 };
+
+const sheepRandomizer = Math.random();
+let sheepPic = '98';
+
+switch (true) {
+  case sheepRandomizer < 0.2:
+    sheepPic = '76'
+    break;
+  case sheepRandomizer < 0.4:
+    sheepPic = '82';
+    break;
+  case sheepRandomizer < 0.6:
+    sheepPic = '89';
+    break;
+  case sheepRandomizer < 0.8:
+    sheepPic = '97';
+}
+
 story.beginning = [
   [
     `./24.jpg`,
@@ -137,7 +155,7 @@ a hero for to find.
   ],
 
   [
-    `./8.jpg`,
+    `./${sheepPic}.jpg`,
 
     `That summer morning, messengers came.
 Messengers there were three.
@@ -523,7 +541,7 @@ const chapter = [
   "Cache Only",
   "Who requestAnimationFrame(edRogerRabbit?)",
   "&lt;div&gt;ide &amp; Conquer&lt;/div&gt;",
-  "Escape (Sequence) from New York",
+  "Escape \\Sequence from New York",
   "ANSI Boys",
   "join(\'The\' \'Army\') and C the Navy",
   "Single or Carriage Return"
