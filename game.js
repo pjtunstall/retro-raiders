@@ -1774,8 +1774,8 @@ function reset(restart) {
           `<div><span id="n">[N]ew game</span></div>
           <div><span id="c">[C]redits</span></div>
           <div><span id="f">[F]lash effect toggle</span></div>
-          <div><span id="a">[ANY OTHER KEY] to continue</span></div>
-          <div><span id="s">[S]tory</span></div>`
+          <div><span id="s">[S]tory</span></div>
+          <div><span id="a">[ANY OTHER KEY] to continue</span></div>`
         );
       }
       storyMode = false;
