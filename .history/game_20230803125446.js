@@ -721,7 +721,7 @@ const html = `
     `;
 ufo.insertAdjacentHTML("beforeend", html);
 let hasUfoBeenShot = false;
-
+let removeBean = false;
 gameContainer.appendChild(ufo);
 let ufoBeam = document.querySelector(".beam");
 let ufoShip = document.querySelector(".ufo");
@@ -2078,6 +2078,7 @@ function update(frameDuration) {
     worker.onmessage = function (event) {
       playerLeft = event.data.player.left;
       // playerBulletTop = event.data.player.bullet.top;
+      
       if (event.data.player.dead) {
         if (storyMode) {
           isInUfoCutScene = true;
@@ -2093,10 +2094,19 @@ function update(frameDuration) {
               ufoDirection = -1;
             }
           }
+          ufoToggleBeam =
+          (ufoDirection === 1 &&
+            ufoLeft + ufoWidth / 2 < playerLeft + playerWidth / 2) ||
+          (ufoDirection === -1 &&
+            ufoLeft + ufoWidth / 2 > playerLeft + playerWidth / 2);
         } else {
           playerDeath(true);
         }
       }
+
+
+
+
       aliensTop = event.data.aliens.top;
       aliensLeft = event.data.aliens.left;
       aliensStep = event.data.aliens.step;
@@ -2417,13 +2427,11 @@ function render() {
       voltage.pause();
       removeUfo = false;
       ufoActive = false;
-       if(removeBean){
-
-       
-      ufo.removeChild(ufoBeam);
-      ufo.insertAdjacentHTML("beforeend", `<div class="beam hidden"></div>`);
-      ufoBeam = document.querySelector(".beam");
-
+      if (ufoGetPlayer) {
+        ufo.removeChild(ufoBeam);
+        ufo.insertAdjacentHTML("beforeend", `<div class="beam hidden"></div>`);
+        ufoBeam = document.querySelector(".beam");
+      }
       ufo.style.left = -16 * ufoWidth + "px";
     }
   }
@@ -2468,7 +2476,7 @@ function render() {
       fireAlienBullet(col);
     }
   }
-  if (ufoActive && !ufoToggleBeam && ufoActive) {
+  if (ufoActive && !ufoToggleBeam && ufoGetPlayer) {
     ufoBeam.classList.remove("hidden");
   }
 

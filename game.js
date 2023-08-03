@@ -2078,6 +2078,7 @@ function update(frameDuration) {
     worker.onmessage = function (event) {
       playerLeft = event.data.player.left;
       // playerBulletTop = event.data.player.bullet.top;
+
       if (event.data.player.dead) {
         if (storyMode) {
           isInUfoCutScene = true;
@@ -2093,10 +2094,16 @@ function update(frameDuration) {
               ufoDirection = -1;
             }
           }
+          ufoToggleBeam =
+            (ufoDirection === 1 &&
+              ufoLeft + ufoWidth / 2 < playerLeft + playerWidth / 2) ||
+            (ufoDirection === -1 &&
+              ufoLeft + ufoWidth / 2 > playerLeft + playerWidth / 2);
         } else {
           playerDeath(true);
         }
       }
+
       aliensTop = event.data.aliens.top;
       aliensLeft = event.data.aliens.left;
       aliensStep = event.data.aliens.step;

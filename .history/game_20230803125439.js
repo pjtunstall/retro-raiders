@@ -2078,24 +2078,7 @@ function update(frameDuration) {
     worker.onmessage = function (event) {
       playerLeft = event.data.player.left;
       // playerBulletTop = event.data.player.bullet.top;
-      if (event.data.player.dead) {
-        if (storyMode) {
-          isInUfoCutScene = true;
-          audioContext.suspend();
-          hiddenElementsOnBeam();
-          ufoGetPlayer = true;
-          if (!ufoActive) {
-            launchUfo();
-          } else {
-            if (ufoLeft + ufoWidth / 2 <= playerLeft + playerWidth) {
-              ufoDirection = 1;
-            } else {
-              ufoDirection = -1;
-            }
-          }
-        } else {
-          playerDeath(true);
-        }
+      
       }
       aliensTop = event.data.aliens.top;
       aliensLeft = event.data.aliens.left;
@@ -2417,11 +2400,11 @@ function render() {
       voltage.pause();
       removeUfo = false;
       ufoActive = false;
-      if(ufoGetPlayer){}
-      ufo.removeChild(ufoBeam);
-      ufo.insertAdjacentHTML("beforeend", `<div class="beam hidden"></div>`);
-      ufoBeam = document.querySelector(".beam");
-
+      if (ufoGetPlayer) {
+        ufo.removeChild(ufoBeam);
+        ufo.insertAdjacentHTML("beforeend", `<div class="beam hidden"></div>`);
+        ufoBeam = document.querySelector(".beam");
+      }
       ufo.style.left = -16 * ufoWidth + "px";
     }
   }
