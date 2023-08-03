@@ -56,6 +56,7 @@ let story = {
   aliensReachEarth: [],
 };
 
+let introPic;
 let sheepPic;
 let lastPic;
 let beamPic;
@@ -63,9 +64,24 @@ let beamPic;
 randomizePics();
 
 function randomizePics() {
+  const introRandomizer = Math.random();
   const sheepRandomizer = Math.random();
   const beamRandomizer = Math.random();
   const lastPicRandomizer = Math.random();
+
+  switch (true) {
+    case introRandomizer < 0.25:
+      introPic = '28';
+      break;
+    case introRandomizer < 0.5:
+      introPic = '4b';
+      break;
+    case introRandomizer < 0.75:
+      introPic = '13b'
+      break;
+    default:
+      introPic = '6';
+  }
 
   switch (true) {
     case sheepRandomizer < 0.09:
@@ -102,7 +118,7 @@ function randomizePics() {
   }
 
   if (beamRandomizer < 0.5) {
-    beamPic = '6';
+    beamPic = '4c';
   } else {
     beamPic = '1';
   }
@@ -116,12 +132,14 @@ function randomizePics() {
       break;
     case lastPicRandomizer < 0.75:
       lastPic = '38';
+      break;
     default:
       lastPic = '13';
   }
 }
 
 function modifyPics() {
+  story.beginning[1][0] = `./${introPic}.jpg`;
   story.beginning[3][0] = `./${sheepPic}.jpg`;
   story.aliensReachEarth[0][0] = `./${beamPic}.jpg`;
   story.aliensReachEarth[6][0] = `./${lastPic}.jpg`;
@@ -163,7 +181,7 @@ Her lip it slowly curled.
   ],
 
   [
-    `./28.jpg`,
+    `./${introPic}.jpg`,
 
     `"I know a world called Planet Earth
 with little for defense.
@@ -317,13 +335,20 @@ story.newYorkSaved = [
   [
     `./34.jpg`,
 
-    `Oh they were not happy to lose New York. That was a blow. How they cursed and swore vengeance. Their green blood boiled.
+    `"Three aliens walked into a bar. Which one said ouch?"
+&mdash;Zen <i>koan</i>, traditional
+
+"Game?"
+
+&mdash;Groundskeeper Willie, The Simpsons, S1E7
+
+Oh they were not happy to lose New York. That was a blow. How they cursed and swore vengeance. Their green blood boiled.
 
 And you? What of the victor? Feted and hailed a hero. A long way from your sheep farm now. How does it feel? Do you feel like a hero? Not really.
 
 How can time even pass?
 
-There was a time. And it was everything then, and real and sharp and impossible, as life is. And somehow it's gone. And long gone. And that band of misfits, how can they not be here?
+There was a time. And it was everything then, and real and sharp and impossible, as life is. And somehow it's gone. And long gone. And that band of misfits, how can they have been then so very here, and now&mdash;not?
 
 <font color="red">[T]urn page</font>`
   ],
@@ -625,7 +650,7 @@ const chapter = [
   "&lt;div&gt;ide &amp; Conquer&lt;/div&gt;",
   "Escape \\Sequence from New York",
   "ANSI Boys",
-  "join('The' 'Army') and C the Navy",
+  "['The', 'Army'].join(' ') and C the Navy",
   "Single or Carriage Return",
 ];
 let chapterNumber = Math.floor(chapter.length * Math.random());
