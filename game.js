@@ -2045,7 +2045,6 @@ function update(frameDuration) {
     ufoToggleBeam = false;
     ufoGetPlayer = false;
     ufoTakenPlayer = false;
-    isInUfoCutScene = false;
     playerDeath(true);
   }
 
@@ -2244,6 +2243,7 @@ function playerDeath(final, fireball) {
     }
     playerDirection = 0;
     isGameOver = true;
+    isInUfoCutScene = false;
     setTimeout(() => {
       player.classList.remove("explosion");
       for (let row = 0; row < alienGridHeight; row++) {
@@ -2760,6 +2760,10 @@ function removeRightColumn() {
 
 function handleKeyDown(event) {
   const key = event.key;
+
+  if (isInUfoCutScene) {
+    return;
+  }
 
   if (isInCutScene) {
     if (key === "t" || key === "T") {
