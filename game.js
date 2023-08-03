@@ -725,6 +725,7 @@ let removeBean = false;
 gameContainer.appendChild(ufo);
 let ufoBeam = document.querySelector(".beam");
 let ufoShip = document.querySelector(".ufo");
+
 // Alien variables.
 const aliens = document.getElementById("aliens");
 const alienGridWidth = 11;
@@ -1566,8 +1567,8 @@ function togglePause() {
         startTime = Date.now();
         pauseStartTime = Date.now();
         ufoTimeUp = Date.now() + 20000 + Math.random() * 10000;
-        console.log(starting);
         starting = false;
+        restartInProgress = false;
       }
     } else {
       const pauseInterval = Date.now() - pauseStartTime;
