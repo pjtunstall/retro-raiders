@@ -335,20 +335,17 @@ story.newYorkSaved = [
   [
     `./34.jpg`,
 
-    `"Three aliens walked into a bar. Which one said ouch?"
-&mdash;Zen <i>koan</i>, traditional
+    `"Three aliens walked into a bar. Which one said ouch?" &mdash;Zen <i>koan</i>, traditional
 
-"Game?"
+"Game?" &mdash;Groundskeeper Willie, The Simpsons, S1E7
 
-&mdash;Groundskeeper Willie, The Simpsons, S1E7
-
-Oh they were not happy to lose New York. That was a blow. How they cursed and swore vengeance. Their green blood boiled.
+Oh they were not happy to lose New York. They cursed Earth then. Their green blood boiled.
 
 And you? What of the victor? Feted and hailed a hero. A long way from your sheep farm now. How does it feel? Do you feel like a hero? Not really.
 
 How can time even pass?
 
-There was a time. And it was everything then, and real and sharp and impossible, as life is. And somehow it's gone. And long gone. And that band of misfits, how can they have been then so very here, and now&mdash;not?
+There was a time. And it was everything, and real and sharp and impossible, as life is. And somehow it's gone. And long gone. And your fellow defenders, comrades of that summer, how can they have been then so very here, and now&mdash;not?
 
 <font color="red">[T]urn page</font>`
   ],
@@ -2134,7 +2131,6 @@ function update(frameDuration) {
       ) {
         playerDeath(false);
         bullet.removeMe = true;
-
         break;
       } else if (bullet.top + bulletHeight > containerHeight) {
         bullet.removeMe = true;
