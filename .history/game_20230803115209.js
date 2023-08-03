@@ -2417,7 +2417,7 @@ function render() {
       voltage.pause();
       removeUfo = false;
       ufoActive = false;
-      if (ufoGetPlayer) {
+      if (removeBean) {
         ufo.removeChild(ufoBeam);
         ufo.insertAdjacentHTML("beforeend", `<div class="beam hidden"></div>`);
         ufoBeam = document.querySelector(".beam");
@@ -2466,7 +2466,7 @@ function render() {
       fireAlienBullet(col);
     }
   }
-  if (ufoActive && !ufoToggleBeam && ufoGetPlayer) {
+  if (ufoActive && !ufoToggleBeam && ufoActive) {
     ufoBeam.classList.remove("hidden");
   }
 

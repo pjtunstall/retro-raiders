@@ -2417,11 +2417,11 @@ function render() {
       voltage.pause();
       removeUfo = false;
       ufoActive = false;
-      if (ufoGetPlayer) {
-        ufo.removeChild(ufoBeam);
-        ufo.insertAdjacentHTML("beforeend", `<div class="beam hidden"></div>`);
-        ufoBeam = document.querySelector(".beam");
-      }
+      if(ufoGetPlayer){}
+      ufo.removeChild(ufoBeam);
+      ufo.insertAdjacentHTML("beforeend", `<div class="beam hidden"></div>`);
+      ufoBeam = document.querySelector(".beam");
+
       ufo.style.left = -16 * ufoWidth + "px";
     }
   }

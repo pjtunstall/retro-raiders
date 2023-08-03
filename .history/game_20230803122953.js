@@ -2466,9 +2466,6 @@ function render() {
       fireAlienBullet(col);
     }
   }
-  if (ufoActive && !ufoToggleBeam && ufoGetPlayer) {
-    ufoBeam.classList.remove("hidden");
-  }
 
   for (const blockToChange of blocksToChange) {
     rock.currentTime = 0;

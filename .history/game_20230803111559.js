@@ -71,70 +71,70 @@ function randomizePics() {
 
   switch (true) {
     case introRandomizer < 0.25:
-      introPic = "28";
+      introPic = '28';
       break;
     case introRandomizer < 0.5:
-      introPic = "4b";
+      introPic = '4b';
       break;
     case introRandomizer < 0.75:
-      introPic = "13b";
+      introPic = '13b'
       break;
     default:
-      introPic = "6";
+      introPic = '6';
   }
 
   switch (true) {
     case sheepRandomizer < 0.09:
-      sheepPic = "76";
+      sheepPic = '76'
       break;
     case sheepRandomizer < 0.18:
-      sheepPic = "82";
+      sheepPic = '82';
       break;
     case sheepRandomizer < 0.27:
-      sheepPic = "89";
+      sheepPic = '89';
       break;
     case sheepRandomizer < 0.36:
-      sheepPic = "97";
+      sheepPic = '97';
     case sheepRandomizer < 0.45:
-      sheepPic = "105";
+      sheepPic = '105';
       break;
     case sheepRandomizer < 0.55:
-      sheepPic = "87";
+      sheepPic = '87';
       break;
     case sheepRandomizer < 0.7:
-      sheepPic = "91";
+      sheepPic = '91';
       break;
     case sheepRandomizer < 0.64:
-      sheepPic = "85";
+      sheepPic = '85';
       break;
     case sheepRandomizer < 0.82:
-      sheepPic = "79";
+      sheepPic = '79';
       break;
     case sheepRandomizer < 0.9:
-      sheepPic = "71";
+      sheepPic = '71'
       break;
     default:
-      sheepPic = "98";
+      sheepPic = '98';
   }
 
   if (beamRandomizer < 0.5) {
-    beamPic = "4c";
+    beamPic = '4c';
   } else {
-    beamPic = "1";
+    beamPic = '1';
   }
 
   switch (true) {
     case lastPicRandomizer < 0.25:
-      lastPic = "39";
+      lastPic = '39';
       break;
     case lastPicRandomizer < 0.5:
-      lastPic = "11b";
+      lastPic = '11b';
       break;
     case lastPicRandomizer < 0.75:
-      lastPic = "38";
+      lastPic = '38';
       break;
     default:
-      lastPic = "13";
+      lastPic = '13';
   }
 }
 
@@ -347,7 +347,7 @@ How can time even pass?
 
 There was a time. And it was everything, and real and sharp and impossible, as life is. And somehow it's gone. And long gone. And your fellow defenders, comrades of that summer, how can they have been then so very here, and now&mdash;not?
 
-<font color="red">[T]urn page</font>`,
+<font color="red">[T]urn page</font>`
   ],
 
   [
@@ -363,8 +363,8 @@ You stood outside of time that night. Absurd. The clockwork. The game! All of it
 
 But no time to think on that. A new attack. And they rush you across the ocean.
 
-<font color="red">[T]urn page</font>`,
-  ],
+<font color="red">[T]urn page</font>`
+  ]
 ];
 
 story.playerShot = [
@@ -721,7 +721,7 @@ const html = `
     `;
 ufo.insertAdjacentHTML("beforeend", html);
 let hasUfoBeenShot = false;
-let removeBean = false;
+
 gameContainer.appendChild(ufo);
 let ufoBeam = document.querySelector(".beam");
 let ufoShip = document.querySelector(".ufo");
@@ -1517,7 +1517,7 @@ function turnPage() {
       storyPart === "londonSaved" ||
       storyPart === "chicagoSaved" ||
       storyPart === "newYorkSaved"
-    ) {
+      ) {
       reset(false);
     }
   } else {
@@ -2340,7 +2340,7 @@ function render() {
         "hidden";
       if (poorDoomedAlien.isLastOne) {
         source.playbackRate.value = 1;
-        if (storyMode && level > 1 && level < 5) {
+        if (storyMode && (level > 1 && level < 5)) {
           if (level === 2) {
             storyPart = "londonSaved";
           }
@@ -2417,11 +2417,10 @@ function render() {
       voltage.pause();
       removeUfo = false;
       ufoActive = false;
-      if (ufoGetPlayer) {
-        ufo.removeChild(ufoBeam);
-        ufo.insertAdjacentHTML("beforeend", `<div class="beam hidden"></div>`);
-        ufoBeam = document.querySelector(".beam");
-      }
+      ufo.removeChild(ufoBeam);
+      ufo.insertAdjacentHTML("beforeend", `<div class="beam hidden"></div>`);
+      ufoBeam = document.querySelector(".beam");
+
       ufo.style.left = -16 * ufoWidth + "px";
     }
   }
@@ -2466,7 +2465,7 @@ function render() {
       fireAlienBullet(col);
     }
   }
-  if (ufoActive && !ufoToggleBeam && ufoGetPlayer) {
+  if (ufoActive && !ufoToggleBeam && ufoGetPlayer && story) {
     ufoBeam.classList.remove("hidden");
   }
 

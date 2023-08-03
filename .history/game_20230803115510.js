@@ -2417,11 +2417,11 @@ function render() {
       voltage.pause();
       removeUfo = false;
       ufoActive = false;
-      if (ufoGetPlayer) {
+      
         ufo.removeChild(ufoBeam);
         ufo.insertAdjacentHTML("beforeend", `<div class="beam hidden"></div>`);
         ufoBeam = document.querySelector(".beam");
-      }
+    
       ufo.style.left = -16 * ufoWidth + "px";
     }
   }
@@ -2466,7 +2466,7 @@ function render() {
       fireAlienBullet(col);
     }
   }
-  if (ufoActive && !ufoToggleBeam && ufoGetPlayer) {
+  if (ufoActive && !ufoToggleBeam && ufoActive) {
     ufoBeam.classList.remove("hidden");
   }
 
@@ -2889,6 +2889,7 @@ gameContainer.addEventListener("animationend", (event) => {
     animationName === "oppositeExtendBeam"
   ) {
     ufoTakenPlayer = true;
+    removeBean = true;
   }
 });
 

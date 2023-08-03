@@ -2092,7 +2092,10 @@ function update(frameDuration) {
             } else {
               ufoDirection = -1;
             }
+            
           }
+
+
         } else {
           playerDeath(true);
         }
@@ -2465,9 +2468,6 @@ function render() {
       alienBulletDue = Date.now() + (5000 * Math.random()) / alienFireRate;
       fireAlienBullet(col);
     }
-  }
-  if (ufoActive && !ufoToggleBeam && ufoGetPlayer) {
-    ufoBeam.classList.remove("hidden");
   }
 
   for (const blockToChange of blocksToChange) {
