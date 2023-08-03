@@ -70,14 +70,17 @@ function randomizePics() {
   const lastPicRandomizer = Math.random();
 
   switch (true) {
-    case introRandomizer < 0.25:
+    case introRandomizer < 0.2:
       introPic = "28";
       break;
-    case introRandomizer < 0.5:
+    case introRandomizer < 0.4:
       introPic = "4b";
       break;
-    case introRandomizer < 0.75:
+    case introRandomizer < 0.6:
       introPic = "13b";
+      break;
+    case introRandomizer < 8:
+      introPic = "9";
       break;
     default:
       introPic = "6";
