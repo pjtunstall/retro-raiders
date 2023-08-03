@@ -188,7 +188,7 @@ Her lip it slowly curled.
 
     `"I know a world called Planet Earth
 with little for defense.
-A lone gunner guards their towns.
+A single gunner guards their towns.
 Let's teleport us hence."
 
 "Let's teleport our tribes all three
@@ -240,7 +240,7 @@ Messengers there were three.
 
 "A gunner you must be for us,
 defending Planet Earth.
-A plasma cannon you must steer
+A laser cannon you must steer
 and shoot for all you're worth."
 
 <font color="red">[T]urn page</font>`,
@@ -271,14 +271,14 @@ admirals one, two, three,
 those monsters meet to plot their course,
 to seal their victory.
 
-New swarms appear, they will not rest
+New swarms appear, they'll not let go
 till Earth is all ablaze.
-The human race must suffer now.
+No pity will this planet know.
 Its cities they will raze.
 
 New swarms appear, they will not cease
 till Earth is laid to waste
-and a certain lone defender
+and a certain laser fusilier
 his final end has faced. <font color="red">[T]urn page</font>`,
   ],
 ];
@@ -292,10 +292,10 @@ London's skies are free!
 For a time it seems the horde might leave,
 but that is not to be.
 
-For a while it seems you've won the day,
-but that is premature talk.
+For a while it seems they have withdrawn,
+but that is just a ploy
 Soon new swarms descend upon
-Chicago and New York.
+Chicago, Illinois.
 
 The alien lords are not dismayed.
 They've conquered worlds before.
@@ -303,8 +303,8 @@ If a planet proves too hard to take,
 they just attack it more.
 
 Their strategists devise a plan.
-They are determined now.
-On a certain lone defender
+They'll stop at nothing now.
+On that lone laser rifleman
 vengeance they do vow.
 
 <font color="red">[T]urn page</font>`,
