@@ -1519,11 +1519,7 @@ function newGame() {
   if (displayCredits) {
     toggleCreditsThrottled();
   }
-  if (!pauseOnStart) {
-    togglePause();
-  } else {
-    pauseOnStart = false;
-  }
+  togglePause();
   reset(true);
 }
 
@@ -1733,7 +1729,11 @@ function reset(restart) {
   isInUfoCutScene = false;
   scoreBoardPressAnyKey.classList.add("hidden");
   player.classList.remove("player-beam");
-  source.playbackRate.value = 1;
+
+  if (source) {
+    source.playbackRate.value = 1;
+  }
+
   currentPage = 0;
 
   // To deal with the possibility that the player is hit by an alien bullet while

@@ -473,6 +473,11 @@ body {
   font-size: 27px;
 }
 
+@font-face {
+  font-family: "azimov";
+  src: url("fonts/Asimov-nlg.ttf");
+}
+
 .title {
   position: absolute;
   width: 100%;
@@ -487,6 +492,7 @@ body {
   justify-content: center;
   font-size: 64px;
   color: red;
+  font-family: "azimov";
 }
 
 .credits {
