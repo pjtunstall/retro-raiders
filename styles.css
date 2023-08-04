@@ -542,13 +542,14 @@ body {
   width: 80%;
   margin: 0 auto;
   font-size: 1.5rem;
-
-  /* font-family: "Audiowide", sans-serif; */
+  top: 32px;
 }
 
 .pause-menu-modify {
   display: block;
   text-align: center;
+  position: relative;
+  top: 32px;
 }
 .pause-menu-modify div {
   margin: 0rem 12rem;
