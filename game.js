@@ -280,7 +280,8 @@ New swarms appear, they will not stop
 till Earth is laid to waste,
 and a lone laser fusilier
 his final end has faced.
-<br><font color="red">[T]urn page</font>`,
+
+<font color="red">[T]urn page</font>`,
   ],
 ];
 
