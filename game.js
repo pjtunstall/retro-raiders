@@ -276,9 +276,9 @@ till Earth is all ablaze.
 No pity will this planet know.
 Its cities they will raze.
 
-New swarms appear, they will not cease
-till Earth is laid to waste
-and a certain laser fusilier
+New swarms appear, they will not stop
+till Earth is laid to waste,
+and a lone laser fusilier
 his final end has faced. <font color="red">[T]urn page</font>`,
   ],
 ];
@@ -625,7 +625,7 @@ const chapter = [
   "To Summon His Array",
   "Regex Quandam, Regex Futurusque",
   "Snug as a Bug in a Rug",
-  "A &lt;span&gt;iard in the Works&lt;/span&gt;",
+  "A &lt;span&gt;ner in the Works&lt;/span&gt;",
   "Here We Go Loopy Loo",
   "Needle in a Callstack",
   "Burning Chrome",
@@ -649,6 +649,7 @@ const chapter = [
   "Who requestAnimationFrame(edRogerRabbit?)",
   "&lt;div&gt;ide &amp; Conquer&lt;/div&gt;",
   "Escape \\Sequence from New York",
+  "Midnight in Parity",
   "ANSI Boys",
   "['The', 'Army'].join(' ') and C the Navy",
   "Single or Carriage Return",
