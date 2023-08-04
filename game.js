@@ -1400,6 +1400,7 @@ let pausedTime = 0;
 let musicStartTime = 0;
 
 async function loadAndPlayMusic() {
+  console.log('loading and playing');
   try {
     const musicFile = "Space_Invaders_Music.ogg.mp3";
     const response = await fetch(musicFile);
@@ -1415,17 +1416,6 @@ async function loadAndPlayMusic() {
   } catch (error) {
     console.error("Error loading and playing music:", error);
   }
-}
-
-function waitForKeyPress() {
-  return new Promise((resolve) => {
-    function handleKeyPress(event) {
-      resolve();
-      document.removeEventListener("keydown", handleKeyPress);
-    }
-
-    document.addEventListener("keydown", handleKeyPress);
-  });
 }
 
 // Sound effects.
@@ -1578,6 +1568,7 @@ function togglePause() {
     }
     if (starting) {
       loadAndPlayMusic();
+      console.log('starting now')
     } else {
       audioContext.resume().then(() => {
         source.playbackRate.setValueAtTime(
@@ -2499,12 +2490,8 @@ function render() {
 }
 
 const cutScene = () => {
-  if (storyPart === "beginning") {
-    audioContext.suspend();
-  } else {
-    // if (!isGameOver) {
+  if (storyPart !== "beginning") {
     togglePauseThrottled();
-    // }
   }
   isInCutScene = true;
   pauseMenu.style.display = "none";
