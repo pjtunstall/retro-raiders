@@ -556,7 +556,7 @@ For the briefest moment, its face twisted with a wild-eyed look.
   [
     `./5.jpg`,
 
-    `"What do you know about such things?" the mercenary muttered and a single, spice-scented tear dripped off its laser-scarred chin.
+    `"What do you know of such things?" the mercenary muttered and a single, spice-scented tear dripped off its laser-scarred chin.
 
 But it quickly took another long drag on the pipe and went back to patching its space suit.
 
@@ -564,7 +564,7 @@ Its comrades snickered and flapped their arms in empty glee.
 
 So I left them there and trudged back to the teleport sheds. A bad moon was rising.
 
-I'd write up my notes on the needle ship on the way to the wormhole. With the alliances I'd arranged on my mission, and the false intelligence I'd shared with the Eskalir, it would not go well for the Grumian Empire.
+I'd write up my notes on the needle ship on the way to the wormhole. With the alliances I'd made on my mission, and the false intelligence I'd shared with the Eskalir, it would not go well for the Grumian Empire.
 
 Such is the way of the High Reaches.
 
