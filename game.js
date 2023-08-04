@@ -488,7 +488,7 @@ to Ceti Sigma and Tau,
 you're the last of Earth, you're one of the swarm.
 You're freefalling now.
 
-A retro raider, a space invader,
+A Retro Raider, a Space Invader,
 it's all the same to you.
 Among laser blasts and plasma bolts,
 you look out for your crew.
@@ -502,7 +502,7 @@ you look out for your crew.
     `<i>From the Memoirs of Exaptia Tabbani, Ambassador of the Hmadian Macrostates, on concluding her negotiations with Emperor FnrRa Gfgfgg (II<sup>MXXIV</sup>-I)st, Lord of Orion, Grand Eskalir of Grumium, and Admiral of the High Reaches:</i>
 
 
-Following my embassy to the barbarian emperor&mdash;Oh, I could hardly believe it, she'd walked right into my trap!&mdash;, as I walked back to my teleport pad, I happened upon a contingent of mercenaries, busy darning their space suits for the next invasion.
+Following my embassy to the barbarian emperor&mdash;Oh, I could hardly believe it, she'd walked right into my trap!&mdash;, as I strode back to my teleport pad, I happened upon a contingent of mercenaries, busy darning their space suits for the next invasion.
 
 One caught my eye.
 
@@ -653,7 +653,7 @@ const chapter = [
   "Escape \\Sequence from New York",
   "Midnight in Parity",
   "ANSI Boys",
-  "['The', 'Army'].join(' ') and C the Navy",
+  "['The', 'Army'].join(' ') and C++ the Navy",
   "Single or Carriage Return",
 ];
 let chapterNumber = Math.floor(chapter.length * Math.random());
@@ -2977,12 +2977,8 @@ const controlScore = async (obj) => {
     playerName = obj.playerName;
 
     displayScoreboard(scores, message);
-    // setTimeout(() => {
     showAndAddGameoverMenue();
-    // }, 2500);
     isScoreBoardShowing = true;
-    // togglePauseThrottled();
-    // showScoreBoard();
   } catch (err) {
     console.log(err);
   }
