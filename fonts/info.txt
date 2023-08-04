@@ -1,2 +1,5 @@
-﻿license: Freeware, Non-Commercial
+license: Freeware, Non-Commercial
 link: https://www.fontspace.com/asimov-font-f744
+
+license: Freeware, Non-Commercial
+link: https://www.fontspace.com/computo-monospace-font-f44968

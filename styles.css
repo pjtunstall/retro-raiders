@@ -1,3 +1,20 @@
+.text {
+  padding-left: 1rem;
+  color: white;
+  font-size: clamp(1rem, 1.5vw, 1.7rem);
+  font-family: "Times New Roman", Times, serif !important;
+}
+
+@font-face {
+  font-family: "Azimov";
+  src: url("fonts/Asimov-nlg.ttf");
+}
+
+@font-face {
+  font-family: "Computo Monospace";
+  src: url("fonts/ComputoMonospace-p73xO.ttf");
+}
+
 body {
   margin: 0;
   padding: 0;
@@ -8,6 +25,7 @@ body {
   align-items: center;
   font-size: 10px;
   height: 100vh;
+  font-family: "Azimov";
 }
 :root {
   --conatinerHeight: 770px;
@@ -445,6 +463,7 @@ body {
 .stats-bar span {
   font-weight: bold;
   font-size: 27px;
+  font-family: "Computo Monospace" !important;
 }
 
 .pause-menu {
@@ -473,11 +492,6 @@ body {
   font-size: 27px;
 }
 
-@font-face {
-  font-family: "azimov";
-  src: url("fonts/Asimov-nlg.ttf");
-}
-
 .title {
   position: absolute;
   width: 100%;
@@ -492,7 +506,6 @@ body {
   justify-content: center;
   font-size: 64px;
   color: red;
-  font-family: "azimov";
 }
 
 .credits {
@@ -763,12 +776,6 @@ button:hover {
 .story-container .img img {
   width: 100%;
   object-fit: contain;
-}
-
-.text {
-  padding-left: 1rem;
-  color: white;
-  font-size: clamp(1rem, 1.5vw, 1.7rem);
 }
 
 .hidden {
