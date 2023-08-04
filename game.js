@@ -295,8 +295,8 @@ For a time it seems the horde might leave,
 but that is not to be.
 
 For a while it seems they have withdrawn,
-but that is just a ploy
-Soon new swarms descend upon
+but that is just a ploy;
+soon new swarms descend upon
 Chicago, Illinois.
 
 The alien lords are not dismayed.
