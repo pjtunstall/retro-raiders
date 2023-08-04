@@ -163,7 +163,7 @@ strewn across Orion's belt,
 jibbering and in fits.
 
 Three warlike tribes he did unite,
-Invaders one, two, three,
+Invaders, one, two, three,
 held together by fear and greed
 and his personality.
 
@@ -261,14 +261,14 @@ award you points galore.
 Those mutants promise you, if Earth wins,
 fame, XP, and more.
 
-Invader generals, one, two, three,
+The generals of the alien fleet
 meet in a foul mood.
 This is a point of honour now.
 It's a slight against their brood.
 
 The generals of the alien force,
-admirals one, two, three,
-those monsters meet to plot their course,
+admirals, one, two, three,
+decide upon a monstrous course
 to seal their victory.
 
 New swarms appear, they'll not let go
@@ -279,7 +279,8 @@ Its cities they will raze.
 New swarms appear, they will not stop
 till Earth is laid to waste,
 and a lone laser fusilier
-his final end has faced. <font color="red">[T]urn page</font>`,
+his final end has faced.
+<br><font color="red">[T]urn page</font>`,
   ],
 ];
 
