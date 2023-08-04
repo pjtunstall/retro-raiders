@@ -1428,13 +1428,6 @@ function waitForKeyPress() {
   });
 }
 
-async function startProgram() {
-  await waitForKeyPress();
-  loadAndPlayMusic();
-}
-
-startProgram();
-
 // Sound effects.
 const shootEffect = new Audio("LaserBlastQuick PE1095107.mp3");
 const laserShot = new Audio("Laser-Shot-1.mp3");
@@ -1550,10 +1543,12 @@ function togglePause() {
       voltage.pause();
     }
     wind.play();
-    pausedPlaybackRate = source.playbackRate.value;
-    pausedTime = audioContext.currentTime - musicStartTime;
-    source.playbackRate.setValueAtTime(0, audioContext.currentTime);
-    audioContext.suspend();
+    if (!starting) {
+      pausedPlaybackRate = source.playbackRate.value;
+      pausedTime = audioContext.currentTime - musicStartTime;
+      source.playbackRate.setValueAtTime(0, audioContext.currentTime);
+      audioContext.suspend();
+    }
     pauseMenu.style.visibility = "visible";
     if (resetInProgress) {
       title.style.backgroundColor = "rgba(0, 0, 0, 1);";
@@ -1571,7 +1566,6 @@ function togglePause() {
         startTime = Date.now();
         pauseStartTime = Date.now();
         ufoTimeUp = Date.now() + 20000 + Math.random() * 10000;
-        starting = false;
         restartInProgress = false;
       }
     } else {
@@ -1582,16 +1576,21 @@ function togglePause() {
     if (ufoActive) {
       voltage.play();
     }
-    audioContext.resume().then(() => {
-      source.playbackRate.setValueAtTime(
-        pausedPlaybackRate,
-        audioContext.currentTime
-      );
-      musicStartTime = audioContext.currentTime - pausedTime;
-      if (resetInProgress && source.playbackRate) {
-        source.playbackRate.value = 1;
-      }
-    });
+    if (starting) {
+      loadAndPlayMusic();
+    } else {
+      audioContext.resume().then(() => {
+        source.playbackRate.setValueAtTime(
+          pausedPlaybackRate,
+          audioContext.currentTime
+        );
+        musicStartTime = audioContext.currentTime - pausedTime;
+        if (resetInProgress && source.playbackRate) {
+          source.playbackRate.value = 1;
+        }
+      });
+    }
+    starting = false;
     resetInProgress = false;
   }
 }
@@ -1622,7 +1621,7 @@ const toggleFlashEffectThrottled = throttle(toggleFlashEffect, 256);
 const togglePauseThrottled = throttle(togglePause, 256);
 const firePlayerBulletThrottled = throttle(firePlayerBullet, 128);
 const newGameThrottled = throttle(newGame, 256);
-const turnPageThrottled = throttle(turnPage, 512);
+const turnPageThrottled = throttle(turnPage, 265);
 
 function fireAlienBullet(col) {
   if (
@@ -2235,7 +2234,6 @@ function playerDeath(final, fireball) {
   }
   if (lives < 1) {
     player.classList.add("explosion");
-    console.log(player.classList);
   }
   if (final || lives < 1) {
     const alienBullets = document.querySelectorAll(".alien-bullet");
