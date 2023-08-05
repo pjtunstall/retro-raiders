@@ -752,7 +752,8 @@ button:hover {
 
 .message {
   font-size: 1.7rem;
-  color: rgb(243, 16, 16);
+  /* color: rgb(243, 16, 16); */
+  color: rgb(127, 208, 4);
   margin: 2rem 0;
 }
 

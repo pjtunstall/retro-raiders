@@ -58,6 +58,7 @@ let story = {
 
 let introPic;
 let sheepPic;
+let ufoShotPic;
 let lastPic;
 let beamPic;
 
@@ -66,6 +67,7 @@ randomizePics();
 function randomizePics() {
   const introRandomizer = Math.random();
   const sheepRandomizer = Math.random();
+  const ufoShotRandomizer = Math.random();
   const beamRandomizer = Math.random();
   const lastPicRandomizer = Math.random();
 
@@ -80,7 +82,7 @@ function randomizePics() {
       introPic = "13b";
       break;
     case introRandomizer < 8:
-      introPic = "9";
+      introPic = "35";
       break;
     default:
       introPic = "6";
@@ -120,6 +122,17 @@ function randomizePics() {
       sheepPic = "98";
   }
 
+  switch (true) {
+    case ufoShotRandomizer < 0.33:
+      ufoShotPic = 'aug1';
+      break;
+    case ufoShotRandomizer < 0.66:
+      ufoShotPic = '9';
+      break;
+    default:
+      ufoShotPic = '2b';
+  }
+
   if (beamRandomizer < 0.5) {
     beamPic = "4c";
   } else {
@@ -144,6 +157,7 @@ function randomizePics() {
 function modifyPics() {
   story.beginning[1][0] = `./${introPic}.jpg`;
   story.beginning[3][0] = `./${sheepPic}.jpg`;
+  story.ufoShot[0][0] = `./${ufoShotPic}.jpg`;
   story.aliensReachEarth[0][0] = `./${beamPic}.jpg`;
   story.aliensReachEarth[6][0] = `./${lastPic}.jpg`;
 }
@@ -249,7 +263,7 @@ and shoot for all you're worth."
 
 story.ufoShot = [
   [
-    `./2b.jpg`,
+    `./${ufoShotPic}.jpg`,
 
     `A well-aimed shot, the Mystery Ship
 explodes across the sky!
@@ -2958,10 +2972,7 @@ async function updatesGameOver() {
   if (score < Math.min(...scores.map((el) => el.score))) {
     document.getElementById("overlay").innerHTML = "";
     displayScoreboard(scores, message);
-
-    // setTimeout(() => {
     showAndAddGameoverMenue();
-    // }, 2500);
     isScoreBoardShowing = true;
   }
 
