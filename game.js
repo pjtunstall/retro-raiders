@@ -140,14 +140,17 @@ function randomizePics() {
   }
 
   switch (true) {
-    case lastPicRandomizer < 0.25:
+    case lastPicRandomizer < 0.2:
       lastPic = "39";
       break;
-    case lastPicRandomizer < 0.5:
+    case lastPicRandomizer < 0.4:
       lastPic = "11b";
       break;
-    case lastPicRandomizer < 0.75:
+    case lastPicRandomizer < 0.6:
       lastPic = "38";
+      break;
+    case lastPicRandomizer < 0.8:
+      lastPic = "69";
       break;
     default:
       lastPic = "13";
