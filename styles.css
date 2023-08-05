@@ -623,7 +623,7 @@ h1 {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 100vh;
+  height: 80vh;
   color: #fff;
 }
 
@@ -634,19 +634,23 @@ h1 {
 }
 
 #player-name {
-  padding: 5px 10px;
+  width: 360px;
+  padding: 16px;
+  padding-top: 16px;
+  padding-bottom: 8px;
   border: none;
-  border-radius: 25px;
-  background-color: rgb(243, 235, 235);
-  font-size: 1.7rem;
+  border-radius: 8px;
+  /* background-color: rgb(243, 235, 235); */
+  background-color: rgb(248, 184, 164);
+  font-size: 2rem;
   text-align: center;
-  /* font-family: "Audiowide", sans-serif; */
   outline: none;
-  margin-bottom: 75px;
+  /* margin-bottom: 75px; */
+  font-family: "Azimov";
+  caret-color: black;
 }
 
 .gameOverText {
-  /* font-family: "Audiowide", sans-serif; */
   font-size: 8rem;
 }
 
@@ -732,8 +736,11 @@ button:hover {
 .player-input {
   text-align: center;
   width: 80%;
-  margin: 0 auto;
   font-size: 10rem;
+}
+
+.player-input input::placeholder {
+  font-family: "Azimov";
 }
 
 .stat-group {
@@ -757,10 +764,10 @@ button:hover {
   margin: 2rem 0;
 }
 
-.press-any-key {
+/* .press-any-key {
   color: red;
   font-size: 27px;
-}
+} */
 
 .story-container {
   height: 100vh;

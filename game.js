@@ -81,7 +81,7 @@ function randomizePics() {
     case introRandomizer < 0.6:
       introPic = "13b";
       break;
-    case introRandomizer < 8:
+    case introRandomizer < 0.8:
       introPic = "35";
       break;
     default:
@@ -603,7 +603,7 @@ I like to think he did.
   ],
 ];
 
-let scoreBoardPressAnyKey = document.querySelector(".press-any-key");
+// let scoreBoardPressAnyKey = document.querySelector(".press-any-key");
 const storyEl = document.querySelector(".story-container");
 const scoreElement = document.getElementById("score");
 const levelElement = document.getElementById("level");
@@ -1744,7 +1744,7 @@ function reset(restart) {
   ufoToggleBeam = false;
   ufoTakenPlayer = false;
   isInUfoCutScene = false;
-  scoreBoardPressAnyKey.classList.add("hidden");
+  // scoreBoardPressAnyKey.classList.add("hidden");
   player.classList.remove("player-beam");
 
   if (source) {
@@ -2793,8 +2793,8 @@ function handleKeyDown(event) {
     <div><span id="n">[N]ew game</span></div>
     <div><span id="c">[C]redits</span></div>
     <div><span id="f">[F]lash effect toggle</span></div>
-    <div><span id="a">[ANY OTHER KEY] to continue</span></div>
     <div><span id="s">[S]tory</span></div>
+    <div><span id="a">[ANY OTHER KEY] to continue</span></div>
     `
     );
     togglePause();
@@ -2913,8 +2913,8 @@ document.addEventListener("keyup", handleKeyUp);
 loopID = requestAnimationFrame(gameLoop);
 
 const gameOverView = () => {
+  pauseMenu.style.display = "none";
   const overlay = document.getElementById("overlay");
-
   overlay.innerHTML = "";
   overlay.style.zIndex = 4;
   const html = `
@@ -2934,24 +2934,23 @@ const gameOverView = () => {
         </div>
     </div>
     <div class="player-input">
-        <input type="text" id="player-name" name="player-name" placeholder="Enter your name">
-        <button type="submit">Submit Score</button>
+        <input type="text" id="player-name" name="player-name" placeholder="TYPE NAME, HUMAN SCUM!" autocomplete="off" maxlength="16">
     </div>
-</form> `
+</form>`
         : ``
     }
 </div>
-
- 
   `;
   overlay.insertAdjacentHTML("beforeend", html);
 
   // overlay.classList.remove("overlay-hidden");
 };
 
+// `<button type="submit">Submit Score</button>`
+
 const showAndAddGameoverMenue = () => {
   pauseMenu.innerHTML = "";
-
+  pauseMenu.style.display = "flex";
   pauseMenu.classList.add("pause-menu-modify");
   pauseMenu.insertAdjacentHTML(
     "beforeend",
