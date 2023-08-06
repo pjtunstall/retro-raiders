@@ -1812,14 +1812,29 @@ function reset(restart) {
       if (storyMode) {
         // Restore story option on pause menu if we were previously in story mode.
         pauseMenu.innerHTML = "";
-        pauseMenu.insertAdjacentHTML(
-          "beforeend",
-          `<div><span id="n">[N]ew game</span></div>
+        if (fadeOption) {
+          pauseMenu.insertAdjacentHTML(
+            "beforeend",
+            `
+          <div><span id="n">[N]ew game</span></div>
           <div><span id="c">[C]redits</span></div>
-          <div><span id="f">[F]lash effect toggle</span></div>
-          <div><span id="s">[S]tory</span></div>
-          <div><span id="a">[ANY OTHER KEY] to continue</span></div>`
-        );
+          <div><span id="f">[F]lash effect off</span></div>
+          <div><span id="s"> [S]tory</span></div>
+          <div><span id="a">[ANY OTHER KEY] to continue</span></div>
+          `
+          );
+        } else {
+          pauseMenu.insertAdjacentHTML(
+            "beforeend",
+            `
+          <div><span id="n">[N]ew game</span></div>
+          <div><span id="c">[C]redits</span></div>
+          <div><span id="f">[F]lash effect on</span></div>
+          <div><span id="s"> [S]tory</span></div>
+          <div><span id="a">[ANY OTHER KEY] to continue</span></div>
+          `
+          );
+        }
       }
       storyMode = false;
       hasUfoBeenShot = false;
@@ -2822,17 +2837,29 @@ function handleKeyDown(event) {
     statsBar.style.display = "flex";
     pauseMenu.innerHTML = "";
     pauseMenu.classList.remove("pause-menu-modify");
-
-    pauseMenu.insertAdjacentHTML(
-      "beforeend",
+    if (fadeOption) {
+      pauseMenu.insertAdjacentHTML(
+        "beforeend",
+        `
+      <div><span id="n">[N]ew game</span></div>
+      <div><span id="c">[C]redits</span></div>
+      <div><span id="f">[F]lash effect off</span></div>
+      <div><span id="s"> [S]tory</span></div>
+      <div><span id="a">[ANY OTHER KEY] to continue</span></div>
       `
-    <div><span id="n">[N]ew game</span></div>
-    <div><span id="c">[C]redits</span></div>
-    <div><span id="f">[F]lash effect toggle</span></div>
-    <div><span id="s">[S]tory</span></div>
-    <div><span id="a">[ANY OTHER KEY] to continue</span></div>
-    `
-    );
+      );
+    } else {
+      pauseMenu.insertAdjacentHTML(
+        "beforeend",
+        `
+      <div><span id="n">[N]ew game</span></div>
+      <div><span id="c">[C]redits</span></div>
+      <div><span id="f">[F]lash effect on</span></div>
+      <div><span id="s"> [S]tory</span></div>
+      <div><span id="a">[ANY OTHER KEY] to continue</span></div>
+      `
+      );
+    }
     togglePause();
     reset(true);
     // newGameThrottled();
@@ -2868,15 +2895,27 @@ function handleKeyDown(event) {
         toggleCreditsThrottled();
       }
       pauseMenu.innerHTML = "";
-      pauseMenu.insertAdjacentHTML(
-        "beforeend",
+      if (fadeOption) {
+        pauseMenu.insertAdjacentHTML(
+          "beforeend",
+          `
+        <div><span id="n">[N]ew game</span></div>
+        <div><span id="c">[C]redits</span></div>
+        <div><span id="f">[F]lash effect off</span></div>
+        <div><span id="a">[ANY OTHER KEY] to continue</span></div>
         `
-      <div><span id="n">[N]ew game</span></div>
-      <div><span id="c">[C]redits</span></div>
-      <div><span id="f">[F]lash effect toggle</span></div>
-      <div><span id="any">[ANY OTHER KEY] to continue</span></div>
-      `
-      );
+        );
+      } else {
+        pauseMenu.insertAdjacentHTML(
+          "beforeend",
+          `
+        <div><span id="n">[N]ew game</span></div>
+        <div><span id="c">[C]redits</span></div>
+        <div><span id="f">[F]lash effect on</span></div>
+        <div><span id="a">[ANY OTHER KEY] to continue</span></div>
+        `
+        );
+      }
       storyPart = "beginning";
       cutScene();
       storyMode = true;
@@ -2888,7 +2927,31 @@ function handleKeyDown(event) {
     if (key === "n" || key === "N") {
       newGameThrottled();
     } else if (key === "f" || key === "F") {
+      pauseMenu.innerHTML = "";
       toggleFlashEffectThrottled();
+      if (fadeOption) {
+        pauseMenu.insertAdjacentHTML(
+          "beforeend",
+          `
+        <div><span id="n">[N]ew game</span></div>
+        <div><span id="c">[C]redits</span></div>
+        <div><span id="f">[F]lash effect off</span></div>
+        <div><span id="s"> [S]tory</span></div>
+        <div><span id="a">[ANY OTHER KEY] to continue</span></div>
+        `
+        );
+      } else {
+        pauseMenu.insertAdjacentHTML(
+          "beforeend",
+          `
+        <div><span id="n">[N]ew game</span></div>
+        <div><span id="c">[C]redits</span></div>
+        <div><span id="f">[F]lash effect on</span></div>
+        <div><span id="s"> [S]tory</span></div>
+        <div><span id="a">[ANY OTHER KEY] to continue</span></div>
+        `
+        );
+      }
     } else if (key === "c" || key === "C") {
       toggleCreditsThrottled();
     } else {
