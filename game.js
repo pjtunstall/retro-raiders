@@ -51,6 +51,7 @@ let story = {
   londonSaved: [],
   chicagoSaved: [],
   newYorkSaved: [],
+  parisSaved: [],
   playerShot: [],
   fireballEnding: [],
   aliensReachEarth: [],
@@ -420,6 +421,36 @@ We thought you'd like to know."
 
 <font color="red">[T]urn page</font>`,
   ],
+];
+
+story.parisSaved = [
+  [
+    `./1p.jpg`,
+
+    `Fall found you holed up in a cheap Monmartre hostel, or sometimes in the Catacombs when the bombardment got especially heavy.
+
+It had only been a few months, but already the world had settled into a rhythm. Those things gliding left and right in the night, they might as well have been invisible. People forgot. Is there anything we humans can't take for granted? It came to feel like there'd always been an alien fleet in the sky.
+
+Misty mornings.
+
+First coolness.
+
+Ghosts of leaves fading into the pavement's sheen.
+
+<font color="red">[T]urn page</font>`
+  ],
+
+  [
+    `./3p.jpg`,
+
+    `If they saw you rattling to work down on your scooter down the steep, cobbled alleys, they probably took you for an alien yourself. You tended to dress now in the outlandish harlequin garb of your fellow gunners, all of them by now drawn from Earth's extraterrestrial allies.
+
+Alienation.
+
+The night you saved Paris was marked with barely a just-for-laughs, human-interest piece at the end of the local news. But you knew what was at stake as you packed your bags for the next one.
+
+<font color="red">[T]urn page</font>`
+  ]
 ];
 
 story.fireballEnding = [
@@ -1523,7 +1554,8 @@ function turnPage() {
     if (
       storyPart === "londonSaved" ||
       storyPart === "chicagoSaved" ||
-      storyPart === "newYorkSaved"
+      storyPart === "newYorkSaved" ||
+      storyPart === "parisSaved"
     ) {
       reset(false);
     }
@@ -1818,7 +1850,7 @@ function reset(restart) {
       }
     }
 
-    if (!storyMode || (level < 2 && level > 4)) {
+    if (!storyMode || (level < 2 && level > 5)) {
       togglePauseThrottled();
     }
 
@@ -2142,6 +2174,7 @@ function update(frameDuration) {
         bullet.left + bulletWidth >= playerLeft &&
         bullet.left <= playerLeft + playerWidth
       ) {
+        // Comment out this line to be invulnerable to alien bullets for testing.
         playerDeath(false);
         bullet.removeMe = true;
         break;
@@ -2354,7 +2387,7 @@ function render() {
         "hidden";
       if (poorDoomedAlien.isLastOne) {
         source.playbackRate.value = 1;
-        if (storyMode && level > 1 && level < 5) {
+        if (storyMode && level > 1 && level < 6) {
           if (level === 2) {
             storyPart = "londonSaved";
           }
@@ -2363,6 +2396,9 @@ function render() {
           }
           if (level === 4) {
             storyPart = "newYorkSaved";
+          }
+          if (level === 5) {
+            storyPart = "parisSaved";
           }
           cutScene();
           renderStory(story[storyPart][0]);
