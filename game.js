@@ -443,7 +443,7 @@ Ghosts of leaves fading into the pavement's sheen.
   [
     `./3p.jpg`,
 
-    `If they saw you rattling to work down on your scooter down the steep, cobbled alleys, they probably took you for an alien yourself. You tended to dress now in the outlandish harlequin garb of your fellow gunners, all of them by now drawn from Earth's extraterrestrial allies.
+    `If they saw you rattling to work down on your scooter down the steep, cobbled alleys, they probably took you for an alien yourself. You tended to dress in the outlandish harlequin garb of your fellow gunners, all of them by now drawn from Earth's extraterrestrial allies.
 
 Alienation.
 

@@ -517,6 +517,19 @@ body {
   z-index: 2;
   transition: opacity 0.2s ease-in-out;
   text-align: center;
+  display: flex;
+  justify-content: space-between;
+}
+
+.credits-column {
+  width: 48%;
+  padding: 10px;
+}
+
+.h0 {
+  font-size: 28px;
+  color: white;
+  font-family: "Segoe UI Emoji", "Noto Color Emoji", "Apple Color Emoji", "Arial", sans-serif !important;
 }
 
 .h1 {
@@ -530,7 +543,7 @@ body {
 }
 
 .h3 {
-  font-size: 16px;
+  font-size: 20px;
   font-weight: italic;
   color: rgb(66, 66, 66);
 }
