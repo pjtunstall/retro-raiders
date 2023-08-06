@@ -3031,7 +3031,7 @@ const gameOverView = () => {
         </div>
     </div>
     <div class="player-input">
-        <input type="text" id="player-name" name="player-name" placeholder="TYPE NAME, HUMAN SCUM!" autocomplete="off" maxlength="16">
+        <input type="text" id="player-name" name="player-name" placeholder="TYPE NAME, HUMAN SCUM!" autocomplete="off" maxlength="24">
     </div>
 </form>`
         : ``
