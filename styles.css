@@ -527,7 +527,7 @@ body {
 }
 
 .h2 {
-  font-size: 24px;
+  font-size: 21px;
   color: rgb(174, 173, 173);
 }
 
@@ -535,6 +535,7 @@ body {
   font-size: 20px;
   font-weight: italic;
   color: rgb(66, 66, 66);
+  font-family: "Times New Roman", Times, serif !important;
 }
 
 /* Score Styles */
@@ -720,6 +721,7 @@ h1 {
 
 .player-input input::placeholder {
   font-family: "Azimov";
+  color: rgb(249, 130, 130)
 }
 
 .stat-group {

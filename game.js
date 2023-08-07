@@ -2550,6 +2550,9 @@ function render() {
 }
 
 const cutScene = () => {
+  if (isInCutScene) {
+    return;
+  }
   if (storyPart !== "beginning") {
     togglePauseThrottled();
   }
@@ -3028,6 +3031,7 @@ const gameOverView = () => {
 </div>
   `;
   overlay.insertAdjacentHTML("beforeend", html);
+  document.getElementById("player-name").focus();
 };
 
 const showAndAddGameoverMenue = () => {
