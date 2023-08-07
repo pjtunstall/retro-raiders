@@ -1486,11 +1486,6 @@ const damage = new Audio("damage.wav");
 const LEXPLODE = new Audio("LEXPLODE.wav");
 const blk = new Audio("blkfoot4.wav");
 
-// const sfxArray = [
-//   shootEffect, laserShot, hull, voltage, scream, wood, rock,
-//   bomb, kaboom, mortar, explode1, Explosion1, Explosion2, damage, LEXPLODE, blk
-// ];
-
 const wind = new Audio("wind.mp3");
 wind.loop = true;
 
@@ -1774,7 +1769,6 @@ function reset(restart) {
   ufoToggleBeam = false;
   ufoTakenPlayer = false;
   isInUfoCutScene = false;
-  // scoreBoardPressAnyKey.classList.add("hidden");
   player.classList.remove("player-beam");
 
   if (source) {
@@ -2257,8 +2251,6 @@ function update(frameDuration) {
     ufoLeft = playerLeft + playerWidth / 2 - ufoWidth / 2;
   }
 
-  // if (this.active && this.toggoleBeam && this.gettingPlayer) {
-  // Move UFO.
   if (ufoActive && ufoToggleBeam && ufoGetPlayer) {
     ufoLeft += (ufoDirection * frameDuration) / 5;
   } else if (ufoActive && (!ufoGetPlayer || ufoTakenPlayer)) {
@@ -2860,7 +2852,6 @@ function handleKeyDown(event) {
     }
     togglePause();
     reset(true);
-    // newGameThrottled();
     isGameOver = false;
     isScoreBoardShowing = false;
     return;
@@ -2989,9 +2980,7 @@ gameContainer.addEventListener("animationend", (event) => {
     animationName === "extendBeam" &&
     ufoGetPlayer
   ) {
-    // alert(event.target);
     event.target.classList.add("opposite-beam");
-    // event.target.appendChild(player.element);
     player.classList.add("player-beam");
   }
 
@@ -3039,11 +3028,7 @@ const gameOverView = () => {
 </div>
   `;
   overlay.insertAdjacentHTML("beforeend", html);
-
-  // overlay.classList.remove("overlay-hidden");
 };
-
-// `<button type="submit">Submit Score</button>`
 
 const showAndAddGameoverMenue = () => {
   pauseMenu.innerHTML = "";
@@ -3140,7 +3125,6 @@ function addScore({name, score, minutes, seconds}) {
   scores.sort((a, b) => b.score - a.score);
 }
 
-// Function to format time as mm:ss
 function formatTime(minutes, seconds) {
   const formattedMinutes = String(minutes).padStart(2, "0");
   const formattedSeconds = String(seconds).padStart(2, "0");
@@ -3160,7 +3144,6 @@ const updateScoresOnAdd = ({playerName, score, second, minute}) => {
 };
 
 const message = () => {
-  // const highestScore = scores[0].score;
   const position = scores.findIndex(
     (el) => el.score === score && playerName === el.name
   );
@@ -3222,20 +3205,13 @@ const sendScoreView = (callback) => {
   });
 };
 
-//  default sendScoreView;
-
-// Function to display the scoreboard
 function displayScoreboard(scores, message) {
   if (currentPage > 1) return;
   console.log(score);
   const start = currentPage * 10 + 1;
   const end = start + 9;
-  // Get the scoreboard container
   const container = document.getElementById("end-game-scoreboard-container");
-  // Clear the current scoreboard display
   container.innerHTML = "";
-  // container.style.zIndex = 3;
-  // Create a header for the scoreboard
   const header = document.createElement("h1");
   header.textContent = "High Scores";
   header.id = "high-scores-header";
@@ -3245,16 +3221,13 @@ function displayScoreboard(scores, message) {
   text.textContent = message();
   text.classList.add("message");
   container.appendChild(text);
-  // Determine the start and end indices for the scores on the current page
 
-  // Create and append a new div for each score on the current page
   for (let i = start; i <= end; i++) {
     const {name, score, time} = scores[i - 1];
 
     const entry = document.createElement("div");
     entry.className = "score-entry";
 
-    // Add the ordinal suffix to the rank
     let suffix = "th";
     if (i % 10 === 1) suffix = "st";
     else if (i % 10 === 2) suffix = "nd";
