@@ -159,16 +159,16 @@ function randomizePics() {
 }
 
 function modifyPics() {
-  story.beginning[1][0] = `./${introPic}.jpg`;
-  story.beginning[3][0] = `./${sheepPic}.jpg`;
-  story.ufoShot[0][0] = `./${ufoShotPic}.jpg`;
-  story.aliensReachEarth[0][0] = `./${beamPic}.jpg`;
-  story.aliensReachEarth[6][0] = `./${lastPic}.jpg`;
+  story.beginning[1][0] = `./assets/story-images/${introPic}.jpg`;
+  story.beginning[3][0] = `./assets/story-images/${sheepPic}.jpg`;
+  story.ufoShot[0][0] = `./assets/story-images/${ufoShotPic}.jpg`;
+  story.aliensReachEarth[0][0] = `./assets/story-images/${beamPic}.jpg`;
+  story.aliensReachEarth[6][0] = `./assets/story-images/${lastPic}.jpg`;
 }
 
 story.beginning = [
   [
-    `./24.jpg`,
+    `./assets/story-images/24.jpg`,
 
     `The Emperor of Grumium,
 that galactic buccaneer,
@@ -202,7 +202,7 @@ Her lip it slowly curled.
   ],
 
   [
-    `./${introPic}.jpg`,
+    `./assets/story-images/${introPic}.jpg`,
 
     `"I know a world called Planet Earth
 with little for defense.
@@ -223,7 +223,7 @@ that Pale Blue Speck."
   ],
 
   [
-    `./26.jpg`,
+    `./assets/story-images/26.jpg`,
 
     `You heard it in the street.
 You heard it in the news.
@@ -249,7 +249,7 @@ a hero for to find.
   ],
 
   [
-    `./${sheepPic}.jpg`,
+    `./assets/story-images/${sheepPic}.jpg`,
 
     `That summer morning, messengers came.
 Messengers there were three.
@@ -267,7 +267,7 @@ and shoot for all you're worth."
 
 story.ufoShot = [
   [
-    `./${ufoShotPic}.jpg`,
+    `./assets/story-images/${ufoShotPic}.jpg`,
 
     `A well-aimed shot, the Mystery Ship
 explodes across the sky!
@@ -305,7 +305,7 @@ his final end has faced.
 
 story.londonSaved = [
   [
-    `./4.jpg`,
+    `./assets/story-images/4.jpg`,
 
     `One swarm destroyed, a glimpse of hope,
 London's skies are free!
@@ -333,7 +333,7 @@ vengeance they do vow.
 
 story.chicagoSaved = [
   [
-    `./22.jpg`,
+    `./assets/story-images/22.jpg`,
 
     `The Windy City sighs relief,
 brief respite though it be.
@@ -356,7 +356,7 @@ We haven't finished yet."
 
 story.newYorkSaved = [
   [
-    `./34.jpg`,
+    `./assets/story-images/34.jpg`,
 
     `"Three aliens walked into a bar. Which one said ouch?" &mdash;Zen <i>koan</i>, traditional
 
@@ -376,7 +376,7 @@ There was a time. And it was everything, and real and sharp and impossible, as l
   [
     `8b.jpg`,
 
-    `Each morning, you'd run in Central Park to shake off the adrenaline of the night's battle, then home to toss and turn through the June heat in that sweltering brownstone they'd appointed for Earth's defenders. Misfits all. Aye, and a yellow bird.
+    `Each morning, you'd run in Central Park to burn off the adrenaline of the night's battle, then home to toss and turn through the June heat in that sweltering, cockroach-infested brownstone they'd appointed for Earth's defenders, up in Washington Height. Misfits all. Aye, and a yellow bird.
 
 Sometimes alien allies would come to stay. Ever more often as human gunners fell or quit.
 
@@ -390,9 +390,39 @@ But no time to think on that. A new attack. And they rush you across the ocean.
   ],
 ];
 
+story.parisSaved = [
+  [
+    `./assets/story-images/1p.jpg`,
+
+    `Fall found you holed up in a cheap Monmartre hostel, or sometimes in the Catacombs when the bombardment got especially heavy.
+
+It had only been a few months, but already the world had settled into a rhythm. Those things gliding left and right in the night, they might as well have been invisible. People forgot. Is there anything we humans can't take for granted? It came to feel like there'd always been an alien fleet in the sky.
+
+Misty mornings.
+
+First coolness.
+
+Ghosts of leaves fading into the pavement's sheen.
+
+<font color="red">[T]urn page</font>`
+  ],
+
+  [
+    `./assets/story-images/3p.jpg`,
+
+    `If they saw you rattling to work down on your scooter down the steep, cobbled alleys, they probably took you for an alien yourself. You tended to dress in the outlandish harlequin garb of your fellow gunners, all of them by now drawn from Earth's extraterrestrial allies.
+
+Alienation.
+
+The night you saved Paris was marked with barely a just-for-laughs, human-interest piece at the end of the local news. But you knew what was at stake as you packed your bags for the next one.
+
+<font color="red">[T]urn page</font>`
+  ]
+];
+
 story.playerShot = [
   [
-    `./25.jpg`,
+    `./assets/story-images/25.jpg`,
 
     `The gunner's mother heard the knock,
 three aliens at the door.
@@ -423,39 +453,9 @@ We thought you'd like to know."
   ],
 ];
 
-story.parisSaved = [
-  [
-    `./1p.jpg`,
-
-    `Fall found you holed up in a cheap Monmartre hostel, or sometimes in the Catacombs when the bombardment got especially heavy.
-
-It had only been a few months, but already the world had settled into a rhythm. Those things gliding left and right in the night, they might as well have been invisible. People forgot. Is there anything we humans can't take for granted? It came to feel like there'd always been an alien fleet in the sky.
-
-Misty mornings.
-
-First coolness.
-
-Ghosts of leaves fading into the pavement's sheen.
-
-<font color="red">[T]urn page</font>`
-  ],
-
-  [
-    `./3p.jpg`,
-
-    `If they saw you rattling to work down on your scooter down the steep, cobbled alleys, they probably took you for an alien yourself. You tended to dress in the outlandish harlequin garb of your fellow gunners, all of them by now drawn from Earth's extraterrestrial allies.
-
-Alienation.
-
-The night you saved Paris was marked with barely a just-for-laughs, human-interest piece at the end of the local news. But you knew what was at stake as you packed your bags for the next one.
-
-<font color="red">[T]urn page</font>`
-  ]
-];
-
 story.fireballEnding = [
   [
-    `./0.jpg`,
+    `./assets/story-images/0.jpg`,
 
     `The gunner's mother heard the knock,
 three aliens at the door.
@@ -488,7 +488,7 @@ We thought you'd like to know."
 
 story.aliensReachEarth = [
   [
-    `./${beamPic}.jpg`,
+    `./assets/story-images/${beamPic}.jpg`,
 
     `"O brave defender, gunner bold,
 though human you are in form,
@@ -514,7 +514,7 @@ It is the only way.
   ],
 
   [
-    `./11.jpg`,
+    `./assets/story-images/11.jpg`,
 
     `So it was and so it went
 and what could you do?
@@ -545,7 +545,7 @@ you look out for your crew.
   ],
 
   [
-    `./21.jpg`,
+    `./assets/story-images/21.jpg`,
 
     `<i>From the Memoirs of Exaptia Tabbani, Ambassador of the Hmadian Macrostates, on concluding her negotiations with Emperor FnrRa Gfgfgg (II<sup>MXXIV</sup>-I)st, Lord of Orion, Grand Eskalir of Grumium, and Admiral of the High Reaches:</i>
 
@@ -560,7 +560,7 @@ Crisscrossed with laser scars and plasma burns, it had a curious bilateral symme
   ],
 
   [
-    `./storyimage2.jpeg`,
+    `./assets/story-images/assets/storyimage2.jpeg`,
 
     `As I approached, it looked up and flapped its arms at me.
 
@@ -586,7 +586,7 @@ A faraway look crossed the alien's face.
   ],
 
   [
-    `./7.jpg`,
+    `./assets/story-images/7.jpg`,
 
     `"But you are a civilized being, sir. Are you not ashamed?"
 
@@ -602,7 +602,7 @@ For the briefest moment, its face twisted with a wild-eyed look.
   ],
 
   [
-    `./5.jpg`,
+    `./assets/story-images/5.jpg`,
 
     `"What do you know of such things?" the mercenary muttered and a single, spice-scented tear dripped off its laser-scarred chin.
 
@@ -620,7 +620,7 @@ Such is the way of the High Reaches.
   ],
 
   [
-    `./${lastPic}.jpg`,
+    `./assets/story-images/${lastPic}.jpg`,
 
     `I sometimes wonder what became of that lone laser gunner from Earth. Almost certainly he was killed when the empire fell, shortly after my return.
 
@@ -785,6 +785,8 @@ const aliens = document.getElementById("aliens");
 const alienGridWidth = 11;
 const alienGridHeight = 5;
 const gap = parseFloat(getComputedStyle(aliens).gap);
+
+let alienTimeoutID;
 
 let bottomRow = 4;
 let lowestInColumn = Array(alienGridWidth).fill(alienGridHeight - 1);
@@ -1451,7 +1453,7 @@ let musicStartTime = 0;
 
 async function loadAndPlayMusic() {
   try {
-    const musicFile = "Space_Invaders_Music.ogg.mp3";
+    const musicFile = "assets/SFX/Space_Invaders_Music.ogg.mp3";
     const response = await fetch(musicFile);
     const buffer = await response.arrayBuffer();
     const musicBuffer = await audioContext.decodeAudioData(buffer);
@@ -1468,25 +1470,25 @@ async function loadAndPlayMusic() {
 }
 
 // Sound effects.
-const shootEffect = new Audio("LaserBlastQuick PE1095107.mp3");
-const laserShot = new Audio("Laser-Shot-1.mp3");
-const hull = new Audio("Hull-Breach-4.mp3");
-const voltage = new Audio("Mad-Voltage.mp3");
-const scream = new Audio("Scream-Short-C2-www.fesliyanstudios.com.mp3");
-const wood = new Audio("WoodCrashesDistant FS022705.mp3");
-const rock = new Audio("rock-destroy-6409.mp3");
+const shootEffect = new Audio("assets/SFX/LaserBlastQuick PE1095107.mp3");
+const laserShot = new Audio("assets/SFX/Laser-Shot-1.mp3");
+const hull = new Audio("assets/SFX/Hull-Breach-4.mp3");
+const voltage = new Audio("assets/SFX/Mad-Voltage.mp3");
+const scream = new Audio("assets/SFX/Scream-Short-C2-www.fesliyanstudios.com.mp3");
+const wood = new Audio("assets/SFX/WoodCrashesDistant FS022705.mp3");
+const rock = new Audio("assets/SFX/rock-destroy-6409.mp3");
 rock.volume = 0.5;
-const bomb = new Audio("bomb.mp3");
-const kaboom = new Audio("kaboom.wav");
-const mortar = new Audio("mortar cannon explosion.wav");
-const explode1 = new Audio("explode1.wav");
-const Explosion1 = new Audio("Explosion1.wav");
-const Explosion2 = new Audio("Explosion2.wav");
-const damage = new Audio("damage.wav");
-const LEXPLODE = new Audio("LEXPLODE.wav");
-const blk = new Audio("blkfoot4.wav");
+const bomb = new Audio("assets/SFX/bomb.mp3");
+const kaboom = new Audio("assets/SFX/kaboom.wav");
+const mortar = new Audio("assets/SFX/mortar cannon explosion.wav");
+const explode1 = new Audio("assets/SFX/explode1.wav");
+const Explosion1 = new Audio("assets/SFX/Explosion1.wav");
+const Explosion2 = new Audio("assets/SFX/Explosion2.wav");
+const damage = new Audio("assets/SFX/damage.wav");
+const LEXPLODE = new Audio("assets/SFX/LEXPLODE.wav");
+const blk = new Audio("assets/SFX/blkfoot4.wav");
 
-const wind = new Audio("wind.mp3");
+const wind = new Audio("assets/SFX/wind.mp3");
 wind.loop = true;
 
 // Effects for when alien bullets reach the ground. r is a random number. When r < 0.01,
@@ -1652,7 +1654,7 @@ const toggleFlashEffectThrottled = throttle(toggleFlashEffect, 256);
 const togglePauseThrottled = throttle(togglePause, 256);
 const firePlayerBulletThrottled = throttle(firePlayerBullet, 128);
 const newGameThrottled = throttle(newGame, 256);
-const turnPageThrottled = throttle(turnPage, 265);
+const turnPageThrottled = throttle(turnPage, 256);
 
 function fireAlienBullet(col) {
   if (
@@ -2284,6 +2286,7 @@ function playerDeath(final, fireball) {
     player.classList.add("explosion");
   }
   if (final || lives < 1) {
+    clearTimeout(alienTimeoutID);
     const alienBullets = document.querySelectorAll(".alien-bullet");
     alienBullets.forEach((alienBullet) => alienBullet.remove());
     alienBulletsArray = [];
@@ -2384,13 +2387,13 @@ function render() {
       "";
     hull.currentTime = 0;
     hull.play();
-    setTimeout(function () {
+    alienTimeoutID = setTimeout(function () {
       alienElements[poorDoomedAlien.row][poorDoomedAlien.col].classList.remove(
         "alien-explosion"
       );
       alienElements[poorDoomedAlien.row][poorDoomedAlien.col].style.visibility =
         "hidden";
-      if (poorDoomedAlien.isLastOne) {
+      if (poorDoomedAlien.isLastOne && !playerDeathInProgress) {
         source.playbackRate.value = 1;
         if (storyMode && level > 1 && level < 6) {
           if (level === 2) {
@@ -3031,7 +3034,6 @@ const gameOverView = () => {
 </div>
   `;
   overlay.insertAdjacentHTML("beforeend", html);
-  document.getElementById("player-name").focus();
 };
 
 const showAndAddGameoverMenue = () => {

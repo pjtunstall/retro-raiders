@@ -7,12 +7,12 @@
 
 @font-face {
   font-family: "Azimov";
-  src: url("fonts/Asimov-nlg.ttf");
+  src: url("assets/fonts/Asimov-nlg.ttf");
 }
 
 @font-face {
   font-family: "Computo Monospace";
-  src: url("fonts/ComputoMonospace-p73xO.ttf");
+  src: url("assets/fonts/ComputoMonospace-p73xO.ttf");
 }
 
 body {
@@ -74,7 +74,7 @@ body {
 .aliens-grid > div {
   width: 60px;
   height: 60px;
-  background-image: url("aliens.png");
+  background-image: url("assets/sprites/aliens.png");
   transform: scale(0.5);
 }
 
@@ -172,16 +172,16 @@ body {
   height: 60px;
   background-position: cover;
   background-repeat: no-repeat;
-  background-image: url("explosion.png");
+  background-image: url("assets/sprites/explosion.png");
 }
 
 .explosion {
-  background-image: url("explosion.png");
+  background-image: url("assets/sprites/explosion.png");
 }
 
 .player-bullet {
   position: absolute;
-  background-image: url("bullet.png");
+  background-image: url("assets/sprites/bullet.png");
   background-size: 100%;
   background-repeat: no-repeat;
   background-position: center;
@@ -201,7 +201,7 @@ body {
 
 .lightning {
   animation: lightningAnimation 0.1s infinite steps(2);
-  background-image: url("lightning.png");
+  background-image: url("assets/sprites/lightning.png");
   background-size: cover;
 }
 
@@ -216,22 +216,22 @@ body {
 
 @keyframes fireballAnimation {
   0% {
-    background-image: url("fireball.png");
+    background-image: url("assets/sprites/fireball1.png");
   }
   50% {
-    background-image: url("fireball2.png");
+    background-image: url("assets/sprites/fireball2.png");
   }
   100% {
-    background-image: url("fireball1.png");
+    background-image: url("assets/sprites/fireball1.png");
   }
 }
 
 .cross {
-  background-image: url("cross.png");
+  background-image: url("assets/sprites/cross.png");
 }
 
 .fireball {
-  background-image: url("fireball.png");
+  background-image: url("assets/sprites/fireball.png");
   animation: fireballAnimation 0.1s infinite;
   background-size: 50%;
   width: 30px;
@@ -244,7 +244,7 @@ body {
 
 .ufo {
   /* position: absolute; */
-  background-image: url("RedShip128wx64H.png");
+  background-image: url("assets/sprites/RedShip128wx64H.png");
   background-size: 100%;
   background-repeat: no-repeat;
   background-position: center;
@@ -295,12 +295,7 @@ body {
 @keyframes oppositeExtendBeam {
   0% {
     height: calc((var(--conatinerHeight) - var(--playerHeight)) - 10px);
-    /* background-color: rgba(255, 255, 0, 1); */
   }
-  /* 50% {
-    height: 50vh;
-    background-color: rgba(255, 255, 0, 0.5); */
-  /* } */
   100% {
     height: 0;
   }
@@ -309,7 +304,7 @@ body {
 .ufo > div.ufo-explosion,
 .ufo-explosion {
   position: absolute;
-  background-image: url("explosion.png");
+  background-image: url("assets//sprites/explosion.png");
   background-size: 100%;
   background-repeat: no-repeat;
   background-position: center;
@@ -320,7 +315,7 @@ body {
 .block {
   width: 48px;
   height: 48px;
-  background-image: url("barriers.png");
+  background-image: url("assets/sprites/barriers.png");
   background-position-y: 0px;
 }
 
@@ -360,19 +355,19 @@ body {
 }
 
 .life-1 {
-  background-image: url("player3.png");
+  background-image: url("assets/sprites/player3.png");
 }
 
 .life-2 {
-  background-image: url("player2.png");
+  background-image: url("assets/sprites/player2.png");
 }
 
 .life-3 {
-  background-image: url("player1.png");
+  background-image: url("assets/sprites/player1.png");
 }
 
 .life {
-  background: url("player3.png") center center / cover no-repeat;
+  background: url("assets/sprites/player3.png") center center / cover no-repeat;
   display: inline-block;
   width: 30px;
   height: 20px;
@@ -389,43 +384,43 @@ body {
 }
 
 .london {
-  background-image: url("london.png");
+  background-image: url("assets/background-images/london.png");
 }
 
 .chicago {
-  background-image: url("chicago.png");
+  background-image: url("assets/background-images/chicago.png");
 }
 
 .nyc {
-  background-image: url("nyc.png");
+  background-image: url("assets/background-images/nyc.png");
 }
 
 .paris {
-  background-image: url("paris.png");
+  background-image: url("assets/background-images/paris.png");
 }
 
 .berlin {
-  background-image: url("berlin.png");
+  background-image: url("assets/background-images/berlin.png");
 }
 
 .rome {
-  background-image: url("rome.png");
+  background-image: url("assets/background-images/rome.png");
 }
 
 .austin {
-  background-image: url("austin.png");
+  background-image: url("assets/background-images/austin.png");
 }
 
 .mountains {
-  background-image: url("mountains.png");
+  background-image: url("assets/background-images/mountains.png");
 }
 
 .wood {
-  background-image: url("wood.png");
+  background-image: url("assets/background-images/wood.png");
 }
 
 .forest {
-  background-image: url("forest.png");
+  background-image: url("assets/background-images/forest.png");
 }
 
 .stats-bar {
