@@ -2460,6 +2460,13 @@ function render() {
       killUfo = false;
       ufoShip.classList.add("ufo-explosion");
       gameContainer.classList.add("fade-red");
+      if (storyMode && !hasUfoBeenShot) {
+        storyPart = "ufoShot";
+        cutScene();
+        renderStory(story.ufoShot[0]);
+        storyPageNumber = 0;
+        hasUfoBeenShot = true;
+      }
       setTimeout(() => {
         ufoActive = false;
         ufo.style.left = -16 * ufoWidth + "px";
@@ -2467,13 +2474,6 @@ function render() {
       }, 500);
       setTimeout(() => {
         gameContainer.classList.remove("fade-red");
-        if (storyMode && !hasUfoBeenShot) {
-          storyPart = "ufoShot";
-          cutScene();
-          renderStory(story.ufoShot[0]);
-          storyPageNumber = 0;
-          hasUfoBeenShot = true;
-        }
       }, 1000);
     }
     if (removeUfo) {
