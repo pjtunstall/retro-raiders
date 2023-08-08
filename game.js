@@ -374,7 +374,7 @@ There was a time. And it was everything, and real and sharp and impossible, as l
   ],
 
   [
-    `8b.jpg`,
+    `./assets/story-images/8b.jpg`,
 
     `Each morning, you'd run in Central Park to burn off the adrenaline of the night's battle, then home to toss and turn through the June heat in that sweltering, cockroach-infested brownstone they'd appointed for Earth's defenders, up in Washington Height. Misfits all. Aye, and a yellow bird.
 
@@ -2287,6 +2287,7 @@ function playerDeath(final, fireball) {
   }
   if (final || lives < 1) {
     clearTimeout(alienTimeoutID);
+    isGameOver = true;
     const alienBullets = document.querySelectorAll(".alien-bullet");
     alienBullets.forEach((alienBullet) => alienBullet.remove());
     alienBulletsArray = [];
@@ -2295,7 +2296,6 @@ function playerDeath(final, fireball) {
       lifeCounter[i].style.visibility = "hidden";
     }
     playerDirection = 0;
-    isGameOver = true;
     isInUfoCutScene = false;
     setTimeout(() => {
       player.classList.remove("explosion");
@@ -2393,7 +2393,7 @@ function render() {
       );
       alienElements[poorDoomedAlien.row][poorDoomedAlien.col].style.visibility =
         "hidden";
-      if (poorDoomedAlien.isLastOne && !playerDeathInProgress) {
+      if (poorDoomedAlien.isLastOne && !isGameOver) {
         source.playbackRate.value = 1;
         if (storyMode && level > 1 && level < 6) {
           if (level === 2) {
@@ -2455,7 +2455,7 @@ function render() {
       killUfo = false;
       ufoShip.classList.add("ufo-explosion");
       gameContainer.classList.add("fade-red");
-      if (storyMode && !hasUfoBeenShot) {
+      if (storyMode && !hasUfoBeenShot && !isGameOver) {
         storyPart = "ufoShot";
         cutScene();
         renderStory(story.ufoShot[0]);
