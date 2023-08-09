@@ -394,15 +394,15 @@ story.parisSaved = [
   [
     `./assets/story-images/1p.jpg`,
 
-    `Fall found you holed up in a cheap Monmartre hostel, or sometimes in the Catacombs when the bombardment got especially heavy.
-
-It had only been a few months, but already the world had settled into a rhythm. Those things gliding left and right in the night, they might as well have been invisible. People forgot. Is there anything we humans can't take for granted? It came to feel like there'd always been an alien fleet in the sky.
-
-Misty mornings.
+    `Misty mornings.
 
 First coolness.
 
 Ghosts of leaves fading into the pavement's sheen.
+
+Fall found you holed up in a cheap Montmartre hostel, or sometimes in the Catacombs when the bombardment got especially heavy.
+
+It had only been a few months, but already the world had settled into a rhythm. Those things gliding left and right in the night, they might as well have been invisible. Or just a fact or life. Is there anything we can't take for granted?
 
 <font color="red">[T]urn page</font>`
   ],
@@ -410,9 +410,7 @@ Ghosts of leaves fading into the pavement's sheen.
   [
     `./assets/story-images/3p.jpg`,
 
-    `If they saw you rattling to work down on your scooter down the steep, cobbled alleys, they probably took you for an alien yourself. You tended to dress in the outlandish harlequin garb of your fellow gunners, all of them by now drawn from Earth's extraterrestrial allies.
-
-Alienation.
+    `If they saw you rattling to work down on your scooter down the steep, cobbled alleys, the Parisians probably took you for an alien yourself. You dressed in the outlandish harlequin garb of your fellow gunners, all of them by now drawn from Earth's extraterrestrial allies. Your skin was a palimpsest of interstellar tattoos and you'd had your skull deformed with ever tighter bandages, as was their fashion.
 
 The night you saved Paris was marked with barely a just-for-laughs, human-interest piece at the end of the local news. But you knew what was at stake as you packed your bags for the next one.
 
@@ -429,9 +427,9 @@ three aliens at the door.
 Not much to say to blunt that shock:
 "Your hatchling is no more."
 
-"A third and fatal blast he took.
+"A third and fatal blast it took.
 Our plasma bolts struck home.
-Accept this medal for his pluck
+Accept this medal for its pluck
 and a broodling of our own."
 
 "Another a gift we'd like give
@@ -440,13 +438,13 @@ as slaves to serve your every need:
 your quintuplet presidents."
 
 "Now we're the rulers of your world.
-He didn't stand a chance.
+You didn't stand a chance.
 To compensate you further, look!
 We'll do our alien dance."
 
 "Our dance we shall perform for you.
 We flap our arms like so.
-Your child was brave, we honour him.
+Your child was brave, we honour it.
 We thought you'd like to know."
 
 <font color="red">[T]urn page</font>`,
@@ -462,24 +460,24 @@ three aliens at the door.
 Not much to say to blunt that shock:
 "Your hatchling is no more."
 
-"A fireball took his life away.
-For him, there's no tomorrow.
+"A fireball took its life away.
+For it, there's no tomorrow.
 Please take a gift this tragic day
 in token of our sorrow."
 
 "Accept now, Mrs. Gunner, please,
 since we've achieved our goal,
-as consolation in your grief
+as consolation for your grief
 this antique games console.
 
 "A video game is always fun.
-(He didn't stand a chance.)
-To compensate you further now,
+It will your life enhance.
+To compensate you further, dear,
 we'll do our alien dance."
 
 "Our dance we shall perform for you.
 We flap our arms like so.
-Your child was brave, we honour him.
+Your child was brave, we honour it.
 We thought you'd like to know."
 
 <font color="red">[T]urn page</font>`,
@@ -560,7 +558,7 @@ Crisscrossed with laser scars and plasma burns, it had a curious bilateral symme
   ],
 
   [
-    `./assets/story-images/assets/storyimage2.jpeg`,
+    `./assets/story-images/2.jpg`,
 
     `As I approached, it looked up and flapped its arms at me.
 
@@ -594,7 +592,7 @@ A faraway look crossed the alien's face.
 
 I politely declined the smouldering baby-bone pipe it offered. It took a long drag and a glazed smile replaced the bitter look on its face. Its comrades cackled.
 
-"Just look at yourself, sir! Think of what you've lost. This is no life. You'll be run through with a plasmic glaive or shot down sooner or later by a defender such as you once were. Did you not have a family on, what did you call it, Earth? What would your mother think to see you now?"
+"Just look at yourself, sir! Think of what you've lost. This is no life. You'll be run through with a plasmic glaive or shot down sooner or later by a defender such as you once were. Did you not have a family on, what did you call it, Earth? A mate? Hatchlings? What would your mother think to see you now?"
 
 For the briefest moment, its face twisted with a wild-eyed look.
 
