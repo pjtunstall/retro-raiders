@@ -52,8 +52,10 @@ let story = {
   chicagoSaved: [],
   newYorkSaved: [],
   parisSaved: [],
+  berlinSaved: [],
   playerShot: [],
   fireballEnding: [],
+  win: [],
   aliensReachEarth: [],
 };
 
@@ -62,6 +64,7 @@ let sheepPic;
 let ufoShotPic;
 let lastPic;
 let beamPic;
+let winPic;
 
 randomizePics();
 
@@ -70,6 +73,7 @@ function randomizePics() {
   const sheepRandomizer = Math.random();
   const ufoShotRandomizer = Math.random();
   const beamRandomizer = Math.random();
+  const winPicRandomizer = Math.random();
   const lastPicRandomizer = Math.random();
 
   switch (true) {
@@ -83,40 +87,44 @@ function randomizePics() {
       introPic = "13b";
       break;
     case introRandomizer < 0.8:
-      introPic = "35";
+      introPic = "29";
       break;
     default:
       introPic = "6";
   }
 
   switch (true) {
-    case sheepRandomizer < 0.09:
+    case sheepRandomizer < 0.08:
+      sheepPic = "96";
+      break;
+    case sheepRandomizer < 0.17:
       sheepPic = "76";
       break;
-    case sheepRandomizer < 0.18:
+    case sheepRandomizer < 0.25:
       sheepPic = "82";
       break;
-    case sheepRandomizer < 0.27:
+    case sheepRandomizer < 0.42:
       sheepPic = "89";
       break;
-    case sheepRandomizer < 0.36:
+    case sheepRandomizer < 0.5:
       sheepPic = "97";
-    case sheepRandomizer < 0.45:
+      break;
+    case sheepRandomizer < 0.58:
       sheepPic = "105";
       break;
-    case sheepRandomizer < 0.55:
+    case sheepRandomizer < 0.75:
       sheepPic = "87";
       break;
-    case sheepRandomizer < 0.7:
+    case sheepRandomizer < 0.67:
       sheepPic = "91";
       break;
-    case sheepRandomizer < 0.64:
+    case sheepRandomizer < 0.75:
       sheepPic = "85";
       break;
-    case sheepRandomizer < 0.82:
+    case sheepRandomizer < 0.83:
       sheepPic = "79";
       break;
-    case sheepRandomizer < 0.9:
+    case sheepRandomizer < 0.92:
       sheepPic = "71";
       break;
     default:
@@ -138,6 +146,14 @@ function randomizePics() {
     beamPic = "4c";
   } else {
     beamPic = "1";
+  }
+
+  switch (true) {
+    case winPicRandomizer < 0.5:
+      winPic = `crash`;
+      break;
+    default:
+      winPic = `victorian`;
   }
 
   switch (true) {
@@ -164,6 +180,7 @@ function modifyPics() {
   story.ufoShot[0][0] = `./assets/story-images/${ufoShotPic}.jpg`;
   story.aliensReachEarth[0][0] = `./assets/story-images/${beamPic}.jpg`;
   story.aliensReachEarth[6][0] = `./assets/story-images/${lastPic}.jpg`;
+  story.win[0][0] = `./assets/story-images/${winPic}.jpg`;
 }
 
 story.beginning = [
@@ -177,7 +194,7 @@ cut down in his thousandth year.
 
 A faulty teleportation pad
 left him in 64 bits,
-strewn across Orion's belt,
+strewn across the Southern Cross,
 jibbering and in fits.
 
 Three warlike tribes he did unite,
@@ -400,9 +417,9 @@ First coolness.
 
 Ghosts of leaves fading into the pavement's sheen.
 
-Fall found you holed up in a cheap Montmartre hostel, or sometimes in the Catacombs when the bombardment got especially heavy.
+Fall found you holed up in a Montmartre hostel (disused since the tourists fled), or sometimes in the Catacombs when the bombardment got too heavy.
 
-It had only been a few months, but already the world had settled into a rhythm. Those things gliding left and right in the night, they might as well have been invisible. Or just a fact or life. Is there anything we can't take for granted?
+It had only been a few months, but already the world had settled into a rhythm. Those things gliding left and right in the night, they might as well have been invisible. Just a fact or life. Is there anything we humans can't take for granted?
 
 <font color="red">[T]urn page</font>`
   ],
@@ -410,9 +427,51 @@ It had only been a few months, but already the world had settled into a rhythm. 
   [
     `./assets/story-images/3p.jpg`,
 
-    `If they saw you rattling to work down on your scooter down the steep, cobbled alleys, the Parisians probably took you for an alien yourself. You dressed in the outlandish harlequin garb of your fellow gunners, all of them by now drawn from Earth's extraterrestrial allies. Your skin was a palimpsest of interstellar tattoos and you'd had your skull deformed with ever tighter bandages, as was their fashion.
+    `If they saw you rattling to work down on your scooter down the steep, cobbled alleys, the Parisians probably took you for an alien yourself. You dressed in the outlandish harlequin garb of your fellow gunners, all of them by now drawn from Earth's extraterrestrial allies. Your skin was a palimpsest of interstellar tattoos and you'd had your skull deformed with ever tighter ligatures, as was their fashion.
+
+Alienation.
 
 The night you saved Paris was marked with barely a just-for-laughs, human-interest piece at the end of the local news. But you knew what was at stake as you packed your bags for the next one.
+
+<font color="red">[T]urn page</font>`
+  ]
+];
+
+story.berlinSaved = [
+  [
+    `./assets/story-images/wall.jpg`,
+
+    `It was winter in Berlin. Even your alien allies had absconded, all but one. You sold your medals for that dingy room over the bar in Friedrichshain. The two of you took turns on a stall at the fleamarket. Weeks could go by without a sale. When one did come, you'd celebrate with Glühwein and drew a little closer, and it kept out the December chill for a while.
+
+It was in those days you started writing your story. Back then, you still thought it would have a happy ending.
+
+More and more, people began to deny the existence of the invasion. Their certainty would have been laughable had it not been so bellicose. Others called for all alien blood. There was a massacre. You kept a low profile then.
+
+<font color="red">[T]urn page</font>`
+  ],
+
+  [
+    `./assets/story-images/rebec.jpg`,
+
+    `Such misunderstanding, on every level! How much of it due to those crummy AI translation headsets they gave you? Who knows? She never did seem at ease in this world. You wondered what kept her here.
+
+For her birthday (or rather <i>external soulday</i>, as they called it), you gave her a trinket you'd found on a neighboring stall. Turns out, it was an instrument of her people, the <i>silent rebec</i>.
+
+She was delighted. It took great skill to play well, balancing each cadence against its sonic inverse, although only a true master could approach the ideal of perfect silence. Indeed, at first, she often let slip a bright squall of notes to cheer that drab, little apartment. She made ok money at the cabaret&mdash;till she started to improve.
+
+<font color="red">[T]urn page</font>`
+  ],
+
+  [
+    `./assets/story-images/twins.jpg`,
+
+    `By spring, she almost had it. She looked magnificent, coaxing the arcane contraption into what you guessed, from your fading recollection of her early attempts, must be tunes of devastating transcendence, but you never felt more alone.
+
+Then, just as you started to doubt your aim, the last of the swarm exploded across the sky. Berlin was saved.
+
+You celebrated with a few friends from the market. The Glühwein flowed. And later, when they'd gone ... Probably that was the first time you tried out the alien dance, flapping your arms as you bobbed about the apartment, both of you in stitches, as you did your best to keep to the noiseless beat.
+
+Probably that was when the twins were conceived.
 
 <font color="red">[T]urn page</font>`
   ]
@@ -479,6 +538,34 @@ we'll do our alien dance."
 We flap our arms like so.
 Your child was brave, we honour it.
 We thought you'd like to know."
+
+<font color="red">[T]urn page</font>`,
+  ],
+];
+
+story.win = [
+  [
+    `./assets/story-images/${winPic}.jpg`,
+
+    `Earth's free at last from yon bad dream.
+Was it story or history?
+The more you think, the stranger seem
+those years of tragedy.
+
+Each joke contains the tragedy,
+each loss the cosmic jest.
+Now Terra's saved. Don't think too deep,
+but take your hard-earned rest.
+
+Each happenstance the cosmic dance,
+in miniature, at least.
+Such thoughts you ponder, dazed and praised,
+at the celebration feast.
+
+Each fiction's fact by other means,
+at each storm's heart a lull.
+All life's a game, all game is life
+if lived-played to the full.
 
 <font color="red">[T]urn page</font>`,
   ],
@@ -1549,7 +1636,8 @@ function turnPage() {
       storyPart === "londonSaved" ||
       storyPart === "chicagoSaved" ||
       storyPart === "newYorkSaved" ||
-      storyPart === "parisSaved"
+      storyPart === "parisSaved" ||
+      storyPart === "berlinSaved"
     ) {
       reset(false);
     }
@@ -1857,7 +1945,7 @@ function reset(restart) {
       }
     }
 
-    if (!storyMode || (level < 2 && level > 5)) {
+    if (!storyMode || level > 6) {
       togglePauseThrottled();
     }
 
@@ -2181,6 +2269,7 @@ function update(frameDuration) {
         bullet.left + bulletWidth >= playerLeft &&
         bullet.left <= playerLeft + playerWidth
       ) {
+        // Cheat mode:
         // Comment out this line to be invulnerable to alien bullets for testing.
         playerDeath(false);
         bullet.removeMe = true;
@@ -2270,7 +2359,9 @@ function playerDeath(final, fireball) {
   playerDeathInProgress = true;
   player.classList.remove(`life-${4 - lives}`);
   scream.currentTime = 0;
-  scream.play();
+  if (storyPart !== "win") {
+    scream.play();
+  }
   lives--;
   const lifeCounter = document.querySelectorAll(".life");
   for (let i = 0; i < 3; i++) {
@@ -2304,9 +2395,11 @@ function playerDeath(final, fireball) {
         }
       }
       if (storyMode) {
-        storyPart = final ? "aliensReachEarth" : "playerShot";
-        if (fireball) {
-          storyPart = "fireballEnding";
+        if (storyPart !== "win") {
+          storyPart = final ? "aliensReachEarth" : "playerShot";
+          if (fireball) {
+            storyPart = "fireballEnding";
+          }
         }
         cutScene();
         storyPageNumber = -1;
@@ -2393,18 +2486,28 @@ function render() {
         "hidden";
       if (poorDoomedAlien.isLastOne && !isGameOver) {
         source.playbackRate.value = 1;
-        if (storyMode && level > 1 && level < 6) {
-          if (level === 2) {
-            storyPart = "londonSaved";
-          }
-          if (level === 3) {
-            storyPart = "chicagoSaved";
-          }
-          if (level === 4) {
-            storyPart = "newYorkSaved";
-          }
-          if (level === 5) {
-            storyPart = "parisSaved";
+        level++;
+        if (storyMode && (level < 7 || level === 11)) {
+          console.log(level)
+          switch (level) {
+            case 2:
+              storyPart = "londonSaved";
+              break;
+            case 3:
+              storyPart = "chicagoSaved";
+              break;
+            case 4:
+              storyPart = "newYorkSaved";
+              break;
+            case 5:
+              storyPart = "parisSaved";
+              break;
+            case 6:
+              storyPart = "berlinSaved";
+              break;
+            case 11:
+              storyPart = "win";
+              playerDeath(true);
           }
           cutScene();
           renderStory(story[storyPart][0]);
@@ -2577,6 +2680,7 @@ const unCutScene = () => {
   if (
     storyPart === "playerShot" ||
     storyPart === "fireballEnding" ||
+    storyPart === "win" ||
     storyPart === "aliensReachEarth"
   ) {
     storyEndInProgress = false;
@@ -2723,7 +2827,6 @@ function playerBulletCollisions() {
           aliensRemaining--;
           let isLastOne = false;
           if (aliensRemaining < 1) {
-            level++;
             isLastOne = true;
           }
           aliensToRemove.push({
