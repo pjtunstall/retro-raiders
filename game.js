@@ -379,7 +379,7 @@ story.newYorkSaved = [
 
 "Game?" &mdash;Groundskeeper Willie, The Simpsons, S1E7
 
-Oh they were not happy to lose New York. They cursed Earth then. Their green blood boiled.
+O, they were not happy to lose New York. They cursed Earth then. Their green blood boiled.
 
 And you? What of the victor? Feted and hailed a hero. A long way from your sheep farm now. How does it feel? Do you feel like a hero? Not really.
 
@@ -393,7 +393,7 @@ There was a time. And it was everything, and real and sharp and impossible, as l
   [
     `./assets/story-images/8b.jpg`,
 
-    `Each morning, you'd run in Central Park to burn off the adrenaline of the night's battle, then home to toss and turn through the June heat in the sweltering, cockroach-infested brownstone they'd appointed for Earth's defenders, up in Washington Height. Band of misfits, Scottie called you. And that was right enough.
+    `Each morning, you'd run in Central Park to burn off the adrenaline of the night's battle, then home to toss and turn through the June heat in the sweltering, cockroach-infested brownstone they'd appointed for Earth's defenders, up in Washington Heights. Band of misfits, Scottie called you. And that was right enough.
 
 Sometimes alien allies would come to stay. Ever more often as human gunners fell or quit.
 
@@ -417,7 +417,7 @@ First coolness.
 
 Ghosts of leaves fading into the pavement's sheen.
 
-Fall found you holed up in a cheap hostel (disused since the tourists fled), or sometimes in the Catacombs when the bombardment got too heavy.
+Fall found you holed up in a cheap Pig Ally hostel (disused since the tourists fled), or else in the Catacombs when the bombardment got too heavy.
 
 It had only been a few months, but already the world had settled into a rhythm. Those things gliding left and right in the night, they might as well have been invisible. Just a fact or life.
 
@@ -463,7 +463,7 @@ More and more, people began to deny the existence of the invasion. Their certain
 
 For her birthday (or rather <i>external soulday</i>, as they called it), you gave her a trinket you'd found on a neighboring stall. Turns out, it was an instrument of her people, the <i>silent rebec</i>.
 
-She was delighted. It took great skill to play well, balancing each cadence against its sonic inverse, although only a true master could approach the ideal of perfect silence. Indeed, at first, she often let slip a bright squall of notes to cheer that drab, little apartment.
+She was delighted. It took great skill to play well, balancing each cadence against its sonic inverse, although only a true master could approach the ideal of perfect silence. Indeed, at first, she often let slip a bright squall of notes to cheer your drab, little apartment.
 
 She made ok money at the cabaret&mdash;till she started to improve.
 
@@ -473,7 +473,7 @@ She made ok money at the cabaret&mdash;till she started to improve.
   [
     `./assets/story-images/twins.jpg`,
 
-    `By spring, she almost had it. She looked magnificent, coaxing the arcane contraption into what you guessed, from your fading recollection of her early attempts, must be tunes of devastating transcendence, but you never felt more alone.
+    `By spring, she almost had it. She looked magnificent, coaxing the arcane contraption into what you guessed, from your fading recollection of her early attempts, must be tunes of devastating transcendence, albeit deftly canceled out. You applauded, and felt quite alone.
 
 Then, just as you started to doubt your aim, the last of the swarm exploded across the sky. Berlin was saved.
 
@@ -494,9 +494,9 @@ three aliens at the door.
 Not much to say to blunt that shock:
 "Your hatchling is no more."
 
-"A third and fatal blast it took.
+"A third and fatal blast he took.
 Our plasma bolts struck home.
-Accept this medal for its pluck
+Accept this medal for his pluck
 and a broodling of our own."
 
 "Another a gift we'd like give
@@ -505,13 +505,13 @@ as slaves to serve your every need:
 your quintuplet presidents."
 
 "Now we're the rulers of your world.
-You didn't stand a chance.
+He didn't stand a chance.
 To compensate you further, look!
 We'll do our alien dance."
 
 "Our dance we shall perform for you.
 We flap our arms like so.
-Your child was brave, we honour it.
+Your boy was brave, we honour him.
 We thought you'd like to know."
 
 <font color="red">[T]urn page</font>`,
@@ -527,8 +527,8 @@ three aliens at the door.
 Not much to say to blunt that shock:
 "Your hatchling is no more."
 
-"A fireball took its life away.
-For it, there's no tomorrow.
+"A fireball took his life away.
+For him, there's no tomorrow.
 Please take a gift this tragic day
 in token of our sorrow."
 
@@ -544,7 +544,7 @@ we'll do our alien dance."
 
 "Our dance we shall perform for you.
 We flap our arms like so.
-Your child was brave, we honour it.
+Your child was brave, we honour him.
 We thought you'd like to know."
 
 <font color="red">[T]urn page</font>`,
@@ -643,7 +643,7 @@ you look out for your crew.
     `<i>From the Memoirs of Exaptia Tabbani, Ambassador of the Hmadian Macrostates, on concluding her negotiations with Emperor FnrRa Gfgfgg (II<sup>MXXIV</sup>-I)st, Lord of Orion, Grand Eskalir of Grumium, and Admiral of the High Reaches:</i>
 
 
-Following my embassy to the barbarian emperor&mdash;Oh, I could hardly believe it, she'd walked right into my trap!&mdash;, as I strode back to my teleport pad, I happened upon a contingent of mercenaries, busy darning their space suits for the next invasion.
+Following my embassy to the barbarian emperor&mdash;O, I could hardly believe it, she'd walked right into my trap!&mdash;, as I strode back to my teleport pad, I happened upon a contingent of mercenaries, busy darning their space suits for the next invasion.
 
 One caught my eye.
 
@@ -1009,8 +1009,8 @@ let rightCol = 10;
 
 // Alien bullet variables.
 let alienBulletsArray = [];
-let alienFireRate = level;
-let alienBulletDue = Date.now() + (5000 * Math.random()) / alienFireRate;
+let alienRateOfFire = level;
+let alienBulletDue = Date.now() + (5000 * Math.random()) / alienRateOfFire;
 let maxAlienBullets = 16;
 const bulletWidth = 10;
 const bulletHeight = 30;
@@ -1021,37 +1021,37 @@ const bulletHeight = 30;
 // level = 5;
 // startHeight = 60;
 // aliensStep = 160;
-// alienFireRate = 5;
+// alienRateOfFire = 5;
 // skyline.classList.add('berlin');
 
 // level = 6;
 // startHeight = 60;
 // aliensStep = 160;
-// alienFireRate = 6;
+// alienRateOfFire = 6;
 // skyline.classList.add('rome');
 
 // level = 7;
 // startHeight = 70;
 // aliensStep = 170;
-// alienFireRate = 7;
+// alienRateOfFire = 7;
 // skyline.classList.add('austin');
 
 // level = 8;
 // startHeight = 70;
 // aliensStep = 170;
-// alienFireRate = 8;
+// alienRateOfFire = 8;
 // skyline.classList.add('mountains');
 
 // level = 9;
 // startHeight = 80;
 // aliensStep = 180;
-// alienFireRate = 9;
+// alienRateOfFire = 9;
 // skyline.classList.add('wood');
 
 // level = 10;
 // startHeight = 40;
 // aliensStep = 180;
-// alienFireRate = 10;
+// alienRateOfFire = 10;
 // skyline.classList.add('forest');
 
 let flashBrightness = 255;
@@ -1761,8 +1761,8 @@ function fireAlienBullet(col) {
   }
   laserShot.time = 0;
   laserShot.play();
-  if (alienFireRate < 16) {
-    alienFireRate += 0.03 * level;
+  if (alienRateOfFire < 16) {
+    alienRateOfFire += 0.01 * level;
   }
   const newAlienBullet = document.createElement("div");
   let r = Math.random();
@@ -1974,7 +1974,7 @@ function reset(restart) {
     source.playbackRate.value = 1;
 
     aliensRemaining = alienGridHeight * alienGridWidth;
-    alienFireRate = level;
+    alienRateOfFire = level;
 
     alienAnimationDuration = 1;
     aliensToRemove = [];
@@ -2629,7 +2629,7 @@ function render() {
   ) {
     const col = pickAColumn();
     if (col <= alienGridWidth) {
-      alienBulletDue = Date.now() + (5000 * Math.random()) / alienFireRate;
+      alienBulletDue = Date.now() + (5000 * Math.random()) / alienRateOfFire;
       fireAlienBullet(col);
     }
   }
