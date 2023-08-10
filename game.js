@@ -393,7 +393,7 @@ There was a time. And it was everything, and real and sharp and impossible, as l
   [
     `./assets/story-images/8b.jpg`,
 
-    `Each morning, you'd run in Central Park to burn off the adrenaline of the night's battle, then home to toss and turn through the June heat in that sweltering, cockroach-infested brownstone they'd appointed for Earth's defenders, up in Washington Height. Misfits all. Aye, and a yellow bird.
+    `Each morning, you'd run in Central Park to burn off the adrenaline of the night's battle, then home to toss and turn through the June heat in the sweltering, cockroach-infested brownstone they'd appointed for Earth's defenders, up in Washington Height. Band of misfits, Scottie called you. And that was right enough.
 
 Sometimes alien allies would come to stay. Ever more often as human gunners fell or quit.
 
@@ -417,9 +417,11 @@ First coolness.
 
 Ghosts of leaves fading into the pavement's sheen.
 
-Fall found you holed up in a Montmartre hostel (disused since the tourists fled), or sometimes in the Catacombs when the bombardment got too heavy.
+Fall found you holed up in a cheap hostel (disused since the tourists fled), or sometimes in the Catacombs when the bombardment got too heavy.
 
-It had only been a few months, but already the world had settled into a rhythm. Those things gliding left and right in the night, they might as well have been invisible. Just a fact or life. Is there anything we humans can't take for granted?
+It had only been a few months, but already the world had settled into a rhythm. Those things gliding left and right in the night, they might as well have been invisible. Just a fact or life.
+
+Is there anything we humans can't take for granted?
 
 <font color="red">[T]urn page</font>`
   ],
@@ -427,11 +429,15 @@ It had only been a few months, but already the world had settled into a rhythm. 
   [
     `./assets/story-images/3p.jpg`,
 
-    `If they saw you rattling to work down on your scooter down the steep, cobbled alleys, the Parisians probably took you for an alien yourself. You dressed in the outlandish harlequin garb of your fellow gunners, all of them by now drawn from Earth's extraterrestrial allies. Your skin was a palimpsest of interstellar tattoos and you'd had your skull deformed with ever tighter ligatures, as was their fashion.
+    `If they saw you rattling to work on your scooter down the steep, cobbled alleys of Montmartre, the Parisians probably took you for an alien yourself.
+
+You dressed in the outlandish, harlequin garb of your fellow gunners, all of them by now drawn from Earth's extraterrestrial allies. Your skin was a mesh of interstellar tattoos, glowing faintly with bioluminescent exobacteria, and you'd had your skull deformed with ever tighter ligatures, as was their fashion.
 
 Alienation.
 
-The night you saved Paris was marked with barely a just-for-laughs, human-interest piece at the end of the local news. But you knew what was at stake as you packed your bags for the next one.
+The night you saved Paris was marked with barely a just-for-laughs, human-interest piece at the end of the local news.
+
+But you knew what was at stake as you packed your bags for the next one.
 
 <font color="red">[T]urn page</font>`
   ]
@@ -441,7 +447,7 @@ story.berlinSaved = [
   [
     `./assets/story-images/wall.jpg`,
 
-    `It was winter in Berlin. Even your alien allies had absconded, all but one. You sold your medals for that dingy room over the bar in Friedrichshain. The two of you took turns on a stall at the fleamarket. Weeks could go by without a sale. When one did come, you'd celebrate with Glühwein and drew a little closer, and it kept out the December chill for a while.
+    `It was winter in Berlin. Even your alien allies had absconded. All but one. You sold your medals for that dingy room over the bar in Friedrichshain. The two of you took turns on a stall at the fleamarket. Weeks could go by without a sale. When one did come, you'd celebrate with <i>Glühwein</i> and drew a little closer, and it kept out the December chill for a while.
 
 It was in those days you started writing your story. Back then, you still thought it would have a happy ending.
 
@@ -457,7 +463,9 @@ More and more, people began to deny the existence of the invasion. Their certain
 
 For her birthday (or rather <i>external soulday</i>, as they called it), you gave her a trinket you'd found on a neighboring stall. Turns out, it was an instrument of her people, the <i>silent rebec</i>.
 
-She was delighted. It took great skill to play well, balancing each cadence against its sonic inverse, although only a true master could approach the ideal of perfect silence. Indeed, at first, she often let slip a bright squall of notes to cheer that drab, little apartment. She made ok money at the cabaret&mdash;till she started to improve.
+She was delighted. It took great skill to play well, balancing each cadence against its sonic inverse, although only a true master could approach the ideal of perfect silence. Indeed, at first, she often let slip a bright squall of notes to cheer that drab, little apartment.
+
+She made ok money at the cabaret&mdash;till she started to improve.
 
 <font color="red">[T]urn page</font>`
   ],
@@ -469,7 +477,7 @@ She was delighted. It took great skill to play well, balancing each cadence agai
 
 Then, just as you started to doubt your aim, the last of the swarm exploded across the sky. Berlin was saved.
 
-You celebrated with a few friends from the market. The Glühwein flowed. And later, when they'd gone ... Probably that was the first time you tried out the alien dance, flapping your arms as you bobbed about the apartment, both of you in stitches, as you did your best to keep to the noiseless beat.
+You celebrated with a few friends from the market. The <i>Glühwein</i> flowed. And later, when they'd gone ... Probably that was the first time you tried out the alien dance, flapping your arms as you bobbed about the apartment&mdash;both of you in stitches&mdash;as you did your best to keep to the noiseless beat.
 
 Probably that was when the twins were conceived.
 
