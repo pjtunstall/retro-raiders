@@ -32,6 +32,7 @@ let score = 0;
 let incrementScore = false;
 let lives = 3;
 let level = 1;
+let levelStartTime;
 let startTime = Date.now();
 let timer = "00:00";
 let isRenderingTimer = false;
@@ -490,9 +491,9 @@ story.romeSaved = [
   [
     `./assets/story-images/wolves.jpg`,
 
-    `O, your brave little fellow.
+    `O, your brave little fellow!
 
-No hospital would take a half-alien baby, so he lived his hard, hard three days in our tent on the south bank of the Tiber, and left us in the early hours of the fourth.
+No hospital would take a half-alien baby, so he lived his hard three days on this earth in our tent on the south bank of the Tiber, and left us in the early hours of the fourth.
 
 She ate him, of course, as was the way of her people, and vanished soon after with the other.
 
@@ -504,13 +505,13 @@ This just wasn't their world.
   [
     `./assets/story-images/colosseum.jpg`,
 
-    `It was just you and your laser, then. You camped by the river till the police moved you on, then in cemeteries, robbing pilgrims for the cash to recharge it.
+    `It was just you and your laser, then. You camped by the river till the <i>polizia robotica</i> moved you on, then in cemeteries, robbing pilgrims for the cash to recharge it.
 
 Seems like no one believed in the Invaders anymore. Even the Pope dismissed them, but you knew better. Sure, you called it a game in your vision&mdash;that is, when you tried to wrestle your vision into words. But there are games and games: games that are part of life, and the big game that life is a part of.
 
 You had to keep such thoughts to yourself, though, in those days, and shoot your laser from patches of waste ground in the night.
 
-Why were you still trying to save these people? You sometimes wondered. Maybe you wanted to finish what you started.
+Why were you still trying to save these people? You sometimes wondered. Maybe you just wanted to finish what you started.
 
 <font color="red">[T]urn page</font>`
   ]
@@ -1720,6 +1721,7 @@ function togglePause() {
     title.style.visibility = "hidden";
     wind.pause();
     if (resetInProgress || starting) {
+      levelStartTime = Date.now();
       pausedTime = audioContext.currentTime - musicStartTime;
       if (restartInProgress || starting) {
         startTime = Date.now();
@@ -1884,6 +1886,10 @@ function reset(restart) {
     score = 0;
     randomizePics();
     modifyPics();
+  }
+
+  if (level > 4) {
+    lives = 3;
   }
 
   chapterNumber++;
@@ -2234,6 +2240,7 @@ function update(frameDuration) {
       resetInProgress: resetInProgress,
       frameDuration: frameDuration,
       level: level,
+      levelStartTime: levelStartTime,
       player: {
         left: playerLeft,
         step: playerStep,

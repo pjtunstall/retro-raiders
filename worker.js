@@ -34,8 +34,14 @@ function update(data) {
     if (data.aliens.top < 0) {
       data.aliens.top = 0;
     }
+    // This line says don't let the aliens reach the ground on the levels
+    // where they bob till 3 minutes have passed.
     if (howLowCanYouGo > containerHeight - 60) {
-      data.aliens.top = howLowCanYouGo - data.aliens.groundSensor - 60;
+      if (Date.now() - data.levelStartTime < 180000) {
+        data.aliens.top = howLowCanYouGo - data.aliens.groundSensor - 60;
+      } else {
+        data.player.dead = true;
+      }
     }
   }
   if (data.level - 1 % 10 > 6) {
@@ -43,8 +49,15 @@ function update(data) {
     if (data.aliens.top < 0) {
       data.aliens.top = 0;
     }
+    // This line says don't let the aliens reach the ground on the levels
+    // where they jerk about at random till 3 minutes have passed.
+    // (On the 10th level bob and kerk about at random.)
     if (howLowCanYouGo > containerHeight - 60) {
-      data.aliens.top = howLowCanYouGo - data.aliens.groundSensor - 60;
+      if (Date.now() - data.levelStartTime < 180000) {
+        data.aliens.top = howLowCanYouGo - data.aliens.groundSensor - 60;
+      } else {
+        data.player.dead = true;
+      }
     }
   }
   if (data.aliens.left + data.aliens.insetLeft < 0) {
