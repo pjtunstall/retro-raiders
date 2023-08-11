@@ -55,6 +55,9 @@ let story = {
   parisSaved: [],
   berlinSaved: [],
   romeSaved: [],
+  austinSaved: [],
+  mountainsSaved: [],
+  woodSaved: [],
   playerShot: [],
   fireballEnding: [],
   win: [],
@@ -66,7 +69,6 @@ let sheepPic;
 let ufoShotPic;
 let lastPic;
 let beamPic;
-let winPic;
 
 randomizePics();
 
@@ -75,7 +77,6 @@ function randomizePics() {
   const sheepRandomizer = Math.random();
   const ufoShotRandomizer = Math.random();
   const beamRandomizer = Math.random();
-  const winPicRandomizer = Math.random();
   const lastPicRandomizer = Math.random();
 
   switch (true) {
@@ -151,14 +152,6 @@ function randomizePics() {
   }
 
   switch (true) {
-    case winPicRandomizer < 0.5:
-      winPic = `crash`;
-      break;
-    default:
-      winPic = `victorian`;
-  }
-
-  switch (true) {
     case lastPicRandomizer < 0.2:
       lastPic = "39";
       break;
@@ -182,7 +175,6 @@ function modifyPics() {
   story.ufoShot[0][0] = `./assets/story-images/${ufoShotPic}.jpg`;
   story.aliensReachEarth[0][0] = `./assets/story-images/${beamPic}.jpg`;
   story.aliensReachEarth[6][0] = `./assets/story-images/${lastPic}.jpg`;
-  story.win[0][0] = `./assets/story-images/${winPic}.jpg`;
 }
 
 story.beginning = [
@@ -493,11 +485,13 @@ story.romeSaved = [
 
     `O, your brave little fellow!
 
-No hospital would take a half-alien baby, so he lived his hard three days on this earth in our tent on the south bank of the Tiber, and left us in the early hours of the fourth.
+No hospital would take a half-alien baby, so he lived his out three fevered days in your tent on the south bank of the Tiber; and, on the third night, convulsed and was done.
 
 She ate him, of course, as was the way of her people, and vanished soon after with the other.
 
-This just wasn't their world.
+It just wasn't their world.
+
+You didn't care about anything then, certainly not the people of Planet Earth, but momentum carried you on. Not knowing what else to do, you threw yourself into the mission.
 
 <font color="red">[T]urn page</font>`
   ],
@@ -505,13 +499,65 @@ This just wasn't their world.
   [
     `./assets/story-images/colosseum.jpg`,
 
-    `It was just you and your laser, then. You camped by the river till the <i>polizia robotica</i> moved you on, then in cemeteries, robbing pilgrims for the cash to recharge it.
+    `It was just you and your laser now. You camped by the river till the <i>polizia robotica</i> moved you on, then in cemeteries, robbing pilgrims for the cash to recharge it.
 
 Seems like no one believed in the Invaders anymore. Even the Pope dismissed them, but you knew better. Sure, you called it a game in your vision&mdash;that is, when you tried to wrestle your vision into words. But there are games and games: games that are part of life, and the big game that life is a part of.
 
-You had to keep such thoughts to yourself, though, in those days, and shoot your laser from patches of waste ground in the night.
+You had to keep such thoughts to yourself in those days, though, and shoot your laser from abandonned lots in the night.
 
 Why were you still trying to save these people? You sometimes wondered. Maybe you just wanted to finish what you started.
+
+<font color="red">[T]urn page</font>`
+  ]
+];
+
+story.austinSaved = [
+  [
+    `./assets/story-images/106.jpg`,
+
+    `The remnants of the human race in rags their cities flee. They leave to seek a safer place, a mountain sanctuary.
+
+In search of haven, humankind are heading to the downs. The urban life has extra risk. It's over for the towns.
+
+Nobody doubts the danger now. The deadly alien force has turned to novel tactics, wow, attacks without remorse.
+
+The humans now acknowledge you. They know the threat is real. They've no idea what to do. They envy you your zeal.
+
+All people do depend on you&mdash;their plans are in a mess&mdash;more humble since inhabiting a hilly wilderness.
+
+<font color="red">[T]urn page</font>`
+  ]
+];
+
+story.mountainsSaved = [
+  [
+    `./assets/story-images/51.jpg`,
+
+    `Their mountain base abandonning, abysmal prospects then, the last survivors leave it for a lonely forest den.
+
+Escaping from that skilled assault has scared them to their senses. They claim they lately were a little waylaid by false pretenses.
+
+Escaping in a skittish mood, they scorn no longer hold, as formerly they did, for you, their own defender bold.
+
+"A forest refuge fits our need; it's far from any town." You can rely on cosmic scouts to quickly hunt you down.
+
+You can rely on alien lads to look both high and low. The place that you supposed was safe, they presently will know.
+
+<font color="red">[T]urn page</font>`
+  ]
+];
+
+story.woodSaved = [
+  [
+    `./assets/story-images/48.jpg`,
+
+    `As driven from their forest den, the few survivors run, you deep into the forest flee, defend them with your gun.
+
+Though somewhat scarred by circumstance, you swear to hold the line. Though terrible their likely fate, you tell them they'll be fine.
+
+Determined now to take a stand, you tell them small white lies: instead of truth, a story blithe to still their anguished cries.
+
+There's nowhere else on Earth to run. This is the make-or-break. History will be decided here. The whole world's at stake.
 
 <font color="red">[T]urn page</font>`
   ]
@@ -585,7 +631,7 @@ We thought you'd like to know."
 
 story.win = [
   [
-    `./assets/story-images/${winPic}.jpg`,
+    `./assets/story-images/victorian.jpg`,
 
     `Earth's free at last from yon bad dream.
 Was it story or history?
@@ -1678,7 +1724,10 @@ function turnPage() {
       storyPart === "newYorkSaved" ||
       storyPart === "parisSaved" ||
       storyPart === "berlinSaved" ||
-      storyPart === "romeSaved"
+      storyPart === "romeSaved" ||
+      storyPart === "austinSaved" ||
+      storyPart === "mountainsSaved" ||
+      storyPart === "woodSaved"
     ) {
       reset(false);
     }
@@ -1991,7 +2040,7 @@ function reset(restart) {
       }
     }
 
-    if (!storyMode || level > 7) {
+    if (!storyMode) {
       togglePauseThrottled();
     }
 
@@ -2534,7 +2583,7 @@ function render() {
       if (poorDoomedAlien.isLastOne && !isGameOver) {
         source.playbackRate.value = 1;
         level++;
-        if (storyMode && (level < 8 || level === 11)) {
+        if (storyMode) {
           switch (level) {
             case 2:
               storyPart = "londonSaved";
@@ -2553,6 +2602,15 @@ function render() {
               break;
             case 7:
               storyPart = "romeSaved";
+              break;
+            case 8:
+              storyPart = "austinSaved";
+              break;
+            case 9:
+              storyPart = "mountainsSaved";
+              break;
+            case 10:
+              storyPart = "woodSaved";
               break;
             case 11:
               storyPart = "win";
