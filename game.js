@@ -535,7 +535,7 @@ story.mountainsSaved = [
 
     `Their mountain base abandonning, abysmal prospects then, the last survivors leave it for a lonely forest den.
 
-Escaping from that skilled assault has scared them to their senses. They claim they lately were a little waylaid by false pretenses.
+Escaping from that skilled assault has scared them to their senses. They claim they were somewhat of late waylaid by false pretenses.
 
 Escaping in a skittish mood, they scorn no longer hold, as formerly they did, for you, their own defender bold.
 
