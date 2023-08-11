@@ -1562,7 +1562,7 @@ function resetBarriers() {
   // A barrier type is chosen at random each level apart from the first
   // and after the state variables are reset after every 10th level, in
   // other words, when level % 10 === 1.
-  if (level - (1 % 10) === 0) {
+  if ((level - 1) % 10 === 0) {
     blockType = regularBarrier;
   } else {
     const rand = Math.floor(Math.random() * barrierList.length);
@@ -2093,7 +2093,7 @@ function reset(restart) {
       for (let col = 0; col < alienGridWidth; col++) {
         alienAlive[row][col] = true;
         let alien = alienElements[row][col];
-        if (level % 10 === 1) {
+        if ((level - 1) % 10 === 0) {
           alien.remove();
           alien = document.createElement("div");
           aliens.appendChild(alien);
@@ -2178,7 +2178,7 @@ function reset(restart) {
       stage: 1,
     }));
 
-    switch (level - (1 % 10)) {
+    switch ((level - 1) % 10) {
       case 0:
         skyline.classList.remove("forest");
         skyline.classList.add("london");
