@@ -53,6 +53,7 @@ let story = {
   newYorkSaved: [],
   parisSaved: [],
   berlinSaved: [],
+  romeSaved: [],
   playerShot: [],
   fireballEnding: [],
   win: [],
@@ -451,7 +452,7 @@ story.berlinSaved = [
 
 It was in those days you started writing your story. Back then, you still thought it would have a happy ending.
 
-More and more, people began to deny the existence of the invasion. Their certainty would have been laughable had it not been so bellicose. Others called for all alien blood. There was a massacre. You kept a low profile then.
+More and more, people began to deny the existence of the Invaders. Their certainty would have been laughable had it not been so bellicose. Others called for all alien blood. There was a massacre. You kept a low profile then.
 
 <font color="red">[T]urn page</font>`
   ],
@@ -463,9 +464,9 @@ More and more, people began to deny the existence of the invasion. Their certain
 
 For her birthday (or rather <i>external soulday</i>, as they called it), you gave her a trinket you'd found on a neighboring stall. Turns out, it was an instrument of her people, the <i>silent rebec</i>.
 
-She was delighted. It took great skill to play well, balancing each cadence against its sonic inverse, although only a true master could approach the ideal of perfect silence. Indeed, at first, she often let slip a bright squall of notes to cheer your drab, little apartment.
+She was delighted. It took great skill to play well, balancing each cadence against its sonic inverse, although only a true master could approach the ideal of perfect silence. Indeed, at first, she often let slip a bright squall of notes to cheer the drab winter hours.
 
-She made ok money at the cabaret&mdash;till she started to improve.
+She made ok money at the cabaret&mdash;till she got really good.
 
 <font color="red">[T]urn page</font>`
   ],
@@ -477,9 +478,39 @@ She made ok money at the cabaret&mdash;till she started to improve.
 
 Then, just as you started to doubt your aim, the last of the swarm exploded across the sky. Berlin was saved.
 
-You celebrated with a few friends from the market. The <i>Glühwein</i> flowed. And later, when they'd gone ... Probably that was the first time you tried out the alien dance, flapping your arms as you bobbed about the apartment&mdash;both of you in stitches&mdash;as you did your best to keep to the noiseless beat.
+You celebrated with a few friends from the market. The <i>Glühwein</i> flowed. And later, when they'd gone ... Probably that was the first time you tried out the alien dance, flapping your arms as you bobbed about the room&mdash;both of you in stitches&mdash;as you did your best to keep to the noiseless beat.
 
 Probably that was when the twins were conceived.
+
+<font color="red">[T]urn page</font>`
+  ]
+];
+
+story.romeSaved = [
+  [
+    `./assets/story-images/wolves.jpg`,
+
+    `O, your brave little fellow.
+
+No hospital would take a half-alien baby, so he lived his hard, hard three days in our tent on the south bank of the Tiber, and left us in the early hours of the fourth.
+
+She ate him, of course, as was the way of her people, and vanished soon after with the other.
+
+This just wasn't their world.
+
+<font color="red">[T]urn page</font>`
+  ],
+
+  [
+    `./assets/story-images/colosseum.jpg`,
+
+    `It was just you and your laser, then. You camped by the river till the police moved you on, then in cemeteries, robbing pilgrims for the cash to recharge it.
+
+Seems like no one believed in the Invaders anymore. Even the Pope dismissed them, but you knew better. Sure, you called it a game in your vision&mdash;that is, when you tried to wrestle your vision into words. But there are games and games: games that are part of life, and the big game that life is a part of.
+
+You had to keep such thoughts to yourself, though, in those days, and shoot your laser from patches of waste ground in the night.
+
+Why were you still trying to save these people? You sometimes wondered. Maybe you wanted to finish what you started.
 
 <font color="red">[T]urn page</font>`
   ]
@@ -1645,7 +1676,8 @@ function turnPage() {
       storyPart === "chicagoSaved" ||
       storyPart === "newYorkSaved" ||
       storyPart === "parisSaved" ||
-      storyPart === "berlinSaved"
+      storyPart === "berlinSaved" ||
+      storyPart === "romeSaved"
     ) {
       reset(false);
     }
@@ -1953,7 +1985,7 @@ function reset(restart) {
       }
     }
 
-    if (!storyMode || level > 6) {
+    if (!storyMode || level > 7) {
       togglePauseThrottled();
     }
 
@@ -2495,8 +2527,7 @@ function render() {
       if (poorDoomedAlien.isLastOne && !isGameOver) {
         source.playbackRate.value = 1;
         level++;
-        if (storyMode && (level < 7 || level === 11)) {
-          console.log(level)
+        if (storyMode && (level < 8 || level === 11)) {
           switch (level) {
             case 2:
               storyPart = "londonSaved";
@@ -2512,6 +2543,9 @@ function render() {
               break;
             case 6:
               storyPart = "berlinSaved";
+              break;
+            case 7:
+              storyPart = "romeSaved";
               break;
             case 11:
               storyPart = "win";
