@@ -29,7 +29,7 @@ function update(data) {
     data.aliens.left += data.aliens.direction * data.aliens.step * data.frameDuration / 1000;
   const howLowCanYouGo = data.aliens.top + data.aliens.groundSensor;
   if ((data.level - 1) % 10 > 3 && ((data.level - 1) % 10 < 7) || ((data.level - 1) % 10 > 9)) {
-    const bob = 0.001 * (data.level - 4) * (Math.floor(Date.now() % 1000) - 500 + data.level);
+    const bob = 0.001 * ((data.level - 1) % 10 - 3) * (Math.floor(Date.now() % 1000) - 500 + data.level);
     data.aliens.top += bob * data.aliens.step * data.frameDuration / 1000;
     if (data.aliens.top < 0) {
       data.aliens.top = 0;
