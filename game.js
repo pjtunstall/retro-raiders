@@ -559,9 +559,9 @@ story.woodSaved = [
 
 Though somewhat scarred by circumstance, you swear to hold the line. Though terrible their likely fate, you tell them they'll be fine.
 
-Determined now to take a stand, you tell them small white lies: instead of truth, a story blithe to still their anguished cries.
+Determined now to take a stand, you tell them happy lies: instead of truth, a story blithe to still their anguished cries.
 
-There's nowhere else on Earth to flee. This is the make-or-break. Decided here is history. The whole world's at stake.
+There's nowhere else on Earth to flee. This is the make-or-break. Decided here is history. The whole wide world's at stake.
 
 <font color="red">[T]urn page</font>`
   ]
@@ -637,20 +637,25 @@ story.win = [
   [
     `./assets/story-images/victorian.jpg`,
 
-    `Earth's free at last from yon bad dream.
+    `Earth wakes at last from that bad dream.
 Was it story or history?
 The more you think, the stranger seem
 those years of tragedy.
 
-Each joke contains the tragedy,
-each loss the cosmic jest.
-Now Terra's saved. Don't think too deep,
-but take your hard-earned rest.
-
-Each happenstance the cosmic dance,
-in miniature, at least.
-Such thoughts you ponder, dazed and praised,
+Such thoughts you ponder, praised and dazed,
 at the celebration feast.
+The presidential quints guffaw.
+They're having fun, at least.
+
+"Don't wrack your brains; you've done your bit.
+Our hero! We are free!
+You were in the thick of it."
+They offer you more tea.
+
+But your mind is on the mystery.
+You will not let it rest:
+how each joke contains the tragedy,
+each loss the cosmic jest.
 
 Each fiction's fact by other means,
 at each storm's heart a lull.
@@ -1096,6 +1101,9 @@ let alienBulletDue = Date.now() + (5000 * Math.random()) / alienRateOfFire;
 let maxAlienBullets = 16;
 const bulletWidth = 10;
 const bulletHeight = 30;
+
+let endBounce = false;
+let endFlit = false;
 
 // Uncomment to test level parameters: background image and difficulty parameters,
 // but not selection of alien types or choice or black vs white aliens.
@@ -1931,6 +1939,8 @@ function reset(restart) {
     return;
   }
   resetInProgress = true;
+  endBounce = false;
+  endFlit = false;
 
   if (restart) {
     restartInProgress = true;
@@ -2314,6 +2324,8 @@ function update(frameDuration) {
         insetRight: insetRight - 60,
         direction: aliensDirection,
       },
+      endBounce: endBounce,
+      endFlit: endFlit
     });
     worker.onmessage = function (event) {
       playerLeft = event.data.player.left;
@@ -2341,6 +2353,8 @@ function update(frameDuration) {
       aliensLeft = event.data.aliens.left;
       aliensStep = event.data.aliens.step;
       aliensDirection = event.data.aliens.direction;
+      endBounce = event.data.endBounce;
+      endFlit = event.data.endFlit;
     };
 
     // Move player bullet.
