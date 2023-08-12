@@ -2603,7 +2603,7 @@ function render() {
         source.playbackRate.value = 1;
         level++;
         if (storyMode) {
-          switch (level) {
+          switch (level % 10) {
             case 2:
               storyPart = "londonSaved";
               break;
@@ -2628,10 +2628,10 @@ function render() {
             case 9:
               storyPart = "mountainsSaved";
               break;
-            case 10:
+            case 0:
               storyPart = "woodSaved";
               break;
-            case 11:
+            case 1:
               storyPart = "win";
               playerDeath(true);
           }
