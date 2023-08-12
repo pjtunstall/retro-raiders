@@ -561,7 +561,7 @@ Though somewhat scarred by circumstance, you swear to hold the line. Though terr
 
 Determined now to take a stand, you tell them small white lies: instead of truth, a story blithe to still their anguished cries.
 
-There's nowhere else on Earth to flee. This is the make-or-break. Decided here is history. Your whole world's at stake.
+There's nowhere else on Earth to flee. This is the make-or-break. Decided here is history. The whole world's at stake.
 
 <font color="red">[T]urn page</font>`
   ]
@@ -2477,6 +2477,7 @@ function playerDeath(final, fireball) {
   if (final || lives < 1) {
     clearTimeout(alienTimeoutID);
     isGameOver = true;
+    playerBullet.style.visibility = "hidden";
     const alienBullets = document.querySelectorAll(".alien-bullet");
     alienBullets.forEach((alienBullet) => alienBullet.remove());
     alienBulletsArray = [];

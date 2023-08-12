@@ -28,30 +28,24 @@ function update(data) {
   if (data.aliens.remaining > 0) {
     data.aliens.left += data.aliens.direction * data.aliens.step * data.frameDuration / 1000;
   const howLowCanYouGo = data.aliens.top + data.aliens.groundSensor;
-  if (data.level % 10 > 4 && (data.level % 10 < 8) || (data.level % 10 === 0)) {
+  if ((data.aliens.top < 500 && (data.level % 10 > 4 && data.level % 10 < 7)) ||
+  (data.aliens.top < 300 && data.level % 10 === 7)) {
     const bob = 0.001 * ((data.level - 1) % 10 - 3) * (Math.floor(Date.now() % 1000) - 500 + data.level);
     data.aliens.top += bob * data.aliens.step * data.frameDuration / 1000;
     if (data.aliens.top < 0) {
       data.aliens.top = 0;
     }
-    // This line says don't let the aliens reach the ground on the levels
-    // where they bob till 3 minutes have passed.
     if (howLowCanYouGo > containerHeight - 60) {
-      if (Date.now() - data.levelStartTime < 180000) {
-        data.aliens.top = howLowCanYouGo - data.aliens.groundSensor - 60;
-      } else {
         data.player.dead = true;
-      }
     }
   }
-  if (data.level % 10 > 7) {
+  if (data.level % 10 > 7 || data.level === 10) {
     data.aliens.top += data.level * (Math.random() - 0.496) * data.aliens.step * data.frameDuration / 1000;
     if (data.aliens.top < 0) {
       data.aliens.top = 0;
     }
-    // This line says don't let the aliens reach the ground on the levels
-    // where they jerk about at random till 3 minutes have passed.
-    // (On the 10th level bob and kerk about at random.)
+    // This line says don't let the aliens reach the ground on a random dip
+    // on levels where they jerk about at random.
     if (howLowCanYouGo > containerHeight - 60) {
       if (Date.now() - data.levelStartTime < 180000) {
         data.aliens.top = howLowCanYouGo - data.aliens.groundSensor - 60;
