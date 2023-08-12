@@ -14,6 +14,10 @@
 // Knowing what we know now, we'd make smaller images and ensure that the game container
 // was a suitable size for all browsers at 100%.
 
+// If using Live Server in VS Code, go to settings and add "**/scores.json" to
+// "liveServer.settings.ignoreFiles", so that when a new high score is added to the
+// scoreboard it won't reload the page.
+
 // Game container and background variables.
 const gameContainer = document.querySelector(".game-container");
 const containerWidth = gameContainer.offsetWidth;
@@ -533,7 +537,7 @@ story.mountainsSaved = [
   [
     `./assets/story-images/51.jpg`,
 
-    `Their mountain base abandonning, abysmal prospects then, the last survivors leave it for a lonely forest den.
+    `Their mountain base abandonning, abysmal prospects there, the last survivors leave it for a lonely woodland lair.
 
 Escaping from that skilled assault has scared them to their senses. They claim they were somewhat of late waylaid by false pretenses.
 
@@ -551,13 +555,13 @@ story.woodSaved = [
   [
     `./assets/story-images/48.jpg`,
 
-    `As driven from their forest den, the few survivors run, you deep into the forest flee, defend them with your gun.
+    `Yet deeper traipse into the woods the tattered last few folk. The way is scattered with their goods, their wishes up in smoke.
 
 Though somewhat scarred by circumstance, you swear to hold the line. Though terrible their likely fate, you tell them they'll be fine.
 
 Determined now to take a stand, you tell them small white lies: instead of truth, a story blithe to still their anguished cries.
 
-There's nowhere else on Earth to run. This is the make-or-break. History will be decided here. The whole world's at stake.
+There's nowhere else on Earth to flee. This is the make-or-break. Decided here is history. Your whole world's at stake.
 
 <font color="red">[T]urn page</font>`
   ]
@@ -1562,7 +1566,7 @@ function resetBarriers() {
   // A barrier type is chosen at random each level apart from the first
   // and after the state variables are reset after every 10th level, in
   // other words, when level % 10 === 1.
-  if ((level - 1) % 10 === 0) {
+  if (level % 10 === 1) {
     blockType = regularBarrier;
   } else {
     const rand = Math.floor(Math.random() * barrierList.length);
@@ -2093,7 +2097,7 @@ function reset(restart) {
       for (let col = 0; col < alienGridWidth; col++) {
         alienAlive[row][col] = true;
         let alien = alienElements[row][col];
-        if ((level - 1) % 10 === 0) {
+        if (level % 10 === 1) {
           alien.remove();
           alien = document.createElement("div");
           aliens.appendChild(alien);
@@ -2178,44 +2182,44 @@ function reset(restart) {
       stage: 1,
     }));
 
-    switch ((level - 1) % 10) {
-      case 0:
+    switch (level % 10) {
+      case 1:
         skyline.classList.remove("forest");
         skyline.classList.add("london");
         break;
-      case 1:
+      case 2:
         skyline.classList.remove("london");
         skyline.classList.add("chicago");
         break;
-      case 2:
+      case 3:
         skyline.classList.remove("chicago");
         skyline.classList.add("nyc");
         break;
-      case 3:
+      case 4:
         skyline.classList.remove("nyc");
         skyline.classList.add("paris");
         break;
-      case 4:
+      case 5:
         skyline.classList.remove("paris");
         skyline.classList.add("berlin");
         break;
-      case 5:
+      case 6:
         skyline.classList.remove("berlin");
         skyline.classList.add("rome");
         break;
-      case 6:
+      case 7:
         skyline.classList.remove("rome");
         skyline.classList.add("austin");
         break;
-      case 7:
+      case 8:
         skyline.classList.remove("austin");
         skyline.classList.add("mountains");
         break;
-      case 8:
+      case 9:
         skyline.classList.remove("mountains");
         skyline.classList.add("wood");
         break;
-      case 9:
+      case 10:
         skyline.classList.remove("wood");
         skyline.classList.add("forest");
         break;
