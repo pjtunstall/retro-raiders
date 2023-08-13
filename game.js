@@ -1951,7 +1951,7 @@ function reset(restart) {
     modifyPics();
   }
 
-  if (level > 4) {
+  if (level % 10 === 0 || level % 10 > 4) {
     lives = 3;
   }
 
