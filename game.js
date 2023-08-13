@@ -2076,11 +2076,13 @@ function reset(restart) {
     source.playbackRate.value = 1;
 
     aliensRemaining = alienGridHeight * alienGridWidth;
-    alienRateOfFire = level;
-
+    if (level % 10 === 0) {
+      alienRateOfFire = 10
+    } else {
+      alienRateOfFire = level % 10;
+    }
     alienAnimationDuration = 1;
     aliensToRemove = [];
-
     aliensLeft = containerWidth / 2 - alienGridPixelWidth / 2;
     aliensTop = startHeight;
     insetLeft = 0;
