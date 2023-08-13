@@ -463,7 +463,7 @@ For her birthday (or rather <i>external soulday</i>, as they called it), you gav
 
 She was delighted. It took great skill to play well, balancing each cadence against its sonic inverse, although only a true master could approach the ideal of perfect silence. Indeed, at first, she often let slip a bright squall of notes to cheer the drab winter hours.
 
-She made ok money at the cabaret&mdash;till she got really good.
+She made ok money at the cabaret&mdash;until she got good.
 
 <font color="red">[T]urn page</font>`
   ],
@@ -489,7 +489,7 @@ story.romeSaved = [
 
     `O, your brave little fellow!
 
-No hospital would take a half-alien baby, so he lived his out three fevered days in your tent on the south bank of the Tiber; and, on the third night, convulsed and was done.
+No hospital would take a half-alien baby, so he lived his out three fevered days in your tent on the south bank of the Tiber; and, on the third, convulsed and was done.
 
 She ate him, of course, as was the way of her people, and vanished soon after with the other.
 
@@ -503,7 +503,7 @@ You didn't care about anything then, certainly not the people of Planet Earth, b
   [
     `./assets/story-images/colosseum.jpg`,
 
-    `It was just you and your laser now. You camped by the river till the <i>polizia robotica</i> moved you on, then in cemeteries, robbing pilgrims for the cash to recharge it.
+    `It was just you and your little coin-op laser now. You camped by the river till the <i>polizia robotica</i> moved you on, then in cemeteries, robbing pilgrims for the cash to recharge it.
 
 Seems like no one believed in the Invaders anymore. Even the Pope dismissed them, but you knew better. Sure, you called it a game in your vision&mdash;that is, when you tried to wrestle your vision into words. But there are games and games: games that are part of life, and the big game that life is a part of.
 
@@ -727,7 +727,7 @@ you look out for your crew.
   [
     `./assets/story-images/21.jpg`,
 
-    `<i>From the Memoirs of Exaptia Tabbani, Ambassador of the Hmadian Macrostates, on concluding her negotiations with Emperor FnrRa Gfgfgg (II<sup>MXXIV</sup>-I)st, Lord of Orion, Grand Eskalir of Grumium, and Admiral of the High Reaches:</i>
+    `<i>From the Memoirs of Exaptia Tabbani, Envoy Incarnate of the Hmadian Macrostates, on concluding her negotiations with Emperor FnrRa Gfgfgg (II<sup>MXXIV</sup>-I)st, Lord of Orion, Grand Eskalir of Grumium, and Admiral of the High Reaches:</i>
 
 
 Following my embassy to the barbarian emperor&mdash;O, I could hardly believe it, she'd walked right into my trap!&mdash;, as I strode back to my teleport pad, I happened upon a contingent of mercenaries, busy darning their space suits for the next invasion.
@@ -871,6 +871,7 @@ const chapter = [
   "Tupenny 'APIenny",
   "Bitwise and Pound Foolish",
   "Lookit, Log it, Lockett",
+  "The Bilalgorithm",
   "Nully the Element Packed Her Math.trunc<br>and ...Spread Goodbye to the Circus",
   "Lookbehind in Anger",
   "Home, Home on the Range Loop",
