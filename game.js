@@ -884,7 +884,8 @@ const chapter = [
   "ANSI Boys",
   "['The', 'Army'].join(' ') and C++ the Navy",
   "Single or Carriage Return",
-  "Brain-Fukkatsu no Hi"
+  "Brain-Fukkatsu no Hi",
+  "The Thenable Bede"
 ];
 let chapterNumber = Math.floor(chapter.length * Math.random());
 title.innerHTML = `Chapter ${level}:<br>${chapter[chapterNumber]}`;
