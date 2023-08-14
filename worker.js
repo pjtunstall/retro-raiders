@@ -63,7 +63,7 @@ function update(data) {
     if (howLowCanYouGo < containerHeight) {
       data.aliens.top += 20;
       if (data.aliens.step < maxAlienSpeed) {
-        data.aliens.step = data.aliens.top + 100;
+        // data.aliens.step = data.aliens.top + 100;
       }
     } else {
       data.player.dead = true;
@@ -75,7 +75,7 @@ function update(data) {
     if (howLowCanYouGo < containerHeight) {
       data.aliens.top += 20;
       if (data.aliens.step < maxAlienSpeed) {
-        data.aliens.step = data.aliens.top + 100;
+        // data.aliens.step = data.aliens.top + 100;
       }
     } else {
         data.player.dead = true;

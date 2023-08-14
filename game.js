@@ -884,6 +884,7 @@ const chapter = [
   "ANSI Boys",
   "['The', 'Army'].join(' ') and C++ the Navy",
   "Single or Carriage Return",
+  "Brain-Fukkatsu no Hi"
 ];
 let chapterNumber = Math.floor(chapter.length * Math.random());
 title.innerHTML = `Chapter ${level}:<br>${chapter[chapterNumber]}`;
@@ -932,7 +933,7 @@ let playerBulletOnScreen = false;
 const mysteryScore = [
   100, 50, 50, 100, 150, 100, 100, 50, 300, 100, 100, 100, 50, 150, 100, 50,
 ];
-let ufoScorePointer = -1;
+let ufoScorePointer = 0;
 let ufoTimeUp = Date.now() + 20000 + Math.random() * 10000;
 let ufoActive = false;
 let ufoDirection;
@@ -1906,10 +1907,6 @@ function launchUfo() {
   voltage.currentTime = 0;
   voltage.play();
   ufoActive = true;
-  ufoScorePointer++;
-  if (ufoScorePointer > 15) {
-    ufoScorePointer = 0;
-  }
   if (Math.random() < 0.5) {
     ufoDirection = 1;
     ufoLeft = -ufoWidth;
@@ -2354,7 +2351,7 @@ function update(frameDuration) {
       }
       aliensTop = event.data.aliens.top;
       aliensLeft = event.data.aliens.left;
-      aliensStep = event.data.aliens.step;
+      // aliensStep = event.data.aliens.step;
       aliensDirection = event.data.aliens.direction;
       endBounce = event.data.endBounce;
       endFlit = event.data.endFlit;
@@ -2890,6 +2887,10 @@ function firePlayerBullet() {
   playerBulletTop = playerTop - playerBulletHeight;
   playerBullet.style.top = `${playerBulletTop}px`;
   newPlayerBullet = true;
+  ufoScorePointer++;
+  if (ufoScorePointer > 14) {
+    ufoScorePointer = 0;
+  }
 }
 
 function playerBulletCollisions() {
@@ -2952,6 +2953,11 @@ function playerBulletCollisions() {
           playerBulletLeft <=
             aliensLeft + alienLeftInGrid[row][col] + scaledWidth + gap * col
         ) {
+          if (level % 10 < 5 && level % 10 !== 0) {
+            aliensStep += 10;
+          } else {
+            aliensStep += 5;
+          }
           playerBulletRemoveMe = true;
           aliensRemaining--;
           let isLastOne = false;
