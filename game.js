@@ -2230,7 +2230,7 @@ function reset(restart) {
         skyline.classList.remove("mountains");
         skyline.classList.add("wood");
         break;
-      case 10:
+      case 0:
         skyline.classList.remove("wood");
         skyline.classList.add("forest");
         break;
