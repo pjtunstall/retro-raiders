@@ -505,7 +505,7 @@ You didn't care about anything then, certainly not the people of Planet Earth, b
 
     `It was just you and your little coin-op laser now. You camped by the river till the <i>polizia robotica</i> moved you on, then in cemeteries, robbing pilgrims for the cash to recharge it.
 
-Seems like no one believed in the Invaders anymore. Even the Pope dismissed them, but you knew better. Sure, you called it a game in your vision&mdash;that is, when you tried to wrestle your vision into words. But there are games and games: games that are part of life, and the big game that life is a part of.
+Seems like no one believed in the Invaders anymore. Even the quintuplet presidents dismissed them, but you knew better. Sure, you called it a game in your vision&mdash;that is, when you tried to wrestle your vision into words. But there are games and games: games that are part of life, and the big game that life is a part of.
 
 You had to keep such thoughts to yourself in those days, though, and shoot your laser from abandonned lots in the night.
 
