@@ -885,7 +885,6 @@ const chapter = [
   "['The', 'Army'].join(' ') and C++ the Navy",
   "Single or Carriage Return",
   "Brain-Fukkatsu no Hi",
-  "The Thenable Bede"
 ];
 let chapterNumber = Math.floor(chapter.length * Math.random());
 title.innerHTML = `Chapter ${level}:<br>${chapter[chapterNumber]}`;
@@ -1627,28 +1626,65 @@ function resetBarriers() {
 resetBarriers();
 
 // Music.
-const audioContext = new AudioContext();
+let audioContext = new AudioContext();
 let source;
 let musicInterval;
 
 // Parameters governing how the music gets faster.
-const speedIncreaseAmount = 0.08;
+const speedIncreaseAmount = 0.02;
 let pausedPlaybackRate = 1;
 let pausedTime = 0;
 let musicStartTime = 0;
+let musicFile;
 
-async function loadAndPlayMusic() {
+function pickMusic() {
+  let musicRandomizer = Math.random();
+    switch (true) {
+      case musicRandomizer < 0.2:
+        musicFile = "assets/music/POL-chubby-cat-short.wav";
+        break;
+      case musicRandomizer < 0.4:
+        musicFile = "assets/music/POL-combat-plan-short.wav";
+        break;
+      case musicRandomizer < 0.6:
+        musicFile = "assets/music/POL-bomb-carrier-short.wav";
+        break;
+      case musicRandomizer < 0.8:
+        musicFile = "assets/music/POL-secret-alchemy-short.wav";
+        break;
+      default:
+        musicFile = "assets/music/POL-galactic-chase-short.wav";
+    }
+}
+
+async function loadAndPlayMusic(musicRate = 1, existingMusic = "") {
+  audioContext = new AudioContext();
   try {
-    const musicFile = "assets/SFX/Space_Invaders_Music.ogg.mp3";
+    if (source) {
+      source.stop();
+      source.disconnect();
+    }
+    await audioContext.resume();
+    if (existingMusic === "") {
+      pickMusic();
+    } else {
+      musicFile = existingMusic
+    }
     const response = await fetch(musicFile);
     const buffer = await response.arrayBuffer();
     const musicBuffer = await audioContext.decodeAudioData(buffer);
 
     source = audioContext.createBufferSource();
+    source.playbackRate.value = musicRate;
     source.buffer = musicBuffer;
     source.loop = true;
-    source.playbackRate.value = 1;
-    source.connect(audioContext.destination);
+
+    const gainNode = audioContext.createGain();
+    gainNode.gain.value = 0.2; // Adjust volume (0 to 1)
+
+    source.connect(gainNode);
+    gainNode.connect(audioContext.destination);
+
     source.start();
   } catch (error) {
     console.error("Error loading and playing music:", error);
@@ -1663,7 +1699,7 @@ const voltage = new Audio("assets/SFX/Mad-Voltage.mp3");
 const scream = new Audio("assets/SFX/Scream-Short-C2-www.fesliyanstudios.com.mp3");
 const wood = new Audio("assets/SFX/WoodCrashesDistant FS022705.mp3");
 const rock = new Audio("assets/SFX/rock-destroy-6409.mp3");
-rock.volume = 0.5;
+rock.volume = 0.1;
 const bomb = new Audio("assets/SFX/bomb.mp3");
 const kaboom = new Audio("assets/SFX/kaboom.wav");
 const mortar = new Audio("assets/SFX/mortar cannon explosion.wav");
@@ -1673,6 +1709,9 @@ const Explosion2 = new Audio("assets/SFX/Explosion2.wav");
 const damage = new Audio("assets/SFX/damage.wav");
 const LEXPLODE = new Audio("assets/SFX/LEXPLODE.wav");
 const blk = new Audio("assets/SFX/blkfoot4.wav");
+
+const sfx = [shootEffect, laserShot, hull, scream, wood, bomb, kaboom, mortar, explode1, Explosion1, Explosion2, damage, LEXPLODE, blk];
+sfx.forEach(sound => {sound.volume = 0.2});
 
 const wind = new Audio("assets/SFX/wind.mp3");
 wind.loop = true;
@@ -1785,6 +1824,7 @@ function togglePause() {
     title.style.visibility = "hidden";
     wind.pause();
     if (resetInProgress || starting) {
+      loadAndPlayMusic();
       levelStartTime = Date.now();
       pausedTime = audioContext.currentTime - musicStartTime;
       if (restartInProgress || starting) {
@@ -1797,23 +1837,10 @@ function togglePause() {
       const pauseInterval = Date.now() - pauseStartTime;
       startTime += pauseInterval;
       ufoTimeUp += pauseInterval;
+      loadAndPlayMusic(pausedPlaybackRate, musicFile);
     }
     if (ufoActive) {
       voltage.play();
-    }
-    if (starting) {
-      loadAndPlayMusic();
-    } else {
-      audioContext.resume().then(() => {
-        source.playbackRate.setValueAtTime(
-          pausedPlaybackRate,
-          audioContext.currentTime
-        );
-        musicStartTime = audioContext.currentTime - pausedTime;
-        if (resetInProgress && source.playbackRate) {
-          source.playbackRate.value = 1;
-        }
-      });
     }
     starting = false;
     resetInProgress = false;
@@ -1967,10 +1994,6 @@ function reset(restart) {
   isInUfoCutScene = false;
   player.classList.remove("player-beam");
 
-  if (source) {
-    source.playbackRate.value = 1;
-  }
-
   currentPage = 0;
 
   // To deal with the possibility that the player is hit by an alien bullet while
@@ -2070,8 +2093,6 @@ function reset(restart) {
         lifeCounter[i].style.visibility = "hidden";
       }
     }
-
-    source.playbackRate.value = 1;
 
     aliensRemaining = alienGridHeight * alienGridWidth;
     if (level % 10 === 0) {
@@ -2496,7 +2517,6 @@ function playerDeath(final, fireball) {
     const alienBullets = document.querySelectorAll(".alien-bullet");
     alienBullets.forEach((alienBullet) => alienBullet.remove());
     alienBulletsArray = [];
-    source.playbackRate.value = 1;
     for (let i = 0; i < 3; i++) {
       lifeCounter[i].style.visibility = "hidden";
     }
@@ -2601,7 +2621,6 @@ function render() {
       alienElements[poorDoomedAlien.row][poorDoomedAlien.col].style.visibility =
         "hidden";
       if (poorDoomedAlien.isLastOne && !isGameOver) {
-        source.playbackRate.value = 1;
         level++;
         if (storyMode) {
           switch (level % 10) {
