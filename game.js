@@ -675,7 +675,7 @@ though human you are in form,
 you've proved your worth, so take your place
 in our invader swarm."
 
-"Your worth you've shown, O earthling bold,
+"Your worth you've shown us, earthling lad,
 so join our conquering host.
 Your world's a cinder, nothing left.
 Of our offer make the most."
