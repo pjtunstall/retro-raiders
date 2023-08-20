@@ -1,23 +1,3 @@
-// If using Go Live server on VS Code, use port number 5500.
-// E.g. http://127.0.0.1:5500/
-// Replace 127.0.0.1 with your IP address or localhost or 0.0.0.0.
-
-// If using `python -m SimpleHTTPServer` or `python3 -m http.server`, port number 8000.
-
-// Best played on full screen. Refresh page after making full screen.
-
-// We recommend Chrome. Chrome will automatically switch to 80%, which is a good size.
-// Safari can be used if you manually zoom out to 80%, then refresh. Unfortunately
-// Firefox seems to have rounding errors in rescaling the sprites. They only look right
-// at 100% zoom on Firefox, which is too big to fit my screen at least.
-
-// Knowing what we know now, we'd make smaller images and ensure that the game container
-// was a suitable size for all browsers at 100%.
-
-// If using Live Server in VS Code, go to settings and add "**/scores.json" to
-// "liveServer.settings.ignoreFiles", so that when a new high score is added to the
-// scoreboard it won't reload the page.
-
 // Game container and background variables.
 const gameContainer = document.querySelector(".game-container");
 const containerWidth = gameContainer.offsetWidth;
