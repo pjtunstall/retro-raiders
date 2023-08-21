@@ -32,8 +32,12 @@ Comment them back, to ensure that `go run .` still works. Now you can double cli
 
 This was our first JavaScript project for 01Founders, a branch of the 01Edu education system, and our first attempt at making a browser game.
 
-If we were starting from scratch, knowing what we know now, we'd do some things differently.
+If we were starting from scratch, knowing what we know now, we'd do many things differently. Given more time, we'd have a more thorough refactoring stage.
+
+Variables would be intialized at the start of the game by the same function that resets them for a new game.
 
 We'd scale everything so that it would work well at 100% zoom in all the main browsers and on all normal screen sizes. As it is, we need to recommend Chrome because Chrome automatically adjusts to the right zoom, 80% for my screen, and selects sprites from the spritesheet with none of the artifacts that Firefox produces at 80%, perhaps due to rounding errors in calculating pixels.
 
 We'd write more object-oriented code, which would make it easier to pass data to the web worker.
+
+As it is, we prioritized learning new things and making something fun, rather than wrangling all of our false starts into neater code.
