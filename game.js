@@ -362,7 +362,7 @@ You didn't believe at first,
 but that was no excuse.
 
 The politicians said keep calm.
-Panicked they did meet.
+Panicked, they did meet.
 Precious little help against
 a rampaging alien fleet.
 
@@ -495,7 +495,7 @@ story.newYorkSaved = [
 
 O, they were not happy to lose New York. They cursed Earth then. Their green blood boiled.
 
-And you? What of the victor? Feted and hailed a hero. A long way from your sheep farm now. How does it feel? Do you feel like a hero? Not really.
+And you? What of the victor? F&#234;ted and hailed a hero. A long way from your sheep farm now. How does it feel? Do you feel like a hero? Not really.
 
 How can time even pass?
 
@@ -591,7 +591,7 @@ ${partnerSubjectPronounCapital} made ok money at the cabaret&mdash;until ${partn
 
 Then, just as you started to doubt your aim, the last of the swarm exploded across the sky. Berlin was saved.
 
-You celebrated with a few friends from the market. The <i>Glühwein</i> flowed. And later, when they'd gone ... Probably that was the first time you tried out the alien dance, flapping your arms as you bobbed about the room&mdash;both of you in stitches&mdash;as you did your best to keep to the noiseless beat.
+You celebrated with a few friends from the market. The <i>Glühwein</i> flowed. And later, when they'd gone . . . Probably that was the first time you tried out the alien dance, flapping your arms as you bobbed about the room&mdash;both of you in stitches&mdash;as you did your best to keep to the noiseless beat.
 
 Probably that was when the twins were conceived.
 
