@@ -53,10 +53,62 @@ let sheepPic;
 let ufoShotPic;
 let lastPic;
 let beamPic;
+let berlinPic1;
+let berlinPic2;
+let berlinPic3;
 
-randomizePics();
+let playerCharacterIsMale;
 
-function randomizePics() {
+let rhyme;
+let boyOrGirl;
+let ladOrLass;
+let sirOrMadam;
+let wivesOrHusbands;
+let riflemanOrAmazon;
+let subjectPronoun;
+let possessivePronoun;
+let objectPronoun;
+let partnerSubjectPronoun;
+let partnerPossessivePronoun;
+let partnerObjectPronoun;
+
+randomizeStory();
+modifyStory();
+
+function randomizeStory() {
+  const genderRandomizer = Math.round(Math.random());
+  playerCharacterIsMale = !genderRandomizer;
+  
+  if (playerCharacterIsMale) {
+    boyOrGirl = "boy";
+    ladOrLass = "lad";
+    sirOrMadam = "sir"
+    wivesOrHusbands = "wives";
+    riflemanOrAmazon = "rifleman";
+    rhyme = "Their strategists devise a plan.";
+    subjectPronoun = "he";
+    possessivePronoun = "his";
+    objectPronoun = "him";
+    partnerSubjectPronoun = "she";
+    partnerPossessivePronoun = "her";
+    partnerObjectPronoun = "her";
+    berlinPic2 = "rebec";
+  } else {
+    rhyme = "Retreat or respite show they none;"
+    boyOrGirl = "girl";
+    ladOrLass = "lass";
+    sirOrMadam = "madam"
+    wivesOrHusbands = "husbands";
+    riflemanOrAmazon = "amazon";
+    subjectPronoun = "she";
+    possessivePronoun = "her";
+    objectPronoun = "her";
+    partnerSubjectPronoun = "he";
+    partnerPossessivePronoun = "his";
+    partnerObjectPronoun = "him";
+    berlinPic2 = "graffiti";
+  }
+
   const introRandomizer = Math.random();
   const sheepRandomizer = Math.random();
   const ufoShotRandomizer = Math.random();
@@ -80,42 +132,107 @@ function randomizePics() {
       introPic = "6";
   }
 
-  switch (true) {
-    case sheepRandomizer < 0.08:
-      sheepPic = "96";
-      break;
-    case sheepRandomizer < 0.17:
-      sheepPic = "76";
-      break;
-    case sheepRandomizer < 0.25:
-      sheepPic = "82";
-      break;
-    case sheepRandomizer < 0.42:
-      sheepPic = "89";
-      break;
-    case sheepRandomizer < 0.5:
-      sheepPic = "97";
-      break;
-    case sheepRandomizer < 0.58:
-      sheepPic = "105";
-      break;
-    case sheepRandomizer < 0.75:
-      sheepPic = "87";
-      break;
-    case sheepRandomizer < 0.67:
-      sheepPic = "91";
-      break;
-    case sheepRandomizer < 0.75:
-      sheepPic = "85";
-      break;
-    case sheepRandomizer < 0.83:
-      sheepPic = "79";
-      break;
-    case sheepRandomizer < 0.92:
-      sheepPic = "71";
-      break;
-    default:
-      sheepPic = "98";
+  if (playerCharacterIsMale) {
+    switch (true) {
+      case sheepRandomizer < 0.08:
+        sheepPic = "96";
+        break;
+      case sheepRandomizer < 0.17:
+        sheepPic = "76";
+        break;
+      case sheepRandomizer < 0.25:
+        sheepPic = "82";
+        break;
+      case sheepRandomizer < 0.42:
+        sheepPic = "89";
+        break;
+      case sheepRandomizer < 0.5:
+        sheepPic = "97";
+        break;
+      case sheepRandomizer < 0.58:
+        sheepPic = "105";
+        break;
+      case sheepRandomizer < 0.75:
+        sheepPic = "87";
+        break;
+      case sheepRandomizer < 0.67:
+        sheepPic = "91";
+        break;
+      case sheepRandomizer < 0.75:
+        sheepPic = "85";
+        break;
+      case sheepRandomizer < 0.83:
+        sheepPic = "79";
+        break;
+      case sheepRandomizer < 0.92:
+        sheepPic = "71";
+        break;
+      default:
+        sheepPic = "98";
+    }
+
+    switch (true) {
+      case lastPicRandomizer < 0.2:
+        lastPic = "39";
+        break;
+      case lastPicRandomizer < 0.4:
+        lastPic = "11b";
+        break;
+      case lastPicRandomizer < 0.6:
+        lastPic = "38";
+        break;
+      case lastPicRandomizer < 0.8:
+        lastPic = "69";
+        break;
+      default:
+        lastPic = "13";
+    }
+  } else {
+    switch (true) {
+      case sheepRandomizer < 0.1:
+        sheepPic = "5f";
+        break;
+      case sheepRandomizer < 0.2:
+        sheepPic = "6f";
+        break;
+      case sheepRandomizer < 0.3:
+        sheepPic = "11f";
+        break;
+      case sheepRandomizer < 0.4:
+        sheepPic = "14f";
+        break;
+      case sheepRandomizer < 0.5:
+        sheepPic = "12f";
+        break;
+      case sheepRandomizer < 0.6:
+        sheepPic = "15f";
+        break;
+      case sheepRandomizer < 0.7:
+        sheepPic = "17f";
+        break;
+      case sheepRandomizer < 0.8:
+        sheepPic = "4f";
+        break;
+      case sheepRandomizer < 0.9:
+        sheepPic = "8af";
+        break;
+      default:
+        sheepPic = "16f";
+    }
+
+    switch(true) {
+      case lastPicRandomizer < 0.25:
+        lastPic = "3af";
+        break;
+      case lastPicRandomizer < 0.5:
+        lastPic = "10f";
+        break;
+      case lastPicRandomizer < 0.75:
+        lastPic = "ruinsf";
+        break;
+      default:
+        lastPic = "1af";
+    }
   }
 
   switch (true) {
@@ -131,35 +248,24 @@ function randomizePics() {
 
   if (beamRandomizer < 0.5) {
     beamPic = "4c";
+    berlinPic1 = "wall";
+    berlinPic3 = "twins";
   } else {
     beamPic = "1";
-  }
-
-  switch (true) {
-    case lastPicRandomizer < 0.2:
-      lastPic = "39";
-      break;
-    case lastPicRandomizer < 0.4:
-      lastPic = "11b";
-      break;
-    case lastPicRandomizer < 0.6:
-      lastPic = "38";
-      break;
-    case lastPicRandomizer < 0.8:
-      lastPic = "69";
-      break;
-    default:
-      lastPic = "13";
+    berlinPic1 = "apartment-block";
+    berlinPic3 = "twins2";
   }
 }
 
-function modifyPics() {
-  story.beginning[1][0] = `./assets/story-images/${introPic}.jpg`;
-  story.beginning[3][0] = `./assets/story-images/${sheepPic}.jpg`;
-  story.ufoShot[0][0] = `./assets/story-images/${ufoShotPic}.jpg`;
-  story.aliensReachEarth[0][0] = `./assets/story-images/${beamPic}.jpg`;
-  story.aliensReachEarth[6][0] = `./assets/story-images/${lastPic}.jpg`;
-}
+function modifyStory() {
+  // story.beginning[1][0] = `./assets/story-images/${introPic}.jpg`;
+  // story.beginning[3][0] = `./assets/story-images/${sheepPic}.jpg`;
+  // story.ufoShot[0][0] = `./assets/story-images/${ufoShotPic}.jpg`;
+  // story.aliensReachEarth[0][0] = `./assets/story-images/${beamPic}.jpg`;
+  // story.aliensReachEarth[6][0] = `./assets/story-images/${lastPic}.jpg`;
+  // story.berlinSaved[0][0] = `./assets/story-images/${berlinPic1}.jpg`;
+  // story.berlinSaved[1][0] = `./assets/story-images/${berlinPic2}.jpg`;
+  // story.berlinSaved[2][0] = `./assets/story-images/${berlinPic3}.jpg`;
 
 story.beginning = [
   [
@@ -292,7 +398,7 @@ Its cities they will raze.
 New swarms appear, they will not stop
 till Earth is laid to waste,
 and a lone laser fusilier
-his final end has faced.
+${possessivePronoun} final end has faced.
 
 <font color="red">[T]urn page</font>`,
   ],
@@ -317,9 +423,9 @@ They've conquered worlds before.
 If a planet proves too hard to take,
 they just attack it more.
 
-Their strategists devise a plan.
+${rhyme}
 They'll stop at nothing now.
-On that lone laser rifleman
+On that lone laser ${riflemanOrAmazon}
 vengeance they do vow.
 
 <font color="red">[T]urn page</font>`,
@@ -337,7 +443,7 @@ Chicago too is free.
 
 There's fireworks on Navy Pier.
 Perhaps it's not too late?
-Earth's saviour, though, has earned himself
+Earth's saviour, though, has earned ${objectPronoun}self
 some hard alien hate.
 
 The galactic interlopers run
@@ -423,7 +529,7 @@ But you knew what was at stake as you packed your bags for the next one.
 
 story.berlinSaved = [
   [
-    `./assets/story-images/wall.jpg`,
+    `./assets/story-images/${berlinPic1}.jpg`,
 
     `It was winter in Berlin. Even your alien allies had absconded. All but one. You sold your medals for that dingy room over the bar in Friedrichshain. The two of you took turns on a stall at the fleamarket. Weeks could go by without a sale. When one did come, you'd celebrate with <i>Glühwein</i> and drew a little closer, and it kept out the December chill for a while.
 
@@ -439,11 +545,11 @@ More and more, people began to deny the existence of the Invaders. Their certain
 
     `Such misunderstanding, on every level! How much of it due to those crummy AI translation headsets they gave you? Who knows? She never did seem at ease in this world. You wondered what kept her here.
 
-For her birthday (or rather <i>external soulday</i>, as they called it), you gave her a trinket you'd found on a neighboring stall. Turns out, it was an instrument of her people, the <i>silent rebec</i>.
+For ${partnerPossessivePronoun} birthday (or rather <i>external soulday</i>, as they called it), you gave ${partnerObjectPronoun} a trinket you'd found on a neighboring stall. Turns out, it was an instrument of ${partnerPossessivePronoun} people, the <i>silent rebec</i>.
 
-She was delighted. It took great skill to play well, balancing each cadence against its sonic inverse, although only a true master could approach the ideal of perfect silence. Indeed, at first, she often let slip a bright squall of notes to cheer the drab winter hours.
+${partnerSubjectPronoun} was delighted. It took great skill to play well, balancing each cadence against its sonic inverse, although only a true master could approach the ideal of perfect silence. Indeed, at first, ${partnerSubjectPronoun} often let slip a bright squall of notes to cheer the drab winter hours.
 
-She made ok money at the cabaret&mdash;until she got good.
+${partnerSubjectPronoun} made ok money at the cabaret&mdash;until ${partnerSubjectPronoun} got good.
 
 <font color="red">[T]urn page</font>`
   ],
@@ -451,7 +557,7 @@ She made ok money at the cabaret&mdash;until she got good.
   [
     `./assets/story-images/twins.jpg`,
 
-    `By spring, she almost had it. She looked magnificent, coaxing the arcane contraption into what you guessed, from your fading recollection of her early attempts, must be tunes of devastating transcendence, albeit deftly canceled out. You applauded, and felt quite alone.
+    `By spring, ${partnerSubjectPronoun} almost had it. ${partnerSubjectPronoun} looked magnificent, coaxing the arcane contraption into what you guessed, from your fading recollection of ${partnerPossessivePronoun} early attempts, must be tunes of devastating transcendence, albeit deftly canceled out. You applauded, and felt quite alone.
 
 Then, just as you started to doubt your aim, the last of the swarm exploded across the sky. Berlin was saved.
 
@@ -471,7 +577,7 @@ story.romeSaved = [
 
 No hospital would take a half-alien baby, so he lived his out three fevered days in your tent on the south bank of the Tiber; and, on the third, convulsed and was done.
 
-She ate him, of course, as was the way of her people, and vanished soon after with the other.
+${partnerSubjectPronoun} ate him, of course, as was the way of ${partnerPossessivePronoun} people, and vanished soon after with the other.
 
 It just wasn't their world.
 
@@ -556,9 +662,9 @@ three aliens at the door.
 Not much to say to blunt that shock:
 "Your hatchling is no more."
 
-"A third and fatal blast he took.
+"A third and fatal blast ${subjectPronoun} took.
 Our plasma bolts struck home.
-Accept this medal for his pluck
+Accept this medal for ${possessivePronoun} pluck
 and a broodling of our own."
 
 "Another a gift we'd like give
@@ -566,14 +672,14 @@ to help you out from hence,
 as slaves to serve your every need:
 your quintuplet presidents."
 
-"Now we're the rulers of your world.
-He didn't stand a chance.
+"Now we're the rulers of your world;
+${subjectPronoun} didn't stand a chance.
 To compensate you further, look!
 We'll do our alien dance."
 
 "Our dance we shall perform for you.
 We flap our arms like so.
-Your boy was brave, we honour him.
+Your ${boyOrGirl} was brave, we honour ${objectPronoun}.
 We thought you'd like to know."
 
 <font color="red">[T]urn page</font>`,
@@ -589,14 +695,14 @@ three aliens at the door.
 Not much to say to blunt that shock:
 "Your hatchling is no more."
 
-"A fireball took his life away.
-For him, there's no tomorrow.
+"A fireball took ${possessivePronoun} life away.
+For ${objectPronoun}, there's no tomorrow.
 Please take a gift this tragic day
 in token of our sorrow."
 
 "Accept now, Mrs. Gunner, please,
 since we've achieved our goal,
-as consolation for your grief
+as consolation in your grief
 this antique games console.
 
 "A video game is always fun.
@@ -606,7 +712,7 @@ we'll do our alien dance."
 
 "Our dance we shall perform for you.
 We flap our arms like so.
-Your child was brave, we honour him.
+Your ${boyOrGirl} was brave, we honour ${objectPronoun}.
 We thought you'd like to know."
 
 <font color="red">[T]urn page</font>`,
@@ -655,7 +761,7 @@ though human you are in form,
 you've proved your worth, so take your place
 in our invader swarm."
 
-"Your worth you've shown us, earthling lad,
+"Your worth you've shown us, earthling ${ladOrLass},
 so join our conquering host.
 Your world's a cinder, nothing left.
 Of our offer make the most."
@@ -688,7 +794,7 @@ That is hard to say.
 
 A rover, you, a treasure trover,
 you keep the loot you find.
-Alien wives, you have three,
+Alien ${wivesOrHusbands}, you have three,
 one of each kind.
 
 From ALGOL the Demon Star
@@ -724,7 +830,7 @@ Crisscrossed with laser scars and plasma burns, it had a curious bilateral symme
 
     `As I approached, it looked up and flapped its arms at me.
 
-I returned the traditional Invader salute and enquired, "Where are you from, sir?"
+I returned the traditional Invader salute and enquired, "Where are you from, ${sirOrMadam}?"
 
 "Earth," it grunted.
 
@@ -740,7 +846,7 @@ A faraway look crossed the alien's face.
 
 "You live as one of these barbarous rogues, raiding other planets?"
 
-"It's a fine life," the mercenary grinned. "I have treasures aplenty, the spoils of half the galaxy and three alien wives. One of each kind."
+"It's a fine life," the mercenary grinned. "I have treasures aplenty, the spoils of half the galaxy and three alien ${wivesOrHusbands}. One of each kind."
 
 <font color="red">[T]urn page</font>`,
   ],
@@ -748,15 +854,15 @@ A faraway look crossed the alien's face.
   [
     `./assets/story-images/7.jpg`,
 
-    `"But you are a civilized being, sir. Are you not ashamed?"
+    `"But you are a civilized being, my friend. Are you not ashamed?"
 
 "I have all the best spice, mister. I feel nothing."
 
 I politely declined the smouldering baby-bone pipe it offered. It took a long drag and a glazed smile replaced the bitter look on its face. Its comrades cackled.
 
-"Just look at yourself, sir! Think of what you've lost. This is no life. You'll be run through with a plasmic glaive or shot down sooner or later by a defender such as you once were. Did you not have a family on, what did you call it, Earth? A mate? Hatchlings? What would your mother think to see you now?"
+"Just look at yourself, ${sirOrMadam}! Think of what you've lost. This is no life. You'll be run through with a plasmic glaive or shot down sooner or later by a defender such as you once were. Did you not have a family on, what did you call it, Earth? A mate? Hatchlings? What would your mother think to see you now?"
 
-For the briefest moment, its face twisted with a wild-eyed look.
+For the briefest moment, its face twisted into a wild-eyed look.
 
 <font color="red">[T]urn page</font>`,
   ],
@@ -782,19 +888,20 @@ Such is the way of the High Reaches.
   [
     `./assets/story-images/${lastPic}.jpg`,
 
-    `I sometimes wonder what became of that lone laser gunner from Earth. Almost certainly he was killed when the empire fell, shortly after my return.
+    `I sometimes wonder what became of that lone laser gunner from Earth. Almost certainly ${subjectPronoun} was killed when the empire fell, shortly after my return.
 
-Any chance he escaped? Not really. But who knows?
+Any chance ${subjectPronoun} escaped? Not really. But who knows?
 
-Maybe he found some way out through the chaos of all those years, got himself cloned, and founded a new Earth somewhere out in the quiet backwaters of Orion.
+Maybe ${subjectPronoun} found some way out through the chaos of all those years, got ${objectPronoun}self cloned, and founded a new Earth somewhere out in the quiet backwaters of Orion.
 
-I like to think he did.
+I like to think ${subjectPronoun} did.
 
 <font color="red">[T]urn page</font>`,
   ],
 ];
 
-// let scoreBoardPressAnyKey = document.querySelector(".press-any-key");
+}
+
 const storyEl = document.querySelector(".story-container");
 const scoreElement = document.getElementById("score");
 const levelElement = document.getElementById("level");
@@ -1953,8 +2060,8 @@ function reset(restart) {
     level = 1;
     lives = 3;
     score = 0;
-    randomizePics();
-    modifyPics();
+    randomizeStory();
+    modifyStory();
   }
 
   if (level % 10 === 0 || level % 10 > 4) {
