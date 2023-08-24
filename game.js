@@ -561,9 +561,9 @@ story.berlinSaved = [
   [
     `./assets/story-images/${berlinPic1}.jpg`,
 
-    `It was winter in Berlin. Even your alien allies had absconded. All but one. You sold your medals for that dingy room over the bar in Friedrichshain. The two of you took turns on a stall at the fleamarket. Weeks could go by without a sale. When one did come, you'd celebrate with <i>Glühwein</i> and drew a little closer, and it kept out the December chill awhile.
+    `It was winter in Berlin. Even your alien allies had absconded. All but one. You sold your medals for that dingy room over the bar in Friedrichshain and took turns on a stall at the fleamarket. Weeks could go by without a sale. When someone finally did take a shine to your Presidents' Star or Quintessential Badge of Courage, you'd celebrate with <i>Glühwein</i> and drew a little closer, and it kept out the December chill awhile.
 
-It was in those days you started writing your story. Back when you still thought it would have a happy ending.
+It was in those days that you started writing your story&mdash;back when you still thought it would have a happy ending.
 
 Ever more people began to deny the existence of the Invaders. Their certainty would have been laughable had it not been so bellicose. Others called for all alien blood. There was a massacre. You kept a low profile then.
 
@@ -709,7 +709,7 @@ We'll do our alien dance."
 
 "Our dance we shall perform for you.
 We flap our arms like so.
-Your ${boyOrGirl} was brave, we honour ${objectPronoun}.
+Your ${boyOrGirl} was brave, we honor ${objectPronoun}.
 We thought you'd like to know."
 
 <font color="red">[T]urn page</font>`,
@@ -742,7 +742,7 @@ we'll do our alien dance."
 
 "Our dance we shall perform for you.
 We flap our arms like so.
-Your ${boyOrGirl} was brave, we honour ${objectPronoun}.
+Your ${boyOrGirl} was brave, we honor ${objectPronoun}.
 We thought you'd like to know."
 
 <font color="red">[T]urn page</font>`,
