@@ -88,7 +88,7 @@ function randomizeStory() {
     sirOrMadam = "sir"
     wivesOrHusbands = "wives";
     riflemanOrAmazon = "rifleman";
-    rhyme = "Their strategists devise a plan.";
+    rhyme = "Their strategists devise a plan;";
     subjectPronoun = "he";
     possessivePronoun = "his";
     objectPronoun = "him";
@@ -262,6 +262,7 @@ function randomizeStory() {
         break;
       case lastPicRandomizer < 0.92:
         lastPic = "8f";
+        break;
       default:
         lastPic = "1af";
     }
@@ -447,7 +448,7 @@ If a planet proves too hard to take,
 they just attack it more.
 
 ${rhyme}
-They'll stop at nothing now.
+they'll stop at nothing now.
 On that lone laser ${riflemanOrAmazon}
 vengeance they do vow.
 
@@ -1220,11 +1221,11 @@ let endFlit = false;
 // Uncomment to test level parameters: background image and difficulty parameters,
 // but not selection of alien types or choice or black vs white aliens.
 
-// level = 5;
-// startHeight = 60;
-// aliensStep = 160;
-// alienRateOfFire = 5;
-// skyline.classList.add('berlin');
+level = 5;
+startHeight = 60;
+aliensStep = 160;
+alienRateOfFire = 5;
+skyline.classList.add('berlin');
 
 // level = 6;
 // startHeight = 60;
@@ -2517,7 +2518,7 @@ function update(frameDuration) {
       ) {
         // Cheat mode:
         // Comment out this line to be invulnerable to alien bullets for testing.
-        playerDeath(false);
+        // playerDeath(false);
         bullet.removeMe = true;
         break;
       } else if (bullet.top + bulletHeight > containerHeight) {
