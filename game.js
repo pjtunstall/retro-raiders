@@ -69,9 +69,11 @@ let sirOrMadam;
 let wivesOrHusbands;
 let riflemanOrAmazon;
 let subjectPronoun;
+let subjectPronounCapital;
 let possessivePronoun;
 let objectPronoun;
 let partnerSubjectPronoun;
+let partnerSubjectPronounCapital;
 let partnerPossessivePronoun;
 let partnerObjectPronoun;
 
@@ -90,9 +92,11 @@ function randomizeStory() {
     riflemanOrAmazon = "rifleman";
     rhyme = "Their strategists devise a plan;";
     subjectPronoun = "he";
+    subjectPronounCapital = "He";
     possessivePronoun = "his";
     objectPronoun = "him";
     partnerSubjectPronoun = "she";
+    partnerSubjectPronounCapital = "She";
     partnerPossessivePronoun = "her";
     partnerObjectPronoun = "her";
     berlinPic2 = "rebec";
@@ -107,9 +111,11 @@ function randomizeStory() {
     wivesOrHusbands = "husbands";
     riflemanOrAmazon = "amazon";
     subjectPronoun = "she";
+    subjectPronounCapital = "She";
     possessivePronoun = "her";
     objectPronoun = "her";
     partnerSubjectPronoun = "he";
+    partnerSubjectPronounCapital = "He";
     partnerPossessivePronoun = "his";
     partnerObjectPronoun = "him";
     berlinPic2 = "graffiti";
@@ -567,13 +573,13 @@ More and more, people began to deny the existence of the Invaders. Their certain
   [
     `./assets/story-images/${berlinPic2}.jpg`,
 
-    `Such misunderstanding, on every level! How much of it due to those crummy AI translation headsets they gave you? Who knows? She never did seem at ease in this world. You wondered what kept her here.
+    `Such misunderstanding, on every level! How much of it due to those crummy AI translation headsets they gave you? Who knows? ${partnerSubjectPronounCapital} never did seem at ease in this world. You wondered what kept ${partnerObjectPronoun} here.
 
 For ${partnerPossessivePronoun} birthday (or rather <i>external soulday</i>, as they called it), you gave ${partnerObjectPronoun} a trinket you'd found on a neighboring stall. Turns out, it was an instrument of ${partnerPossessivePronoun} people, the <i>silent rebec</i>.
 
-${partnerSubjectPronoun} was delighted. It took great skill to play well, balancing each cadence against its sonic inverse, although only a true master could approach the ideal of perfect silence. Indeed, at first, ${partnerSubjectPronoun} often let slip a bright squall of notes to cheer the drab winter hours.
+${partnerSubjectPronounCapital} was delighted. It took great skill to play well, balancing each cadence against its sonic inverse, although only a true master could approach the ideal of perfect silence. Indeed, at first, ${partnerSubjectPronoun} often let slip a bright squall of notes to cheer the drab winter hours.
 
-${partnerSubjectPronoun} made ok money at the cabaret&mdash;until ${partnerSubjectPronoun} got good.
+${partnerSubjectPronounCapital} made ok money at the cabaret&mdash;until ${partnerSubjectPronoun} got good.
 
 <font color="red">[T]urn page</font>`
   ],
@@ -581,7 +587,7 @@ ${partnerSubjectPronoun} made ok money at the cabaret&mdash;until ${partnerSubje
   [
     `./assets/story-images/${berlinPic3}.jpg`,
 
-    `By spring, ${partnerSubjectPronoun} almost had it. ${partnerSubjectPronoun} looked magnificent, coaxing the arcane contraption into what you guessed, from your fading recollection of ${partnerPossessivePronoun} early attempts, must be tunes of devastating transcendence, albeit deftly canceled out. You applauded, and felt quite alone.
+    `By spring, ${partnerSubjectPronoun} almost had it. ${partnerSubjectPronounCapital} looked magnificent, coaxing the arcane contraption into what you guessed, from your fading recollection of ${partnerPossessivePronoun} early attempts, must be tunes of devastating transcendence, albeit deftly canceled out. You applauded, and felt quite alone.
 
 Then, just as you started to doubt your aim, the last of the swarm exploded across the sky. Berlin was saved.
 
@@ -601,9 +607,9 @@ story.romeSaved = [
 
 No hospital would take a half-alien baby, so he lived his out three fevered days in your tent on the south bank of the Tiber; and, on the third, convulsed and was done.
 
-${partnerSubjectPronoun} ate him, of course, as was the way of ${partnerPossessivePronoun} people, and vanished soon after with the other.
+${partnerSubjectPronounCapital} ate him, of course, as was the way of ${partnerPossessivePronoun} people, and vanished soon after with the other.
 
-It just wasn't their world.
+It just wasn't ${partnerPossessivePronoun} world.
 
 You didn't care about anything then, certainly not the people of Planet Earth, but momentum carried you on. Not knowing what else to do, you threw yourself into the mission.
 
@@ -631,11 +637,11 @@ story.austinSaved = [
 
     `The remnants of the human race in rags their cities flee. They leave to seek a safer place, a mountain sanctuary.
 
-In search of haven, humankind are heading to the downs. The urban life has extra risk. It's over for the towns.
+In search of haven, humankind are headed for the downs. The urban life has extra risk. It's over for the towns.
 
 Nobody doubts the danger now. The deadly alien force has turned to novel tactics, wow, attacks without remorse.
 
-The humans now acknowledge you. They know the threat is real. They've no idea what to do. They envy you your zeal.
+The refugees acknowledge you. They know the threat is real. They've no idea what to do. They envy you your zeal.
 
 All people do depend on you&mdash;their plans are in a mess&mdash;more humble since inhabiting a hilly wilderness.
 
@@ -653,7 +659,7 @@ Escaping from that skilled assault has scared them to their senses. They claim t
 
 Escaping in a skittish mood, they scorn no longer hold, as formerly they did, for you, their own defender bold.
 
-"A forest refuge fits our need; it's far from any town." You can rely on cosmic scouts to quickly hunt you down.
+"A forest refuge fits our need; it's far from any town." But you can rely on cosmic scouts to quickly hunt you down.
 
 You can rely on alien lads to look both high and low. The place that you supposed was safe, they presently will know.
 
@@ -747,7 +753,7 @@ story.win = [
   [
     `./assets/story-images/victorian.jpg`,
 
-    `Earth wakes at last from that bad dream.
+    `Earth wakes at last from yon bad dream.
 Was it story or history?
 The more you think, the stranger seem
 those years of tragedy.
@@ -1221,11 +1227,11 @@ let endFlit = false;
 // Uncomment to test level parameters: background image and difficulty parameters,
 // but not selection of alien types or choice or black vs white aliens.
 
-level = 5;
-startHeight = 60;
-aliensStep = 160;
-alienRateOfFire = 5;
-skyline.classList.add('berlin');
+// level = 5;
+// startHeight = 60;
+// aliensStep = 160;
+// alienRateOfFire = 5;
+// skyline.classList.add('berlin');
 
 // level = 6;
 // startHeight = 60;
@@ -2518,7 +2524,7 @@ function update(frameDuration) {
       ) {
         // Cheat mode:
         // Comment out this line to be invulnerable to alien bullets for testing.
-        // playerDeath(false);
+        playerDeath(false);
         bullet.removeMe = true;
         break;
       } else if (bullet.top + bulletHeight > containerHeight) {
