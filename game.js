@@ -848,7 +848,7 @@ Crisscrossed with plasma burns, it had a curious bilateral symmetry and wore a b
 
     `It scowled up at me and flapped its arms.
 
-I returned the traditional Invader salute and enquired, "Where are you from, ${sirOrMadam}?"
+I returned the traditional Invader salute and enquired, "Where are you from?"
 
 "Earth," it grunted.
 
@@ -864,7 +864,7 @@ A faraway cast clouded the alien's visage.
 
 "You live as one of these barbarous rogues, raiding other planets?"
 
-"It's a fine life," the mercenary grinned. "I have treasures aplenty, the spoils of half the galaxy and three alien ${wivesOrHusbands}. One of each kind."
+"It's a fine life," the mercenary shrugged. "I have treasures aplenty, the spoils of half the galaxy and three alien ${wivesOrHusbands}. One of each kind."
 
 <font color="red">[T]urn page</font>`,
   ],
