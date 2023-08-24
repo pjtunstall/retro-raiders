@@ -413,7 +413,7 @@ admirals, one, two, three,
 decide upon a monstrous course
 to seal their victory.
 
-They faster flap, they'll not let go
+Faster they flap, they'll not let go
 till Earth is all ablaze.
 No pity will this planet know.
 Its cities they will raze.
