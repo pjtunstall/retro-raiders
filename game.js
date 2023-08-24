@@ -302,7 +302,7 @@ function modifyStory() {
       `./assets/story-images/24.jpg`,
 
       `The Emperor of Grumium,
-that galactic buccaneer,
+that galactic cavalier,
 was on campaign in Orion Arm,
 cut down in his thousandth year.
 
