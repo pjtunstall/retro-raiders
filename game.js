@@ -412,7 +412,7 @@ fame, XP, and more.
 
 The generals of the alien fleet
 meet in a foul mood.
-This is a point of honour now.
+This is a point of honor now.
 It's a slight against their brood.
 
 The generals of the alien force,
@@ -473,7 +473,7 @@ Chicago too is free.
 
 There's fireworks on Navy Pier.
 Perhaps it's not too late?
-Earth's saviour, though, has earned ${objectPronoun}self
+Earth's savior, though, has earned ${objectPronoun}self
 some hard alien hate.
 
 The galactic interlopers run
@@ -561,11 +561,11 @@ story.berlinSaved = [
   [
     `./assets/story-images/${berlinPic1}.jpg`,
 
-    `It was winter in Berlin. Even your alien allies had absconded. All but one. You sold your medals for that dingy room over the bar in Friedrichshain. The two of you took turns on a stall at the fleamarket. Weeks could go by without a sale. When one did come, you'd celebrate with <i>Glühwein</i> and drew a little closer, and it kept out the December chill for a while.
+    `It was winter in Berlin. Even your alien allies had absconded. All but one. You sold your medals for that dingy room over the bar in Friedrichshain. The two of you took turns on a stall at the fleamarket. Weeks could go by without a sale. When one did come, you'd celebrate with <i>Glühwein</i> and drew a little closer, and it kept out the December chill awhile.
 
-It was in those days you started writing your story. Back then, you still thought it would have a happy ending.
+It was in those days you started writing your story. Back when you still thought it would have a happy ending.
 
-More and more, people began to deny the existence of the Invaders. Their certainty would have been laughable had it not been so bellicose. Others called for all alien blood. There was a massacre. You kept a low profile then.
+Ever more people began to deny the existence of the Invaders. Their certainty would have been laughable had it not been so bellicose. Others called for all alien blood. There was a massacre. You kept a low profile then.
 
 <font color="red">[T]urn page</font>`
   ],
@@ -850,7 +850,7 @@ Following my embassy to the barbarian emperor&mdash;O, I could hardly believe it
 
 One caught my eye.
 
-Crisscrossed with laser scars and plasma burns, it had a curious bilateral symmetry and wore a breastplate in the Orion style, much like those of its comrades.
+Crisscrossed with plasma burns, it had a curious bilateral symmetry and wore a breastplate in the Orion style, much like those of its comrades.
 
 <font color="red">[T]urn page</font>`,
   ],
@@ -858,7 +858,7 @@ Crisscrossed with laser scars and plasma burns, it had a curious bilateral symme
   [
     `./assets/story-images/2.jpg`,
 
-    `As I approached, it looked up and flapped its arms at me.
+    `It scowled up at me and flapped its arms.
 
 I returned the traditional Invader salute and enquired, "Where are you from, ${sirOrMadam}?"
 
@@ -872,7 +872,7 @@ I looked blank.
 
 "It's one of the Behenian Earths. Was. All burnt now."
 
-A faraway look crossed the alien's face.
+A faraway cast clouded the alien's visage.
 
 "You live as one of these barbarous rogues, raiding other planets?"
 
@@ -886,9 +886,9 @@ A faraway look crossed the alien's face.
 
     `"But you are a civilized being, my friend. Are you not ashamed?"
 
-"I have all the best spice, mister. I feel nothing."
+"I have all the best spice, your honor. I feel nothing."
 
-I politely declined the smouldering baby-bone pipe it offered. It took a long drag and a glazed smile replaced the bitter look on its face. Its comrades cackled.
+I politely declined the smouldering baby-bone pipe it offered. It took a long drag and a glazed smile replaced the bitter expression. Its comrades cackled.
 
 "Just look at yourself, ${sirOrMadam}! Think of what you've lost. This is no life. You'll be run through with a plasmic glaive or shot down sooner or later by a defender such as you once were. Did you not have a family on, what did you call it, Earth? A mate? Hatchlings? What would your mother think to see you now?"
 
