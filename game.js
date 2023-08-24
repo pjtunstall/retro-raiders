@@ -61,13 +61,10 @@ let ninePic;
 let tenPic;
 
 let playerCharacterIsMale;
-
-let rhyme;
 let boyOrGirl;
 let ladOrLass;
 let sirOrMadam;
 let wivesOrHusbands;
-let riflemanOrAmazon;
 let subjectPronoun;
 let subjectPronounCapital;
 let possessivePronoun;
@@ -89,8 +86,6 @@ function randomizeStory() {
     ladOrLass = "lad";
     sirOrMadam = "sir"
     wivesOrHusbands = "wives";
-    riflemanOrAmazon = "rifleman";
-    rhyme = "Their strategists devise a plan;";
     subjectPronoun = "he";
     subjectPronounCapital = "He";
     possessivePronoun = "his";
@@ -104,12 +99,10 @@ function randomizeStory() {
     ninePic = "51";
     tenPic = "48";
   } else {
-    rhyme = "Retreat or respite show they none;"
     boyOrGirl = "girl";
     ladOrLass = "lass";
     sirOrMadam = "madam"
     wivesOrHusbands = "husbands";
-    riflemanOrAmazon = "amazon";
     subjectPronoun = "she";
     subjectPronounCapital = "She";
     possessivePronoun = "her";
@@ -420,12 +413,12 @@ admirals, one, two, three,
 decide upon a monstrous course
 to seal their victory.
 
-New swarms appear, they'll not let go
+They faster flap, they'll not let go
 till Earth is all ablaze.
 No pity will this planet know.
 Its cities they will raze.
 
-New swarms appear, they will not stop
+They're speeding up, they will not stop
 till Earth is laid to waste,
 and a lone laser fusilier
 ${possessivePronoun} final end has faced.
@@ -438,7 +431,7 @@ story.londonSaved = [
   [
     `./assets/story-images/4.jpg`,
 
-    `One swarm destroyed, a glimpse of hope,
+    `One fleet destroyed, a glimpse of hope,
 London's skies are free!
 For a time it seems the horde might leave,
 but that is not to be.
@@ -452,11 +445,6 @@ The alien lords are not dismayed.
 They've conquered worlds before.
 If a planet proves too hard to take,
 they just attack it more.
-
-${rhyme}
-they'll stop at nothing now.
-On that lone laser ${riflemanOrAmazon}
-vengeance they do vow.
 
 <font color="red">[T]urn page</font>`,
   ],
@@ -659,9 +647,9 @@ Escaping from that skilled assault has scared them to their senses. They claim t
 
 Escaping in a skittish mood, they scorn no longer hold, as formerly they did, for you, their own defender bold.
 
-"A forest refuge fits our need; it's far from any town." But you can rely on cosmic scouts to quickly hunt you down.
+"A forest refuge fits our need; it's far from any town." But you can count cosmic scouts to quickly hunt you down.
 
-You can rely on alien lads to look both high and low. The place that you supposed was safe, they presently will know.
+You can rely on swarms from space to search both high and low. The place that you supposed was safe, they presently will know.
 
 <font color="red">[T]urn page</font>`
   ]
