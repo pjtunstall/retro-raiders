@@ -56,6 +56,9 @@ let beamPic;
 let berlinPic1;
 let berlinPic2;
 let berlinPic3;
+let eightPic;
+let ninePic;
+let tenPic;
 
 let playerCharacterIsMale;
 
@@ -93,6 +96,9 @@ function randomizeStory() {
     partnerPossessivePronoun = "her";
     partnerObjectPronoun = "her";
     berlinPic2 = "rebec";
+    eightPic = "106";
+    ninePic = "51";
+    tenPic = "48";
   } else {
     rhyme = "Retreat or respite show they none;"
     boyOrGirl = "girl";
@@ -107,6 +113,9 @@ function randomizeStory() {
     partnerPossessivePronoun = "his";
     partnerObjectPronoun = "him";
     berlinPic2 = "graffiti";
+    eightPic = "3f";
+    ninePic = "2f";
+    tenPic = "7f";
   }
 
   const introRandomizer = Math.random();
@@ -143,16 +152,16 @@ function randomizeStory() {
       case sheepRandomizer < 0.25:
         sheepPic = "82";
         break;
-      case sheepRandomizer < 0.42:
+      case sheepRandomizer < 0.33:
         sheepPic = "89";
         break;
-      case sheepRandomizer < 0.5:
+      case sheepRandomizer < 0.42:
         sheepPic = "97";
         break;
-      case sheepRandomizer < 0.58:
+      case sheepRandomizer < 0.5:
         sheepPic = "105";
         break;
-      case sheepRandomizer < 0.75:
+      case sheepRandomizer < 0.58:
         sheepPic = "87";
         break;
       case sheepRandomizer < 0.67:
@@ -221,15 +230,38 @@ function randomizeStory() {
     }
 
     switch(true) {
-      case lastPicRandomizer < 0.25:
+      case lastPicRandomizer < 0.08:
         lastPic = "3af";
         break;
-      case lastPicRandomizer < 0.5:
+      case lastPicRandomizer < 0.17:
         lastPic = "10f";
         break;
-      case lastPicRandomizer < 0.75:
+      case lastPicRandomizer < 0.25:
         lastPic = "ruinsf";
         break;
+      case lastPicRandomizer < 0.33:
+        lastPic = "2ff";
+        break;
+      case lastPicRandomizer < 0.42:
+        lastPic = "7ff";
+        break;
+      case lastPicRandomizer < 0.5:
+        lastPic = "11ff";
+        break;
+      case lastPicRandomizer < 0.58:
+        lastPic = "4ff";
+        break;
+      case lastPicRandomizer < 0.67:
+        lastPic = "12ff";
+        break;
+      case lastPicRandomizer < 0.75:
+        lastPic = "9ff"
+        break;
+      case lastPicRandomizer <  0.83:
+        lastPic = "1ff";
+        break;
+      case lastPicRandomizer < 0.92:
+        lastPic = "8f";
       default:
         lastPic = "1af";
     }
@@ -258,20 +290,11 @@ function randomizeStory() {
 }
 
 function modifyStory() {
-  // story.beginning[1][0] = `./assets/story-images/${introPic}.jpg`;
-  // story.beginning[3][0] = `./assets/story-images/${sheepPic}.jpg`;
-  // story.ufoShot[0][0] = `./assets/story-images/${ufoShotPic}.jpg`;
-  // story.aliensReachEarth[0][0] = `./assets/story-images/${beamPic}.jpg`;
-  // story.aliensReachEarth[6][0] = `./assets/story-images/${lastPic}.jpg`;
-  // story.berlinSaved[0][0] = `./assets/story-images/${berlinPic1}.jpg`;
-  // story.berlinSaved[1][0] = `./assets/story-images/${berlinPic2}.jpg`;
-  // story.berlinSaved[2][0] = `./assets/story-images/${berlinPic3}.jpg`;
+  story.beginning = [
+    [
+      `./assets/story-images/24.jpg`,
 
-story.beginning = [
-  [
-    `./assets/story-images/24.jpg`,
-
-    `The Emperor of Grumium,
+      `The Emperor of Grumium,
 that galactic buccaneer,
 was on campaign in Orion Arm,
 cut down in his thousandth year.
@@ -541,7 +564,7 @@ More and more, people began to deny the existence of the Invaders. Their certain
   ],
 
   [
-    `./assets/story-images/rebec.jpg`,
+    `./assets/story-images/${berlinPic2}.jpg`,
 
     `Such misunderstanding, on every level! How much of it due to those crummy AI translation headsets they gave you? Who knows? She never did seem at ease in this world. You wondered what kept her here.
 
@@ -555,7 +578,7 @@ ${partnerSubjectPronoun} made ok money at the cabaret&mdash;until ${partnerSubje
   ],
 
   [
-    `./assets/story-images/twins.jpg`,
+    `./assets/story-images/${berlinPic3}.jpg`,
 
     `By spring, ${partnerSubjectPronoun} almost had it. ${partnerSubjectPronoun} looked magnificent, coaxing the arcane contraption into what you guessed, from your fading recollection of ${partnerPossessivePronoun} early attempts, must be tunes of devastating transcendence, albeit deftly canceled out. You applauded, and felt quite alone.
 
@@ -603,7 +626,7 @@ Why were you still trying to save these people? You sometimes wondered. Maybe yo
 
 story.austinSaved = [
   [
-    `./assets/story-images/106.jpg`,
+    `./assets/story-images/${eightPic}.jpg`,
 
     `The remnants of the human race in rags their cities flee. They leave to seek a safer place, a mountain sanctuary.
 
@@ -621,7 +644,7 @@ All people do depend on you&mdash;their plans are in a mess&mdash;more humble si
 
 story.mountainsSaved = [
   [
-    `./assets/story-images/51.jpg`,
+    `./assets/story-images/${ninePic}.jpg`,
 
     `Their mountain base abandonning, abysmal prospects there, the last survivors leave it for a lonely woodland lair.
 
@@ -639,7 +662,7 @@ You can rely on alien lads to look both high and low. The place that you suppose
 
 story.woodSaved = [
   [
-    `./assets/story-images/48.jpg`,
+    `./assets/story-images/${tenPic}.jpg`,
 
     `Yet deeper traipse into the woods the tattered last few folk. The way is scattered with their goods, their wishes up in smoke.
 
@@ -771,7 +794,7 @@ there's nothing left for thee.
 If I were you, I'd gladly leap
 at this opportunity."
 
-An apprenticeship in space invading
+An apprenticeship in Space Invading
 we offer you this day.
 Accept it now or perish too.
 It is the only way.
@@ -816,7 +839,7 @@ you look out for your crew.
     `<i>From the Memoirs of Exaptia Tabbani, Envoy Incarnate of the Hmadian Macrostates, on concluding her negotiations with Emperor FnrRa Gfgfgg (II<sup>MXXIV</sup>-I)st, Lord of Orion, Grand Eskalir of Grumium, and Admiral of the High Reaches:</i>
 
 
-Following my embassy to the barbarian emperor&mdash;O, I could hardly believe it, she'd walked right into my trap!&mdash;, as I strode back to my teleport pad, I happened upon a contingent of mercenaries, busy darning their space suits for the next invasion.
+Following my embassy to the barbarian emperor&mdash;O, I could hardly believe it, she'd walked right into my trap!&mdash;as I strode back to my teleport pad, I happened upon a contingent of mercenaries, busy darning their space suits for the next invasion.
 
 One caught my eye.
 
