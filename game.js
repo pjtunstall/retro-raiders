@@ -76,6 +76,7 @@ let partnerObjectPronoun;
 let buccaneerOrCavalier;
 let ladsOrSwarms;
 let asteroidsOrMeteors;
+let three;
 
 randomizeStory();
 modifyStory();
@@ -102,6 +103,10 @@ function randomizeStory() {
     ninePic = "51";
     tenPic = "48";
     ladsOrSwarms = "alien lads";
+    three = `Three warlike tribes he did unite,
+Invaders, one, two, three,
+held together by fear and greed
+and his personality.`;
   } else {
     boyOrGirl = "girl";
     ladOrLass = "lass";
@@ -120,6 +125,10 @@ function randomizeStory() {
     ninePic = "2f";
     tenPic = "7f";
     ladsOrSwarms = "swarms from space";
+    three = `Three warring clans did he unite,
+Invaders, white and red, 
+bound together by greed and hate
+and, of their leader, dread`;
   }
 
   const introRandomizer = Math.random();
@@ -319,10 +328,7 @@ left him in 64 bits,
 strewn across the Southern Cross,
 jibbering and in fits.
 
-Three warlike tribes he did unite,
-Invaders, one, two, three,
-held together by fear and greed
-and his personality.
+${three}
 
 His offspring fought till one was left,
 a hatchling from the brood.
