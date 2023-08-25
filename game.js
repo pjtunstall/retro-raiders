@@ -432,7 +432,7 @@ story.londonSaved = [
     `./assets/story-images/4.jpg`,
 
     `One fleet destroyed, a glimpse of hope,
-London's skies are free!
+and London's skies are free!
 For a time it seems the horde might leave,
 but that is not to be.
 
@@ -1251,6 +1251,7 @@ let endFlit = false;
 // alienRateOfFire = 10;
 // skyline.classList.add('forest');
 
+// Variables to do with the flash effect for when alien bullets hit the ground.
 let flashBrightness = 255;
 let fades = Array.from({length: maxAlienBullets * 2}, () => ({
   duration: 2000,
