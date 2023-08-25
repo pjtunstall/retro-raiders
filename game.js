@@ -73,6 +73,9 @@ let partnerSubjectPronoun;
 let partnerSubjectPronounCapital;
 let partnerPossessivePronoun;
 let partnerObjectPronoun;
+let buccaneerOrCavalier;
+let ladsOrSwarms;
+let asteroidsOrMeteors;
 
 randomizeStory();
 modifyStory();
@@ -98,6 +101,7 @@ function randomizeStory() {
     eightPic = "106";
     ninePic = "51";
     tenPic = "48";
+    ladsOrSwarms = "alien lads";
   } else {
     boyOrGirl = "girl";
     ladOrLass = "lass";
@@ -115,6 +119,7 @@ function randomizeStory() {
     eightPic = "3f";
     ninePic = "2f";
     tenPic = "7f";
+    ladsOrSwarms = "swarms from space";
   }
 
   const introRandomizer = Math.random();
@@ -282,10 +287,20 @@ function randomizeStory() {
     beamPic = "4c";
     berlinPic1 = "wall";
     berlinPic3 = "twins";
+    buccaneerOrCavalier = "buccaneer";
+    asteroidsOrMeteors = `Asteroids we'll ram off course
+their cities for to wreck.
+From off the starcharts let us wipe
+that Pale Blue Speck.`
   } else {
     beamPic = "1";
     berlinPic1 = "apartment-block";
     berlinPic3 = "twins2";
+    buccaneerOrCavalier = "cavalier";
+    asteroidsOrMeteors = `Meteors we'll heave off course
+and pillage all they've got.
+It's not looking terribly good
+for that Pale Blue Dot.`
   }
 }
 
@@ -295,7 +310,7 @@ function modifyStory() {
       `./assets/story-images/24.jpg`,
 
       `The Emperor of Grumium,
-that galactic cavalier,
+that galactic ${buccaneerOrCavalier},
 was on campaign in Orion Arm,
 cut down in his thousandth year.
 
@@ -338,10 +353,7 @@ and a Mystery Ship to boot.
 Paris and New York will fall.
 We'll divvy up the loot."
 
-"Asteroids we'll ram off course
-their cities for to wreck.
-From off the starcharts let us wipe
-that Pale Blue Speck."
+"${asteroidsOrMeteors}"
 
 <font color="red">[T]urn page</font>`,
   ],
@@ -649,7 +661,7 @@ Escaping in a skittish mood, they scorn no longer hold, as formerly they did, fo
 
 "A forest refuge fits our need; it's far from any town." But you can count cosmic scouts to quickly hunt you down.
 
-You can rely on swarms from space to search both high and low. The place that you supposed was safe, they presently will know.
+You can rely on ${ladsOrSwarms} to search both high and low. The place that you supposed was safe, they presently will know.
 
 <font color="red">[T]urn page</font>`
   ]
