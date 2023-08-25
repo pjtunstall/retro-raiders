@@ -1732,19 +1732,14 @@ function resetBarriers() {
 resetBarriers();
 
 // Music.
-let audioContext = new AudioContext();
-let source;
-let musicInterval;
-
-// Parameters governing how the music gets faster.
-const speedIncreaseAmount = 0.02;
-let pausedPlaybackRate = 1;
-let pausedTime = 0;
-let musicStartTime = 0;
-let musicFile;
+let music = new Audio();
+music.volume = 0.2;
+music.loop = true;
+const musicSpeedIncreaseAmount = 0.02;
 
 function pickMusic() {
-  let musicRandomizer = Math.random();
+  const musicRandomizer = Math.random();
+  let musicFile;
     switch (true) {
       case musicRandomizer < 0.2:
         musicFile = "assets/music/POL-chubby-cat-short.wav";
@@ -1761,40 +1756,7 @@ function pickMusic() {
       default:
         musicFile = "assets/music/POL-galactic-chase-short.wav";
     }
-}
-
-async function loadAndPlayMusic(musicRate = 1, existingMusic = "") {
-  audioContext = new AudioContext();
-  try {
-    if (source) {
-      source.stop();
-      source.disconnect();
-    }
-    await audioContext.resume();
-    if (existingMusic === "") {
-      pickMusic();
-    } else {
-      musicFile = existingMusic
-    }
-    const response = await fetch(musicFile);
-    const buffer = await response.arrayBuffer();
-    const musicBuffer = await audioContext.decodeAudioData(buffer);
-
-    source = audioContext.createBufferSource();
-    source.playbackRate.value = musicRate;
-    source.buffer = musicBuffer;
-    source.loop = true;
-
-    const gainNode = audioContext.createGain();
-    gainNode.gain.value = 0.2; // Adjust volume (0 to 1)
-
-    source.connect(gainNode);
-    gainNode.connect(audioContext.destination);
-
-    source.start();
-  } catch (error) {
-    console.error("Error loading and playing music:", error);
-  }
+    music.src = musicFile;
 }
 
 // Sound effects.
@@ -1913,10 +1875,7 @@ function togglePause() {
     }
     wind.play();
     if (!starting) {
-      pausedPlaybackRate = source.playbackRate.value;
-      pausedTime = audioContext.currentTime - musicStartTime;
-      source.playbackRate.setValueAtTime(0, audioContext.currentTime);
-      audioContext.suspend();
+      music.pause();
     }
     pauseMenu.style.visibility = "visible";
     if (resetInProgress) {
@@ -1930,9 +1889,10 @@ function togglePause() {
     title.style.visibility = "hidden";
     wind.pause();
     if (resetInProgress || starting) {
-      loadAndPlayMusic();
+      pickMusic();
+      music.playbackRate = 1;
+      music.currentTime = 0;
       levelStartTime = Date.now();
-      pausedTime = audioContext.currentTime - musicStartTime;
       if (restartInProgress || starting) {
         startTime = Date.now();
         pauseStartTime = Date.now();
@@ -1943,11 +1903,11 @@ function togglePause() {
       const pauseInterval = Date.now() - pauseStartTime;
       startTime += pauseInterval;
       ufoTimeUp += pauseInterval;
-      loadAndPlayMusic(pausedPlaybackRate, musicFile);
     }
     if (ufoActive) {
       voltage.play();
     }
+    music.play();
     starting = false;
     resetInProgress = false;
   }
@@ -2461,7 +2421,7 @@ function update(frameDuration) {
       if (event.data.player.dead) {
         if (storyMode) {
           isInUfoCutScene = true;
-          audioContext.suspend();
+          // audioContext.suspend();
           hiddenElementsOnBeam();
           ufoGetPlayer = true;
           if (!ufoActive) {
@@ -2613,12 +2573,10 @@ function playerDeath(final, fireball) {
       lifeCounter[i].style.visibility = "hidden";
     }
   }
-  if (lives < 1) {
-    player.classList.add("explosion");
-  }
   if (final || lives < 1) {
     clearTimeout(alienTimeoutID);
     isGameOver = true;
+    player.classList.add("explosion");
     playerBullet.style.visibility = "hidden";
     const alienBullets = document.querySelectorAll(".alien-bullet");
     alienBullets.forEach((alienBullet) => alienBullet.remove());
@@ -2685,6 +2643,7 @@ function render() {
 
   if (!paused) {
     renderTimerThrottled();
+    music.playbackRate += musicSpeedIncreaseAmount * (frameDuration / 5000);
   }
 
   if (quake) {
@@ -2982,10 +2941,9 @@ function gameLoop(timestamp) {
     accumulatedFrameTime -= frameDuration;
   }
 
-  if (source && source.playbackRate.value < 16) {
-    const speedIncrease = speedIncreaseAmount * (frameDuration / 5000);
-    source.playbackRate.value += speedIncrease;
-  }
+  // if (source && source.playbackRate.value < 16) {
+  //   source.playbackRate.value += musicSpeedIncreaseAmount * (frameDuration / 5000);
+  // }
 
   render();
 
@@ -3413,8 +3371,6 @@ const showAndAddGameoverMenue = () => {
 };
 
 async function updatesGameOver() {
-  audioContext.suspend();
-
   gameContainer.style.visibility = "hidden";
   title.style.visibility = "hidden";
   pauseMenu.innerHTML = "";
