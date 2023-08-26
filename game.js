@@ -77,18 +77,26 @@ let buccaneerOrCavalier;
 let ladsOrSwarms;
 let asteroidsOrMeteors;
 let three;
+let lootOrHell;
+let sheepOrLamas;
+let sirOrMaam;
+let earthOrTerra;
+let amazonOrRifleman;
+let hatchlingOrBroodling;
 
 randomizeStory();
 modifyStory();
 
 function randomizeStory() {
   const genderRandomizer = Math.round(Math.random());
+  const otherRandomizer = !Math.round(Math.random());
   playerCharacterIsMale = !genderRandomizer;
   
   if (playerCharacterIsMale) {
     boyOrGirl = "boy";
     ladOrLass = "lad";
-    sirOrMadam = "sir"
+    sirOrMadam = "sir";
+    sirOrMaam = "sir";
     wivesOrHusbands = "wives";
     subjectPronoun = "he";
     subjectPronounCapital = "He";
@@ -107,10 +115,15 @@ function randomizeStory() {
 Invaders, one, two, three,
 held together by fear and greed
 and his personality.`;
+    amazonOrRifleman = `Their strategists devise a plan.
+They'll stop at nothing now.
+On that lone laser rifleman
+vengeance they do vow.`
   } else {
     boyOrGirl = "girl";
     ladOrLass = "lass";
-    sirOrMadam = "madam"
+    sirOrMadam = "madam";
+    sirOrMaam = "ma'am";
     wivesOrHusbands = "husbands";
     subjectPronoun = "she";
     subjectPronounCapital = "She";
@@ -129,6 +142,10 @@ and his personality.`;
 Invaders, white and red, 
 bound together by greed and hate
 and, of their leader, dread`;
+    amazonOrRifleman = `Those monsters, quarter give they none.
+They'll stop at nothing now.
+On that lone laser amazon
+vengeance they do vow.`
   }
 
   const introRandomizer = Math.random();
@@ -311,6 +328,43 @@ and pillage all they've got.
 It's not looking terribly good
 for that Pale Blue Dot.`
   }
+
+  if (otherRandomizer) {
+    hatchlingOrBroodling = `a hatchling from the brood.
+The only way to prove herself
+was spilling yet more blood.`
+    lootOrHell = `Let's teleport our tribes all three
+and a Mystery Ship to boot.
+Paris and New York will fall.
+We'll divvy up the loot.`;
+    if (beamRandomizer < 0.33) {
+      sheepOrLamas = `flock and come," they cried,
+"`;
+    } else if (beamRandomizer < 0.67) {
+      sheepOrLamas = `quadrupeds," they said,
+"`;
+    } else {
+      sheepOrLamas = `woolly pals," they called,
+"`;
+    }
+    earthOrTerra = "Earth";
+  } else {
+    hatchlingOrBroodling = `a broodling without mirth.
+The only way to prove herself
+was conquering an earth.`
+    lootOrHell = `Let's teleport our species three
+and a UFO as well.
+Chicago and Berlin will fall.
+We'll make their world a hell.`;
+  if (playerCharacterIsMale) {
+    sheepOrLamas = `furry friends, sir.
+`;
+  } else {
+    sheepOrLamas = `lamas, ma'am," they said,
+"`;
+  }
+  earthOrTerra = "Terra";
+  }
 }
 
 function modifyStory() {
@@ -331,13 +385,11 @@ jibbering and in fits.
 ${three}
 
 His offspring fought till one was left,
-a hatchling from the brood.
-The only way to prove her power
-was spilling yet more blood.
+${hatchlingOrBroodling}
 
 A babe in arms, but sharp and sly,
 her rivals bit the dust.
-They crowned her Emperess that day.
+They crowned her Emperor that day.
 For conquest she did lust.
 
 "Where shall we invade today?"
@@ -351,13 +403,10 @@ Her lip it slowly curled.
 
     `"I know a world called Planet Earth
 with little for defense.
-A single gunner guards their towns.
+A lone gunner guards their towns.
 Let's teleport us hence."
 
-"Let's teleport our tribes all three
-and a Mystery Ship to boot.
-Paris and New York will fall.
-We'll divvy up the loot."
+"${lootOrHell}"
 
 "${asteroidsOrMeteors}"
 
@@ -395,8 +444,7 @@ a hero for to find.
 
     `That summer morning, messengers came.
 Messengers there were three.
-"Leave your sheep and goats," they said,
-"A gunner you must be."
+"Leave your ${sheepOrLamas}A gunner you must be."
 
 "A gunner you must be for us,
 defending Planet Earth.
@@ -463,6 +511,8 @@ The alien lords are not dismayed.
 They've conquered worlds before.
 If a planet proves too hard to take,
 they just attack it more.
+
+${amazonOrRifleman}
 
 <font color="red">[T]urn page</font>`,
   ],
@@ -868,13 +918,13 @@ Crisscrossed with plasma burns, it had a curious bilateral symmetry and wore a b
 
     `It scowled up at me and flapped its arms.
 
-I returned the traditional Invader salute and enquired, "Where are you from?"
+I returned the traditional Invader salute and enquired, "Where are you from, ${sirOrMaam}?"
 
-"Earth," it grunted.
+"${earthOrTerra}," it grunted.
 
-"Earth Angiedi?"
+"${earthOrTerra} Angiedi?"
 
-"No, Earth Solis."
+"No, ${earthOrTerra} Solis."
 
 I looked blank.
 
@@ -910,7 +960,7 @@ For the briefest moment, its face twisted into a wild-eyed look.
 
     `"What do you know of such things?" the mercenary muttered and a single, spice-scented tear dripped off its laser-scarred chin.
 
-But it quickly took another long drag on the pipe and went back to patching its space suit.
+But it quickly took another hit of the pipe and went back to patching its space suit.
 
 Its comrades snickered and flapped their arms in empty glee.
 
