@@ -323,7 +323,7 @@ that Pale Blue Speck.`
     berlinPic1 = "apartment-block";
     berlinPic3 = "twins2";
     buccaneerOrCavalier = "cavalier";
-    asteroidsOrMeteors = `Meteors we'll heave off course
+    asteroidsOrMeteors = `Meteors we'll haul off course
 and pillage all they've got.
 It's not looking terribly good
 for that Pale Blue Dot.`
@@ -349,7 +349,7 @@ We'll divvy up the loot.`;
     }
     earthOrTerra = "Earth";
   } else {
-    hatchlingOrBroodling = `a broodling without mirth.
+    hatchlingOrBroodling = `a broodling short of mirth.
 The only way to prove herself
 was conquering an earth.`
     lootOrHell = `Let's teleport our species three
@@ -1109,6 +1109,7 @@ const mysteryScore = [
   100, 50, 50, 100, 150, 100, 100, 50, 300, 100, 100, 100, 50, 150, 100, 50,
 ];
 let ufoScorePointer = 0;
+let ufoBoost = 1;
 let ufoTimeUp = Date.now() + 20000 + Math.random() * 10000;
 let ufoActive = false;
 let ufoDirection;
@@ -2109,6 +2110,7 @@ function reset(restart) {
     level = 1;
     lives = 3;
     score = 0;
+    ufoBoost = 1;
     randomizeStory();
     modifyStory();
   }
@@ -2494,6 +2496,7 @@ function update(frameDuration) {
           music.pause();
           hiddenElementsOnBeam();
           ufoGetPlayer = true;
+          ufoBoost = 3;
           if (!ufoActive) {
             launchUfo();
           } else {
@@ -2612,10 +2615,9 @@ function update(frameDuration) {
     ufoLeft = playerLeft + playerWidth / 2 - ufoWidth / 2;
   }
 
-  if (ufoActive && ufoToggleBeam && ufoGetPlayer) {
-    ufoLeft += (ufoDirection * frameDuration) / 5;
-  } else if (ufoActive && (!ufoGetPlayer || ufoTakenPlayer)) {
-    ufoLeft += (ufoDirection * frameDuration) / 5;
+  if ((ufoActive && ufoToggleBeam && ufoGetPlayer) ||
+    (ufoActive && (!ufoGetPlayer || ufoTakenPlayer))) {
+    ufoLeft += ufoBoost * (ufoDirection * frameDuration) / 5;
   }
 
   if (ufoActive && (ufoLeft < -ufoWidth - 8 || ufoLeft > containerWidth + 8)) {
@@ -3107,10 +3109,10 @@ function playerBulletCollisions() {
           playerBulletLeft <=
             aliensLeft + alienLeftInGrid[row][col] + scaledWidth + gap * col
         ) {
-          if (level % 10 < 5 && level % 10 !== 0) {
+          if (level % 10 < 6 || level > 7) {
             aliensStep += 10;
           } else {
-            aliensStep += 5;
+            aliensStep += 7;
           }
           playerBulletRemoveMe = true;
           aliensRemaining--;
