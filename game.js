@@ -1345,7 +1345,7 @@ function addFade(duration, stage) {
   }
 }
 
-// Barriers.
+// Barrier variables.
 
 // Types and relative positions of blocks that make up a barrier.
 const regularBarrier = [
@@ -2471,7 +2471,9 @@ function update(frameDuration) {
         bullet: {
           isOnScreen: playerBulletOnScreen,
           top: playerBulletTop,
+          left: playerBulletLeft,
           speedY: playerBulletSpeedY,
+          removeMe: playerBulletRemoveMe,
         },
       },
       aliens: {
@@ -2485,7 +2487,13 @@ function update(frameDuration) {
         direction: aliensDirection,
       },
       endBounce: endBounce,
-      endFlit: endFlit
+      endFlit: endFlit,
+      barriers: {
+        damage: barriers,
+        blockVis: blockVis,
+        blockTop: blockTop,
+        blockLeft: blockLeft,
+      }
     });
     worker.onmessage = function (event) {
       playerLeft = event.data.player.left;
@@ -2516,6 +2524,14 @@ function update(frameDuration) {
       aliensDirection = event.data.aliens.direction;
       endBounce = event.data.endBounce;
       endFlit = event.data.endFlit;
+      let block = event.data.barriers.blockToChange;
+      if (block) {
+        if (!playerBulletRemoveMe) {
+          playerBulletRemoveMe = true;
+        }
+        barriers[block.barrierNumber][block.rowNumber][block.colNumber]++;
+        blocksToChange.push(block);
+      }
     };
 
     // Move player bullet.
@@ -2555,8 +2571,7 @@ function update(frameDuration) {
         break;
       }
       if (bullet.top + bulletHeight > barrierTop) {
-        for (let i = 0; i < blocks.length; i++) {
-          const block = blocks[i];
+        for (let i = 0; i < 48; i++) {
           if (
             bullet.top + bulletHeight >= blockTop[i] &&
             bullet.left + bulletWidth >= blockLeft[i] &&
@@ -2577,12 +2592,10 @@ function update(frameDuration) {
               removeMe = true;
             }
             blocksToChange.push({
-              block: block,
               rowNumber: rowNumber,
               colNumber: colNumber,
               barrierNumber: barrierNumber,
               removeMe: removeMe,
-              changed: false,
             });
             if (bullet.type !== "fireball") {
               bullet.removeMe = true;
@@ -2915,10 +2928,13 @@ function render() {
   for (const blockToChange of blocksToChange) {
     rock.currentTime = 0;
     rock.play();
+    const i = 12 * blockToChange.barrierNumber + 4 * blockToChange.rowNumber + blockToChange.colNumber;
+    const block = blocks[i];
     if (blockToChange.removeMe === true) {
-      blockToChange.block.style.visibility = "hidden";
+      block.style.visibility = "hidden";
+      blockVis[i] = false;
     } else {
-      blockToChange.block.style.backgroundPositionX =
+      block.style.backgroundPositionX =
         blockX[blockType[blockToChange.rowNumber][blockToChange.colNumber]][
           barriers[blockToChange.barrierNumber][blockToChange.rowNumber][
             blockToChange.colNumber
@@ -3050,37 +3066,37 @@ function firePlayerBullet() {
 }
 
 function playerBulletCollisions() {
-  for (let i = 0; i < blocks.length; i++) {
-    const block = blocks[i];
-    if (
-      playerBulletTop <= blockTop[i] + 48 &&
-      playerBulletTop + playerBulletHeight >= blockTop[i] &&
-      playerBulletLeft + playerBulletWidth >= blockLeft[i] &&
-      playerBulletLeft <= blockLeft[i] + 48 &&
-      blockVis[i] === true
-    ) {
-      playerBulletRemoveMe = true;
-      const barrierNumber = Math.floor(i / 12);
-      const h = i % 12;
-      const rowNumber = Math.floor(h / 4);
-      const colNumber = h % 4;
-      barriers[barrierNumber][rowNumber][colNumber]++;
-      let removeMe = false;
-      if (barriers[barrierNumber][rowNumber][colNumber] > 3) {
-        blockVis[i] = false;
-        removeMe = true;
-      }
-      blocksToChange.push({
-        block: block,
-        rowNumber: rowNumber,
-        colNumber: colNumber,
-        barrierNumber: barrierNumber,
-        removeMe: removeMe,
-        changed: false,
-      });
-      break;
-    }
-  }
+  // for (let i = 0; i < blocks.length; i++) {
+  //   const block = blocks[i];
+  //   if (
+  //     playerBulletTop <= blockTop[i] + 48 &&
+  //     playerBulletTop + playerBulletHeight >= blockTop[i] &&
+  //     playerBulletLeft + playerBulletWidth >= blockLeft[i] &&
+  //     playerBulletLeft <= blockLeft[i] + 48 &&
+  //     blockVis[i] === true
+  //   ) {
+  //     playerBulletRemoveMe = true;
+  //     const barrierNumber = Math.floor(i / 12);
+  //     const h = i % 12;
+  //     const rowNumber = Math.floor(h / 4);
+  //     const colNumber = h % 4;
+  //     barriers[barrierNumber][rowNumber][colNumber]++;
+  //     let removeMe = false;
+  //     if (barriers[barrierNumber][rowNumber][colNumber] > 3) {
+  //       blockVis[i] = false;
+  //       removeMe = true;
+  //     }
+  //     blocksToChange.push({
+  //       block: block,
+  //       rowNumber: rowNumber,
+  //       colNumber: colNumber,
+  //       barrierNumber: barrierNumber,
+  //       removeMe: removeMe,
+  //       changed: false,
+  //     });
+  //     break;
+  //   }
+  // }
 
   if (ufoActive) {
     if (

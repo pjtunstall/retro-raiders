@@ -1,12 +1,15 @@
 'use strict';
 
 const playerWidth = 33;
+const playerBulletHeight = 12;
+const playerBulletWidth = 3;
 const containerWidth = 1600;
 const containerHeight = 770;
 const alienGridWidth = 11;
 const alienGridPixelWidth = 600;
 const gap = 0;
 const maxAlienSpeed = 512;
+const barrierTop = containerHeight - 185;
 
 self.onmessage = function(event) {
   const data = event.data;
@@ -18,6 +21,8 @@ self.onmessage = function(event) {
 }
 
 function update(data) {
+  data.barriers.blockToChange = null;
+
   data.player.left += data.player.direction * data.player.step * data.frameDuration / 1000;
   data.player.left = Math.max(0, Math.min(containerWidth - playerWidth, data.player.left));
 //   if (data.player.bullet.isOnScreen) {
@@ -82,5 +87,36 @@ function update(data) {
     }
   }
   }
+
+  // Collisions between player bullet and barriers.
+  if (data.player.bullet.isOnScreen && !data.player.bullet.removeMe) {
+    for (let i = 0; i < 48; i++) {
+      if (
+        data.player.bullet.top <= data.barriers.blockTop[i] + 48 &&
+        data.player.bullet.top + playerBulletHeight >= data.barriers.blockTop[i] &&
+        data.player.bullet.left + playerBulletWidth >= data.barriers.blockLeft[i] &&
+        data.player.bullet.left <= data.barriers.blockLeft[i] + 48 &&
+        data.barriers.blockVis[i] === true
+      ) {
+        const barrierNumber = Math.floor(i / 12);
+        const h = i % 12;
+        const rowNumber = Math.floor(h / 4);
+        const colNumber = h % 4;
+        data.barriers.damage[barrierNumber][rowNumber][colNumber]++;
+        let removeMe = false;
+        if (data.barriers.damage[barrierNumber][rowNumber][colNumber] > 3) {
+          removeMe = true;
+        }
+        data.barriers.blockToChange = {
+          rowNumber: rowNumber,
+          colNumber: colNumber,
+          barrierNumber: barrierNumber,
+          removeMe: removeMe
+        };
+        break;
+      }
+    }
+  }
+
   return data;
 }
