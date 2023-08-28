@@ -1113,8 +1113,8 @@ let ufoBoost = 1;
 let ufoTimeUp = Date.now() + 20000 + Math.random() * 10000;
 let ufoActive = false;
 let ufoDirection;
-let ufoHeight = 40;
-let ufoWidth = 40;
+const ufoHeight = 40;
+const ufoWidth = 40;
 let killUfo = false;
 let removeUfo = false;
 let ufoTop = 0;
@@ -2494,6 +2494,11 @@ function update(frameDuration) {
         blockVis: blockVis,
         blockTop: blockTop,
         blockLeft: blockLeft,
+      },
+      ufo: {
+        active: ufoActive,
+        top: ufoTop,
+        left: ufoLeft
       }
     });
     worker.onmessage = function (event) {
@@ -2505,7 +2510,7 @@ function update(frameDuration) {
           music.pause();
           hiddenElementsOnBeam();
           ufoGetPlayer = true;
-          ufoBoost = 3;
+          ufoBoost = 2;
           if (!ufoActive) {
             launchUfo();
           } else {
@@ -2528,12 +2533,17 @@ function update(frameDuration) {
       if (event.data.player.bullet.removeMeMessage) {
         playerBulletRemoveMe = true;
       }
-      console.log("on screen:", playerBulletOnScreen, "playerBulletRemoveMe:", playerBulletRemoveMe);
       for (let block of event.data.barriers.blocksToChange) {
         playerBulletRemoveMe = true;
         barriers[block.barrierNumber][block.rowNumber][block.colNumber]++;
         blocksToChange.push(block);
       }
+    if (event.data.ufo.kill) {
+      killUfo = true;
+      score += mysteryScore[ufoScorePointer];
+      incrementScore = true;
+      ufoTimeUp = Date.now() + 20000 + Math.random() * 10000;
+    }
     };
 
     // Move player bullet.
@@ -2889,15 +2899,13 @@ function render() {
     newPlayerBullet = false;
   }
 
-  if (playerBulletOnScreen) {
-    if (playerBulletRemoveMe) {
-      playerBullet.style.visibility = "hidden";
-      playerBulletRemoveMe = false;
-      playerBulletOnScreen = false;
-    } else {
-      playerBullet.style.top = `${playerBulletTop}px`;
-      playerBullet.style.left = `${playerBulletLeft}px`;
-    }
+  if (playerBulletRemoveMe) {
+    playerBullet.style.visibility = "hidden";
+    playerBulletRemoveMe = false;
+    playerBulletOnScreen = false;
+  } else {
+    playerBullet.style.top = `${playerBulletTop}px`;
+    playerBullet.style.left = `${playerBulletLeft}px`;
   }
 
   for (const [index, bullet] of alienBulletsArray.entries()) {
@@ -3100,19 +3108,19 @@ function playerBulletCollisions() {
   //   }
   // }
 
-  if (ufoActive) {
-    if (
-      playerBulletTop <= ufoTop + ufoHeight &&
-      playerBulletLeft + playerBulletWidth >= ufoLeft &&
-      playerBulletLeft <= ufoLeft + ufoWidth
-    ) {
-      playerBulletRemoveMe = true;
-      killUfo = true;
-      score += mysteryScore[ufoScorePointer];
-      incrementScore = true;
-      ufoTimeUp = Date.now() + 20000 + Math.random() * 10000;
-    }
-  }
+  // if (ufoActive) {
+  //   if (
+  //     playerBulletTop <= ufoTop + ufoHeight &&
+  //     playerBulletLeft + playerBulletWidth >= ufoLeft &&
+  //     playerBulletLeft <= ufoLeft + ufoWidth
+  //   ) {
+  //     playerBulletRemoveMe = true;
+  //     killUfo = true;
+  //     score += mysteryScore[ufoScorePointer];
+  //     incrementScore = true;
+  //     ufoTimeUp = Date.now() + 20000 + Math.random() * 10000;
+  //   }
+  // }
 
   alienIsHit: for (let row = 0; row < alienGridHeight; row++) {
     for (let col = 0; col < alienGridWidth; col++) {

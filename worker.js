@@ -11,6 +11,8 @@ const gap = 0;
 const maxAlienSpeed = 512;
 const alienBulletHeight = 30;
 const alienBulletWidth = 10;
+const ufoHeight = 40;
+const ufoWidth = 40;
 const barrierTop = containerHeight - 185;
 
 self.onmessage = function(event) {
@@ -24,6 +26,7 @@ self.onmessage = function(event) {
 function update(data) {
   data.barriers.blocksToChange = [];
   data.player.bullet.removeMeMessage = false;
+  data.ufo.kill = false;
 
   data.player.left += data.player.direction * data.player.step * data.frameDuration / 1000;
   data.player.left = Math.max(0, Math.min(containerWidth - playerWidth, data.player.left));
@@ -88,6 +91,22 @@ function update(data) {
         data.player.dead = true;
     }
   }
+  }
+
+  // Collisions between player bullet and UFO.
+  if (data.ufo.active) {
+    if (data.player.bullet.isOnScreen) {
+      if (
+        data.player.bullet.top <= data.ufo.top + ufoHeight &&
+        data.player.bullet.left + playerBulletWidth >= data.ufo.left &&
+        data.player.bullet.left <= data.ufo.left + ufoWidth
+      ) {
+        // Not necessary to remove player bullet explicitly, because it reaches top of screen
+        // fast enough to be removed anyway immediately after hitting the ufo.
+        data.ufo.kill = true;
+        // ufoTimeUp = Date.now() + 20000 + Math.random() * 10000;
+      }
+    }
   }
 
   // Collisions between player bullet and barriers.
