@@ -2476,7 +2476,7 @@ function update(frameDuration) {
           top: playerBulletTop,
           left: playerBulletLeft,
           speedY: playerBulletSpeedY,
-          removeMe: playerBulletRemoveMe,
+          removeMeMessageToWorker: playerBulletRemoveMe,
         },
       },
       aliens: {
@@ -2531,7 +2531,7 @@ function update(frameDuration) {
       aliensDirection = event.data.aliens.direction;
       endBounce = event.data.endBounce;
       endFlit = event.data.endFlit;
-      if (event.data.player.bullet.removeMeMessage) {
+      if (event.data.player.bullet.removeMeMessageFromWorker) {
         playerBulletRemoveMe = true;
       }
       for (let block of event.data.barriers.blocksToChange) {

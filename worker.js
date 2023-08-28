@@ -25,7 +25,7 @@ self.onmessage = function(event) {
 
 function update(data) {
   data.barriers.blocksToChange = [];
-  data.player.bullet.removeMeMessage = false;
+  data.player.bullet.removeMeMessageFromWorker = false;
   data.ufo.kill = false;
 
   data.player.left += data.player.direction * data.player.step * data.frameDuration / 1000;
@@ -110,9 +110,9 @@ function update(data) {
   }
 
   // Collisions between player bullet and barriers.
-  if (data.player.bullet.isOnScreen && !data.player.bullet.removeMe) {
+  if (data.player.bullet.isOnScreen && !data.player.bullet.removeMeMessageToWorker) {
     if (data.player.bullet.top < 0) {
-      data.player.bullet.removeMeMessage = true;
+      data.player.bullet.removeMeMessageFromWorker = true;
     }
     for (let i = 0; i < 48; i++) {
       if (
