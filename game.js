@@ -2069,6 +2069,7 @@ function launchUfo() {
   if (ufoActive || paused || resetInProgress) {
     return;
   }
+  killUfo = false;
   voltage.currentTime = 0;
   voltage.play();
   ufoActive = true;
@@ -2447,6 +2448,7 @@ function update(frameDuration) {
       backgroundColor[i] = startColor[0] * (1 - brightest);
     }
   }
+
   if (
     ufoGetPlayer &&
     (ufoLeft < -ufoWidth - 8 || ufoLeft > containerWidth + 8)
@@ -2510,7 +2512,6 @@ function update(frameDuration) {
           music.pause();
           hiddenElementsOnBeam();
           ufoGetPlayer = true;
-          ufoBoost = 2;
           if (!ufoActive) {
             launchUfo();
           } else {
@@ -2636,8 +2637,10 @@ function update(frameDuration) {
       (ufoDirection === -1 &&
         ufoLeft + ufoWidth / 2 > playerLeft + playerWidth / 2);
   }
+
   if (!ufoToggleBeam && ufoGetPlayer && !ufoTakenPlayer) {
     ufoLeft = playerLeft + playerWidth / 2 - ufoWidth / 2;
+    ufoBoost = 3;
   }
 
   if ((ufoActive && ufoToggleBeam && ufoGetPlayer) ||
@@ -2740,7 +2743,9 @@ function render() {
 
   if (!paused) {
     renderTimerThrottled();
-    music.playbackRate += musicSpeedIncreaseAmount * (frameDuration / 5000);
+    if (music.playbackRate < 3.9) {
+      music.playbackRate += musicSpeedIncreaseAmount * (frameDuration / 5000);
+    }
   }
 
   if (quake) {
