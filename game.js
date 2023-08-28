@@ -2151,7 +2151,7 @@ function reset(restart) {
   alienBulletsArray = [];
 
   playerBullet.style.visibility = "hidden";
-  playerBulletOnScreen = false;
+  playerBulletRemoveMe = false;
 
   const barrierElements = document.querySelectorAll(".barrier");
   barrierElements.forEach((barrierElement) => barrierElement.remove());
@@ -2464,6 +2464,7 @@ function update(frameDuration) {
       frameDuration: frameDuration,
       level: level,
       levelStartTime: levelStartTime,
+      ufoGetPlayer: ufoGetPlayer,
       player: {
         left: playerLeft,
         step: playerStep,
@@ -2524,11 +2525,12 @@ function update(frameDuration) {
       aliensDirection = event.data.aliens.direction;
       endBounce = event.data.endBounce;
       endFlit = event.data.endFlit;
-      let block = event.data.barriers.blockToChange;
-      if (block) {
-        if (!playerBulletRemoveMe) {
-          playerBulletRemoveMe = true;
-        }
+      if (event.data.player.bullet.removeMeMessage) {
+        playerBulletRemoveMe = true;
+      }
+      console.log("on screen:", playerBulletOnScreen, "playerBulletRemoveMe:", playerBulletRemoveMe);
+      for (let block of event.data.barriers.blocksToChange) {
+        playerBulletRemoveMe = true;
         barriers[block.barrierNumber][block.rowNumber][block.colNumber]++;
         blocksToChange.push(block);
       }
@@ -2540,7 +2542,7 @@ function update(frameDuration) {
       playerBulletCollisions();
     }
 
-    // Move alien bullets and check for collision with barriers or player or ground.
+    // Move alien bullets and check for collisions with barriers or player or ground.
     for (const bullet of alienBulletsArray) {
       if (ufoGetPlayer) break;
       bullet.top += (bullet.speed * frameDuration) / 1000;
@@ -2607,7 +2609,7 @@ function update(frameDuration) {
     }
 
     // Fire player bullets.
-    if (spaceKeyDown && !playerBulletOnScreen) {
+    if (spaceKeyDown && !playerBulletOnScreen && !playerBulletRemoveMe) {
       firePlayerBulletThrottled();
     }
 
@@ -3181,10 +3183,6 @@ function playerBulletCollisions() {
         }
       }
     }
-  }
-
-  if (playerBulletTop < 0 || !playerBulletOnScreen) {
-    playerBulletRemoveMe = true;
   }
 }
 

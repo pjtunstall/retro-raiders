@@ -9,6 +9,8 @@ const alienGridWidth = 11;
 const alienGridPixelWidth = 600;
 const gap = 0;
 const maxAlienSpeed = 512;
+const alienBulletHeight = 30;
+const alienBulletWidth = 10;
 const barrierTop = containerHeight - 185;
 
 self.onmessage = function(event) {
@@ -16,12 +18,12 @@ self.onmessage = function(event) {
   if (data.resetInProgress) {
     return;
   }
-  const result = update(data);
-  self.postMessage(result);
+  self.postMessage(update(data));
 }
 
 function update(data) {
-  data.barriers.blockToChange = null;
+  data.barriers.blocksToChange = [];
+  data.player.bullet.removeMeMessage = false;
 
   data.player.left += data.player.direction * data.player.step * data.frameDuration / 1000;
   data.player.left = Math.max(0, Math.min(containerWidth - playerWidth, data.player.left));
@@ -90,6 +92,9 @@ function update(data) {
 
   // Collisions between player bullet and barriers.
   if (data.player.bullet.isOnScreen && !data.player.bullet.removeMe) {
+    if (data.player.bullet.top < 0) {
+      data.player.bullet.removeMeMessage = true;
+    }
     for (let i = 0; i < 48; i++) {
       if (
         data.player.bullet.top <= data.barriers.blockTop[i] + 48 &&
@@ -107,16 +112,54 @@ function update(data) {
         if (data.barriers.damage[barrierNumber][rowNumber][colNumber] > 3) {
           removeMe = true;
         }
-        data.barriers.blockToChange = {
-          rowNumber: rowNumber,
-          colNumber: colNumber,
-          barrierNumber: barrierNumber,
-          removeMe: removeMe
-        };
+        data.barriers.blocksToChange.push(
+          {
+            rowNumber: rowNumber,
+            colNumber: colNumber,
+            barrierNumber: barrierNumber,
+            removeMe: removeMe,
+            destroyer: "player"
+          }
+        );
         break;
       }
     }
   }
+
+  // // Check for collisions between aliens bullets and barriers
+  // for (const bullet of data.alienBulletsArray) {
+  //   if (bullet.top + alienBulletHeight > barrierTop) {
+  //     for (let i = 0; i < 48; i++) {
+  //       if (
+  //         bullet.top + alienBulletHeight >= blockTop[i] &&
+  //         bullet.left +alienBulletWidth >= blockLeft[i] &&
+  //         bullet.left <= blockLeft[i] + 48 &&
+  //         data.barriers.blockVis[i] === true
+  //       ) {
+  //         const barrierNumber = Math.floor(i / 12);
+  //         const h = i % 12;
+  //         const rowNumber = Math.floor(h / 4);
+  //         const colNumber = h % 4;
+  //         data.barriers.damage[barrierNumber][rowNumber][colNumber]++;
+  //       let removeMe = false;
+  //       if (data.barriers.damage[barrierNumber][rowNumber][colNumber] > 3) {
+  //         removeMe = true;
+  //       }
+  //         data.barriers.blocksToChange.push({
+  //           rowNumber: rowNumber,
+  //           colNumber: colNumber,
+  //           barrierNumber: barrierNumber,
+  //           removeMe: removeMe,
+  //           destroyer: bullet.type
+  //         });
+  //         if (bullet.type !== "fireball") {
+  //           bullet.removeMe = true;
+  //           break;
+  //         }
+  //       }
+  //     }
+  //   }
+  // }
 
   return data;
 }
