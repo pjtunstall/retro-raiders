@@ -136,7 +136,7 @@ function update(data) {
     }
   }
 
-  // Collisions between player bullet and barriers and top of container.
+  // Collisions between player bullet and barriers or top of container.
   if (
     data.player.bullet.isOnScreen &&
     !data.player.bullet.removeMeMessageToWorker
@@ -176,7 +176,7 @@ function update(data) {
     }
   }
 
-  // Check for collisions between aliens bullets and barriers, ground.
+  // Collisions between aliens bullets and barriers, ground, or player.
   for (const bullet of data.aliens.bullets) {
     if (bullet.removeMe || data.ufo.getPlayer) {
       break;

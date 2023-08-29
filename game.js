@@ -2609,34 +2609,6 @@ function update(frameDuration) {
       playerBulletCollisions();
     }
 
-    // // Move alien bullets and check for collisions with player or ground.
-    // for (const bullet of alienBulletsArray) {
-    //   if (ufoGetPlayer) break;
-    //   // bullet.top += (bullet.speed * frameDuration) / 1000;
-    //   if (
-    //     bullet.type === "fireball" &&
-    //     bullet.top + 64 >= playerTop &&
-    //     bullet.left + 16 >= playerLeft &&
-    //     bullet.left <= playerLeft + playerWidth
-    //   ) {
-    //     bullet.removeMe = true;
-    //     lives = 1;
-    //     player.className = "player";
-    //     playerDeath(false, true);
-    //     break;
-    //   } else if (
-    //     bullet.top + bulletHeight >= playerTop &&
-    //     bullet.left + bulletWidth >= playerLeft &&
-    //     bullet.left <= playerLeft + playerWidth
-    //   ) {
-    //     // Cheat mode:
-    //     // Comment out this line to be invulnerable to alien bullets for testing.
-    //     playerDeath(false);
-    //     bullet.removeMe = true;
-    //     break;
-    //   }
-    // }
-
     // Fire player bullets.
     if (spaceKeyDown && !playerBulletOnScreen && !playerBulletRemoveMe) {
       firePlayerBulletThrottled();
