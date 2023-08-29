@@ -91,7 +91,7 @@ function randomizeStory() {
   const genderRandomizer = Math.round(Math.random());
   const otherRandomizer = !Math.round(Math.random());
   playerCharacterIsMale = !genderRandomizer;
-  
+
   if (playerCharacterIsMale) {
     boyOrGirl = "boy";
     ladOrLass = "lad";
@@ -118,7 +118,7 @@ and his personality.`;
     amazonOrRifleman = `Their strategists devise a plan.
 They'll stop at nothing now.
 On that lone laser rifleman
-vengeance they do vow.`
+vengeance they do vow.`;
   } else {
     boyOrGirl = "girl";
     ladOrLass = "lass";
@@ -145,7 +145,7 @@ and, of their leader, dread`;
     amazonOrRifleman = `Those monsters, quarter give they none.
 They'll stop at nothing now.
 On that lone laser amazon
-vengeance they do vow.`
+vengeance they do vow.`;
   }
 
   const introRandomizer = Math.random();
@@ -259,7 +259,7 @@ vengeance they do vow.`
         sheepPic = "16f";
     }
 
-    switch(true) {
+    switch (true) {
       case lastPicRandomizer < 0.08:
         lastPic = "3af";
         break;
@@ -285,9 +285,9 @@ vengeance they do vow.`
         lastPic = "12ff";
         break;
       case lastPicRandomizer < 0.75:
-        lastPic = "9ff"
+        lastPic = "9ff";
         break;
-      case lastPicRandomizer <  0.83:
+      case lastPicRandomizer < 0.83:
         lastPic = "1ff";
         break;
       case lastPicRandomizer < 0.92:
@@ -300,13 +300,13 @@ vengeance they do vow.`
 
   switch (true) {
     case ufoShotRandomizer < 0.33:
-      ufoShotPic = 'aug1';
+      ufoShotPic = "aug1";
       break;
     case ufoShotRandomizer < 0.66:
-      ufoShotPic = '9';
+      ufoShotPic = "9";
       break;
     default:
-      ufoShotPic = '2b';
+      ufoShotPic = "2b";
   }
 
   if (beamRandomizer < 0.5) {
@@ -317,7 +317,7 @@ vengeance they do vow.`
     asteroidsOrMeteors = `Asteroids we'll ram off course
 their cities for to wreck.
 From off the starcharts let us wipe
-that Pale Blue Speck.`
+that Pale Blue Speck.`;
   } else {
     beamPic = "1";
     berlinPic1 = "apartment-block";
@@ -326,13 +326,13 @@ that Pale Blue Speck.`
     asteroidsOrMeteors = `Meteors we'll haul off course
 and pillage all they've got.
 It's not looking terribly good
-for that Pale Blue Dot.`
+for that Pale Blue Dot.`;
   }
 
   if (otherRandomizer) {
     hatchlingOrBroodling = `a hatchling from the brood.
 The only way to prove herself
-was spilling yet more blood.`
+was spilling yet more blood.`;
     lootOrHell = `Let's teleport our tribes all three
 and a Mystery Ship to boot.
 Paris and New York will fall.
@@ -351,19 +351,19 @@ We'll divvy up the loot.`;
   } else {
     hatchlingOrBroodling = `a broodling short of mirth.
 The only way to prove herself
-was conquering an earth.`
+was conquering an earth.`;
     lootOrHell = `Let's teleport our species three
 and a UFO as well.
 Chicago and Berlin will fall.
 We'll make their world a hell.`;
-  if (playerCharacterIsMale) {
-    sheepOrLamas = `furry friends, sir.
+    if (playerCharacterIsMale) {
+      sheepOrLamas = `furry friends, sir.
 `;
-  } else {
-    sheepOrLamas = `lamas, ma'am," they said,
+    } else {
+      sheepOrLamas = `lamas, ma'am," they said,
 "`;
-  }
-  earthOrTerra = "Terra";
+    }
+    earthOrTerra = "Terra";
   }
 }
 
@@ -396,12 +396,12 @@ For conquest she did lust.
 Her lip it slowly curled.
 "Turn left at Barnard's Star," she said.
 "I know a world." <font color="red">[T]urn page</font>`,
-  ],
+    ],
 
-  [
-    `./assets/story-images/${introPic}.jpg`,
+    [
+      `./assets/story-images/${introPic}.jpg`,
 
-    `"I know a world called Planet Earth
+      `"I know a world called Planet Earth
 with little for defense.
 A lone gunner guards their towns.
 Let's teleport us hence."
@@ -411,12 +411,12 @@ Let's teleport us hence."
 "${asteroidsOrMeteors}"
 
 <font color="red">[T]urn page</font>`,
-  ],
+    ],
 
-  [
-    `./assets/story-images/26.jpg`,
+    [
+      `./assets/story-images/26.jpg`,
 
-    `You heard it in the street.
+      `You heard it in the street.
 You heard it in the news.
 You didn't believe at first,
 but that was no excuse.
@@ -437,12 +437,12 @@ to send out messengers far and wide
 a hero for to find.
 
 <font color="red">[T]urn page</font>`,
-  ],
+    ],
 
-  [
-    `./assets/story-images/${sheepPic}.jpg`,
+    [
+      `./assets/story-images/${sheepPic}.jpg`,
 
-    `That summer morning, messengers came.
+      `That summer morning, messengers came.
 Messengers there were three.
 "Leave your ${sheepOrLamas}A gunner you must be."
 
@@ -452,14 +452,14 @@ A laser cannon you must steer
 and shoot for all you're worth."
 
 <font color="red">[T]urn page</font>`,
-  ],
-];
+    ],
+  ];
 
-story.ufoShot = [
-  [
-    `./assets/story-images/${ufoShotPic}.jpg`,
+  story.ufoShot = [
+    [
+      `./assets/story-images/${ufoShotPic}.jpg`,
 
-    `A well-aimed shot, the Mystery Ship
+      `A well-aimed shot, the Mystery Ship
 explodes across the sky!
 A cheer goes up from Planet Earth.
 Perhaps they will not die.
@@ -490,14 +490,14 @@ and a lone laser fusilier
 ${possessivePronoun} final end has faced.
 
 <font color="red">[T]urn page</font>`,
-  ],
-];
+    ],
+  ];
 
-story.londonSaved = [
-  [
-    `./assets/story-images/4.jpg`,
+  story.londonSaved = [
+    [
+      `./assets/story-images/4.jpg`,
 
-    `One fleet destroyed, a glimpse of hope,
+      `One fleet destroyed, a glimpse of hope,
 and London's skies are free!
 For a time it seems the horde might leave,
 but that is not to be.
@@ -515,14 +515,14 @@ they just attack it more.
 ${amazonOrRifleman}
 
 <font color="red">[T]urn page</font>`,
-  ],
-];
+    ],
+  ];
 
-story.chicagoSaved = [
-  [
-    `./assets/story-images/22.jpg`,
+  story.chicagoSaved = [
+    [
+      `./assets/story-images/22.jpg`,
 
-    `The Windy City sighs relief,
+      `The Windy City sighs relief,
 brief respite though it be.
 From Riverdale to Rogers park,
 Chicago too is free.
@@ -538,14 +538,14 @@ while issuing a threat:
 We haven't finished yet."
 
 <font color="red">[T]urn page</font>`,
-  ],
-];
+    ],
+  ];
 
-story.newYorkSaved = [
-  [
-    `./assets/story-images/34.jpg`,
+  story.newYorkSaved = [
+    [
+      `./assets/story-images/34.jpg`,
 
-    `"Three aliens walked into a bar. Which one said ouch?" &mdash;Zen <i>koan</i>, traditional
+      `"Three aliens walked into a bar. Which one said ouch?" &mdash;Zen <i>koan</i>, traditional
 
 "Game?" &mdash;Groundskeeper Willie, The Simpsons, S1E7
 
@@ -558,12 +558,12 @@ How can time even pass?
 There was a time. And it was everything, and real and sharp and impossible, as life is. And somehow it's gone. And long gone. And your fellow defenders, comrades of that summer, how can they have been then so very here, and now&mdash;not?
 
 <font color="red">[T]urn page</font>`,
-  ],
+    ],
 
-  [
-    `./assets/story-images/8b.jpg`,
+    [
+      `./assets/story-images/8b.jpg`,
 
-    `Each morning, you'd run in Central Park to burn off the adrenaline of the night's battle, then home to toss and turn through the June heat in the sweltering, cockroach-infested brownstone they'd appointed for Earth's defenders, up in Washington Heights.
+      `Each morning, you'd run in Central Park to burn off the adrenaline of the night's battle, then home to toss and turn through the June heat in the sweltering, cockroach-infested brownstone they'd appointed for Earth's defenders, up in Washington Heights.
 
 Band of misfits, Scottie called you. And that was right enough.
 
@@ -576,14 +576,14 @@ You stood outside of time that night. Absurd. The clockwork. The game! All of it
 But no time to think on that. A new attack. And they rush you across the ocean.
 
 <font color="red">[T]urn page</font>`,
-  ],
-];
+    ],
+  ];
 
-story.parisSaved = [
-  [
-    `./assets/story-images/1p.jpg`,
+  story.parisSaved = [
+    [
+      `./assets/story-images/1p.jpg`,
 
-    `Misty mornings.
+      `Misty mornings.
 
 First coolness.
 
@@ -595,13 +595,13 @@ It had only been a few months, but already the world had settled into a rhythm. 
 
 Is there anything we humans can't take for granted?
 
-<font color="red">[T]urn page</font>`
-  ],
+<font color="red">[T]urn page</font>`,
+    ],
 
-  [
-    `./assets/story-images/3p.jpg`,
+    [
+      `./assets/story-images/3p.jpg`,
 
-    `If they saw you rattling to work on your scooter down the steep, cobbled alleys of Montmartre, the Parisians probably took you for an alien yourself.
+      `If they saw you rattling to work on your scooter down the steep, cobbled alleys of Montmartre, the Parisians probably took you for an alien yourself.
 
 You dressed in the outlandish, harlequin garb of your fellow gunners, all of them by now drawn from Earth's extraterrestrial allies. Your skin was a mesh of interstellar tattoos, glowing faintly with bioluminescent exobacteria, and you'd had your skull deformed with ever tighter ligatures, as was their fashion.
 
@@ -611,27 +611,27 @@ The night you saved Paris was marked with barely a just-for-laughs, human-intere
 
 But you knew what was at stake as you packed your bags for the next one.
 
-<font color="red">[T]urn page</font>`
-  ]
-];
+<font color="red">[T]urn page</font>`,
+    ],
+  ];
 
-story.berlinSaved = [
-  [
-    `./assets/story-images/${berlinPic1}.jpg`,
+  story.berlinSaved = [
+    [
+      `./assets/story-images/${berlinPic1}.jpg`,
 
-    `It was winter in Berlin. Even your alien allies had absconded. All but one. You sold your medals for that dingy room over the bar in Friedrichshain and took turns on a stall at the fleamarket. Weeks could go by without a sale. When someone finally did take a shine to your Presidents' Star or Quintessential Badge of Courage, you'd celebrate with <i>Glühwein</i> and drew a little closer, and it kept out the December chill awhile.
+      `It was winter in Berlin. Even your alien allies had absconded. All but one. You sold your medals for that dingy room over the bar in Friedrichshain and took turns on a stall at the fleamarket. Weeks could go by without a sale. When someone finally did take a shine to your Presidents' Star or Quintessential Badge of Courage, you'd celebrate with <i>Glühwein</i> and drew a little closer, and it kept out the December chill awhile.
 
 It was in those days that you started writing your story&mdash;back when you still thought it would have a happy ending.
 
 Ever more people began to deny the existence of the Invaders. Their certainty would have been laughable had it not been so bellicose. Others called for all alien blood. There was a massacre. You kept a low profile then.
 
-<font color="red">[T]urn page</font>`
-  ],
+<font color="red">[T]urn page</font>`,
+    ],
 
-  [
-    `./assets/story-images/${berlinPic2}.jpg`,
+    [
+      `./assets/story-images/${berlinPic2}.jpg`,
 
-    `Such misunderstanding, on every level! How much of it due to those crummy AI translation headsets they gave you? Who knows? ${partnerSubjectPronounCapital} never did seem at ease in this world. You wondered what kept ${partnerObjectPronoun} here.
+      `Such misunderstanding, on every level! How much of it due to those crummy AI translation headsets they gave you? Who knows? ${partnerSubjectPronounCapital} never did seem at ease in this world. You wondered what kept ${partnerObjectPronoun} here.
 
 For ${partnerPossessivePronoun} birthday (or rather <i>external soulday</i>, as they called it), you gave ${partnerObjectPronoun} a trinket you'd found on a neighboring stall. Turns out, it was an instrument of ${partnerPossessivePronoun} people, the <i>silent rebec</i>.
 
@@ -639,13 +639,13 @@ ${partnerSubjectPronounCapital} was delighted. It took great skill to play well,
 
 ${partnerSubjectPronounCapital} made ok money at the cabaret&mdash;until ${partnerSubjectPronoun} got good.
 
-<font color="red">[T]urn page</font>`
-  ],
+<font color="red">[T]urn page</font>`,
+    ],
 
-  [
-    `./assets/story-images/${berlinPic3}.jpg`,
+    [
+      `./assets/story-images/${berlinPic3}.jpg`,
 
-    `By spring, ${partnerSubjectPronoun} almost had it. ${partnerSubjectPronounCapital} looked magnificent, coaxing the arcane contraption into what you guessed, from your fading recollection of ${partnerPossessivePronoun} early attempts, must be tunes of devastating transcendence, albeit deftly canceled out. You applauded, and felt quite alone.
+      `By spring, ${partnerSubjectPronoun} almost had it. ${partnerSubjectPronounCapital} looked magnificent, coaxing the arcane contraption into what you guessed, from your fading recollection of ${partnerPossessivePronoun} early attempts, must be tunes of devastating transcendence, albeit deftly canceled out. You applauded, and felt quite alone.
 
 Then, just as you started to doubt your aim, the last of the swarm exploded across the sky. Berlin was saved.
 
@@ -653,15 +653,15 @@ You celebrated with a few friends from the market. The <i>Glühwein</i> flowed. 
 
 Probably that was when the twins were conceived.
 
-<font color="red">[T]urn page</font>`
-  ]
-];
+<font color="red">[T]urn page</font>`,
+    ],
+  ];
 
-story.romeSaved = [
-  [
-    `./assets/story-images/wolves.jpg`,
+  story.romeSaved = [
+    [
+      `./assets/story-images/wolves.jpg`,
 
-    `O, your brave little fellow!
+      `O, your brave little fellow!
 
 No hospital would take a half-alien baby, so he lived his out three fevered days in your tent on the south bank of the Tiber; and, on the third, convulsed and was done.
 
@@ -671,13 +671,13 @@ It just wasn't ${partnerPossessivePronoun} world.
 
 You didn't care about anything then, certainly not the people of Planet Earth, but momentum carried you on. Not knowing what else to do, you threw yourself into the mission.
 
-<font color="red">[T]urn page</font>`
-  ],
+<font color="red">[T]urn page</font>`,
+    ],
 
-  [
-    `./assets/story-images/colosseum.jpg`,
+    [
+      `./assets/story-images/colosseum.jpg`,
 
-    `It was just you and your little coin-op laser now. You camped by the river till the <i>polizia robotica</i> moved you on, then in cemeteries, robbing pilgrims for the cash to recharge it.
+      `It was just you and your little coin-op laser now. You camped by the river till the <i>polizia robotica</i> moved you on, then in cemeteries, robbing pilgrims for the cash to recharge it.
 
 Seems like no one believed in the Invaders anymore. Even the quintuplet presidents dismissed them, but you knew better. Sure, you called it a game in your vision&mdash;that is, when you tried to wrestle your vision into words. But there are games and games: games that are part of life, and the big game that life is a part of.
 
@@ -685,15 +685,15 @@ You had to keep such thoughts to yourself in those days, though, and shoot your 
 
 Why were you still trying to save these people? You sometimes wondered. Maybe you just wanted to finish what you started.
 
-<font color="red">[T]urn page</font>`
-  ]
-];
+<font color="red">[T]urn page</font>`,
+    ],
+  ];
 
-story.austinSaved = [
-  [
-    `./assets/story-images/${eightPic}.jpg`,
+  story.austinSaved = [
+    [
+      `./assets/story-images/${eightPic}.jpg`,
 
-    `The remnants of the human race in rags their cities flee. They leave to seek a safer place, a mountain sanctuary.
+      `The remnants of the human race in rags their cities flee. They leave to seek a safer place, a mountain sanctuary.
 
 In search of haven, humankind are headed for the downs. The urban life has extra risk. It's over for the towns.
 
@@ -703,15 +703,15 @@ The refugees acknowledge you. They know the threat is real. They've no idea what
 
 All people do depend on you&mdash;their plans are in a mess&mdash;more humble since inhabiting a hilly wilderness.
 
-<font color="red">[T]urn page</font>`
-  ]
-];
+<font color="red">[T]urn page</font>`,
+    ],
+  ];
 
-story.mountainsSaved = [
-  [
-    `./assets/story-images/${ninePic}.jpg`,
+  story.mountainsSaved = [
+    [
+      `./assets/story-images/${ninePic}.jpg`,
 
-    `Their mountain base abandonning, abysmal prospects there, the last survivors leave it for a lonely woodland lair.
+      `Their mountain base abandonning, abysmal prospects there, the last survivors leave it for a lonely woodland lair.
 
 Escaping from that skilled assault has scared them to their senses. They claim they were somewhat of late waylaid by false pretenses.
 
@@ -721,15 +721,15 @@ Escaping in a skittish mood, they scorn no longer hold, as formerly they did, fo
 
 You can rely on ${ladsOrSwarms} to search both high and low. The place that you supposed was safe, they presently will know.
 
-<font color="red">[T]urn page</font>`
-  ]
-];
+<font color="red">[T]urn page</font>`,
+    ],
+  ];
 
-story.woodSaved = [
-  [
-    `./assets/story-images/${tenPic}.jpg`,
+  story.woodSaved = [
+    [
+      `./assets/story-images/${tenPic}.jpg`,
 
-    `Yet deeper traipse into the woods the tattered last few folk. The way is scattered with their goods, their wishes up in smoke.
+      `Yet deeper traipse into the woods the tattered last few folk. The way is scattered with their goods, their wishes up in smoke.
 
 Though somewhat scarred by circumstance, you swear to hold the line. Though terrible their likely fate, you tell them they'll be fine.
 
@@ -737,15 +737,15 @@ Determined now to take a stand, you tell them happy lies: instead of truth, a st
 
 There's nowhere else on Earth to flee. This is the make-or-break. Decided here is history. The whole wide world's at stake.
 
-<font color="red">[T]urn page</font>`
-  ]
-];
+<font color="red">[T]urn page</font>`,
+    ],
+  ];
 
-story.playerShot = [
-  [
-    `./assets/story-images/25.jpg`,
+  story.playerShot = [
+    [
+      `./assets/story-images/25.jpg`,
 
-    `The gunner's mother heard the knock,
+      `The gunner's mother heard the knock,
 three aliens at the door.
 Not much to say to blunt that shock:
 "Your hatchling is no more."
@@ -771,14 +771,14 @@ Your ${boyOrGirl} was brave, we honor ${objectPronoun}.
 We thought you'd like to know."
 
 <font color="red">[T]urn page</font>`,
-  ],
-];
+    ],
+  ];
 
-story.fireballEnding = [
-  [
-    `./assets/story-images/0.jpg`,
+  story.fireballEnding = [
+    [
+      `./assets/story-images/0.jpg`,
 
-    `The gunner's mother heard the knock,
+      `The gunner's mother heard the knock,
 three aliens at the door.
 Not much to say to blunt that shock:
 "Your hatchling is no more."
@@ -804,14 +804,14 @@ Your ${boyOrGirl} was brave, we honor ${objectPronoun}.
 We thought you'd like to know."
 
 <font color="red">[T]urn page</font>`,
-  ],
-];
+    ],
+  ];
 
-story.win = [
-  [
-    `./assets/story-images/victorian.jpg`,
+  story.win = [
+    [
+      `./assets/story-images/victorian.jpg`,
 
-    `Earth wakes at last from yon bad dream.
+      `Earth wakes at last from yon bad dream.
 Was it story or history?
 The more you think, the stranger seem
 those years of tragedy.
@@ -837,14 +837,14 @@ All life's a game, all game is life
 if lived-played to the full.
 
 <font color="red">[T]urn page</font>`,
-  ],
-];
+    ],
+  ];
 
-story.aliensReachEarth = [
-  [
-    `./assets/story-images/${beamPic}.jpg`,
+  story.aliensReachEarth = [
+    [
+      `./assets/story-images/${beamPic}.jpg`,
 
-    `"O brave defender, gunner bold,
+      `"O brave defender, gunner bold,
 though human you are in form,
 you've proved your worth, so take your place
 in our invader swarm."
@@ -865,12 +865,12 @@ Accept it now or perish too.
 It is the only way.
 
 <font color="red">[T]urn page</font>`,
-  ],
+    ],
 
-  [
-    `./assets/story-images/11.jpg`,
+    [
+      `./assets/story-images/11.jpg`,
 
-    `So it was and so it went
+      `So it was and so it went
 and what could you do?
 Now many years and light years hence,
 you're an Invader through and through.
@@ -896,12 +896,12 @@ Among laser blasts and plasma bolts,
 you look out for your crew.
 
 <font color="red">[T]urn page</font>`,
-  ],
+    ],
 
-  [
-    `./assets/story-images/21.jpg`,
+    [
+      `./assets/story-images/21.jpg`,
 
-    `<i>From the Memoirs of Exaptia Tabbani, Envoy Incarnate of the Hmadian Macrostates, on concluding her negotiations with Emperor FnrRa Gfgfgg (II<sup>MXXIV</sup>-I)st, Lord of Orion, Grand Eskalir of Grumium, and Admiral of the High Reaches:</i>
+      `<i>From the Memoirs of Exaptia Tabbani, Envoy Incarnate of the Hmadian Macrostates, on concluding her negotiations with Emperor FnrRa Gfgfgg (II<sup>MXXIV</sup>-I)st, Lord of Orion, Grand Eskalir of Grumium, and Admiral of the High Reaches:</i>
 
 
 Following my embassy to the barbarian emperor&mdash;O, I could hardly believe it, she'd walked right into my trap!&mdash;as I strode back to my teleport pad, I happened upon a contingent of mercenaries, busy darning their space suits for the next invasion.
@@ -911,12 +911,12 @@ One caught my eye.
 Crisscrossed with plasma burns, it had a curious bilateral symmetry and wore a breastplate in the Orion style, much like those of its comrades.
 
 <font color="red">[T]urn page</font>`,
-  ],
+    ],
 
-  [
-    `./assets/story-images/2.jpg`,
+    [
+      `./assets/story-images/2.jpg`,
 
-    `It scowled up at me and flapped its arms.
+      `It scowled up at me and flapped its arms.
 
 I returned the traditional Invader salute and enquired, "Where are you from, ${sirOrMaam}?"
 
@@ -937,12 +937,12 @@ A faraway cast clouded the alien's visage.
 "It's a fine life," the mercenary shrugged. "I have treasures aplenty, the spoils of half the galaxy and three alien ${wivesOrHusbands}. One of each kind."
 
 <font color="red">[T]urn page</font>`,
-  ],
+    ],
 
-  [
-    `./assets/story-images/7.jpg`,
+    [
+      `./assets/story-images/7.jpg`,
 
-    `"But you are a civilized being, my friend. Are you not ashamed?"
+      `"But you are a civilized being, my friend. Are you not ashamed?"
 
 "I have all the best spice, your honor. I feel nothing."
 
@@ -953,12 +953,12 @@ I politely declined the smouldering baby-bone pipe it offered. It took a long dr
 For the briefest moment, its face twisted into a wild-eyed look.
 
 <font color="red">[T]urn page</font>`,
-  ],
+    ],
 
-  [
-    `./assets/story-images/5.jpg`,
+    [
+      `./assets/story-images/5.jpg`,
 
-    `"What do you know of such things?" the mercenary muttered and a single, spice-scented tear dripped off its laser-scarred chin.
+      `"What do you know of such things?" the mercenary muttered and a single, spice-scented tear dripped off its laser-scarred chin.
 
 But it quickly took another hit of the pipe and went back to patching its space suit.
 
@@ -971,12 +971,12 @@ I'd write up my notes on the needle ship on the way to the wormhole. With the al
 Such is the way of the High Reaches.
 
 <font color="red">[T]urn page</font>`,
-  ],
+    ],
 
-  [
-    `./assets/story-images/${lastPic}.jpg`,
+    [
+      `./assets/story-images/${lastPic}.jpg`,
 
-    `I sometimes wonder what became of that lone laser gunner from Earth. Almost certainly ${subjectPronoun} was killed when the empire fell, shortly after my return.
+      `I sometimes wonder what became of that lone laser gunner from Earth. Almost certainly ${subjectPronoun} was killed when the empire fell, shortly after my return.
 
 Any chance ${subjectPronoun} escaped? Not really. But who knows?
 
@@ -985,9 +985,8 @@ Maybe ${subjectPronoun} found some way out through the chaos of all those years,
 I like to think ${subjectPronoun} did.
 
 <font color="red">[T]urn page</font>`,
-  ],
-];
-
+    ],
+  ];
 }
 
 const storyEl = document.querySelector(".story-container");
@@ -1274,6 +1273,7 @@ let rightCol = 10;
 
 // Alien bullet variables.
 let alienBulletsArray = [];
+let alienBulletsElementArray = [];
 let alienRateOfFire = level;
 let alienBulletDue = Date.now() + (5000 * Math.random()) / alienRateOfFire;
 let maxAlienBullets = 16;
@@ -1324,7 +1324,7 @@ let endFlit = false;
 
 // Variables to do with the flash effect for when alien bullets hit the ground.
 let flashBrightness = 255;
-let fades = Array.from({length: maxAlienBullets * 2}, () => ({
+let fades = Array.from({ length: maxAlienBullets * 2 }, () => ({
   duration: 2000,
   stage: 1,
 }));
@@ -1811,23 +1811,23 @@ const musicSpeedIncreaseAmount = 0.02;
 function pickMusic() {
   const musicRandomizer = Math.random();
   let musicFile;
-    switch (true) {
-      case musicRandomizer < 0.2:
-        musicFile = "assets/music/POL-chubby-cat-short.wav";
-        break;
-      case musicRandomizer < 0.4:
-        musicFile = "assets/music/POL-combat-plan-short.wav";
-        break;
-      case musicRandomizer < 0.6:
-        musicFile = "assets/music/POL-bomb-carrier-short.wav";
-        break;
-      case musicRandomizer < 0.8:
-        musicFile = "assets/music/POL-secret-alchemy-short.wav";
-        break;
-      default:
-        musicFile = "assets/music/POL-galactic-chase-short.wav";
-    }
-    music.src = musicFile;
+  switch (true) {
+    case musicRandomizer < 0.2:
+      musicFile = "assets/music/POL-chubby-cat-short.wav";
+      break;
+    case musicRandomizer < 0.4:
+      musicFile = "assets/music/POL-combat-plan-short.wav";
+      break;
+    case musicRandomizer < 0.6:
+      musicFile = "assets/music/POL-bomb-carrier-short.wav";
+      break;
+    case musicRandomizer < 0.8:
+      musicFile = "assets/music/POL-secret-alchemy-short.wav";
+      break;
+    default:
+      musicFile = "assets/music/POL-galactic-chase-short.wav";
+  }
+  music.src = musicFile;
 }
 
 // Sound effects.
@@ -1835,7 +1835,9 @@ const shootEffect = new Audio("assets/SFX/LaserBlastQuick PE1095107.mp3");
 const laserShot = new Audio("assets/SFX/Laser-Shot-1.mp3");
 const hull = new Audio("assets/SFX/Hull-Breach-4.mp3");
 const voltage = new Audio("assets/SFX/Mad-Voltage.mp3");
-const scream = new Audio("assets/SFX/Scream-Short-C2-www.fesliyanstudios.com.mp3");
+const scream = new Audio(
+  "assets/SFX/Scream-Short-C2-www.fesliyanstudios.com.mp3"
+);
 const wood = new Audio("assets/SFX/WoodCrashesDistant FS022705.mp3");
 const rock = new Audio("assets/SFX/rock-destroy-6409.mp3");
 rock.volume = 0.1;
@@ -1849,8 +1851,25 @@ const damage = new Audio("assets/SFX/damage.wav");
 const LEXPLODE = new Audio("assets/SFX/LEXPLODE.wav");
 const blk = new Audio("assets/SFX/blkfoot4.wav");
 
-const sfx = [shootEffect, laserShot, hull, scream, wood, bomb, kaboom, mortar, explode1, Explosion1, Explosion2, damage, LEXPLODE, blk];
-sfx.forEach(sound => {sound.volume = 0.2});
+const sfx = [
+  shootEffect,
+  laserShot,
+  hull,
+  scream,
+  wood,
+  bomb,
+  kaboom,
+  mortar,
+  explode1,
+  Explosion1,
+  Explosion2,
+  damage,
+  LEXPLODE,
+  blk,
+];
+sfx.forEach((sound) => {
+  sound.volume = 0.2;
+});
 
 const wind = new Audio("assets/SFX/wind.mp3");
 wind.loop = true;
@@ -2054,8 +2073,8 @@ function fireAlienBullet(col) {
 
   const bulletSpeedY = 300 + 360 * Math.random() * r;
 
+  alienBulletsElementArray.push(newAlienBullet);
   alienBulletsArray.push({
-    element: newAlienBullet,
     type: type,
     speed: bulletSpeedY,
     top: bulletY,
@@ -2086,7 +2105,9 @@ function launchUfo() {
 const hiddenElementsOnBeam = () => {
   aliens.style.opacity = 0;
   barrierGrids.forEach((el) => (el.style.opacity = 0));
-  alienBulletsArray.forEach((el) => (el.element.style.visibility = "hidden"));
+  alienBulletsElementArray.forEach(
+    (el) => (el.element.style.visibility = "hidden")
+  );
 
   playerBullet.style.opacity = 0;
 };
@@ -2094,7 +2115,9 @@ const hiddenElementsOnBeam = () => {
 const showElementsOnBeam = () => {
   aliens.style.opacity = 1;
   barrierGrids.forEach((el) => (el.style.opacity = 1));
-  alienBulletsArray.forEach((el) => (el.element.style.visibility = "visible"));
+  alienBulletsElementArray.forEach(
+    (el) => (el.element.style.visibility = "visible")
+  );
   playerBullet.style.opacity = 1;
 };
 
@@ -2150,6 +2173,7 @@ function reset(restart) {
   const alienBullets = document.querySelectorAll(".alien-bullet");
   alienBullets.forEach((alienBullet) => alienBullet.remove());
   alienBulletsArray = [];
+  alienBulletsElementArray = [];
 
   playerBullet.style.visibility = "hidden";
   playerBulletRemoveMe = false;
@@ -2235,7 +2259,7 @@ function reset(restart) {
 
     aliensRemaining = alienGridHeight * alienGridWidth;
     if (level % 10 === 0) {
-      alienRateOfFire = 10
+      alienRateOfFire = 10;
     } else {
       alienRateOfFire = level % 10;
     }
@@ -2348,7 +2372,7 @@ function reset(restart) {
 
     resetBarriers();
 
-    fades = Array.from({length: maxAlienBullets * 2}, () => ({
+    fades = Array.from({ length: maxAlienBullets * 2 }, () => ({
       duration: 2000,
       stage: 1,
     }));
@@ -2488,6 +2512,7 @@ function update(frameDuration) {
         insetLeft: insetLeft,
         insetRight: insetRight - 60,
         direction: aliensDirection,
+        bullets: alienBulletsArray,
       },
       endBounce: endBounce,
       endFlit: endFlit,
@@ -2500,8 +2525,9 @@ function update(frameDuration) {
       ufo: {
         active: ufoActive,
         top: ufoTop,
-        left: ufoLeft
-      }
+        left: ufoLeft,
+        getPlayer: ufoGetPlayer,
+      },
     });
     worker.onmessage = function (event) {
       playerLeft = event.data.player.left;
@@ -2534,17 +2560,32 @@ function update(frameDuration) {
       if (event.data.player.bullet.removeMeMessageFromWorker) {
         playerBulletRemoveMe = true;
       }
-      for (let block of event.data.barriers.blocksToChange) {
-        playerBulletRemoveMe = true;
+      for (const block of event.data.barriers.blocksToChange) {
         barriers[block.barrierNumber][block.rowNumber][block.colNumber]++;
         blocksToChange.push(block);
       }
-    if (event.data.ufo.kill) {
-      killUfo = true;
-      score += mysteryScore[ufoScorePointer];
-      incrementScore = true;
-      ufoTimeUp = Date.now() + 20000 + Math.random() * 10000;
-    }
+      if (event.data.ufo.kill) {
+        killUfo = true;
+        score += mysteryScore[ufoScorePointer];
+        incrementScore = true;
+        ufoTimeUp = Date.now() + 20000 + Math.random() * 10000;
+      }
+      for (const index of event.data.aliens.bullets.removalIndices) {
+        if (alienBulletsArray.length > index) {
+          alienBulletsArray[index].removeMe = true;
+        }
+      }
+      // for (bullet of alienBulletsArray) {
+      //   bullet.top = event.data.aliens.bullets[index];
+      // }
+      if (event.data.player.hitByBullet) {
+        playerDeath(false);
+      }
+      if (event.data.player.hitByFireball) {
+        lives = 1;
+        player.className = "player";
+        playerDeath(false, true);
+      }
     };
 
     // Move player bullet.
@@ -2553,7 +2594,7 @@ function update(frameDuration) {
       playerBulletCollisions();
     }
 
-    // Move alien bullets and check for collisions with barriers or player or ground.
+    // Move alien bullets and check for collisions with player or ground.
     for (const bullet of alienBulletsArray) {
       if (ufoGetPlayer) break;
       bullet.top += (bullet.speed * frameDuration) / 1000;
@@ -2583,40 +2624,6 @@ function update(frameDuration) {
         bullet.groundHit = true;
         break;
       }
-      if (bullet.top + bulletHeight > barrierTop) {
-        for (let i = 0; i < 48; i++) {
-          if (
-            bullet.top + bulletHeight >= blockTop[i] &&
-            bullet.left + bulletWidth >= blockLeft[i] &&
-            bullet.left <= blockLeft[i] + 48 &&
-            blockVis[i] === true
-          ) {
-            const barrierNumber = Math.floor(i / 12);
-            const h = i % 12;
-            const rowNumber = Math.floor(h / 4);
-            const colNumber = h % 4;
-            barriers[barrierNumber][rowNumber][colNumber]++;
-            let removeMe = false;
-            if (
-              bullet.type === "fireball" ||
-              barriers[barrierNumber][rowNumber][colNumber] > 3
-            ) {
-              blockVis[i] = false;
-              removeMe = true;
-            }
-            blocksToChange.push({
-              rowNumber: rowNumber,
-              colNumber: colNumber,
-              barrierNumber: barrierNumber,
-              removeMe: removeMe,
-            });
-            if (bullet.type !== "fireball") {
-              bullet.removeMe = true;
-              break;
-            }
-          }
-        }
-      }
     }
 
     // Fire player bullets.
@@ -2643,9 +2650,11 @@ function update(frameDuration) {
     ufoBoost = 3;
   }
 
-  if ((ufoActive && ufoToggleBeam && ufoGetPlayer) ||
-    (ufoActive && (!ufoGetPlayer || ufoTakenPlayer))) {
-    ufoLeft += ufoBoost * (ufoDirection * frameDuration) / 5;
+  if (
+    (ufoActive && ufoToggleBeam && ufoGetPlayer) ||
+    (ufoActive && (!ufoGetPlayer || ufoTakenPlayer))
+  ) {
+    ufoLeft += (ufoBoost * (ufoDirection * frameDuration)) / 5;
   }
 
   if (ufoActive && (ufoLeft < -ufoWidth - 8 || ufoLeft > containerWidth + 8)) {
@@ -2681,6 +2690,7 @@ function playerDeath(final, fireball) {
     const alienBullets = document.querySelectorAll(".alien-bullet");
     alienBullets.forEach((alienBullet) => alienBullet.remove());
     alienBulletsArray = [];
+    alienBulletsElementArray = [];
     for (let i = 0; i < 3; i++) {
       lifeCounter[i].style.visibility = "hidden";
     }
@@ -2913,15 +2923,17 @@ function render() {
     playerBullet.style.left = `${playerBulletLeft}px`;
   }
 
-  for (const [index, bullet] of alienBulletsArray.entries()) {
+  for (const [index, bulletElement] of alienBulletsElementArray.entries()) {
+    let bullet = alienBulletsArray[index];
     if (bullet.removeMe) {
-      bullet.element.remove();
+      bulletElement.remove();
       alienBulletsArray.splice(index, 1);
+      alienBulletsElementArray.splice(index, 1);
       if (bullet.groundHit) {
         playBombEffect(bullet);
       }
     } else {
-      bullet.element.style.top = bullet.top + "px";
+      bulletElement.style.top = bullet.top + "px";
     }
   }
 
@@ -2943,7 +2955,10 @@ function render() {
   for (const blockToChange of blocksToChange) {
     rock.currentTime = 0;
     rock.play();
-    const i = 12 * blockToChange.barrierNumber + 4 * blockToChange.rowNumber + blockToChange.colNumber;
+    const i =
+      12 * blockToChange.barrierNumber +
+      4 * blockToChange.rowNumber +
+      blockToChange.colNumber;
     const block = blocks[i];
     if (blockToChange.removeMe === true) {
       block.style.visibility = "hidden";
@@ -3081,52 +3096,6 @@ function firePlayerBullet() {
 }
 
 function playerBulletCollisions() {
-  // for (let i = 0; i < blocks.length; i++) {
-  //   const block = blocks[i];
-  //   if (
-  //     playerBulletTop <= blockTop[i] + 48 &&
-  //     playerBulletTop + playerBulletHeight >= blockTop[i] &&
-  //     playerBulletLeft + playerBulletWidth >= blockLeft[i] &&
-  //     playerBulletLeft <= blockLeft[i] + 48 &&
-  //     blockVis[i] === true
-  //   ) {
-  //     playerBulletRemoveMe = true;
-  //     const barrierNumber = Math.floor(i / 12);
-  //     const h = i % 12;
-  //     const rowNumber = Math.floor(h / 4);
-  //     const colNumber = h % 4;
-  //     barriers[barrierNumber][rowNumber][colNumber]++;
-  //     let removeMe = false;
-  //     if (barriers[barrierNumber][rowNumber][colNumber] > 3) {
-  //       blockVis[i] = false;
-  //       removeMe = true;
-  //     }
-  //     blocksToChange.push({
-  //       block: block,
-  //       rowNumber: rowNumber,
-  //       colNumber: colNumber,
-  //       barrierNumber: barrierNumber,
-  //       removeMe: removeMe,
-  //       changed: false,
-  //     });
-  //     break;
-  //   }
-  // }
-
-  // if (ufoActive) {
-  //   if (
-  //     playerBulletTop <= ufoTop + ufoHeight &&
-  //     playerBulletLeft + playerBulletWidth >= ufoLeft &&
-  //     playerBulletLeft <= ufoLeft + ufoWidth
-  //   ) {
-  //     playerBulletRemoveMe = true;
-  //     killUfo = true;
-  //     score += mysteryScore[ufoScorePointer];
-  //     incrementScore = true;
-  //     ufoTimeUp = Date.now() + 20000 + Math.random() * 10000;
-  //   }
-  // }
-
   alienIsHit: for (let row = 0; row < alienGridHeight; row++) {
     for (let col = 0; col < alienGridWidth; col++) {
       if (alienAlive[row][col]) {
@@ -3517,7 +3486,7 @@ async function getScores() {
   }
 }
 
-const sendScore = async ({playerName, score, second, minute}) => {
+const sendScore = async ({ playerName, score, second, minute }) => {
   try {
     const response = await fetch("http://localhost:10000/add-score", {
       method: "POST",
@@ -3542,9 +3511,9 @@ const sendScore = async ({playerName, score, second, minute}) => {
   }
 };
 
-function addScore({name, score, minutes, seconds}) {
+function addScore({ name, score, minutes, seconds }) {
   const time = formatTime(minutes, seconds);
-  scores.push({name, score, time});
+  scores.push({ name, score, time });
   scores.sort((a, b) => b.score - a.score);
 }
 
@@ -3560,9 +3529,9 @@ const deleteMinimumScore = () => {
   scores.splice(minIndex, 1);
 };
 
-const updateScoresOnAdd = ({playerName, score, second, minute}) => {
+const updateScoresOnAdd = ({ playerName, score, second, minute }) => {
   const time = formatTime(minute, second);
-  scores.push({name: playerName, score: +score, time});
+  scores.push({ name: playerName, score: +score, time });
   scores.sort((a, b) => b.score - a.score);
 };
 
@@ -3624,7 +3593,7 @@ const sendScoreView = (callback) => {
     let minute = parseInt(time[0]);
     let second = parseInt(time[1]);
 
-    callback({playerName, score, second, minute});
+    callback({ playerName, score, second, minute });
   });
 };
 
@@ -3646,7 +3615,7 @@ function displayScoreboard(scores, message) {
   container.appendChild(text);
 
   for (let i = start; i <= end; i++) {
-    const {name, score, time} = scores[i - 1];
+    const { name, score, time } = scores[i - 1];
 
     const entry = document.createElement("div");
     entry.className = "score-entry";
