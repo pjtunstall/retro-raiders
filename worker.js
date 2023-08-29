@@ -1,10 +1,12 @@
 "use strict";
 
-const playerWidth = 33;
-const playerBulletHeight = 12;
-const playerBulletWidth = 3;
 const containerWidth = 1600;
 const containerHeight = 770;
+const playerWidth = 33;
+const playerHeight = 33;
+const playerBulletHeight = 12;
+const playerBulletWidth = 3;
+const playerTop = containerHeight - playerHeight;
 const alienGridWidth = 11;
 const alienGridPixelWidth = 600;
 const gap = 0;
@@ -174,7 +176,7 @@ function update(data) {
     }
   }
 
-  // Check for collisions between aliens bullets and barriers
+  // Check for collisions between aliens bullets and barriers, ground.
   for (const bullet of data.aliens.bullets) {
     if (bullet.removeMe || data.ufo.getPlayer) {
       break;
@@ -182,32 +184,27 @@ function update(data) {
 
     bullet.top += (bullet.speed * data.frameDuration) / 1000;
 
-    // if (
-    //   bullet.type === "fireball" &&
-    //   bullet.top + 64 >= player.top &&
-    //   bullet.left + 16 >= player.left &&
-    //   bullet.left <= playerLeft + playerWidth
-    // ) {
-    //   data.player.hitByFireball;
-    //   removalIndices.push(index);
-    //   break;
-    // } else if (
-    //   bullet.top + alienBulletHeight >= data.player.top &&
-    //   bullet.left + alienBulletWidth >= data.player.left &&
-    //   bullet.left <= player.left + playerWidth
-    // ) {
-    //   // Cheat mode:
-    //   // Comment out this line to be invulnerable to alien bullets for testing.
-    //   data.player.hitByBullet = true;
-    //   removalIndices.push(index);
-    //   break;
-    // }
-
-    // // if (bullet.top + alienBulletHeight > containerHeight) {
-    // //   removalIndices.push(index);
-    // //   bullet.groundHit = true;
-    // //   break;
-    // // }
+    if (
+      bullet.type === "fireball" &&
+      bullet.top + 64 >= playerTop &&
+      bullet.left + 16 >= data.player.left &&
+      bullet.left <= data.player.left + playerWidth
+    ) {
+      data.player.hitByFireball = true;
+      bullet.removeMe = true;
+      break;
+    }
+    if (
+      bullet.top + alienBulletHeight >= playerTop &&
+      bullet.left + alienBulletWidth >= data.player.left &&
+      bullet.left <= data.player.left + playerWidth
+    ) {
+      // Cheat mode:
+      // Comment out this line to be invulnerable to alien bullets for testing.
+      data.player.hitByBullet = true;
+      bullet.removeMe = true;
+      continue;
+    }
 
     if (bullet.top + alienBulletHeight > barrierTop) {
       for (let i = 0; i < 48; i++) {
@@ -239,6 +236,11 @@ function update(data) {
           }
         }
       }
+    }
+
+    if (bullet.top + alienBulletHeight > containerHeight) {
+      bullet.removeMe = true;
+      bullet.groundHit = true;
     }
   }
 
