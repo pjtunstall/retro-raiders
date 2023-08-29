@@ -15,6 +15,9 @@ const ufoHeight = 40;
 const ufoWidth = 40;
 const barrierTop = containerHeight - 185;
 
+let endBounce = false;
+let endFlit = false;
+
 self.onmessage = function (event) {
   const data = event.data;
   if (data.resetInProgress) {
@@ -172,13 +175,12 @@ function update(data) {
   }
 
   // Check for collisions between aliens bullets and barriers
-  let removalIndices = [];
-  for (const [index, bullet] of data.aliens.bullets.entries()) {
+  for (const bullet of data.aliens.bullets) {
     if (bullet.removeMe || data.ufo.getPlayer) {
       break;
     }
 
-    // bullet.top += (bullet.speed * data.frameDuration) / 1000;
+    bullet.top += (bullet.speed * data.frameDuration) / 1000;
 
     // if (
     //   bullet.type === "fireball" &&
@@ -232,14 +234,13 @@ function update(data) {
             destroyer: bullet.type,
           });
           if (bullet.type !== "fireball") {
-            removalIndices.push(index);
+            bullet.removeMe = true;
             break;
           }
         }
       }
     }
   }
-  data.aliens.bullets.removalIndices = removalIndices;
 
   return data;
 }

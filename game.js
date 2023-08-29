@@ -1271,17 +1271,25 @@ let insetRight = 0;
 let leftCol = 0;
 let rightCol = 10;
 
+// Variables relating to alien movement patterns on later levels.
+let endBounce = false;
+let endFlit = false;
+
 // Alien bullet variables.
 let alienBulletsArray = [];
 let alienBulletsElementArray = [];
+function* IDGenerator() {
+  let i = 0;
+  while (true) {
+    yield ++i;
+  }
+}
+const ids = IDGenerator();
 let alienRateOfFire = level;
 let alienBulletDue = Date.now() + (5000 * Math.random()) / alienRateOfFire;
 let maxAlienBullets = 16;
 const bulletWidth = 10;
 const bulletHeight = 30;
-
-let endBounce = false;
-let endFlit = false;
 
 // Uncomment to test level parameters: background image and difficulty parameters,
 // but not selection of alien types or choice or black vs white aliens.
@@ -2073,7 +2081,8 @@ function fireAlienBullet(col) {
 
   const bulletSpeedY = 300 + 360 * Math.random() * r;
 
-  alienBulletsElementArray.push(newAlienBullet);
+  let n = ids.next().value;
+  alienBulletsElementArray.push({ element: newAlienBullet, id: n });
   alienBulletsArray.push({
     type: type,
     speed: bulletSpeedY,
@@ -2081,6 +2090,7 @@ function fireAlienBullet(col) {
     left: bulletX,
     r: r,
     removeMe: false,
+    id: n,
   });
 }
 
@@ -2570,14 +2580,16 @@ function update(frameDuration) {
         incrementScore = true;
         ufoTimeUp = Date.now() + 20000 + Math.random() * 10000;
       }
-      for (const index of event.data.aliens.bullets.removalIndices) {
-        if (alienBulletsArray.length > index) {
-          alienBulletsArray[index].removeMe = true;
+      for (const bullet of alienBulletsArray) {
+        for (const workerBullet of event.data.aliens.bullets) {
+          if (bullet.id === workerBullet.id) {
+            bullet.top = workerBullet.top;
+            if (workerBullet.removeMe) {
+              bullet.removeMe = true;
+            }
+          }
         }
       }
-      // for (bullet of alienBulletsArray) {
-      //   bullet.top = event.data.aliens.bullets[index];
-      // }
       if (event.data.player.hitByBullet) {
         playerDeath(false);
       }
@@ -2597,7 +2609,7 @@ function update(frameDuration) {
     // Move alien bullets and check for collisions with player or ground.
     for (const bullet of alienBulletsArray) {
       if (ufoGetPlayer) break;
-      bullet.top += (bullet.speed * frameDuration) / 1000;
+      // bullet.top += (bullet.speed * frameDuration) / 1000;
       if (
         bullet.type === "fireball" &&
         bullet.top + 64 >= playerTop &&
@@ -2926,14 +2938,14 @@ function render() {
   for (const [index, bulletElement] of alienBulletsElementArray.entries()) {
     let bullet = alienBulletsArray[index];
     if (bullet.removeMe) {
-      bulletElement.remove();
+      bulletElement.element.remove();
       alienBulletsArray.splice(index, 1);
       alienBulletsElementArray.splice(index, 1);
       if (bullet.groundHit) {
         playBombEffect(bullet);
       }
     } else {
-      bulletElement.style.top = bullet.top + "px";
+      bulletElement.element.style.top = bullet.top + "px";
     }
   }
 
