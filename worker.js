@@ -16,6 +16,7 @@ const alienBulletWidth = 10;
 const ufoHeight = 40;
 const ufoWidth = 40;
 const barrierTop = containerHeight - 185;
+let backgroundColor = [0, 0, 0];
 
 let endBounce = false;
 let endFlit = false;
@@ -32,6 +33,29 @@ function update(data) {
   data.barriers.blocksToChange = [];
   data.player.bullet.removeMeMessageFromWorker = false;
   data.ufo.kill = false;
+
+  // if (data.fadeOption) {
+  //   let brightest = 1;
+  //   let fadesCount = data.fades.length;
+  //   for (let i = 0; i < data.fades.length; i++) {
+  //     if (data.fades[i].stage < 1) {
+  //       console.log(data.fades[i].stage);
+  //       data.fades[i].stage += data.frameDuration / data.fades[i].duration;
+  //       if (data.fades[i].stage < brightest) {
+  //         brightest = data.fades[i].stage;
+  //       }
+  //     } else {
+  //       data.fades[i].stage = 1;
+  //       fadesCount--;
+  //     }
+  //   }
+  //   if (fadesCount === 0) {
+  //     data.quake = false;
+  //   }
+  //   for (let i = 0; i < 3; i++) {
+  //     data.backgroundColor[i] = 255 * (1 - brightest);
+  //   }
+  // }
 
   data.player.left +=
     (data.player.direction * data.player.step * data.frameDuration) / 1000;
@@ -178,8 +202,11 @@ function update(data) {
 
   // Collisions between aliens bullets and barriers, ground, or player.
   for (const bullet of data.aliens.bullets) {
-    if (bullet.removeMe || data.ufo.getPlayer) {
+    if (data.ufo.getPlayer) {
       break;
+    }
+    if (bullet.removeMe) {
+      continue;
     }
 
     bullet.top += (bullet.speed * data.frameDuration) / 1000;

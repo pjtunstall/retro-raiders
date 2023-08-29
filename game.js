@@ -1331,13 +1331,10 @@ const bulletHeight = 30;
 // skyline.classList.add('forest');
 
 // Variables to do with the flash effect for when alien bullets hit the ground.
-let flashBrightness = 255;
 let fades = Array.from({ length: maxAlienBullets * 2 }, () => ({
   duration: 2000,
   stage: 1,
 }));
-const startColor = Array(3).fill(flashBrightness);
-const endColor = [0, 0, 0];
 const backgroundColor = [0, 0, 0];
 let quake = false;
 
@@ -2460,7 +2457,6 @@ function updateTimer() {
 const worker = new Worker("worker.js");
 
 function update(frameDuration) {
-  // Update fades.
   if (fadeOption) {
     let brightest = 1;
     let fadesCount = fades.length;
@@ -2479,7 +2475,7 @@ function update(frameDuration) {
       quake = false;
     }
     for (let i = 0; i < 3; i++) {
-      backgroundColor[i] = startColor[0] * (1 - brightest);
+      backgroundColor[i] = 255 * (1 - brightest);
     }
   }
 
@@ -2500,6 +2496,10 @@ function update(frameDuration) {
       frameDuration: frameDuration,
       level: level,
       levelStartTime: levelStartTime,
+      fadeOption: fadeOption,
+      // fades: fades,
+      // quake: quake,
+      // backgroundColor: backgroundColor,
       ufoGetPlayer: ufoGetPlayer,
       player: {
         left: playerLeft,
@@ -2540,6 +2540,13 @@ function update(frameDuration) {
       },
     });
     worker.onmessage = function (event) {
+      // for (let i in fades) {
+      //   fades[i].stage = event.data.fades[i].stage;
+      // }
+      // for (let i in backgroundColor) {
+      //   backgroundColor[i] = event.data.backgroundColor[i];
+      // }
+      // quake = event.data.quake;
       playerLeft = event.data.player.left;
       // playerBulletTop = event.data.player.bullet.top;
       if (event.data.player.dead) {
