@@ -2654,7 +2654,7 @@ function update(frameDuration) {
 }
 
 function playerDeath(final, fireball) {
-  if (playerDeathInProgress) {
+  if (playerDeathInProgress || isGameOver) {
     return;
   }
   playerDeathInProgress = true;
