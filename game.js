@@ -2645,12 +2645,6 @@ function update(frameDuration) {
       }
     };
 
-    // // Move player bullet.
-    // if (playerBulletOnScreen) {
-    //   playerBulletTop -= (playerBulletSpeedY * frameDuration) / 1000;
-    //   // playerBulletCollisions();
-    // }
-
     // Fire player bullets.
     if (spaceKeyDown && !playerBulletOnScreen && !playerBulletRemoveMe) {
       firePlayerBulletThrottled();
