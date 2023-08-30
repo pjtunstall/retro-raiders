@@ -18,6 +18,16 @@ const scale = 0.5;
 const scaledHeight = scale * alienHeight;
 const scaledWidth = scale * alienWidth;
 const gap = 0;
+const alienTopInGrid = Array(alienGridHeight);
+const alienLeftInGrid = Array(alienGridHeight);
+for (let i = 0; i < alienGridHeight; i++) {
+  alienTopInGrid[i] = Array(alienGridWidth);
+  alienLeftInGrid[i] = Array(alienGridWidth);
+  for (let j = 0; j < alienGridWidth; j++) {
+    alienTopInGrid[i][j] = i * alienHeight + (alienHeight - scaledHeight) / 2;
+    alienLeftInGrid[i][j] = j * alienWidth + (alienWidth - scaledWidth) / 2;
+  }
+}
 const maxAlienSpeed = 512;
 const alienBulletHeight = 30;
 const alienBulletWidth = 10;
@@ -168,16 +178,14 @@ function update(data) {
         if (data.aliens.alive[row][col]) {
           if (
             data.player.bullet.top <=
-              data.aliens.top +
-                data.aliens.topInGrid[row][col] +
-                scaledHeight &&
+              data.aliens.top + alienTopInGrid[row][col] + scaledHeight &&
             data.player.bullet.top + playerBulletHeight >=
-              data.aliens.top + data.aliens.topInGrid[row][col] &&
+              data.aliens.top + alienTopInGrid[row][col] &&
             data.player.bullet.left >=
-              data.aliens.left + data.aliens.leftInGrid[row][col] + gap * col &&
+              data.aliens.left + alienLeftInGrid[row][col] + gap * col &&
             data.player.bullet.left <=
               data.aliens.left +
-                data.aliens.leftInGrid[row][col] +
+                alienLeftInGrid[row][col] +
                 scaledWidth +
                 gap * col
           ) {
