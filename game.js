@@ -2037,11 +2037,13 @@ const newGameThrottled = throttle(newGame, 256);
 const turnPageThrottled = throttle(turnPage, 256);
 
 function fireAlienBullet(col) {
+  const howLowCanYouGo = aliensTop + aliensGroundSensor;
   if (
     resetInProgress ||
     isInUfoCutScene ||
     isGameOver ||
-    playerDeathInProgress
+    playerDeathInProgress ||
+    howLowCanYouGo + 30 > containerHeight
   ) {
     return;
   }
@@ -2766,7 +2768,22 @@ function render() {
   aliens.style.top = aliensTop + "px";
 
   for (const poorDoomedAlien of aliensToRemove) {
-    alienElements[poorDoomedAlien.row][poorDoomedAlien.col].classList.remove(
+    hull.currentTime = 0;
+    hull.play();
+    const row = poorDoomedAlien.row;
+    const col = poorDoomedAlien.col;
+    switch (true) {
+      case alienElements[row][col].classList.contains("squid"):
+        score += 30;
+        break;
+      case alienElements[row][col].classList.contains("crab"):
+        score += 20;
+        break;
+      default:
+        score += 10;
+    }
+    incrementScore = true;
+    alienElements[row][col].classList.remove(
       "squid",
       "squid-black",
       "crab",
@@ -2779,8 +2796,6 @@ function render() {
     );
     alienElements[poorDoomedAlien.row][poorDoomedAlien.col].style.animation =
       "";
-    hull.currentTime = 0;
-    hull.play();
     alienTimeoutID = setTimeout(function () {
       alienElements[poorDoomedAlien.row][poorDoomedAlien.col].classList.remove(
         "alien-explosion"
@@ -3128,17 +3143,6 @@ function playerBulletCollisions() {
             alienAnimationDuration -= alienAnimationIncrement;
             aliensDanceFaster = true;
           }
-          switch (true) {
-            case alienElements[row][col].classList.contains("squid"):
-              score += 30;
-              break;
-            case alienElements[row][col].classList.contains("crab"):
-              score += 20;
-              break;
-            default:
-              score += 10;
-          }
-          incrementScore = true;
           if (col === leftCol && alienAlive.every((row) => !row[col])) {
             removeLeftColumn();
           }
