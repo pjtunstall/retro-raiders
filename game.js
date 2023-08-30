@@ -1328,7 +1328,7 @@ const bulletHeight = 30;
 // startHeight = 40;
 // aliensStep = 180;
 // alienRateOfFire = 10;
-// skyline.classList.add('forest');
+// skyline.classList.add("forest");
 
 // Variables to do with the flash effect for when alien bullets hit the ground.
 let fades = Array.from({ length: maxAlienBullets * 2 }, () => ({
@@ -2511,7 +2511,6 @@ function update(frameDuration) {
           isOnScreen: playerBulletOnScreen,
           top: playerBulletTop,
           left: playerBulletLeft,
-          speedY: playerBulletSpeedY,
           removeMeMessageToWorker: playerBulletRemoveMe,
         },
       },
@@ -2522,9 +2521,19 @@ function update(frameDuration) {
         step: aliensStep,
         groundSensor: aliensGroundSensor,
         insetLeft: insetLeft,
-        insetRight: insetRight - 60,
+        insetRight: insetRight,
         direction: aliensDirection,
         bullets: alienBulletsArray,
+        alive: alienAlive,
+        animationDuration: alienAnimationDuration,
+        danceFaster: aliensDanceFaster,
+        lowestInColumn: lowestInColumn,
+        leftCol: leftCol,
+        rightCol: rightCol,
+        bottomRow: bottomRow,
+        topInGrid: alienTopInGrid,
+        leftInGrid: alienLeftInGrid,
+        beingRemoved: aliensToRemove,
       },
       endBounce: endBounce,
       endFlit: endFlit,
@@ -2550,7 +2559,9 @@ function update(frameDuration) {
       // }
       // quake = event.data.quake;
       playerLeft = event.data.player.left;
-      // playerBulletTop = event.data.player.bullet.top;
+      if (playerBulletOnScreen) {
+        playerBulletTop = event.data.player.bullet.top;
+      }
       if (event.data.player.dead) {
         if (storyMode) {
           isInUfoCutScene = true;
@@ -2572,10 +2583,32 @@ function update(frameDuration) {
       }
       aliensTop = event.data.aliens.top;
       aliensLeft = event.data.aliens.left;
-      // aliensStep = event.data.aliens.step;
+      aliensStep = event.data.aliens.step;
       aliensDirection = event.data.aliens.direction;
       endBounce = event.data.endBounce;
       endFlit = event.data.endFlit;
+      leftCol = event.data.aliens.leftCol;
+      rightCol = event.data.aliens.rightCol;
+      bottomRow = event.data.aliens.bottomRow;
+      insetRight = event.data.aliens.insetRight;
+      insetLeft = event.data.aliens.insetLeft;
+      aliensGroundSensor = event.data.aliens.groundSensor;
+      for (const row in event.data.aliens.alive) {
+        for (const col in row) {
+          // alienAlive[row][col] = event.data.aliens.alive[row][col];
+          alienTopInGrid[row][col] = event.data.aliens.topInGrid[row][col];
+        }
+      }
+      aliensRemaining = event.data.aliens.remaining;
+      const gotOne = event.data.aliens.toRemove;
+      if (gotOne) {
+        aliensToRemove.push(event.data.aliens.toRemove);
+      }
+      alienAnimationDuration = event.data.aliens.animationDuration;
+      aliensDanceFaster = event.data.aliens.danceFaster;
+      for (let col = 0; col < alienGridWidth; col++) {
+        lowestInColumn[col] = event.data.aliens.lowestInColumn[col];
+      }
       if (event.data.player.bullet.removeMeMessageFromWorker) {
         playerBulletRemoveMe = true;
       }
@@ -2612,11 +2645,11 @@ function update(frameDuration) {
       }
     };
 
-    // Move player bullet.
-    if (playerBulletOnScreen) {
-      playerBulletTop -= (playerBulletSpeedY * frameDuration) / 1000;
-      playerBulletCollisions();
-    }
+    // // Move player bullet.
+    // if (playerBulletOnScreen) {
+    //   playerBulletTop -= (playerBulletSpeedY * frameDuration) / 1000;
+    //   // playerBulletCollisions();
+    // }
 
     // Fire player bullets.
     if (spaceKeyDown && !playerBulletOnScreen && !playerBulletRemoveMe) {
@@ -2772,6 +2805,7 @@ function render() {
     hull.play();
     const row = poorDoomedAlien.row;
     const col = poorDoomedAlien.col;
+    alienAlive[row][col] = false;
     switch (true) {
       case alienElements[row][col].classList.contains("squid"):
         score += 30;
@@ -3100,100 +3134,100 @@ function firePlayerBullet() {
   }
 }
 
-function playerBulletCollisions() {
-  alienIsHit: for (let row = 0; row < alienGridHeight; row++) {
-    for (let col = 0; col < alienGridWidth; col++) {
-      if (alienAlive[row][col]) {
-        if (
-          playerBulletTop <=
-            aliensTop + alienTopInGrid[row][col] + scaledHeight &&
-          playerBulletTop + playerBulletHeight >=
-            aliensTop + alienTopInGrid[row][col] &&
-          playerBulletLeft >=
-            aliensLeft + alienLeftInGrid[row][col] + gap * col &&
-          playerBulletLeft <=
-            aliensLeft + alienLeftInGrid[row][col] + scaledWidth + gap * col
-        ) {
-          if (level % 10 < 6 || level > 7) {
-            aliensStep += 10;
-          } else {
-            aliensStep += 7;
-          }
-          playerBulletRemoveMe = true;
-          aliensRemaining--;
-          let isLastOne = false;
-          if (aliensRemaining < 1) {
-            isLastOne = true;
-          }
-          aliensToRemove.push({
-            row: row,
-            col: col,
-            isLastOne: isLastOne,
-          });
-          alienAlive[row][col] = false;
-          if (row === lowestInColumn[col]) {
-            for (let i = row; i >= 0; i--) {
-              if (alienAlive[i][col]) {
-                break;
-              }
-              lowestInColumn[col]--;
-            }
-          }
-          if (alienAnimationDuration > 0.3) {
-            alienAnimationDuration -= alienAnimationIncrement;
-            aliensDanceFaster = true;
-          }
-          if (col === leftCol && alienAlive.every((row) => !row[col])) {
-            removeLeftColumn();
-          }
-          if (col === rightCol && alienAlive.every((row) => !row[col])) {
-            removeRightColumn();
-          }
-          if (
-            row === bottomRow &&
-            alienAlive[row].every((colValue) => !colValue)
-          ) {
-            removeRow();
-          }
-          break alienIsHit;
-        }
-      }
-    }
-  }
-}
+// function playerBulletCollisions() {
+//   alienIsHit: for (let row = 0; row < alienGridHeight; row++) {
+//     for (let col = 0; col < alienGridWidth; col++) {
+//       if (alienAlive[row][col]) {
+//         if (
+//           playerBulletTop <=
+//             aliensTop + alienTopInGrid[row][col] + scaledHeight &&
+//           playerBulletTop + playerBulletHeight >=
+//             aliensTop + alienTopInGrid[row][col] &&
+//           playerBulletLeft >=
+//             aliensLeft + alienLeftInGrid[row][col] + gap * col &&
+//           playerBulletLeft <=
+//             aliensLeft + alienLeftInGrid[row][col] + scaledWidth + gap * col
+//         ) {
+//           if (level % 10 < 6 || level > 7) {
+//             aliensStep += 10;
+//           } else {
+//             aliensStep += 7;
+//           }
+//           playerBulletRemoveMe = true;
+//           aliensRemaining--;
+//           let isLastOne = false;
+//           if (aliensRemaining < 1) {
+//             isLastOne = true;
+//           }
+//           aliensToRemove.push({
+//             row: row,
+//             col: col,
+//             isLastOne: isLastOne,
+//           });
+//           alienAlive[row][col] = false;
+//           if (row === lowestInColumn[col]) {
+//             for (let i = row; i >= 0; i--) {
+//               if (alienAlive[i][col]) {
+//                 break;
+//               }
+//               lowestInColumn[col]--;
+//             }
+//           }
+//           if (alienAnimationDuration > 0.3) {
+//             alienAnimationDuration -= alienAnimationIncrement;
+//             aliensDanceFaster = true;
+//           }
+//           if (col === leftCol && alienAlive.every((row) => !row[col])) {
+//             removeLeftColumn();
+//           }
+//           if (col === rightCol && alienAlive.every((row) => !row[col])) {
+//             removeRightColumn();
+//           }
+//           if (
+//             row === bottomRow &&
+//             alienAlive[row].every((colValue) => !colValue)
+//           ) {
+//             removeRow();
+//           }
+//           break alienIsHit;
+//         }
+//       }
+//     }
+//   }
+// }
 
-// Logic to deal with what happens when the bottom row of aliens is destroyed.
-function removeRow() {
-  bottomRow--;
-  aliensGroundSensor -= alienHeight;
-  while (
-    bottomRow > 0 &&
-    alienAlive[bottomRow].every((colValue) => !colValue)
-  ) {
-    bottomRow--;
-    aliensGroundSensor -= alienHeight;
-  }
-}
+// // Logic to deal with what happens when the bottom row of aliens is destroyed.
+// function removeRow() {
+//   bottomRow--;
+//   aliensGroundSensor -= alienHeight;
+//   while (
+//     bottomRow > 0 &&
+//     alienAlive[bottomRow].every((colValue) => !colValue)
+//   ) {
+//     bottomRow--;
+//     aliensGroundSensor -= alienHeight;
+//   }
+// }
 
-// Logic for when the leftmost column of aliens is destroyed.
-function removeLeftColumn() {
-  leftCol++;
-  insetLeft += alienWidth + gap;
-  while (leftCol < rightCol && alienAlive.every((row) => !row[leftCol])) {
-    leftCol++;
-    insetLeft += alienWidth + gap;
-  }
-}
+// // Logic for when the leftmost column of aliens is destroyed.
+// function removeLeftColumn() {
+//   leftCol++;
+//   insetLeft += alienWidth + gap;
+//   while (leftCol < rightCol && alienAlive.every((row) => !row[leftCol])) {
+//     leftCol++;
+//     insetLeft += alienWidth + gap;
+//   }
+// }
 
-// Logic for what to do when the rightmost column of aliens is destroyed.
-function removeRightColumn() {
-  rightCol--;
-  insetRight += alienWidth + gap;
-  while (rightCol > leftCol && alienAlive.every((row) => !row[rightCol])) {
-    rightCol--;
-    insetRight += alienWidth + gap;
-  }
-}
+// // Logic for what to do when the rightmost column of aliens is destroyed.
+// function removeRightColumn() {
+//   rightCol--;
+//   insetRight += alienWidth + gap;
+//   while (rightCol > leftCol && alienAlive.every((row) => !row[rightCol])) {
+//     rightCol--;
+//     insetRight += alienWidth + gap;
+//   }
+// }
 
 function handleKeyDown(event) {
   const key = event.key;

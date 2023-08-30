@@ -6,13 +6,22 @@ const playerWidth = 33;
 const playerHeight = 33;
 const playerBulletHeight = 12;
 const playerBulletWidth = 3;
+const playerBulletSpeed = 1024;
 const playerTop = containerHeight - playerHeight;
+const alienGridHeight = 5;
 const alienGridWidth = 11;
-const alienGridPixelWidth = 600;
+const alienGridPixelHeight = 300;
+const alienGridPixelWidth = 660;
+const alienWidth = alienGridPixelWidth / alienGridWidth;
+const alienHeight = alienGridPixelHeight / alienGridHeight;
+const scale = 0.5;
+const scaledHeight = scale * alienHeight;
+const scaledWidth = scale * alienWidth;
 const gap = 0;
 const maxAlienSpeed = 512;
 const alienBulletHeight = 30;
 const alienBulletWidth = 10;
+const alienAnimationIncrement = 0.03;
 const ufoHeight = 40;
 const ufoWidth = 40;
 const barrierTop = containerHeight - 185;
@@ -33,6 +42,7 @@ function update(data) {
   data.barriers.blocksToChange = [];
   data.player.bullet.removeMeMessageFromWorker = false;
   data.ufo.kill = false;
+  data.aliens.toRemove = null;
 
   // if (data.fadeOption) {
   //   let brightest = 1;
@@ -57,15 +67,20 @@ function update(data) {
   //   }
   // }
 
+  // Move player.
   data.player.left +=
     (data.player.direction * data.player.step * data.frameDuration) / 1000;
   data.player.left = Math.max(
     0,
     Math.min(containerWidth - playerWidth, data.player.left)
   );
-  //   if (data.player.bullet.isOnScreen) {
-  //     data.player.bullet.top -= data.player.bullet.speedY * data.frameDuration / 1000;
-  //   }
+
+  // Move player bullet.
+  if (data.player.bullet.isOnScreen) {
+    data.player.bullet.top -= (playerBulletSpeed * data.frameDuration) / 1000;
+  } else {
+    data.player.bullet.top = playerTop - playerBulletHeight;
+  }
 
   // Move aliens and check if they've reached the sides or bottom.
   if (data.aliens.remaining > 0) {
@@ -109,7 +124,7 @@ function update(data) {
       }
     }
     if (data.aliens.left + data.aliens.insetLeft < 0) {
-      data.aliens.left = 0 - data.aliens.insetLeft;
+      data.aliens.left = -data.aliens.insetLeft;
       data.aliens.direction = 1;
       if (howLowCanYouGo < containerHeight) {
         data.aliens.top += 20;
@@ -140,6 +155,117 @@ function update(data) {
         }
       } else {
         data.player.dead = true;
+      }
+    }
+  }
+
+  if (
+    data.player.bullet.isOnScreen &&
+    !data.player.bullet.removeMeMessageToWorker
+  ) {
+    alienIsHit: for (let row = 0; row < alienGridHeight; row++) {
+      for (let col = 0; col < alienGridWidth; col++) {
+        if (data.aliens.alive[row][col]) {
+          if (
+            data.player.bullet.top <=
+              data.aliens.top +
+                data.aliens.topInGrid[row][col] +
+                scaledHeight &&
+            data.player.bullet.top + playerBulletHeight >=
+              data.aliens.top + data.aliens.topInGrid[row][col] &&
+            data.player.bullet.left >=
+              data.aliens.left + data.aliens.leftInGrid[row][col] + gap * col &&
+            data.player.bullet.left <=
+              data.aliens.left +
+                data.aliens.leftInGrid[row][col] +
+                scaledWidth +
+                gap * col
+          ) {
+            let beingRemoved = false;
+            for (const alienToRemove of data.aliens.beingRemoved) {
+              if (alienToRemove.row === row && alienToRemove.col === col) {
+                beingRemoved = true;
+              }
+            }
+            if (!beingRemoved) {
+              data.player.bullet.removeMeMessageFromWorker = true;
+              data.aliens.alive[row][col] = false;
+              if (data.level % 10 < 6 || data.level > 7) {
+                data.aliens.step += 10;
+              } else {
+                data.aliens.step += 7;
+              }
+              data.aliens.remaining--;
+              let isLastOne = false;
+              if (data.aliens.remaining < 1) {
+                isLastOne = true;
+              }
+              if (row === data.aliens.lowestInColumn[col]) {
+                for (let i = row; i >= 0; i--) {
+                  if (data.aliens.alive[i][col]) {
+                    break;
+                  }
+                  data.aliens.lowestInColumn[col]--;
+                }
+              }
+              if (data.aliens.animationDuration > 0.3) {
+                data.aliens.animationDuration -= alienAnimationIncrement;
+                data.aliens.danceFaster = true;
+              }
+              if (
+                col === data.aliens.leftCol &&
+                data.aliens.alive.every((row) => !row[col])
+              ) {
+                data.aliens.leftCol++;
+                while (
+                  data.aliens.leftCol < data.aliens.rightCol &&
+                  data.aliens.alive.every((row) => !row[data.aliens.leftCol])
+                ) {
+                  data.aliens.leftCol++;
+                }
+                data.aliens.insetLeft =
+                  (alienWidth + gap) * data.aliens.leftCol;
+              }
+              if (
+                col === data.aliens.rightCol &&
+                data.aliens.alive.every((row) => !row[col])
+              ) {
+                data.aliens.rightCol--;
+                while (
+                  data.aliens.rightCol > data.aliens.leftCol &&
+                  data.aliens.alive.every((row) => !row[data.aliens.rightCol])
+                ) {
+                  data.aliens.rightCol--;
+                }
+                data.aliens.insetRight =
+                  (alienWidth + gap) *
+                  (alienGridWidth - 1 - data.aliens.rightCol);
+              }
+              if (
+                row === data.aliens.bottomRow &&
+                data.aliens.alive[row].every((colValue) => !colValue)
+              ) {
+                data.aliens.bottomRow--;
+                data.aliens.groundSensor -= alienHeight;
+                while (
+                  data.aliens.bottomRow > 0 &&
+                  data.aliens.alive[data.aliens.bottomRow].every(
+                    (colValue) => !colValue
+                  )
+                ) {
+                  data.aliens.bottomRow--;
+                  data.aliens.groundSensor -= alienHeight;
+                }
+              }
+              data.aliens.toRemove = {
+                row: row,
+                col: col,
+                isLastOne: isLastOne,
+              };
+              break alienIsHit;
+            }
+          }
+        }
       }
     }
   }
