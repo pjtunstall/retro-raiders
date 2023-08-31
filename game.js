@@ -1279,7 +1279,7 @@ function* IDGenerator() {
 const ids = IDGenerator();
 let alienRateOfFire = level;
 let alienBulletDue = Date.now() + (5000 * Math.random()) / alienRateOfFire;
-let maxAlienBullets = 16;
+const maxAlienBullets = 16;
 const bulletWidth = 10;
 const bulletHeight = 30;
 
@@ -1323,24 +1323,12 @@ const bulletHeight = 30;
 // skyline.classList.add("forest");
 
 // Variables to do with the flash effect for when alien bullets hit the ground.
-let fades = Array.from({ length: maxAlienBullets * 2 }, () => ({
-  duration: 2000,
-  stage: 1,
-}));
+// let fades = Array.from({ length: maxAlienBullets * 2 }, () => ({
+//   duration: 2000,
+//   stage: 1,
+// }));
 const backgroundColor = [0, 0, 0];
 let quake = false;
-
-function addFade(duration, stage) {
-  let i = 0;
-  while (fades[i].stage < 1) {
-    i++;
-  }
-  if (i <= fades.length) {
-    fades[i].stage = stage;
-    fades[i].duration = duration;
-    quake = true;
-  }
-}
 
 // Barrier variables.
 
@@ -1900,13 +1888,13 @@ function playBombEffect(bullet) {
     soundEffect = Explosion1;
   }
   soundEffect.play();
-  if (fadeOption) {
-    if (bullet.type === "fireball") {
-      addFade(2000 + 3000 * bullet.r, 0);
-    } else {
-      addFade(2024 * bullet.r, bullet.r);
-    }
-  }
+  // if (fadeOption) {
+  //   if (bullet.type === "fireball") {
+  //     addFade(2000 + 3000 * bullet.r, 0);
+  //   } else {
+  //     addFade(2024 * bullet.r, bullet.r);
+  //   }
+  // }
 }
 
 // Even though only one player bullet can be on screen at a time, player fire rate is throttled
@@ -2373,11 +2361,6 @@ function reset(restart) {
 
     resetBarriers();
 
-    fades = Array.from({ length: maxAlienBullets * 2 }, () => ({
-      duration: 2000,
-      stage: 1,
-    }));
-
     switch (level % 10) {
       case 1:
         skyline.classList.remove("forest");
@@ -2451,28 +2434,6 @@ function updateTimer() {
 const worker = new Worker("worker.js");
 
 function update(frameDuration) {
-  if (fadeOption) {
-    let brightest = 1;
-    let fadesCount = fades.length;
-    for (let i = 0; i < fades.length; i++) {
-      if (fades[i].stage < 1) {
-        fades[i].stage += frameDuration / fades[i].duration;
-        if (fades[i].stage < brightest) {
-          brightest = fades[i].stage;
-        }
-      } else {
-        fades[i].stage = 1;
-        fadesCount--;
-      }
-    }
-    if (fadesCount === 0) {
-      quake = false;
-    }
-    for (let i = 0; i < 3; i++) {
-      backgroundColor[i] = 255 * (1 - brightest);
-    }
-  }
-
   if (
     ufoGetPlayer &&
     (ufoLeft < -ufoWidth - 8 || ufoLeft > containerWidth + 8)
@@ -2484,16 +2445,14 @@ function update(frameDuration) {
   }
 
   if (!ufoGetPlayer) {
-    // Update player position.
     worker.postMessage({
       resetInProgress: resetInProgress,
       frameDuration: frameDuration,
       level: level,
       levelStartTime: levelStartTime,
       fadeOption: fadeOption,
-      // fades: fades,
-      // quake: quake,
-      // backgroundColor: backgroundColor,
+      quake: quake,
+      backgroundColor: backgroundColor,
       ufoGetPlayer: ufoGetPlayer,
       player: {
         left: playerLeft,
@@ -2539,15 +2498,12 @@ function update(frameDuration) {
       },
     });
     worker.onmessage = function (event) {
-      // if (fadeOption) {
-      //   for (let i in fades) {
-      //     fades[i].stage = event.data.fades[i].stage;
-      //   }
-      //   for (let i in backgroundColor) {
-      //     backgroundColor[i] = event.data.backgroundColor[i];
-      //   }
-      //   quake = event.data.quake;
-      // }
+      if (fadeOption) {
+        for (let i in backgroundColor) {
+          backgroundColor[i] = event.data.backgroundColor[i];
+        }
+        quake = event.data.quake;
+      }
       playerLeft = event.data.player.left;
       if (playerBulletOnScreen) {
         playerBulletTop = event.data.player.bullet.top;
@@ -2583,11 +2539,6 @@ function update(frameDuration) {
       insetRight = event.data.aliens.insetRight;
       insetLeft = event.data.aliens.insetLeft;
       aliensGroundSensor = event.data.aliens.groundSensor;
-      // for (const row in event.data.aliens.alive) {
-      //   for (const col in row) {
-      //     alienAlive[row][col] = event.data.aliens.alive[row][col];
-      //   }
-      // }
       aliensRemaining = event.data.aliens.remaining;
       const gotOne = event.data.aliens.toRemove;
       if (gotOne) {

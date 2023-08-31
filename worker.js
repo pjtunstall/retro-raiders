@@ -31,12 +31,18 @@ for (let i = 0; i < alienGridHeight; i++) {
     alienLeftInGrid[i][j] = j * alienWidth + (alienWidth - scaledWidth) / 2;
   }
 }
-const maxAlienSpeed = 512;
-const alienBulletHeight = 30;
-const alienBulletWidth = 10;
 const alienAnimationIncrement = 0.03;
 let endBounce = false;
 let endFlit = false;
+const maxAlienSpeed = 512;
+
+const maxAlienBullets = 66;
+const alienBulletHeight = 30;
+const alienBulletWidth = 10;
+let fades = Array.from({ length: maxAlienBullets * 2 }, () => ({
+  duration: 2000,
+  stage: 1,
+}));
 
 const ufoHeight = 40;
 const ufoWidth = 40;
@@ -73,28 +79,28 @@ function update(data) {
   data.ufo.kill = false;
   data.aliens.toRemove = null;
 
-  // if (data.fadeOption) {
-  //   let brightest = 1;
-  //   let fadesCount = data.fades.length;
-  //   for (let i = 0; i < data.fades.length; i++) {
-  //     if (data.fades[i].stage < 1) {
-  //       console.log(data.fades[i].stage);
-  //       data.fades[i].stage += data.frameDuration / data.fades[i].duration;
-  //       if (data.fades[i].stage < brightest) {
-  //         brightest = data.fades[i].stage;
-  //       }
-  //     } else {
-  //       data.fades[i].stage = 1;
-  //       fadesCount--;
-  //     }
-  //   }
-  //   if (fadesCount === 0) {
-  //     data.quake = false;
-  //   }
-  //   for (let i = 0; i < 3; i++) {
-  //     data.backgroundColor[i] = 255 * (1 - brightest);
-  //   }
-  // }
+  if (data.fadeOption) {
+    let brightest = 1;
+    let fadesCount = fades.length;
+    for (let i = 0; i < fades.length; i++) {
+      if (fades[i].stage < 1) {
+        // console.log(data.fades[i].stage);
+        fades[i].stage += data.frameDuration / fades[i].duration;
+        if (fades[i].stage < brightest) {
+          brightest = fades[i].stage;
+        }
+      } else {
+        fades[i].stage = 1;
+        fadesCount--;
+      }
+    }
+    if (fadesCount === 0) {
+      data.quake = false;
+    }
+    for (let i = 0; i < 3; i++) {
+      data.backgroundColor[i] = 255 * (1 - brightest);
+    }
+  }
 
   // Move player.
   data.player.left +=
@@ -347,7 +353,7 @@ function update(data) {
     }
   }
 
-  // Collisions between aliens bullets and barriers, ground, or player.
+  // Alien bullet movement and collisions with player, barriers, or ground.
   for (const bullet of data.aliens.bullets) {
     if (data.ufo.getPlayer) {
       break;
@@ -415,6 +421,26 @@ function update(data) {
     if (bullet.top + alienBulletHeight > containerHeight) {
       bullet.removeMe = true;
       bullet.groundHit = true;
+      if (data.fadeOption) {
+        let duration;
+        let stage;
+        if (bullet.type === "fireball") {
+          duration = 2000 + 3000 * bullet.r;
+          stage = 0;
+        } else {
+          duration = 2024 * bullet.r;
+          stage = bullet.r;
+        }
+        let i = 0;
+        while (fades[i].stage < 1) {
+          i++;
+        }
+        if (i <= fades.length) {
+          fades[i].stage = stage;
+          fades[i].duration = duration;
+          data.quake = true;
+        }
+      }
     }
   }
 
