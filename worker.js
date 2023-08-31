@@ -208,89 +208,85 @@ function update(data) {
                 scaledWidth +
                 gap * col
           ) {
-            let beingRemoved = false;
             for (const alienToRemove of data.aliens.beingRemoved) {
               if (alienToRemove.row === row && alienToRemove.col === col) {
-                beingRemoved = true;
+                continue alienIsHit;
               }
             }
-            if (!beingRemoved) {
-              data.player.bullet.removeMeMessageFromWorker = true;
-              data.aliens.alive[row][col] = false;
-              if (data.level % 10 < 6 || data.level > 7) {
-                data.aliens.step += 10;
-              } else {
-                data.aliens.step += 7;
-              }
-              data.aliens.remaining--;
-              let isLastOne = false;
-              if (data.aliens.remaining < 1) {
-                isLastOne = true;
-              }
-              if (row === data.aliens.lowestInColumn[col]) {
-                for (let i = row; i >= 0; i--) {
-                  if (data.aliens.alive[i][col]) {
-                    break;
-                  }
-                  data.aliens.lowestInColumn[col]--;
+            data.player.bullet.removeMeMessageFromWorker = true;
+            data.aliens.alive[row][col] = false;
+            if (data.level % 10 < 6 || data.level > 7) {
+              data.aliens.step += 10;
+            } else {
+              data.aliens.step += 7;
+            }
+            data.aliens.remaining--;
+            let isLastOne = false;
+            if (data.aliens.remaining < 1) {
+              isLastOne = true;
+            }
+            if (row === data.aliens.lowestInColumn[col]) {
+              for (let i = row; i >= 0; i--) {
+                if (data.aliens.alive[i][col]) {
+                  break;
                 }
+                data.aliens.lowestInColumn[col]--;
               }
-              if (data.aliens.animationDuration > 0.3) {
-                data.aliens.animationDuration -= alienAnimationIncrement;
-                data.aliens.danceFaster = true;
-              }
-              if (
-                col === data.aliens.leftCol &&
-                data.aliens.alive.every((row) => !row[col])
+            }
+            if (data.aliens.animationDuration > 0.3) {
+              data.aliens.animationDuration -= alienAnimationIncrement;
+              data.aliens.danceFaster = true;
+            }
+            if (
+              col === data.aliens.leftCol &&
+              data.aliens.alive.every((row) => !row[col])
+            ) {
+              data.aliens.leftCol++;
+              while (
+                data.aliens.leftCol < data.aliens.rightCol &&
+                data.aliens.alive.every((row) => !row[data.aliens.leftCol])
               ) {
                 data.aliens.leftCol++;
-                while (
-                  data.aliens.leftCol < data.aliens.rightCol &&
-                  data.aliens.alive.every((row) => !row[data.aliens.leftCol])
-                ) {
-                  data.aliens.leftCol++;
-                }
-                data.aliens.insetLeft =
-                  (alienWidth + gap) * data.aliens.leftCol;
               }
-              if (
-                col === data.aliens.rightCol &&
-                data.aliens.alive.every((row) => !row[col])
+              data.aliens.insetLeft = (alienWidth + gap) * data.aliens.leftCol;
+            }
+            if (
+              col === data.aliens.rightCol &&
+              data.aliens.alive.every((row) => !row[col])
+            ) {
+              data.aliens.rightCol--;
+              while (
+                data.aliens.rightCol > data.aliens.leftCol &&
+                data.aliens.alive.every((row) => !row[data.aliens.rightCol])
               ) {
                 data.aliens.rightCol--;
-                while (
-                  data.aliens.rightCol > data.aliens.leftCol &&
-                  data.aliens.alive.every((row) => !row[data.aliens.rightCol])
-                ) {
-                  data.aliens.rightCol--;
-                }
-                data.aliens.insetRight =
-                  (alienWidth + gap) *
-                  (alienGridWidth - 1 - data.aliens.rightCol);
               }
-              if (
-                row === data.aliens.bottomRow &&
-                data.aliens.alive[row].every((colValue) => !colValue)
+              data.aliens.insetRight =
+                (alienWidth + gap) *
+                (alienGridWidth - 1 - data.aliens.rightCol);
+            }
+            if (
+              row === data.aliens.bottomRow &&
+              data.aliens.alive[row].every((colValue) => !colValue)
+            ) {
+              data.aliens.bottomRow--;
+              data.aliens.groundSensor -= alienHeight;
+              while (
+                data.aliens.bottomRow > 0 &&
+                data.aliens.alive[data.aliens.bottomRow].every(
+                  (colValue) => !colValue
+                )
               ) {
                 data.aliens.bottomRow--;
                 data.aliens.groundSensor -= alienHeight;
-                while (
-                  data.aliens.bottomRow > 0 &&
-                  data.aliens.alive[data.aliens.bottomRow].every(
-                    (colValue) => !colValue
-                  )
-                ) {
-                  data.aliens.bottomRow--;
-                  data.aliens.groundSensor -= alienHeight;
-                }
               }
-              data.aliens.toRemove = {
-                row: row,
-                col: col,
-                isLastOne: isLastOne,
-              };
-              break alienIsHit;
             }
+            data.aliens.toRemove = {
+              row: row,
+              col: col,
+              isLastOne: isLastOne,
+            };
+            break alienIsHit;
           }
         }
       }

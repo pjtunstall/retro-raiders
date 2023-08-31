@@ -18,7 +18,7 @@ If you're sensitive to flashing lights, press `F` while the game is paused to to
 
 ## 3. INSTRUCTIONS
 
-Use left and right arow keys to move, and space to fire. You can only have one bullet on screen at a time, as in the original Space Invaders. Hold down space to keep firing.
+Use left and right arrow keys to move, and space to fire. You can only have one bullet on screen at a time, as in the original Space Invaders. Hold down space to keep firing.
 
 ## 4. EXECUTABLE
 
@@ -32,4 +32,4 @@ Comment them back, to ensure that `go run .` still works. Now you can double cli
 
 ## 5. BACKGROUND
 
-This was our first JavaScript project for 01Founders, a branch of the 01Edu education system, and our first attempt at making a browser game. We've treated it as an opportunity to explore new ideas rather than a place to demonstrate perfection.
+This was our first JavaScript project for 01Founders, a branch of the 01Edu education system, and our first attempt at making a browser game. We've prioritized exploring new ideas over perfecting them.

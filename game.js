@@ -2539,13 +2539,15 @@ function update(frameDuration) {
       },
     });
     worker.onmessage = function (event) {
-      // for (let i in fades) {
-      //   fades[i].stage = event.data.fades[i].stage;
+      // if (fadeOption) {
+      //   for (let i in fades) {
+      //     fades[i].stage = event.data.fades[i].stage;
+      //   }
+      //   for (let i in backgroundColor) {
+      //     backgroundColor[i] = event.data.backgroundColor[i];
+      //   }
+      //   quake = event.data.quake;
       // }
-      // for (let i in backgroundColor) {
-      //   backgroundColor[i] = event.data.backgroundColor[i];
-      // }
-      // quake = event.data.quake;
       playerLeft = event.data.player.left;
       if (playerBulletOnScreen) {
         playerBulletTop = event.data.player.bullet.top;
