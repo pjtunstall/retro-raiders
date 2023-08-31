@@ -565,7 +565,7 @@ There was a time. And it was everything, and real and sharp and impossible, as l
 
       `Each morning, you'd run in Central Park to burn off the adrenaline of the night's battle, then home to toss and turn through the June heat in the sweltering, cockroach-infested brownstone they'd appointed for Earth's defenders, up in Washington Heights.
 
-Band of misfits, Scottie called you. And that was right enough.
+Band of misfits, they called you. And that was right enough.
 
 Sometimes alien allies would come to stay. Ever more often as human gunners fell or quit.
 
