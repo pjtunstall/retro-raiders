@@ -2,12 +2,15 @@
 
 const containerWidth = 1600;
 const containerHeight = 770;
+
 const playerWidth = 33;
 const playerHeight = 33;
+const playerTop = containerHeight - playerHeight;
+
 const playerBulletHeight = 12;
 const playerBulletWidth = 3;
 const playerBulletSpeed = 1024;
-const playerTop = containerHeight - playerHeight;
+
 const alienGridHeight = 5;
 const alienGridWidth = 11;
 const alienGridPixelHeight = 300;
@@ -32,13 +35,29 @@ const maxAlienSpeed = 512;
 const alienBulletHeight = 30;
 const alienBulletWidth = 10;
 const alienAnimationIncrement = 0.03;
-const ufoHeight = 40;
-const ufoWidth = 40;
-const barrierTop = containerHeight - 185;
-let backgroundColor = [0, 0, 0];
-
 let endBounce = false;
 let endFlit = false;
+
+const ufoHeight = 40;
+const ufoWidth = 40;
+
+const barrierTop = containerHeight - 185;
+// blockLeft[i] = blocks[i].offsetLeft + parent.offsetLeft;
+// blockTop[i] = blocks[i].offsetTop + parent.offsetTop;
+const blockTop = [
+  585, 585, 585, 585, 633, 633, 633, 633, 681, 681, 681, 681, 585, 585, 585,
+  585, 633, 633, 633, 633, 681, 681, 681, 681, 585, 585, 585, 585, 633, 633,
+  633, 633, 681, 681, 681, 681, 585, 585, 585, 585, 633, 633, 633, 633, 681,
+  681, 681, 681,
+];
+const blockLeft = [
+  224, 272, 320, 368, 224, 272, 320, 368, 224, 272, 320, 368, 544, 592, 640,
+  688, 544, 592, 640, 688, 544, 592, 640, 688, 864, 912, 960, 1008, 864, 912,
+  960, 1008, 864, 912, 960, 1008, 1184, 1232, 1280, 1328, 1184, 1232, 1280,
+  1328, 1184, 1232, 1280, 1328,
+];
+
+let backgroundColor = [0, 0, 0];
 
 self.onmessage = function (event) {
   const data = event.data;
@@ -304,12 +323,10 @@ function update(data) {
     }
     for (let i = 0; i < 48; i++) {
       if (
-        data.player.bullet.top <= data.barriers.blockTop[i] + 48 &&
-        data.player.bullet.top + playerBulletHeight >=
-          data.barriers.blockTop[i] &&
-        data.player.bullet.left + playerBulletWidth >=
-          data.barriers.blockLeft[i] &&
-        data.player.bullet.left <= data.barriers.blockLeft[i] + 48 &&
+        data.player.bullet.top <= blockTop[i] + 48 &&
+        data.player.bullet.top + playerBulletHeight >= blockTop[i] &&
+        data.player.bullet.left + playerBulletWidth >= blockLeft[i] &&
+        data.player.bullet.left <= blockLeft[i] + 48 &&
         data.barriers.blockVis[i] === true
       ) {
         data.player.bullet.removeMeMessageFromWorker = true;
@@ -370,9 +387,9 @@ function update(data) {
     if (bullet.top + alienBulletHeight > barrierTop) {
       for (let i = 0; i < 48; i++) {
         if (
-          bullet.top + alienBulletHeight >= data.barriers.blockTop[i] &&
-          bullet.left + alienBulletWidth >= data.barriers.blockLeft[i] &&
-          bullet.left <= data.barriers.blockLeft[i] + 48 &&
+          bullet.top + alienBulletHeight >= blockTop[i] &&
+          bullet.left + alienBulletWidth >= blockLeft[i] &&
+          bullet.left <= blockLeft[i] + 48 &&
           data.barriers.blockVis[i] === true
         ) {
           const barrierNumber = Math.floor(i / 12);

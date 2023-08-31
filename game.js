@@ -1784,8 +1784,8 @@ function resetBarriers() {
   blocks = [...document.querySelectorAll(".block")];
   for (const i in blocks) {
     const parent = blocks[i].offsetParent;
-    blockLeft[i] = blocks[i].offsetLeft + parent.offsetLeft;
-    blockTop[i] = blocks[i].offsetTop + parent.offsetTop;
+    // blockLeft[i] = blocks[i].offsetLeft + parent.offsetLeft;
+    // blockTop[i] = blocks[i].offsetTop + parent.offsetTop;
     const t = i % 12;
     const r = Math.floor(t / 4);
     const c = t % 4;
@@ -2530,8 +2530,6 @@ function update(frameDuration) {
       barriers: {
         damage: barriers,
         blockVis: blockVis,
-        blockTop: blockTop,
-        blockLeft: blockLeft,
       },
       ufo: {
         active: ufoActive,
