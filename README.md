@@ -8,7 +8,9 @@
 
 ## 1. SET UP
 
-Open a terminal and, from the folder called `server`, execute `go run .` to launch the game server on port 8080 and the scoreboard server on port 10000. Enter `localhost:8080` in the address bar of Chrome.
+Open a terminal and, from the folder called `server`, execute `go run .` to launch the game server on port 8080 and the scoreboard server on port 10000. Enter `localhost:8080` in the address bar of Chrome, maximize the window and enter full-screen mode (CMD+SHIFT+F).
+
+Chrome will automatically zoom to 80%, which is right. Alternatively, you can play on Firefox if you manually zoom to 67%.
 
 ## 2. CAUTION
 
@@ -20,7 +22,7 @@ Use left and right arow keys to move, and space to fire. You can only have one b
 
 ## 4. EXECUTABLE
 
-To make an executable file, uncomment the indicated lines in `main.go` (at the start of the `main` function) in the `server` folder, then build a Go executable according to the operating system, e.g.
+To make an executable file, uncomment the indicated lines in `main.go` (at the start of the `main` function) in the `server` folder, then build a Go executable according to your operating system, e.g.
 
 `go build -o main_linux`
 `GOOS=windows GOARCH=amd64 go build -o main.exe`
@@ -30,14 +32,4 @@ Comment them back, to ensure that `go run .` still works. Now you can double cli
 
 ## 5. BACKGROUND
 
-This was our first JavaScript project for 01Founders, a branch of the 01Edu education system, and our first attempt at making a browser game.
-
-If we were starting from scratch, knowing what we know now, we'd do many things differently. Given more time, we'd have a more thorough refactoring stage.
-
-Variables would be intialized at the start of the game by the same function that resets them for a new game.
-
-We'd scale everything so that it would work well at 100% zoom in all the main browsers and on all normal screen sizes. As it is, we need to recommend Chrome because Chrome automatically adjusts to the right zoom, 80% for my screen, and selects sprites from the spritesheet with none of the artifacts that Firefox produces at 80%, perhaps due to rounding errors in calculating pixels.
-
-We'd write more object-oriented code, which would make it easier to pass data to the web worker.
-
-As it is, we prioritized learning new things and making something fun, rather than wrangling all of our false starts into neater code.
+This was our first JavaScript project for 01Founders, a branch of the 01Edu education system, and our first attempt at making a browser game. We've treated it as an opportunity to explore new ideas rather than a place to demonstrate perfection.
