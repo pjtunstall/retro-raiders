@@ -119,7 +119,9 @@ function update(data) {
 
   // Move player bullet.
   if (data.player.bullet.isOnScreen) {
-    data.player.bullet.top -= (playerBulletSpeed * data.frameDuration) / 1000;
+    const boost = Date.now() - data.player.bullet.boostStart < 10000 ? 2 : 1;
+    data.player.bullet.top -=
+      (boost * playerBulletSpeed * data.frameDuration) / 1000;
   } else {
     data.player.bullet.top = playerTop - playerBulletHeight;
   }
@@ -317,10 +319,6 @@ function update(data) {
         // Not necessary to remove player bullet explicitly, because it reaches top of screen
         // fast enough to be removed anyway immediately after hitting the ufo.
         data.ufo.kill = true;
-        playerBulletSpeed = 2048;
-        setTimeout(() => {
-          playerBulletSpeed = 1024;
-        }, 7000);
       }
     }
   }

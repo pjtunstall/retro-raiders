@@ -1099,6 +1099,7 @@ const playerBulletWidth = 3;
 let playerBulletRemoveMe = false;
 let newPlayerBullet = false;
 let playerBulletOnScreen = false;
+let bulletBoostStart = Date.now() - 15000;
 
 // Ufo variables.
 const mysteryScore = [
@@ -1969,12 +1970,14 @@ function togglePause() {
         startTime = Date.now();
         pauseStartTime = Date.now();
         ufoTimeUp = Date.now() + 20000 + Math.random() * 10000;
+        bulletBoostStart = Date.now() - 15000;
         restartInProgress = false;
       }
     } else {
       const pauseInterval = Date.now() - pauseStartTime;
       startTime += pauseInterval;
       ufoTimeUp += pauseInterval;
+      bulletBoostStart += pauseInterval;
     }
     if (ufoActive) {
       voltage.play();
@@ -2459,6 +2462,7 @@ function update(frameDuration) {
           top: playerBulletTop,
           left: playerBulletLeft,
           removeMeMessageToWorker: playerBulletRemoveMe,
+          boostStart: bulletBoostStart,
         },
       },
       aliens: {
@@ -2554,6 +2558,7 @@ function update(frameDuration) {
       }
       if (event.data.ufo.kill) {
         killUfo = true;
+        bulletBoostStart = Date.now();
         score += mysteryScore[ufoScorePointer];
         incrementScore = true;
         ufoTimeUp = Date.now() + 20000 + Math.random() * 10000;
