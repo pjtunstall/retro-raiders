@@ -6,10 +6,11 @@ const containerHeight = 770;
 const playerWidth = 33;
 const playerHeight = 33;
 const playerTop = containerHeight - playerHeight;
+let playerStep = 0;
 
 const playerBulletHeight = 12;
 const playerBulletWidth = 3;
-const playerBulletSpeed = 1024;
+let playerBulletSpeed = 1024;
 
 const alienGridHeight = 5;
 const alienGridWidth = 11;
@@ -84,7 +85,6 @@ function update(data) {
     let fadesCount = fades.length;
     for (let i = 0; i < fades.length; i++) {
       if (fades[i].stage < 1) {
-        // console.log(data.fades[i].stage);
         fades[i].stage += data.frameDuration / fades[i].duration;
         if (fades[i].stage < brightest) {
           brightest = fades[i].stage;
@@ -102,9 +102,16 @@ function update(data) {
     }
   }
 
+  // Apply player acceleration.
+  if (data.player.direction !== 0 && playerStep < 512) {
+    playerStep += 16;
+  } else if (playerStep !== 0) {
+    playerStep -= 4;
+  }
+
   // Move player.
   data.player.left +=
-    (data.player.direction * data.player.step * data.frameDuration) / 1000;
+    (playerStep * data.player.direction * data.frameDuration) / 1000;
   data.player.left = Math.max(
     0,
     Math.min(containerWidth - playerWidth, data.player.left)
@@ -310,7 +317,10 @@ function update(data) {
         // Not necessary to remove player bullet explicitly, because it reaches top of screen
         // fast enough to be removed anyway immediately after hitting the ufo.
         data.ufo.kill = true;
-        // ufoTimeUp = Date.now() + 20000 + Math.random() * 10000;
+        playerBulletSpeed = 2048;
+        setTimeout(() => {
+          playerBulletSpeed = 1024;
+        }, 7000);
       }
     }
   }

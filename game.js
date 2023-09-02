@@ -1081,7 +1081,6 @@ let accumulatedFrameTime = 0;
 const player = document.getElementById("player");
 const playerWidth = 33;
 const playerHeight = 33;
-const playerStep = 256;
 let playerDirection = 0;
 let playerLeft = containerWidth / 2 - playerWidth / 2;
 let playerTop = containerHeight - playerHeight;
@@ -1093,8 +1092,6 @@ let playerBullet = document.createElement("div");
 playerBullet.classList.add("player-bullet");
 playerBullet.style.visibility = "hidden";
 gameContainer.appendChild(playerBullet);
-let playerBulletSpeedY = 1024;
-let playerBulletSpeedX = 0;
 let playerBulletTop = 0;
 let playerBulletLeft = 0;
 const playerBulletHeight = 12;
@@ -2456,7 +2453,6 @@ function update(frameDuration) {
       ufoGetPlayer: ufoGetPlayer,
       player: {
         left: playerLeft,
-        step: playerStep,
         direction: playerDirection,
         bullet: {
           isOnScreen: playerBulletOnScreen,
