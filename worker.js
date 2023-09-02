@@ -105,13 +105,14 @@ function update(data) {
   // Apply player acceleration.
   if (data.player.direction !== 0 && playerStep < 512) {
     playerStep += 16;
-  } else if (playerStep !== 0) {
-    playerStep -= 4;
+  }
+  if (data.player.direction === 0) {
+    playerStep /= 2;
   }
 
   // Move player.
   data.player.left +=
-    (playerStep * data.player.direction * data.frameDuration) / 1000;
+    (data.player.direction * playerStep * data.frameDuration) / 1000;
   data.player.left = Math.max(
     0,
     Math.min(containerWidth - playerWidth, data.player.left)
