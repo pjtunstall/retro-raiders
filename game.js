@@ -3212,12 +3212,11 @@ function handleKeyDown(event) {
       togglePauseThrottled();
     }
   }
-  switch (key) {
-    case "ArrowLeft":
-      playerDirection = -1;
-      break;
-    case "ArrowRight":
-      playerDirection = 1;
+  if (key === "ArrowLeft") {
+    playerDirection = -1;
+  }
+  if (key === "ArrowRight") {
+    playerDirection = 1;
   }
   if (event.code === "Space") {
     spaceKeyDown = true;
@@ -3228,9 +3227,11 @@ function handleKeyUp(event) {
   const key = event.key;
   if (key === "ArrowLeft" && playerDirection === -1) {
     playerDirection = 0;
-  } else if (key === "ArrowRight" && playerDirection === 1) {
+  }
+  if (key === "ArrowRight" && playerDirection === 1) {
     playerDirection = 0;
-  } else if (event.code === "Space") {
+  }
+  if (event.code === "Space") {
     spaceKeyDown = false;
   }
 }

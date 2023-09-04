@@ -102,14 +102,6 @@ function update(data) {
     }
   }
 
-  // // Apply player acceleration.
-  // if (data.player.direction !== 0 && Math.abs(playerStep) <= 512) {
-  //   playerStep += 32 * data.player.direction;
-  // }
-  // if (data.player.direction === 0) {
-  //   playerStep -= (64 * playerStep) / Math.abs(playerStep);
-  // }
-
   // Move player.
   data.player.left +=
     (data.player.direction * playerStep * data.frameDuration) / 1000;
