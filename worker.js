@@ -6,7 +6,7 @@ const containerHeight = 770;
 const playerWidth = 33;
 const playerHeight = 33;
 const playerTop = containerHeight - playerHeight;
-let playerStep = 0;
+let playerStep = 512;
 
 const playerBulletHeight = 12;
 const playerBulletWidth = 3;
@@ -102,13 +102,13 @@ function update(data) {
     }
   }
 
-  // Apply player acceleration.
-  if (data.player.direction !== 0 && playerStep < 512) {
-    playerStep += 16;
-  }
-  if (data.player.direction === 0) {
-    playerStep /= 2;
-  }
+  // // Apply player acceleration.
+  // if (data.player.direction !== 0 && Math.abs(playerStep) <= 512) {
+  //   playerStep += 32 * data.player.direction;
+  // }
+  // if (data.player.direction === 0) {
+  //   playerStep -= (64 * playerStep) / Math.abs(playerStep);
+  // }
 
   // Move player.
   data.player.left +=

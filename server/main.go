@@ -3,14 +3,11 @@ package main
 import (
 	"encoding/json"
 	"fmt"
-	"io/ioutil"
 	"log"
 	"math"
-	"path/filepath"
-
 	"net/http"
 	"os"
-
+	"path/filepath"
 	"sync"
 )
 
@@ -34,7 +31,7 @@ var scoresFile = "scores.json" // The name of the JSON file to store the scores
 // loadScores loads the scores from the JSON file
 func loadScores() {
 	// Read the file
-	bytes, err := ioutil.ReadFile(scoresFile)
+	bytes, err := os.ReadFile(scoresFile)
 	if err != nil {
 		// If the file doesn't exist, initialize an empty slice of scores
 		if os.IsNotExist(err) {
@@ -60,7 +57,7 @@ func saveScores() {
 	}
 
 	// Write the JSON to the file
-	err = ioutil.WriteFile(scoresFile, bytes, 0644)
+	err = os.WriteFile(scoresFile, bytes, 0644)
 	if err != nil {
 		log.Fatal(err)
 	}

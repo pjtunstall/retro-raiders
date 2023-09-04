@@ -1,7 +1,7 @@
 // Game container and background variables.
 const gameContainer = document.querySelector(".game-container");
-const containerWidth = gameContainer.offsetWidth;
-const containerHeight = gameContainer.offsetHeight;
+const containerWidth = 1600;
+const containerHeight = 770;
 
 let skyline = document.getElementById("skyline");
 skyline.classList.add("london");
