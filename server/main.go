@@ -142,7 +142,7 @@ func Cors(w *http.ResponseWriter, r *http.Request) {
 }
 
 func main() {
-	// Uncomment this stuff before building executable file.
+	// // Uncomment this stuff before building executable file.
 
 	// // Get the full path of the executable file
 	// exePath, err := os.Executable()
@@ -161,7 +161,7 @@ func main() {
 	// 	return
 	// }
 
-	// End of section only for building exe.
+	// // End of section only for building exe.
 
 	htmlFolderDir, _ := filepath.Abs("../")
 
