@@ -3035,7 +3035,7 @@ function gameLoop(timestamp) {
     ticks++;
     accumulatedFrameTime -= frameDuration;
   }
-  console.log(ticks);
+  console.log("Updates per frame:", ticks);
 
   update(ticks);
   render();
