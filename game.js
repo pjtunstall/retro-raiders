@@ -2433,7 +2433,7 @@ function updateTimer() {
 
 const worker = new Worker("worker.js");
 
-function update(frameDuration) {
+function update(ticks) {
   if (
     ufoGetPlayer &&
     (ufoLeft < -ufoWidth - 8 || ufoLeft > containerWidth + 8)
@@ -2446,8 +2446,8 @@ function update(frameDuration) {
 
   if (!ufoGetPlayer) {
     worker.postMessage({
+      ticks: ticks,
       resetInProgress: resetInProgress,
-      frameDuration: frameDuration,
       level: level,
       levelStartTime: levelStartTime,
       fadeOption: fadeOption,
@@ -2552,9 +2552,11 @@ function update(frameDuration) {
       if (event.data.player.bullet.removeMeMessageFromWorker) {
         playerBulletRemoveMe = true;
       }
-      for (const block of event.data.barriers.blocksToChange) {
-        barriers[block.barrierNumber][block.rowNumber][block.colNumber]++;
-        blocksToChange.push(block);
+      if (event.data.barriers.blocksToChange) {
+        for (const block of event.data.barriers.blocksToChange) {
+          barriers[block.barrierNumber][block.rowNumber][block.colNumber]++;
+          blocksToChange.push(block);
+        }
       }
       if (event.data.ufo.kill) {
         killUfo = true;
@@ -3028,15 +3030,14 @@ function gameLoop(timestamp) {
   }
   accumulatedFrameTime += elapsedTimeBetweenFrames;
 
+  let ticks = 0;
   while (accumulatedFrameTime >= frameDuration) {
-    update(frameDuration);
+    ticks++;
     accumulatedFrameTime -= frameDuration;
   }
+  console.log(ticks);
 
-  // if (source && source.playbackRate.value < 16) {
-  //   source.playbackRate.value += musicSpeedIncreaseAmount * (frameDuration / 5000);
-  // }
-
+  update(ticks);
   render();
 
   if (pauseOnStart) {
