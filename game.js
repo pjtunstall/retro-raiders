@@ -591,7 +591,7 @@ Ghosts of leaves fading into the pavement's sheen.
 
 Fall found you holed up in a cheap Pig Alley hostel (disused since the tourists fled), or else in the Catacombs when the bombardment got too heavy.
 
-It had only been a few months, but already the world had settled into a rhythm. Those things gliding left and right in the night, they might as well have been invisible. Just a fact or life.
+It'd only been a few months, but already the world had settled into a rhythm. Those things gliding left and right in the night, they might as well have been invisible. Just a fact or life.
 
 Is there anything we humans can't take for granted?
 

@@ -32,4 +32,4 @@ Comment them back, to ensure that `go run .` still works. Now you can double cli
 
 ## 5. BACKGROUND
 
-This was our first JavaScript project for 01Founders, a branch of the 01Edu education system, and our first attempt at making a browser game.
+This is our first JavaScript project for 01Founders, a branch of the 01Edu education system, and our first attempt at making a browser game.
