@@ -3,6 +3,8 @@ const gameContainer = document.querySelector(".game-container");
 const containerWidth = 1600;
 const containerHeight = 770;
 
+let frameDropsPerTenSeconds;
+
 let skyline = document.getElementById("skyline");
 skyline.classList.add("london");
 const credits = document.querySelector(".credits");
@@ -1961,6 +1963,10 @@ function togglePause() {
     pauseMenu.style.visibility = "hidden";
     title.style.visibility = "hidden";
     wind.pause();
+    frameDropsPerTenSeconds = 0;
+    setTimeout(() => {
+      console.log("frame drops per second:", frameDropsPerTenSeconds / 10);
+    }, 10000);
     if (resetInProgress || starting) {
       pickMusic();
       music.playbackRate = 1;
@@ -3035,7 +3041,10 @@ function gameLoop(timestamp) {
     ticks++;
     accumulatedFrameTime -= frameDuration;
   }
-  console.log("Updates per frame:", ticks);
+  // console.log("Updates per frame:", ticks);
+  if (ticks > 1) {
+    frameDropsPerTenSeconds++;
+  }
 
   update(ticks);
   render();
