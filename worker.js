@@ -74,14 +74,13 @@ self.onmessage = function (event) {
   if (data.resetInProgress) {
     return;
   }
-  // for (let i = 0; i < data.ticks; i++) {
-  update(data);
-  // }
+  for (let i = 0; i < data.ticks; i++) {
+    update(data);
+  }
   self.postMessage(data);
 };
 
 function update(data) {
-  const speedFactor = data.ticks * frameDuration;
   data.barriers.blocksToChange = [];
   data.player.bullet.removeMeMessageFromWorker = false;
   data.ufo.kill = false;
@@ -92,7 +91,7 @@ function update(data) {
     let fadesCount = fades.length;
     for (let i = 0; i < fades.length; i++) {
       if (fades[i].stage < 1) {
-        fades[i].stage += speedFactor / fades[i].duration;
+        fades[i].stage += frameDuration / fades[i].duration;
         if (fades[i].stage < brightest) {
           brightest = fades[i].stage;
         }
@@ -110,7 +109,8 @@ function update(data) {
   }
 
   // Move player.
-  data.player.left += (data.player.direction * playerStep * speedFactor) / 1000;
+  data.player.left +=
+    (data.player.direction * playerStep * frameDuration) / 1000;
   data.player.left = Math.max(
     0,
     Math.min(containerWidth - playerWidth, data.player.left)
@@ -119,7 +119,8 @@ function update(data) {
   // Move player bullet.
   if (data.player.bullet.isOnScreen) {
     const boost = Date.now() - data.player.bullet.boostStart < 10000 ? 2 : 1;
-    data.player.bullet.top -= (boost * playerBulletSpeed * speedFactor) / 1000;
+    data.player.bullet.top -=
+      (boost * playerBulletSpeed * frameDuration) / 1000;
   } else {
     data.player.bullet.top = playerTop - playerBulletHeight;
   }
@@ -127,14 +128,14 @@ function update(data) {
   // Move aliens and check if they've reached the sides or bottom.
   if (data.aliens.remaining > 0) {
     data.aliens.left +=
-      (data.aliens.direction * data.aliens.step * speedFactor) / 1000;
+      (data.aliens.direction * data.aliens.step * frameDuration) / 1000;
     const howLowCanYouGo = data.aliens.top + data.aliens.groundSensor;
     if (!data.endBounce && data.level % 10 > 4 && data.level % 10 < 8) {
       const bob =
         0.001 *
         (((data.level - 1) % 10) - 3) *
         (Math.floor(Date.now() % 1000) - 500 + data.level);
-      data.aliens.top += (bob * data.aliens.step * speedFactor) / 1000;
+      data.aliens.top += (bob * data.aliens.step * frameDuration) / 1000;
       if (data.aliens.top < 0) {
         data.aliens.top = 0;
       }
@@ -151,7 +152,7 @@ function update(data) {
         (data.level *
           (Math.random() - 0.496) *
           data.aliens.step *
-          speedFactor) /
+          frameDuration) /
         1000;
       if (data.aliens.top < 0) {
         data.aliens.top = 0;
@@ -368,7 +369,7 @@ function update(data) {
       continue;
     }
 
-    bullet.top += (bullet.speed * speedFactor) / 1000;
+    bullet.top += (bullet.speed * frameDuration) / 1000;
 
     if (
       bullet.type === "fireball" &&

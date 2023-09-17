@@ -514,7 +514,8 @@ body {
 .h0 {
   font-size: 28px;
   color: white;
-  font-family: "Segoe UI Emoji", "Noto Color Emoji", "Apple Color Emoji", "Arial", sans-serif !important;
+  font-family: "Segoe UI Emoji", "Noto Color Emoji", "Apple Color Emoji",
+    "Arial", sans-serif !important;
 }
 
 .h1 {
@@ -717,7 +718,7 @@ h1 {
 
 .player-input input::placeholder {
   font-family: "Azimov";
-  color: rgb(249, 130, 130)
+  color: rgb(249, 130, 130);
 }
 
 .stat-group {

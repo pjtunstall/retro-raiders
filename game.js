@@ -4,6 +4,7 @@ const containerWidth = 1600;
 const containerHeight = 770;
 
 let frameDropsPerTenSeconds;
+let frameDropTimer;
 
 let skyline = document.getElementById("skyline");
 skyline.classList.add("london");
@@ -1030,7 +1031,7 @@ const chapter = [
   "That Asyncing Feeling",
   "To Summon His Array",
   "Regex Quandam, Regex Futurusque",
-  "Snug as a Bug in a Rug",
+  "Snug as a Heisenbug in a Schr&#246;dingrug",
   "A &lt;span&gt;ner in the Works&lt;/span&gt;",
   "Here We Go Loopy Loo",
   "Needle in a Callstack",
@@ -1050,7 +1051,6 @@ const chapter = [
   "The Bilalgorithm",
   "Nully the Element Packed Her Math.trunc<br>and ...Spread Goodbye to the Circus",
   "Lookbehind in Anger",
-  "Home, Home on the Range Loop",
   "The Markup of the Beast",
   "Cache Only",
   "Who requestAnimationFrame(edRogerRabbit?)",
@@ -1964,9 +1964,7 @@ function togglePause() {
     title.style.visibility = "hidden";
     wind.pause();
     frameDropsPerTenSeconds = 0;
-    setTimeout(() => {
-      console.log("frame drops per second:", frameDropsPerTenSeconds / 10);
-    }, 10000);
+    frameDropTimer = Date.now();
     if (resetInProgress || starting) {
       pickMusic();
       music.playbackRate = 1;
@@ -3041,9 +3039,15 @@ function gameLoop(timestamp) {
     ticks++;
     accumulatedFrameTime -= frameDuration;
   }
-  // console.log("Updates per frame:", ticks);
   if (ticks > 1) {
+    console.log("dropped drame with", ticks, "updates needed");
     frameDropsPerTenSeconds++;
+  }
+
+  if (Date.now() - frameDropTimer > 10000) {
+    console.log("frame drops per second:", frameDropsPerTenSeconds / 10);
+    frameDropTimer = Date.now();
+    frameDropsPerTenSeconds = 0;
   }
 
   update(ticks);
