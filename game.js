@@ -2620,7 +2620,7 @@ function update(ticks) {
     (ufoActive && ufoToggleBeam && ufoGetPlayer) ||
     (ufoActive && (!ufoGetPlayer || ufoTakenPlayer))
   ) {
-    ufoLeft += (ufoBoost * (ufoDirection * frameDuration)) / 5;
+    ufoLeft += (ticks * (ufoBoost * (ufoDirection * frameDuration))) / 5;
   }
 
   if (ufoActive && (ufoLeft < -ufoWidth - 8 || ufoLeft > containerWidth + 8)) {
