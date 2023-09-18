@@ -3107,29 +3107,16 @@ function handleKeyDown(event) {
     } else {
       onOrOff = "on";
     }
-    if (fadeOption) {
-      pauseMenu.insertAdjacentHTML(
-        "beforeend",
-        `
+    pauseMenu.insertAdjacentHTML(
+      "beforeend",
+      `
       <div><span id="n">[N]ew game</span></div>
       <div><span id="c">[C]redits</span></div>
       <div><span id="f">[F]lash effect ${onOrOff}</span></div>
       <div><span id="s"> [S]tory</span></div>
       <div><span id="a">[ANY OTHER KEY] to continue</span></div>
       `
-      );
-    } else {
-      pauseMenu.insertAdjacentHTML(
-        "beforeend",
-        `
-      <div><span id="n">[N]ew game</span></div>
-      <div><span id="c">[C]redits</span></div>
-      <div><span id="f">[F]lash effect ${onOrOff}</span></div>
-      <div><span id="s"> [S]tory</span></div>
-      <div><span id="a">[ANY OTHER KEY] to continue</span></div>
-      `
-      );
-    }
+    );
     togglePause();
     reset(true);
     isGameOver = false;
