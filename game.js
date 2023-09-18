@@ -2448,7 +2448,7 @@ function update(ticks) {
     playerDeath(true);
   }
 
-  if (!ufoGetPlayer) {
+  if (fadeOption || !ufoGetPlayer) {
     worker.postMessage({
       ticks: ticks,
       resetInProgress: resetInProgress,
@@ -2480,7 +2480,6 @@ function update(ticks) {
         direction: aliensDirection,
         bullets: alienBulletsArray,
         alive: alienAlive,
-        animationDuration: alienAnimationDuration,
         danceFaster: aliensDanceFaster,
         lowestInColumn: lowestInColumn,
         leftCol: leftCol,
@@ -2548,7 +2547,6 @@ function update(ticks) {
       if (gotOne) {
         aliensToRemove.push(event.data.aliens.toRemove);
       }
-      alienAnimationDuration = event.data.aliens.animationDuration;
       aliensDanceFaster = event.data.aliens.danceFaster;
       for (let col = 0; col < alienGridWidth; col++) {
         lowestInColumn[col] = event.data.aliens.lowestInColumn[col];
@@ -3103,13 +3101,19 @@ function handleKeyDown(event) {
     statsBar.style.display = "flex";
     pauseMenu.innerHTML = "";
     pauseMenu.classList.remove("pause-menu-modify");
+    let onOrOff;
+    if (fadeOption) {
+      onOrOff = "off";
+    } else {
+      onOrOff = "on";
+    }
     if (fadeOption) {
       pauseMenu.insertAdjacentHTML(
         "beforeend",
         `
       <div><span id="n">[N]ew game</span></div>
       <div><span id="c">[C]redits</span></div>
-      <div><span id="f">[F]lash effect off</span></div>
+      <div><span id="f">[F]lash effect ${onOrOff}</span></div>
       <div><span id="s"> [S]tory</span></div>
       <div><span id="a">[ANY OTHER KEY] to continue</span></div>
       `
@@ -3120,7 +3124,7 @@ function handleKeyDown(event) {
         `
       <div><span id="n">[N]ew game</span></div>
       <div><span id="c">[C]redits</span></div>
-      <div><span id="f">[F]lash effect on</span></div>
+      <div><span id="f">[F]lash effect ${onOrOff}</span></div>
       <div><span id="s"> [S]tory</span></div>
       <div><span id="a">[ANY OTHER KEY] to continue</span></div>
       `
@@ -3155,32 +3159,26 @@ function handleKeyDown(event) {
   }
 
   if (paused) {
+    let onOrOff;
+    if (fadeOption) {
+      onOrOff = "off";
+    } else {
+      onOrOff = "on";
+    }
     if (!storyMode && (key === "S" || key === "s")) {
       if (displayCredits) {
         toggleCreditsThrottled();
       }
       pauseMenu.innerHTML = "";
-      if (fadeOption) {
-        pauseMenu.insertAdjacentHTML(
-          "beforeend",
-          `
+      pauseMenu.insertAdjacentHTML(
+        "beforeend",
+        `
         <div><span id="n">[N]ew game</span></div>
         <div><span id="c">[C]redits</span></div>
-        <div><span id="f">[F]lash effect off</span></div>
+        <div><span id="f">[F]lash effect ${onOrOff}</span></div>
         <div><span id="a">[ANY OTHER KEY] to continue</span></div>
         `
-        );
-      } else {
-        pauseMenu.insertAdjacentHTML(
-          "beforeend",
-          `
-        <div><span id="n">[N]ew game</span></div>
-        <div><span id="c">[C]redits</span></div>
-        <div><span id="f">[F]lash effect on</span></div>
-        <div><span id="a">[ANY OTHER KEY] to continue</span></div>
-        `
-        );
-      }
+      );
       storyPart = "beginning";
       cutScene();
       storyMode = true;
@@ -3195,13 +3193,17 @@ function handleKeyDown(event) {
       pauseMenu.innerHTML = "";
       toggleFlashEffectThrottled();
       if (fadeOption) {
+        onOrOff = "off";
+      } else {
+        onOrOff = "on";
+      }
+      if (storyMode) {
         pauseMenu.insertAdjacentHTML(
           "beforeend",
           `
         <div><span id="n">[N]ew game</span></div>
         <div><span id="c">[C]redits</span></div>
-        <div><span id="f">[F]lash effect off</span></div>
-        <div><span id="s"> [S]tory</span></div>
+        <div><span id="f">[F]lash effect ${onOrOff}</span></div>
         <div><span id="a">[ANY OTHER KEY] to continue</span></div>
         `
         );
@@ -3211,7 +3213,7 @@ function handleKeyDown(event) {
           `
         <div><span id="n">[N]ew game</span></div>
         <div><span id="c">[C]redits</span></div>
-        <div><span id="f">[F]lash effect on</span></div>
+        <div><span id="f">[F]lash effect ${onOrOff}</span></div>
         <div><span id="s"> [S]tory</span></div>
         <div><span id="a">[ANY OTHER KEY] to continue</span></div>
         `

@@ -81,11 +81,6 @@ self.onmessage = function (event) {
 };
 
 function update(data) {
-  data.barriers.blocksToChange = [];
-  data.player.bullet.removeMeMessageFromWorker = false;
-  data.ufo.kill = false;
-  data.aliens.toRemove = null;
-
   if (data.fadeOption) {
     let brightest = 1;
     let fadesCount = fades.length;
@@ -107,6 +102,15 @@ function update(data) {
       data.backgroundColor[i] = 255 * (1 - brightest);
     }
   }
+
+  if (data.ufo.getPlayer) {
+    return data;
+  }
+
+  data.barriers.blocksToChange = [];
+  data.player.bullet.removeMeMessageFromWorker = false;
+  data.ufo.kill = false;
+  data.aliens.toRemove = null;
 
   // Move player.
   data.player.left +=
