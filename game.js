@@ -3038,7 +3038,7 @@ function gameLoop(timestamp) {
     accumulatedFrameTime -= frameDuration;
   }
   if (ticks > 1) {
-    console.log("dropped drame with", ticks, "updates needed");
+    console.log("dropped frame with", ticks, "updates needed");
     frameDropsPerTenSeconds++;
   }
 
@@ -3270,13 +3270,19 @@ const gameOverView = () => {
   overlay.innerHTML = "";
   overlay.style.zIndex = 4;
   const html = `
-  <h2 class="overlay-title">Game Over</h2>
   <div id="end-game-prompt">
+  <div class="game-over-text">Game Over</div>
     ${
       score > Math.min(...scores.map((el) => el.score))
         ? `<form id="score-form">
-    <div class="gameOver-stats">
+    <div class="game-over-stats">
         <div class="stat-group">
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
             <label for="score1" class="stat-label">SCORE:</label>
             <p class="stat-input" id="score1" name="score">${score}</p>
         </div>
@@ -3284,9 +3290,9 @@ const gameOverView = () => {
             <label for="time" class="stat-label">TIME:</label>
             <p class="stat-input" id="time" name="time">${timer}</p>
         </div>
-    </div>
-    <div class="player-input">
+        <div class="player-input">
         <input type="text" id="player-name" name="player-name" placeholder="TYPE NAME, HUMAN SCUM!" autocomplete="off" maxlength="24">
+    </div>
     </div>
 </form>`
         : ``

@@ -65,7 +65,7 @@ func saveScores() {
 
 // AddScoreHandler handles the POST request to add a new score
 func AddScoreHandler(w http.ResponseWriter, r *http.Request) {
-	Cors(&w, r)
+	Cors(w, r)
 	if r.Method != http.MethodPost {
 		http.Error(w, `{"error": "405 Method Not Allowed"}`, http.StatusMethodNotAllowed)
 		return
@@ -106,7 +106,7 @@ func AddScoreHandler(w http.ResponseWriter, r *http.Request) {
 
 // GetScoresHandler handles the GET request to retrieve all scores
 func GetScoresHandler(w http.ResponseWriter, r *http.Request) {
-	Cors(&w, r)
+	Cors(w, r)
 	if r.Method == http.MethodGet {
 		// Retrieve the scores data
 		scoresData.mu.Lock()
@@ -131,12 +131,13 @@ func GetScoresHandler(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
-func Cors(w *http.ResponseWriter, r *http.Request) {
-	(*w).Header().Set("Access-Control-Allow-Origin", "*")
-	(*w).Header().Set("Access-Control-Allow-Methods", "POST, GET, OPTIONS, PUT, DELETE")
-	(*w).Header().Set("Access-Control-Allow-Credentials", "true")
-	(*w).Header().Set("Access-Control-Allow-Headers", "Content-Type")
+func Cors(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Access-Control-Allow-Origin", "*")
+	w.Header().Set("Access-Control-Allow-Methods", "POST, GET, OPTIONS, PUT, DELETE")
+	w.Header().Set("Access-Control-Allow-Credentials", "true")
+	w.Header().Set("Access-Control-Allow-Headers", "Content-Type")
 	if r.Method == http.MethodOptions {
+		w.WriteHeader(http.StatusOK)
 		return
 	}
 }

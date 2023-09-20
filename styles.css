@@ -554,12 +554,23 @@ body {
 /* Score Styles */
 
 #end-game-scoreboard-container {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  width: 80%;
+  margin: 0 auto;
+  font-size: 1.5rem;
+}
+
+/* #end-game-scoreboard-container {
   text-align: center;
   width: 80%;
   margin: 0 auto;
   font-size: 1.5rem;
   top: 32px;
-}
+} */
 
 .pause-menu-modify {
   display: block;
@@ -634,13 +645,21 @@ h1 {
 
 /* SCOREINPUT */
 
-#end-game-prompt {
+/* #end-game-prompt {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   height: 80vh;
   color: #fff;
+} */
+
+#end-game-prompt {
+  position: absolute;
+  top: 50%; /* Adjust this value to position it higher or lower on the screen */
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
 }
 
 #score-form {
@@ -664,8 +683,9 @@ h1 {
   caret-color: black;
 }
 
-.gameOverText {
-  font-size: 8rem;
+.game-over-text {
+  font-size: 7rem;
+  color: red;
 }
 
 @keyframes flash {
@@ -678,7 +698,7 @@ h1 {
   }
 }
 
-.gameOver-stats {
+.game-over-stats {
   text-align: center;
   width: 80%;
   margin: 0 auto;
@@ -730,6 +750,7 @@ h1 {
   text-align: center;
   width: 80%;
   font-size: 10rem;
+  align-items: center;
 }
 
 .player-input input::placeholder {

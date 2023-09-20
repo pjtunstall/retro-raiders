@@ -8,9 +8,7 @@
 
 ## 1. SET UP
 
-Open a terminal and, from the folder called `server`, execute `go run .` to launch the game server on port 8080 and the scoreboard server on port 10000. Enter `localhost:8080` in the address bar of Chrome, maximize the window and enter full-screen mode (CMD+SHIFT+F).
-
-Chrome will automatically adjust to the right the zoom; for me, it's 80%. Alternatively, you can play on Firefox if you manually zoom; 67% works for me.
+Open a terminal and, from the folder called `server`, execute `go run .` to launch the game server on port 8080 and the scoreboard server on port 10000. Enter `localhost:8080` in the address bar of Chrome, maximize the window and enter full-screen mode (CMD+SHIFT+F). Adjust zoom if needed.
 
 ## 2. CAUTION
 
