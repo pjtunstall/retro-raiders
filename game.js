@@ -1323,10 +1323,6 @@ const bulletHeight = 30;
 // skyline.classList.add("forest");
 
 // Variables to do with the flash effect for when alien bullets hit the ground.
-// let fades = Array.from({ length: maxAlienBullets * 2 }, () => ({
-//   duration: 2000,
-//   stage: 1,
-// }));
 const backgroundColor = [0, 0, 0];
 let quake = false;
 
@@ -2485,7 +2481,7 @@ function update(ticks) {
         leftCol: leftCol,
         rightCol: rightCol,
         bottomRow: bottomRow,
-        beingRemoved: alienToRemove,
+        beingRemoved: !!alienToRemove,
       },
       endBounce: endBounce,
       endFlit: endFlit,
