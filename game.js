@@ -1162,7 +1162,7 @@ const scale = 0.5;
 const scaledHeight = scale * alienHeight;
 const scaledWidth = scale * alienWidth;
 let aliensRemaining = alienGridWidth * alienGridHeight;
-let aliensToRemove = [];
+let alienToRemove = null;
 const alienAlive = Array(alienGridHeight);
 const alienElements = Array(alienGridHeight);
 for (let i = 0; i < alienGridHeight; i++) {
@@ -2257,7 +2257,7 @@ function reset(restart) {
       alienRateOfFire = level % 10;
     }
     alienAnimationDuration = 1;
-    aliensToRemove = [];
+    alienToRemove = null;
     aliensLeft = containerWidth / 2 - alienGridPixelWidth / 2;
     aliensTop = startHeight;
     insetLeft = 0;
@@ -2485,7 +2485,7 @@ function update(ticks) {
         leftCol: leftCol,
         rightCol: rightCol,
         bottomRow: bottomRow,
-        beingRemoved: aliensToRemove,
+        beingRemoved: alienToRemove,
       },
       endBounce: endBounce,
       endFlit: endFlit,
@@ -2543,10 +2543,7 @@ function update(ticks) {
       insetLeft = event.data.aliens.insetLeft;
       aliensGroundSensor = event.data.aliens.groundSensor;
       aliensRemaining = event.data.aliens.remaining;
-      const gotOne = event.data.aliens.toRemove;
-      if (gotOne) {
-        aliensToRemove.push(event.data.aliens.toRemove);
-      }
+      alienToRemove = event.data.aliens.toRemove;
       aliensDanceFaster = event.data.aliens.danceFaster;
       for (let col = 0; col < alienGridWidth; col++) {
         lowestInColumn[col] = event.data.aliens.lowestInColumn[col];
@@ -2739,24 +2736,28 @@ function render() {
   aliens.style.left = aliensLeft + "px";
   aliens.style.top = aliensTop + "px";
 
-  for (const poorDoomedAlien of aliensToRemove) {
+  if (alienToRemove) {
+    const poorDoomedAlien = alienToRemove;
+    alienToRemove = null;
     hull.currentTime = 0;
     hull.play();
-    const row = poorDoomedAlien.row;
-    const col = poorDoomedAlien.col;
-    alienAlive[row][col] = false;
+    alienAlive[poorDoomedAlien.row][poorDoomedAlien.col] = false;
     switch (true) {
-      case alienElements[row][col].classList.contains("squid"):
+      case alienElements[poorDoomedAlien.row][
+        poorDoomedAlien.col
+      ].classList.contains("squid"):
         score += 30;
         break;
-      case alienElements[row][col].classList.contains("crab"):
+      case alienElements[poorDoomedAlien.row][
+        poorDoomedAlien.col
+      ].classList.contains("crab"):
         score += 20;
         break;
       default:
         score += 10;
     }
     incrementScore = true;
-    alienElements[row][col].classList.remove(
+    alienElements[poorDoomedAlien.row][poorDoomedAlien.col].classList.remove(
       "squid",
       "squid-black",
       "crab",
@@ -2819,7 +2820,6 @@ function render() {
       }
     }, 180);
   }
-  aliensToRemove = [];
 
   if (aliensDanceFaster) {
     for (const squid of squids) {

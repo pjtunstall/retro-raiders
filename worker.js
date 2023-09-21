@@ -226,10 +226,12 @@ function update(data) {
                 scaledWidth +
                 gap * col
           ) {
-            for (const alienToRemove of data.aliens.beingRemoved) {
-              if (alienToRemove.row === row && alienToRemove.col === col) {
-                continue alienIsHit;
-              }
+            if (
+              data.beingRemoved &&
+              row === data.beingRemoved.row &&
+              col === data.beingRemoved.col
+            ) {
+              continue alienIsHit;
             }
             data.player.bullet.removeMeMessageFromWorker = true;
             data.aliens.alive[row][col] = false;

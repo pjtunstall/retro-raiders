@@ -67,7 +67,9 @@ func saveScores() {
 func AddScoreHandler(w http.ResponseWriter, r *http.Request) {
 	Cors(w, r)
 	if r.Method != http.MethodPost {
-		http.Error(w, `{"error": "405 Method Not Allowed"}`, http.StatusMethodNotAllowed)
+		if r.Method != http.MethodOptions {
+			http.Error(w, `{"error": "405 Method Not Allowed"}`, http.StatusMethodNotAllowed)
+		}
 		return
 	}
 
