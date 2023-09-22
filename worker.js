@@ -70,20 +70,16 @@ const blockLeft = [
 let backgroundColor = [0, 0, 0];
 
 self.onmessage = function (event) {
-  let data = event.data;
-  if (data.resetInProgress) {
+  if (event.data.resetInProgress) {
     return;
   }
-  self.postMessage(update(data));
-};
-
-function update(data) {
-  if (data.fadeOption) {
+  if (event.data.fadeOption) {
     let brightest = 1;
     let fadesCount = fades.length;
     for (let i = 0; i < fades.length; i++) {
       if (fades[i].stage < 1) {
-        fades[i].stage += (frameDuration * data.ticks) / fades[i].duration;
+        fades[i].stage +=
+          (frameDuration * event.data.ticks) / fades[i].duration;
         if (fades[i].stage < brightest) {
           brightest = fades[i].stage;
         }
@@ -93,209 +89,236 @@ function update(data) {
       }
     }
     if (fadesCount === 0) {
-      data.quake = false;
+      event.data.quake = false;
     }
     for (let i = 0; i < 3; i++) {
-      data.backgroundColor[i] = 255 * (1 - brightest);
+      event.data.backgroundColor[i] = 255 * (1 - brightest);
     }
   }
 
-  if (data.ufo.getPlayer) {
-    return data;
+  if (event.data.ufo.getPlayer) {
+    return;
   }
 
-  data.barriers.blocksToChange = [];
-  data.player.bullet.removeMeMessageFromWorker = false;
-  data.ufo.kill = false;
-  data.aliens.toRemove = null;
+  event.data.barriers.blocksToChange = [];
+  event.data.player.bullet.removeMeMessageFromWorker = false;
+  event.data.ufo.kill = false;
+  event.data.aliens.toRemove = null;
 
   // Move player.
-  data.player.left +=
-    (data.player.direction * playerStep * frameDuration * data.ticks) / 1000;
-  data.player.left = Math.max(
+  event.data.player.left +=
+    (event.data.player.direction *
+      playerStep *
+      frameDuration *
+      event.data.ticks) /
+    1000;
+  event.data.player.left = Math.max(
     0,
-    Math.min(containerWidth - playerWidth, data.player.left)
+    Math.min(containerWidth - playerWidth, event.data.player.left)
   );
 
   // Move player bullet.
-  if (data.player.bullet.isOnScreen) {
-    const boost = Date.now() - data.player.bullet.boostStart < 10000 ? 2 : 1;
-    data.player.bullet.top -=
-      (boost * playerBulletSpeed * frameDuration * data.ticks) / 1000;
+  if (event.data.player.bullet.isOnScreen) {
+    const boost =
+      Date.now() - event.data.player.bullet.boostStart < 10000 ? 2 : 1;
+    event.data.player.bullet.top -=
+      (boost * playerBulletSpeed * frameDuration * event.data.ticks) / 1000;
   } else {
-    data.player.bullet.top = playerTop - playerBulletHeight;
+    event.data.player.bullet.top = playerTop - playerBulletHeight;
   }
 
   // Move aliens and check if they've reached the sides or bottom.
-  if (data.aliens.remaining > 0) {
-    data.aliens.left +=
-      (data.aliens.direction * data.aliens.step * frameDuration * data.ticks) /
+  if (event.data.aliens.remaining > 0) {
+    event.data.aliens.left +=
+      (event.data.aliens.direction *
+        event.data.aliens.step *
+        frameDuration *
+        event.data.ticks) /
       1000;
-    const howLowCanYouGo = data.aliens.top + data.aliens.groundSensor;
-    if (!data.endBounce && data.level % 10 > 4 && data.level % 10 < 8) {
+    const howLowCanYouGo =
+      event.data.aliens.top + event.data.aliens.groundSensor;
+    if (
+      !event.data.endBounce &&
+      event.data.level % 10 > 4 &&
+      event.data.level % 10 < 8
+    ) {
       const bob =
         0.001 *
-        (((data.level - 1) % 10) - 3) *
-        (Math.floor(Date.now() % 1000) - 500 + data.level);
-      data.aliens.top +=
-        (bob * data.aliens.step * frameDuration * data.ticks) / 1000;
-      if (data.aliens.top < 0) {
-        data.aliens.top = 0;
+        (((event.data.level - 1) % 10) - 3) *
+        (Math.floor(Date.now() % 1000) - 500 + event.data.level);
+      event.data.aliens.top +=
+        (bob * event.data.aliens.step * frameDuration * event.data.ticks) /
+        1000;
+      if (event.data.aliens.top < 0) {
+        event.data.aliens.top = 0;
       }
       // Don't let the aliens bounce too low.
       if (howLowCanYouGo > containerHeight - 60) {
-        data.aliens.top = howLowCanYouGo - data.aliens.groundSensor - 60;
-        if (data.level < 7 || Date.now() - data.levelStartTime > 60000) {
-          data.endBounce = true;
+        event.data.aliens.top =
+          howLowCanYouGo - event.data.aliens.groundSensor - 60;
+        if (
+          event.data.level < 7 ||
+          Date.now() - event.data.levelStartTime > 60000
+        ) {
+          event.data.endBounce = true;
         }
       }
     }
-    if (!data.endFlit && (data.level % 10 > 7 || data.level % 10 === 0)) {
-      data.aliens.top +=
-        (data.level *
+    if (
+      !event.data.endFlit &&
+      (event.data.level % 10 > 7 || event.data.level % 10 === 0)
+    ) {
+      event.data.aliens.top +=
+        (event.data.level *
           (Math.random() - 0.496) *
-          data.aliens.step *
+          event.data.aliens.step *
           frameDuration *
-          data.ticks) /
+          event.data.ticks) /
         1000;
-      if (data.aliens.top < 0) {
-        data.aliens.top = 0;
+      if (event.data.aliens.top < 0) {
+        event.data.aliens.top = 0;
       }
       // Till 2 minutes of level have passed, don't let the aliens reach the ground
       // on a random dip on levels where they flit about at random.
       if (howLowCanYouGo > containerHeight - 60) {
-        data.aliens.top = howLowCanYouGo - data.aliens.groundSensor - 60;
-        if (Date.now() - data.levelStartTime > 120000) {
-          data.endFlit = true;
+        event.data.aliens.top =
+          howLowCanYouGo - event.data.aliens.groundSensor - 60;
+        if (Date.now() - event.data.levelStartTime > 120000) {
+          event.data.endFlit = true;
         }
       }
     }
-    if (data.aliens.left + data.aliens.insetLeft < 0) {
-      data.aliens.left = -data.aliens.insetLeft;
-      data.aliens.direction = 1;
+    if (event.data.aliens.left + event.data.aliens.insetLeft < 0) {
+      event.data.aliens.left = -event.data.aliens.insetLeft;
+      event.data.aliens.direction = 1;
       if (howLowCanYouGo < containerHeight) {
-        data.aliens.top += 20;
-        if (data.aliens.step < maxAlienSpeed) {
-          // data.aliens.step = data.aliens.top + 100;
+        event.data.aliens.top += 20;
+        if (event.data.aliens.step < maxAlienSpeed) {
+          // event.data.aliens.step = event.data.aliens.top + 100;
         }
       } else {
-        data.player.dead = true;
+        event.data.player.dead = true;
       }
     }
     if (
-      data.aliens.left +
+      event.data.aliens.left +
         alienGridPixelWidth +
         (alienGridWidth - 1) * gap -
-        data.aliens.insetRight >
+        event.data.aliens.insetRight >
       containerWidth
     ) {
-      data.aliens.left =
+      event.data.aliens.left =
         containerWidth -
         alienGridPixelWidth -
         (alienGridWidth - 1) * gap +
-        data.aliens.insetRight;
-      data.aliens.direction = -1;
+        event.data.aliens.insetRight;
+      event.data.aliens.direction = -1;
       if (howLowCanYouGo < containerHeight) {
-        data.aliens.top += 20;
-        if (data.aliens.step < maxAlienSpeed) {
-          // data.aliens.step = data.aliens.top + 100;
+        event.data.aliens.top += 20;
+        if (event.data.aliens.step < maxAlienSpeed) {
+          // event.data.aliens.step = event.data.aliens.top + 100;
         }
       } else {
-        data.player.dead = true;
+        event.data.player.dead = true;
       }
     }
   }
 
   if (
-    data.player.bullet.isOnScreen &&
-    !data.player.bullet.removeMeMessageToWorker &&
-    !data.aliens.beingRemoved
+    event.data.player.bullet.isOnScreen &&
+    !event.data.player.bullet.removeMeMessageToWorker &&
+    !event.data.aliens.beingRemoved
   ) {
     alienIsHit: for (let row = 0; row < alienGridHeight; row++) {
       for (let col = 0; col < alienGridWidth; col++) {
-        if (data.aliens.alive[row][col]) {
+        if (event.data.aliens.alive[row][col]) {
           if (
-            data.player.bullet.top <=
-              data.aliens.top + alienTopInGrid[row][col] + scaledHeight &&
-            data.player.bullet.top + playerBulletHeight >=
-              data.aliens.top + alienTopInGrid[row][col] &&
-            data.player.bullet.left >=
-              data.aliens.left + alienLeftInGrid[row][col] + gap * col &&
-            data.player.bullet.left <=
-              data.aliens.left +
+            event.data.player.bullet.top <=
+              event.data.aliens.top + alienTopInGrid[row][col] + scaledHeight &&
+            event.data.player.bullet.top + playerBulletHeight >=
+              event.data.aliens.top + alienTopInGrid[row][col] &&
+            event.data.player.bullet.left >=
+              event.data.aliens.left + alienLeftInGrid[row][col] + gap * col &&
+            event.data.player.bullet.left <=
+              event.data.aliens.left +
                 alienLeftInGrid[row][col] +
                 scaledWidth +
                 gap * col
           ) {
-            data.player.bullet.removeMeMessageFromWorker = true;
-            data.aliens.alive[row][col] = false;
-            if (data.level % 10 < 6 || data.level > 7) {
-              data.aliens.step += 10;
+            event.data.player.bullet.removeMeMessageFromWorker = true;
+            event.data.aliens.alive[row][col] = false;
+            if (event.data.level % 10 < 6 || event.data.level > 7) {
+              event.data.aliens.step += 10;
             } else {
-              data.aliens.step += 7;
+              event.data.aliens.step += 7;
             }
-            data.aliens.remaining--;
+            event.data.aliens.remaining--;
             let isLastOne = false;
-            if (data.aliens.remaining < 1) {
+            if (event.data.aliens.remaining < 1) {
               isLastOne = true;
             }
-            if (row === data.aliens.lowestInColumn[col]) {
+            if (row === event.data.aliens.lowestInColumn[col]) {
               for (let i = row; i >= 0; i--) {
-                if (data.aliens.alive[i][col]) {
+                if (event.data.aliens.alive[i][col]) {
                   break;
                 }
-                data.aliens.lowestInColumn[col]--;
+                event.data.aliens.lowestInColumn[col]--;
               }
             }
-            if (data.aliens.animationDuration > 0.3) {
-              data.aliens.animationDuration -= alienAnimationIncrement;
-              data.aliens.danceFaster = true;
-            }
-            if (
-              col === data.aliens.leftCol &&
-              data.aliens.alive.every((row) => !row[col])
-            ) {
-              data.aliens.leftCol++;
-              while (
-                data.aliens.leftCol < data.aliens.rightCol &&
-                data.aliens.alive.every((row) => !row[data.aliens.leftCol])
-              ) {
-                data.aliens.leftCol++;
-              }
-              data.aliens.insetLeft = (alienWidth + gap) * data.aliens.leftCol;
+            if (event.data.aliens.animationDuration > 0.3) {
+              event.data.aliens.animationDuration -= alienAnimationIncrement;
+              event.data.aliens.danceFaster = true;
             }
             if (
-              col === data.aliens.rightCol &&
-              data.aliens.alive.every((row) => !row[col])
+              col === event.data.aliens.leftCol &&
+              event.data.aliens.alive.every((row) => !row[col])
             ) {
-              data.aliens.rightCol--;
+              event.data.aliens.leftCol++;
               while (
-                data.aliens.rightCol > data.aliens.leftCol &&
-                data.aliens.alive.every((row) => !row[data.aliens.rightCol])
+                event.data.aliens.leftCol < event.data.aliens.rightCol &&
+                event.data.aliens.alive.every(
+                  (row) => !row[event.data.aliens.leftCol]
+                )
               ) {
-                data.aliens.rightCol--;
+                event.data.aliens.leftCol++;
               }
-              data.aliens.insetRight =
+              event.data.aliens.insetLeft =
+                (alienWidth + gap) * event.data.aliens.leftCol;
+            }
+            if (
+              col === event.data.aliens.rightCol &&
+              event.data.aliens.alive.every((row) => !row[col])
+            ) {
+              event.data.aliens.rightCol--;
+              while (
+                event.data.aliens.rightCol > event.data.aliens.leftCol &&
+                event.data.aliens.alive.every(
+                  (row) => !row[event.data.aliens.rightCol]
+                )
+              ) {
+                event.data.aliens.rightCol--;
+              }
+              event.data.aliens.insetRight =
                 (alienWidth + gap) *
-                (alienGridWidth - 1 - data.aliens.rightCol);
+                (alienGridWidth - 1 - event.data.aliens.rightCol);
             }
             if (
-              row === data.aliens.bottomRow &&
-              data.aliens.alive[row].every((colValue) => !colValue)
+              row === event.data.aliens.bottomRow &&
+              event.data.aliens.alive[row].every((colValue) => !colValue)
             ) {
-              data.aliens.bottomRow--;
-              data.aliens.groundSensor -= alienHeight;
+              event.data.aliens.bottomRow--;
+              event.data.aliens.groundSensor -= alienHeight;
               while (
-                data.aliens.bottomRow > 0 &&
-                data.aliens.alive[data.aliens.bottomRow].every(
+                event.data.aliens.bottomRow > 0 &&
+                event.data.aliens.alive[event.data.aliens.bottomRow].every(
                   (colValue) => !colValue
                 )
               ) {
-                data.aliens.bottomRow--;
-                data.aliens.groundSensor -= alienHeight;
+                event.data.aliens.bottomRow--;
+                event.data.aliens.groundSensor -= alienHeight;
               }
             }
-            data.aliens.toRemove = {
+            event.data.aliens.toRemove = {
               row: row,
               col: col,
               isLastOne: isLastOne,
@@ -308,47 +331,50 @@ function update(data) {
   }
 
   // Collisions between player bullet and UFO.
-  if (data.ufo.active) {
-    if (data.player.bullet.isOnScreen) {
+  if (event.data.ufo.active) {
+    if (event.data.player.bullet.isOnScreen) {
       if (
-        data.player.bullet.top <= data.ufo.top + ufoHeight &&
-        data.player.bullet.left + playerBulletWidth >= data.ufo.left &&
-        data.player.bullet.left <= data.ufo.left + ufoWidth
+        event.data.player.bullet.top <= event.data.ufo.top + ufoHeight &&
+        event.data.player.bullet.left + playerBulletWidth >=
+          event.data.ufo.left &&
+        event.data.player.bullet.left <= event.data.ufo.left + ufoWidth
       ) {
         // Not necessary to remove player bullet explicitly, because it reaches top of screen
         // fast enough to be removed anyway immediately after hitting the ufo.
-        data.ufo.kill = true;
+        event.data.ufo.kill = true;
       }
     }
   }
 
   // Collisions between player bullet and barriers or top of container.
   if (
-    data.player.bullet.isOnScreen &&
-    !data.player.bullet.removeMeMessageToWorker
+    event.data.player.bullet.isOnScreen &&
+    !event.data.player.bullet.removeMeMessageToWorker
   ) {
-    if (data.player.bullet.top < 0) {
-      data.player.bullet.removeMeMessageFromWorker = true;
+    if (event.data.player.bullet.top < 0) {
+      event.data.player.bullet.removeMeMessageFromWorker = true;
     }
     for (let i = 0; i < 48; i++) {
       if (
-        data.player.bullet.top <= blockTop[i] + 48 &&
-        data.player.bullet.top + playerBulletHeight >= blockTop[i] &&
-        data.player.bullet.left + playerBulletWidth >= blockLeft[i] &&
-        data.player.bullet.left <= blockLeft[i] + 48 &&
-        data.barriers.blockVis[i] === true
+        event.data.player.bullet.top <= blockTop[i] + 48 &&
+        event.data.player.bullet.top + playerBulletHeight >= blockTop[i] &&
+        event.data.player.bullet.left + playerBulletWidth >= blockLeft[i] &&
+        event.data.player.bullet.left <= blockLeft[i] + 48 &&
+        event.data.barriers.blockVis[i] === true
       ) {
-        data.player.bullet.removeMeMessageFromWorker = true;
+        event.data.player.bullet.removeMeMessageFromWorker = true;
         const barrierNumber = Math.floor(i / 12);
         const h = i % 12;
         const rowNumber = Math.floor(h / 4);
         const colNumber = h % 4;
-        data.barriers.damage[barrierNumber][rowNumber][colNumber]++;
+        event.data.barriers.damage[barrierNumber][rowNumber][colNumber]++;
         let removeMe = false;
-        if (data.barriers.damage[barrierNumber][rowNumber][colNumber] > 3) {
+        if (
+          event.data.barriers.damage[barrierNumber][rowNumber][colNumber] > 3
+        ) {
           removeMe = true;
         }
-        data.barriers.blocksToChange.push({
+        event.data.barriers.blocksToChange.push({
           rowNumber: rowNumber,
           colNumber: colNumber,
           barrierNumber: barrierNumber,
@@ -361,34 +387,34 @@ function update(data) {
   }
 
   // Alien bullet movement and collisions with player, barriers, or ground.
-  for (const bullet of data.aliens.bullets) {
-    if (data.ufo.getPlayer) {
+  for (const bullet of event.data.aliens.bullets) {
+    if (event.data.ufo.getPlayer) {
       break;
     }
     if (bullet.removeMe) {
       continue;
     }
 
-    bullet.top += (bullet.speed * frameDuration * data.ticks) / 1000;
+    bullet.top += (bullet.speed * frameDuration * event.data.ticks) / 1000;
 
     if (
       bullet.type === "fireball" &&
       bullet.top + 64 >= playerTop &&
-      bullet.left + 16 >= data.player.left &&
-      bullet.left <= data.player.left + playerWidth
+      bullet.left + 16 >= event.data.player.left &&
+      bullet.left <= event.data.player.left + playerWidth
     ) {
-      data.player.hitByFireball = true;
+      event.data.player.hitByFireball = true;
       bullet.removeMe = true;
       break;
     }
     if (
       bullet.top + alienBulletHeight >= playerTop &&
-      bullet.left + alienBulletWidth >= data.player.left &&
-      bullet.left <= data.player.left + playerWidth
+      bullet.left + alienBulletWidth >= event.data.player.left &&
+      bullet.left <= event.data.player.left + playerWidth
     ) {
       // Cheat mode:
       // Comment out this line to be invulnerable to alien bullets for testing.
-      data.player.hitByBullet = true;
+      event.data.player.hitByBullet = true;
       bullet.removeMe = true;
       continue;
     }
@@ -399,18 +425,20 @@ function update(data) {
           bullet.top + alienBulletHeight >= blockTop[i] &&
           bullet.left + alienBulletWidth >= blockLeft[i] &&
           bullet.left <= blockLeft[i] + 48 &&
-          data.barriers.blockVis[i] === true
+          event.data.barriers.blockVis[i] === true
         ) {
           const barrierNumber = Math.floor(i / 12);
           const h = i % 12;
           const rowNumber = Math.floor(h / 4);
           const colNumber = h % 4;
-          data.barriers.damage[barrierNumber][rowNumber][colNumber]++;
+          event.data.barriers.damage[barrierNumber][rowNumber][colNumber]++;
           let removeMe = false;
-          if (data.barriers.damage[barrierNumber][rowNumber][colNumber] > 3) {
+          if (
+            event.data.barriers.damage[barrierNumber][rowNumber][colNumber] > 3
+          ) {
             removeMe = true;
           }
-          data.barriers.blocksToChange.push({
+          event.data.barriers.blocksToChange.push({
             rowNumber: rowNumber,
             colNumber: colNumber,
             barrierNumber: barrierNumber,
@@ -428,7 +456,7 @@ function update(data) {
     if (bullet.top + alienBulletHeight > containerHeight) {
       bullet.removeMe = true;
       bullet.groundHit = true;
-      if (data.fadeOption) {
+      if (event.data.fadeOption) {
         let duration;
         let stage;
         if (bullet.type === "fireball") {
@@ -445,11 +473,11 @@ function update(data) {
         if (i <= fades.length) {
           fades[i].stage = stage;
           fades[i].duration = duration;
-          data.quake = true;
+          event.data.quake = true;
         }
       }
     }
   }
 
-  return data;
-}
+  self.postMessage(event.data);
+};
