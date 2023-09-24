@@ -535,7 +535,7 @@ Perhaps it's not too late?
 Earth's savior, though, has earned ${objectPronoun}self
 some hard alien hate.
 
-The galactic interlopers run
+That gang of astral rascals run
 while issuing a threat:
 "Never leave your laser gun.
 We haven't finished yet."
