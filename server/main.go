@@ -83,6 +83,7 @@ func AddScoreHandler(w http.ResponseWriter, r *http.Request) {
 
 	minScore := math.MaxInt64
 
+	scoresData.mu.Lock()
 	for _, s := range scoresData.scores {
 		if s.Score < minScore {
 			minScore = s.Score
@@ -99,7 +100,6 @@ func AddScoreHandler(w http.ResponseWriter, r *http.Request) {
 	}
 
 	// Add the score to the scores data
-	scoresData.mu.Lock()
 	scoresData.scores = append(scoresData.scores, score)
 	saveScores() // Save the scores every time a new one is added
 	scoresData.mu.Unlock()
