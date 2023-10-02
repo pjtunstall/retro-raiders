@@ -3457,7 +3457,7 @@ const sendScoreView = (callback) => {
 
     let score = scoreElement.textContent;
     let time = timeElement.textContent.split(":");
-    let playerName = playerNameElement.value;
+    let playerName = DOMPurify.sanitize(playerNameElement.value);
 
     if (!score || !time || !playerName) {
       console.error("Unable to find necessary values");
