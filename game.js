@@ -2997,13 +2997,14 @@ const renderStory = (arr) => {
   const baseSrc = arr[0].slice(0, arr[0].length - 4);
   const html = `
     <div class="img"> 
-      <img src="./assets/story-images-1/${baseSrc}_1.jpg" alt="image of space conflict">
+      <img alt="image of space conflict">
     </div>
     <div class="text">
       ${arr[1].split("\n\n").reduce((acc, el) => (acc += `<p>${el}</p>`), "")}
     </div>
   `;
   const imgSrcs = [
+    `./assets/story-images-1/${baseSrc}_1.jpg`,
     `./assets/story-images-10/${baseSrc}_10.jpg`,
     `./assets/story-images/${arr[0]}`,
   ];
@@ -3018,11 +3019,8 @@ const renderStory = (arr) => {
       imj.removeEventListener("load", loadHandler);
     }
   };
-  if (imj.complete) {
-    imj.src = imgSrcs[currentIndex];
-    currentIndex++;
-  }
   imj.addEventListener("load", loadHandler);
+  imj.src = imgSrcs[currentIndex];
 };
 
 function gameLoop(timestamp) {
