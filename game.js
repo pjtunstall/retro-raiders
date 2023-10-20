@@ -2994,21 +2994,35 @@ const unCutScene = () => {
 const renderStory = (arr) => {
   storyEl.innerHTML = "";
   storyEl.classList.remove("hidden");
+  const baseSrc = arr[0].slice(0, arr[0].length - 4);
   const html = `
-  <div class="img"> 
-  <img src="./assets/story-images-1/${arr[0].slice(
-    0,
-    arr[0].length - 4
-  )}_1.jpg" alt="image of space conflict">
-  </div>
-  <div class="text">
-  ${arr[1].split("\n\n").reduce((acc, el) => (acc += `<p>${el}</p>`), "")}
-  </div>`;
+    <div class="img"> 
+      <img src="./assets/story-images-1/${baseSrc}_1.jpg" alt="image of space conflict">
+    </div>
+    <div class="text">
+      ${arr[1].split("\n\n").reduce((acc, el) => (acc += `<p>${el}</p>`), "")}
+    </div>
+  `;
+  const imgSrcs = [
+    `./assets/story-images-10/${baseSrc}_10.jpg`,
+    `./assets/story-images/${arr[0]}`,
+  ];
+  let currentIndex = 0;
   storyEl.insertAdjacentHTML("beforeend", html);
   const imj = storyEl.querySelector(".img img");
-  imj.addEventListener("load", () => {
-    imj.src = `./assets/story-images/${arr[0]}`;
-  });
+  const loadHandler = () => {
+    currentIndex++;
+    if (currentIndex < imgSrcs.length) {
+      imj.src = imgSrcs[currentIndex];
+    } else {
+      imj.removeEventListener("load", loadHandler);
+    }
+  };
+  if (imj.complete) {
+    imj.src = imgSrcs[currentIndex];
+    currentIndex++;
+  }
+  imj.addEventListener("load", loadHandler);
 };
 
 function gameLoop(timestamp) {
