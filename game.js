@@ -2993,7 +2993,6 @@ const unCutScene = () => {
 
 const renderStory = (arr) => {
   storyEl.innerHTML = "";
-  storyEl.classList.remove("hidden");
   const baseSrc = arr[0].slice(0, arr[0].length - 4);
   const html = `
     <div class="img"> 
@@ -3011,6 +3010,9 @@ const renderStory = (arr) => {
   storyEl.insertAdjacentHTML("beforeend", html);
   const imj = storyEl.querySelector(".img img");
   const loadHandler = () => {
+    if (currentIndex === 0) {
+      storyEl.classList.remove("hidden");
+    }
     currentIndex++;
     if (currentIndex < imgSrcs.length) {
       imj.src = imgSrcs[currentIndex];
@@ -3019,6 +3021,7 @@ const renderStory = (arr) => {
     }
   };
   if (imj.complete) {
+    storyEl.classList.remove("hidden");
     imj.src = imgSrcs[currentIndex];
     currentIndex++;
   }
