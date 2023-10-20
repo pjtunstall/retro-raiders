@@ -2993,6 +2993,7 @@ const unCutScene = () => {
 
 const renderStory = (arr) => {
   storyEl.innerHTML = "";
+  storyEl.classList.add("hidden");
   const baseSrc = arr[0].slice(0, arr[0].length - 4);
   const html = `
     <div class="img"> 
