@@ -373,7 +373,7 @@ We'll make their world a hell.`;
 function modifyStory() {
   story.beginning = [
     [
-      `./assets/story-images/24.jpg`,
+      `24.jpg`,
 
       `The Emperor of Grumium,
 that galactic ${buccaneerOrCavalier},
@@ -402,7 +402,7 @@ Her lip it slowly curled.
     ],
 
     [
-      `./assets/story-images/${introPic}.jpg`,
+      `${introPic}.jpg`,
 
       `"I know a world called Planet Earth
 with little for defense.
@@ -417,7 +417,7 @@ Let's teleport us hence."
     ],
 
     [
-      `./assets/story-images/26.jpg`,
+      `26.jpg`,
 
       `You heard it in the street.
 You heard it in the news.
@@ -443,7 +443,7 @@ a hero for to find.
     ],
 
     [
-      `./assets/story-images/${sheepPic}.jpg`,
+      `${sheepPic}.jpg`,
 
       `That summer morning, messengers came.
 Messengers there were three.
@@ -460,7 +460,7 @@ and shoot for all you're worth."
 
   story.ufoShot = [
     [
-      `./assets/story-images/${ufoShotPic}.jpg`,
+      `${ufoShotPic}.jpg`,
 
       `A well-aimed shot, the Mystery Ship
 explodes across the sky!
@@ -498,7 +498,7 @@ ${possessivePronoun} final end has faced.
 
   story.londonSaved = [
     [
-      `./assets/story-images/4.jpg`,
+      `4.jpg`,
 
       `One fleet destroyed, a glimpse of hope,
 and London's skies are free!
@@ -523,7 +523,7 @@ ${amazonOrRifleman}
 
   story.chicagoSaved = [
     [
-      `./assets/story-images/22.jpg`,
+      `22.jpg`,
 
       `The Windy City sighs relief,
 brief respite though it be.
@@ -546,7 +546,7 @@ We haven't finished yet."
 
   story.newYorkSaved = [
     [
-      `./assets/story-images/34.jpg`,
+      `34.jpg`,
 
       `"Three aliens walked into a bar. Which one said ouch?" &mdash;Zen <i>koan</i>, traditional
 
@@ -564,7 +564,7 @@ There was a time. And it was everything, and real and sharp and impossible, as l
     ],
 
     [
-      `./assets/story-images/8b.jpg`,
+      `8b.jpg`,
 
       `Each morning, you'd run in Central Park to burn off the adrenaline of the night's battle, then home to toss and turn through the June heat in the sweltering, cockroach-infested brownstone they'd appointed for Earth's defenders, up in Washington Heights.
 
@@ -584,7 +584,7 @@ But no time to think on that. A new attack. And they rush you across the ocean.
 
   story.parisSaved = [
     [
-      `./assets/story-images/1p.jpg`,
+      `1p.jpg`,
 
       `Misty mornings.
 
@@ -602,7 +602,7 @@ Is there anything we humans can't take for granted?
     ],
 
     [
-      `./assets/story-images/3p.jpg`,
+      `3p.jpg`,
 
       `If they saw you rattling to work on your scooter down the steep, cobbled alleys of Montmartre, the Parisians probably took you for an alien yourself.
 
@@ -620,7 +620,7 @@ But you knew what was at stake as you packed your bags for the next one.
 
   story.berlinSaved = [
     [
-      `./assets/story-images/${berlinPic1}.jpg`,
+      `${berlinPic1}.jpg`,
 
       `It was winter in Berlin. Even your alien allies had absconded. All but one. You sold your medals for that dingy room over the bar in Friedrichshain and took turns on a stall at the fleamarket. Weeks could go by without a sale. When someone finally did take a shine to your Presidents' Star or Quintessential Badge of Courage, you'd celebrate with <i>Glühwein</i> and drew a little closer, and it kept out the December chill awhile.
 
@@ -632,7 +632,7 @@ Ever more people began to deny the existence of the Invaders. Their certainty wo
     ],
 
     [
-      `./assets/story-images/${berlinPic2}.jpg`,
+      `${berlinPic2}.jpg`,
 
       `Such misunderstanding, on every level! How much of it due to those crummy AI translation headsets they gave you? Who knows? ${partnerSubjectPronounCapital} never did seem at ease in this world. You wondered what kept ${partnerObjectPronoun} here.
 
@@ -646,7 +646,7 @@ ${partnerSubjectPronounCapital} made ok money at the cabaret&mdash;until ${partn
     ],
 
     [
-      `./assets/story-images/${berlinPic3}.jpg`,
+      `${berlinPic3}.jpg`,
 
       `By spring, ${partnerSubjectPronoun} almost had it. ${partnerSubjectPronounCapital} looked magnificent, coaxing the arcane contraption into what you guessed, from your fading recollection of ${partnerPossessivePronoun} early attempts, must be tunes of devastating transcendence, albeit deftly canceled out. You applauded, and felt quite alone.
 
@@ -662,7 +662,7 @@ Probably that was when the twins were conceived.
 
   story.romeSaved = [
     [
-      `./assets/story-images/wolves.jpg`,
+      `wolves.jpg`,
 
       `O, your brave little fellow!
 
@@ -678,7 +678,7 @@ You didn't care about anything then, certainly not the people of Planet Earth, b
     ],
 
     [
-      `./assets/story-images/colosseum.jpg`,
+      `colosseum.jpg`,
 
       `It was just you and your little coin-op laser now. You camped by the river till the <i>polizia robotica</i> moved you on, then in cemeteries, robbing pilgrims for the cash to recharge it.
 
@@ -694,7 +694,7 @@ Why were you still trying to save these people? You sometimes wondered. Maybe yo
 
   story.austinSaved = [
     [
-      `./assets/story-images/${eightPic}.jpg`,
+      `${eightPic}.jpg`,
 
       `The remnants of the human race in rags their cities flee. They leave to seek a safer place, a mountain sanctuary.
 
@@ -712,7 +712,7 @@ All people do depend on you&mdash;their plans are in a mess&mdash;more humble si
 
   story.mountainsSaved = [
     [
-      `./assets/story-images/${ninePic}.jpg`,
+      `${ninePic}.jpg`,
 
       `Their mountain base abandonning, abysmal prospects there, the last survivors leave it for a lonely woodland lair.
 
@@ -730,7 +730,7 @@ You can rely on ${ladsOrSwarms} to search both high and low. The place that you 
 
   story.woodSaved = [
     [
-      `./assets/story-images/${tenPic}.jpg`,
+      `${tenPic}.jpg`,
 
       `Yet deeper traipse into the woods the tattered last few folk. The way is scattered with their goods, their wishes up in smoke.
 
@@ -746,7 +746,7 @@ There's nowhere else on Earth to flee. This is the make-or-break. Decided here i
 
   story.playerShot = [
     [
-      `./assets/story-images/25.jpg`,
+      `25.jpg`,
 
       `The gunner's mother heard the knock,
 three aliens at the door.
@@ -779,7 +779,7 @@ We thought you'd like to know."
 
   story.fireballEnding = [
     [
-      `./assets/story-images/0.jpg`,
+      `0.jpg`,
 
       `The gunner's mother heard the knock,
 three aliens at the door.
@@ -812,7 +812,7 @@ We thought you'd like to know."
 
   story.win = [
     [
-      `./assets/story-images/victorian.jpg`,
+      `victorian.jpg`,
 
       `Earth wakes at last from yon bad dream.
 Was it story or history?
@@ -845,7 +845,7 @@ if lived-played to the full.
 
   story.aliensReachEarth = [
     [
-      `./assets/story-images/${beamPic}.jpg`,
+      `${beamPic}.jpg`,
 
       `"O brave defender, gunner bold,
 though human you are in form,
@@ -871,7 +871,7 @@ It is the only way.
     ],
 
     [
-      `./assets/story-images/11.jpg`,
+      `11.jpg`,
 
       `So it was and so it went
 and what could you do?
@@ -902,7 +902,7 @@ you look out for your crew.
     ],
 
     [
-      `./assets/story-images/21.jpg`,
+      `21.jpg`,
 
       `<i>From the Memoirs of Exaptia Tabbani, Envoy Incarnate of the Hmadian Macrostates, on concluding her negotiations with Emperor FnrRa Gfgfgg (II<sup>MXXIV</sup>-I)st, Lord of Orion, Grand Eskalir of Grumium, and Admiral of the High Reaches:</i>
 
@@ -917,7 +917,7 @@ Crisscrossed with plasma burns, it had a curious bilateral symmetry and wore a b
     ],
 
     [
-      `./assets/story-images/2.jpg`,
+      `2.jpg`,
 
       `It scowled up at me and flapped its arms.
 
@@ -943,7 +943,7 @@ A faraway cast clouded the alien's visage.
     ],
 
     [
-      `./assets/story-images/7.jpg`,
+      `7.jpg`,
 
       `"But you are a civilized being, my friend. Are you not ashamed?"
 
@@ -959,7 +959,7 @@ For the briefest moment, its face twisted into a wild-eyed look.
     ],
 
     [
-      `./assets/story-images/5.jpg`,
+      `5.jpg`,
 
       `"What do you know of such things?" the mercenary muttered and a single, spice-scented tear dripped off its laser-scarred chin.
 
@@ -977,7 +977,7 @@ Such is the way of the High Reaches.
     ],
 
     [
-      `./assets/story-images/${lastPic}.jpg`,
+      `${lastPic}.jpg`,
 
       `I sometimes wonder what became of that lone laser gunner from Earth. Almost certainly ${subjectPronoun} was killed when the empire fell, shortly after my return.
 
@@ -2996,13 +2996,19 @@ const renderStory = (arr) => {
   storyEl.classList.remove("hidden");
   const html = `
   <div class="img"> 
-  <img src="${arr[0]}" alt="image of space conflict">
+  <img src="./assets/story-images-1/${arr[0].slice(
+    0,
+    arr[0].length - 4
+  )}_1.jpg" alt="image of space conflict">
   </div>
   <div class="text">
   ${arr[1].split("\n\n").reduce((acc, el) => (acc += `<p>${el}</p>`), "")}
   </div>`;
-
   storyEl.insertAdjacentHTML("beforeend", html);
+  const imj = storyEl.querySelector(".img img");
+  imj.addEventListener("load", () => {
+    imj.src = `./assets/story-images/${arr[0]}`;
+  });
 };
 
 function gameLoop(timestamp) {
