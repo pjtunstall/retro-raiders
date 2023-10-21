@@ -1136,6 +1136,7 @@ let removeBean = false;
 gameContainer.appendChild(ufo);
 let ufoBeam = document.querySelector(".beam");
 let ufoShip = document.querySelector(".ufo");
+let ufoDeathInProgress = false;
 
 // Alien variables.
 const aliens = document.getElementById("aliens");
@@ -2117,6 +2118,7 @@ function reset(restart) {
   resetInProgress = true;
   endBounce = false;
   endFlit = false;
+  ufoDeathInProgress = false;
 
   if (restart) {
     restartInProgress = true;
@@ -2515,7 +2517,7 @@ function update(ticks) {
           ufoGetPlayer = true;
           if (!ufoActive) {
             launchUfo();
-          } else {
+          } else if (!ufoDeathInProgress) {
             if (ufoLeft + ufoWidth / 2 <= playerLeft + playerWidth) {
               ufoDirection = 1;
             } else {
@@ -2849,11 +2851,12 @@ function render() {
   if (ufoActive) {
     ufo.style.left = ufoLeft + "px";
     if (killUfo) {
+      ufoDeathInProgress = true;
       voltage.pause();
       killUfo = false;
       ufoShip.classList.add("ufo-explosion");
       gameContainer.classList.add("fade-red");
-      if (storyMode && !hasUfoBeenShot && !isGameOver) {
+      if (storyMode && !hasUfoBeenShot && !isGameOver && !isInUfoCutScene) {
         storyPart = "ufoShot";
         cutScene();
         renderStory(story.ufoShot[0]);
@@ -2861,9 +2864,13 @@ function render() {
         hasUfoBeenShot = true;
       }
       setTimeout(() => {
+        ufoDeathInProgress = false;
+        ufoShip.classList.remove("ufo-explosion");
         ufoActive = false;
         ufo.style.left = -16 * ufoWidth + "px";
-        ufoShip.classList.remove("ufo-explosion");
+        if (isInUfoCutScene) {
+          launchUfo();
+        }
       }, 500);
       setTimeout(() => {
         gameContainer.classList.remove("fade-red");
@@ -2922,7 +2929,7 @@ function render() {
       fireAlienBullet(col);
     }
   }
-  if (ufoActive && !ufoToggleBeam && ufoGetPlayer) {
+  if (ufoActive && !ufoToggleBeam && ufoGetPlayer && !ufoDeathInProgress) {
     ufoBeam.classList.remove("hidden");
   }
 
