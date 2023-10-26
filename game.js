@@ -1086,13 +1086,15 @@ const playerHeight = 33;
 let playerDirection = 0;
 let playerLeft = containerWidth / 2 - playerWidth / 2;
 let playerTop = containerHeight - playerHeight;
-player.style.top = playerTop + "px";
 player.classList.add("life-1");
+
+// Get the computed value of the CSS variable
+let CSSVariable = getComputedStyle(player).getPropertyValue("--playerLeft");
 
 // Player bullet variables.
 let playerBullet = document.createElement("div");
 playerBullet.classList.add("player-bullet");
-playerBullet.style.visibility = "hidden";
+playerBullet.style.opacity = 0;
 gameContainer.appendChild(playerBullet);
 let playerBulletTop = 0;
 let playerBulletLeft = 0;
@@ -1124,8 +1126,7 @@ let isInUfoCutScene = false;
 const ufo = document.createElement("div");
 ufo.classList.add("ufo-container");
 let ufoLeft;
-ufo.style.top = "0px";
-ufo.style.left = -16 * ufoWidth + "px";
+ufo.style.transform = `translateX(${-16 * ufoWidth}px)`;
 const html = `
     <div id="ufo"class="ufo"></div>
     <div class="beam hidden"></div>
@@ -1745,8 +1746,12 @@ function resetBarriers() {
   for (let k = 0; k < 4; k++) {
     barrierGrids[k] = document.createElement("div");
     barrierGrids[k].classList.add("barrier");
+    // translateX results in small gaps between the blocks, hence use of style.left.
+    // I assume this is due to rounding differences between left and translateX since
+    // the gaps were between then horizontally but not vertically, and it's the
+    // X-coordinate where division happens.
     barrierGrids[k].style.left = (k + 1) * (containerWidth / 5) - 96 + "px";
-    barrierGrids[k].style.top = barrierTop + "px";
+    barrierGrids[k].style.transform = `translateY(${barrierTop}px)`;
     gameContainer.appendChild(barrierGrids[k]);
     barriers[k] = new Array(3);
     for (let i = 0; i < 3; i++) {
@@ -1761,16 +1766,13 @@ function resetBarriers() {
             blockX[blockType[i][j]][barriers[k][i][j]] + "px";
         } else {
           block.style.backgroundPositionX = "960px";
-          block.style.visibility = "hidden";
+          block.style.opacity = 0;
         }
       }
     }
   }
   blocks = [...document.querySelectorAll(".block")];
   for (const i in blocks) {
-    const parent = blocks[i].offsetParent;
-    // blockLeft[i] = blocks[i].offsetLeft + parent.offsetLeft;
-    // blockTop[i] = blocks[i].offsetTop + parent.offsetTop;
     const t = i % 12;
     const r = Math.floor(t / 4);
     const c = t % 4;
@@ -1949,16 +1951,16 @@ function togglePause() {
     if (!starting) {
       music.pause();
     }
-    pauseMenu.style.visibility = "visible";
+    pauseMenu.style.opacity = 1;
     if (resetInProgress) {
       title.style.backgroundColor = "rgba(0, 0, 0, 1);";
     } else {
       title.style.backgroundColor = "rgba(0, 0, 0, 0.7);";
     }
-    title.style.visibility = "visible";
+    title.style.opacity = 1;
   } else {
-    pauseMenu.style.visibility = "hidden";
-    title.style.visibility = "hidden";
+    pauseMenu.style.opacity = 0;
+    title.style.opacity = 0;
     wind.pause();
     frameDropsPerTenSeconds = 0;
     frameDropTimer = Date.now();
@@ -2054,8 +2056,7 @@ function fireAlienBullet(col) {
   }
   newAlienBullet.style.width = bulletWidth;
   newAlienBullet.style.height = bulletHeight;
-  newAlienBullet.style.left = `${bulletX}px`;
-  newAlienBullet.style.top = `${bulletY}px`;
+  newAlienBullet.style.transform = `translate(${bulletX}px, ${bulletY}px)`;
 
   gameContainer.appendChild(newAlienBullet);
 
@@ -2089,15 +2090,13 @@ function launchUfo() {
     ufoDirection = -1;
     ufoLeft = containerWidth;
   }
-  ufo.style.left = ufoLeft + "px";
+  ufo.style.transform = `translateX(${ufoLeft}px)`;
 }
 
 const hiddenElementsOnBeam = () => {
   aliens.style.opacity = 0;
   barrierGrids.forEach((el) => (el.style.opacity = 0));
-  alienBulletsElementArray.forEach(
-    (el) => (el.element.style.visibility = "hidden")
-  );
+  alienBulletsElementArray.forEach((el) => (el.element.style.opacity = 0));
 
   playerBullet.style.opacity = 0;
 };
@@ -2105,9 +2104,7 @@ const hiddenElementsOnBeam = () => {
 const showElementsOnBeam = () => {
   aliens.style.opacity = 1;
   barrierGrids.forEach((el) => (el.style.opacity = 1));
-  alienBulletsElementArray.forEach(
-    (el) => (el.element.style.visibility = "visible")
-  );
+  alienBulletsElementArray.forEach((el) => (el.element.style.opacity = 1));
   playerBullet.style.opacity = 1;
 };
 
@@ -2159,14 +2156,14 @@ function reset(restart) {
   spaceKeyDown = false;
 
   ufoLeft = -2 * ufoWidth;
-  ufo.style.left = ufoLeft;
+  ufo.style.transform = `translateX(${ufoLeft}px)`;
 
   const alienBullets = document.querySelectorAll(".alien-bullet");
   alienBullets.forEach((alienBullet) => alienBullet.remove());
   alienBulletsArray = [];
   alienBulletsElementArray = [];
 
-  playerBullet.style.visibility = "hidden";
+  playerBullet.style.opacity = 0;
   playerBulletRemoveMe = false;
 
   const barrierElements = document.querySelectorAll(".barrier");
@@ -2242,9 +2239,9 @@ function reset(restart) {
     const lifeCounter = document.querySelectorAll(".life");
     for (let i = 0; i < 3; i++) {
       if (i < lives) {
-        lifeCounter[i].style.visibility = "visible";
+        lifeCounter[i].style.opacity = 1;
       } else {
-        lifeCounter[i].style.visibility = "hidden";
+        lifeCounter[i].style.opacity = 0;
       }
     }
 
@@ -2299,7 +2296,7 @@ function reset(restart) {
             "blob",
             "blob-black"
           );
-          alien.style.visibility = "visible";
+          alien.style.opacity = 1;
         }
         const alienChoice = Math.floor(3 * Math.random());
         if (level % 5 === 1) {
@@ -2636,22 +2633,22 @@ function playerDeath(final, fireball) {
   const lifeCounter = document.querySelectorAll(".life");
   for (let i = 0; i < 3; i++) {
     if (i < lives) {
-      lifeCounter[i].style.visibility = "visible";
+      lifeCounter[i].style.opacity = 1;
     } else {
-      lifeCounter[i].style.visibility = "hidden";
+      lifeCounter[i].style.opacity = 0;
     }
   }
   if (final || lives < 1) {
     clearTimeout(alienTimeoutID);
     isGameOver = true;
     player.classList.add("explosion");
-    playerBullet.style.visibility = "hidden";
+    playerBullet.style.opacity = 0;
     const alienBullets = document.querySelectorAll(".alien-bullet");
     alienBullets.forEach((alienBullet) => alienBullet.remove());
     alienBulletsArray = [];
     alienBulletsElementArray = [];
     for (let i = 0; i < 3; i++) {
-      lifeCounter[i].style.visibility = "hidden";
+      lifeCounter[i].style.opacity = 0;
     }
     playerDirection = 0;
     isInUfoCutScene = false;
@@ -2720,8 +2717,7 @@ function render() {
   if (quake) {
     const randomX = Math.floor(Math.random() * 10) - 10;
     const randomY = Math.floor(Math.random() * 10) - 5;
-    skyline.style.left = randomX + "px";
-    skyline.style.top = randomY + "px";
+    skyline.style.transform = `translate(${randomX}px, ${randomY}px)`;
   }
 
   if (fadeOption) {
@@ -2729,10 +2725,8 @@ function render() {
     gameContainer.style.backgroundColor = colorString;
   }
 
-  player.style.left = playerLeft + "px";
-
-  aliens.style.left = aliensLeft + "px";
-  aliens.style.top = aliensTop + "px";
+  player.style.transform = `translateX(${playerLeft}px)`;
+  aliens.style.transform = `translate(${aliensLeft}px, ${aliensTop}px)`;
 
   if (alienToRemove) {
     const poorDoomedAlien = alienToRemove;
@@ -2772,8 +2766,7 @@ function render() {
       alienElements[poorDoomedAlien.row][poorDoomedAlien.col].classList.remove(
         "alien-explosion"
       );
-      alienElements[poorDoomedAlien.row][poorDoomedAlien.col].style.visibility =
-        "hidden";
+      alienElements[poorDoomedAlien.row][poorDoomedAlien.col].style.opacity = 0;
       if (poorDoomedAlien.isLastOne && !isGameOver) {
         level++;
         if (storyMode) {
@@ -2849,7 +2842,7 @@ function render() {
   }
 
   if (ufoActive) {
-    ufo.style.left = ufoLeft + "px";
+    ufo.style.transform = `translateX(${ufoLeft}px)`;
     if (killUfo) {
       ufoDeathInProgress = true;
       voltage.pause();
@@ -2867,7 +2860,7 @@ function render() {
         ufoDeathInProgress = false;
         ufoShip.classList.remove("ufo-explosion");
         ufoActive = false;
-        ufo.style.left = -16 * ufoWidth + "px";
+        ufo.style.transform = `translateX(${-16 * ufoWidth}px)`;
         if (isInUfoCutScene) {
           launchUfo();
         }
@@ -2885,23 +2878,22 @@ function render() {
         ufo.insertAdjacentHTML("beforeend", `<div class="beam hidden"></div>`);
         ufoBeam = document.querySelector(".beam");
       }
-      ufo.style.left = -16 * ufoWidth + "px";
+      ufo.style.transform = `translateX(${-16 * ufoWidth}px)`;
     }
   }
 
   if (newPlayerBullet) {
-    playerBullet.style.left = `${playerBulletLeft}px`;
-    playerBullet.style.visibility = "visible";
+    playerBullet.style.transform = `translateY(${playerBulletTop}px)`;
+    playerBullet.style.opacity = 1;
     newPlayerBullet = false;
   }
 
   if (playerBulletRemoveMe) {
-    playerBullet.style.visibility = "hidden";
+    playerBullet.style.opacity = 0;
     playerBulletRemoveMe = false;
     playerBulletOnScreen = false;
   } else {
-    playerBullet.style.top = `${playerBulletTop}px`;
-    playerBullet.style.left = `${playerBulletLeft}px`;
+    playerBullet.style.transform = `translate(${playerBulletLeft}px, ${playerBulletTop}px)`;
   }
 
   for (const [index, bulletElement] of alienBulletsElementArray.entries()) {
@@ -2914,7 +2906,7 @@ function render() {
         playBombEffect(bullet);
       }
     } else {
-      bulletElement.element.style.top = bullet.top + "px";
+      bulletElement.element.style.transform = `translate(${bullet.left}px, ${bullet.top}px)`;
     }
   }
 
@@ -2942,7 +2934,7 @@ function render() {
       blockToChange.colNumber;
     const block = blocks[i];
     if (blockToChange.removeMe === true) {
-      block.style.visibility = "hidden";
+      block.style.opacity = 0;
       blockVis[i] = false;
     } else {
       block.style.backgroundPositionX =
@@ -3094,7 +3086,7 @@ function firePlayerBullet() {
   playerBulletOnScreen = true;
   playerBulletLeft = playerLeft + playerWidth / 2 - playerBulletWidth / 2;
   playerBulletTop = playerTop - playerBulletHeight;
-  playerBullet.style.top = `${playerBulletTop}px`;
+  playerBullet.style.transform = `translate(${playerBulletLeft}px), ${playerBulletTop}px)`;
   newPlayerBullet = true;
   ufoScorePointer++;
   if (ufoScorePointer > 14) {
@@ -3269,6 +3261,10 @@ gameContainer.addEventListener("animationend", (event) => {
   ) {
     event.target.classList.add("opposite-beam");
     player.classList.add("player-beam");
+    document.documentElement.style.setProperty(
+      "--playerLeft",
+      playerLeft + "px"
+    );
   }
 
   if (
@@ -3334,15 +3330,15 @@ const showAndAddGameoverMenue = () => {
 <div class="hidden" ><span id="any"> [P]age toggle</span></div> 
 `
   );
-  pauseMenu.style.visibility = "visible";
+  pauseMenu.style.opacity = 1;
 };
 
 async function updatesGameOver() {
   gameContainer.style.visibility = "hidden";
-  title.style.visibility = "hidden";
+  title.style.opacity = 0;
   pauseMenu.innerHTML = "";
   statsBar.style.display = "none";
-  playerBullet.style.visibility = "hidden";
+  playerBullet.style.opacity = 0;
   gameOverView();
   if (score < Math.min(...scores.map((el) => el.score))) {
     document.getElementById("overlay").innerHTML = "";

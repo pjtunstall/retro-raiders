@@ -31,6 +31,7 @@ body {
 :root {
   --containerHeight: 770px;
   --playerHeight: 33px;
+  --playerLeft: 50%;
 }
 
 .everything-container {
@@ -349,20 +350,21 @@ body {
   height: 33px;
   background-size: 100%;
   background-repeat: no-repeat;
-  top: 90%;
-  left: 50%;
+  top: calc((var(--containerHeight) - var(--playerHeight)));
 }
 
 .player-beam {
   animation: movePlayerUp 3s forwards;
 }
+
 @keyframes movePlayerUp {
   0% {
-    transform: translateY(0);
+    transform: translate(var(--playerLeft), 0);
   }
 
   100% {
-    transform: translateY(
+    transform: translate(
+      var(--playerLeft),
       calc(-1 * (var(--containerHeight) - var(--playerHeight) - 17px))
     );
     opacity: 0;
