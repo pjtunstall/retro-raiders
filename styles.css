@@ -348,9 +348,16 @@ body {
   position: absolute;
   width: 33px;
   height: 33px;
-  background-size: 100%;
+  background-size: 99px 33px;
   background-repeat: no-repeat;
   top: calc((var(--containerHeight) - var(--playerHeight)));
+  background-image: url("assets/sprites/player-lives.png");
+}
+
+.player.explosion {
+  background-image: url("assets/sprites/explosion.png");
+  background-size: 100%;
+  background-position: 0;
 }
 
 .player-beam {
@@ -372,15 +379,18 @@ body {
 }
 
 .life-1 {
-  background-image: url("assets/sprites/player3.png");
+  /* background-image: url("assets/sprites/player3.png"); */
+  background-position-x: 0 0;
 }
 
 .life-2 {
-  background-image: url("assets/sprites/player2.png");
+  /* background-image: url("assets/sprites/player2.png"); */
+  background-position: -33px 0;
 }
 
 .life-3 {
-  background-image: url("assets/sprites/player1.png");
+  /* background-image: url("assets/sprites/player1.png"); */
+  background-position: -66px 0;
 }
 
 .life {
