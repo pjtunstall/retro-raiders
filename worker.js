@@ -6,12 +6,12 @@ const frameDuration = 1000 / fps;
 const containerWidth = 1600;
 const containerHeight = 770;
 
-const playerWidth = 33;
-const playerHeight = 33;
+const playerWidth = 48;
+const playerHeight = 32;
 const playerTop = containerHeight - playerHeight;
 let playerStep = 512;
 
-const playerBulletHeight = 12;
+const playerBulletHeight = 8;
 const playerBulletWidth = 3;
 let playerBulletSpeed = 1024;
 

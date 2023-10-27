@@ -1081,8 +1081,8 @@ let accumulatedFrameTime = 0;
 
 // Player variables.
 const player = document.getElementById("player");
-const playerWidth = 33;
-const playerHeight = 33;
+const playerWidth = 48;
+const playerHeight = 32;
 let playerDirection = 0;
 let playerLeft = containerWidth / 2 - playerWidth / 2;
 let playerTop = containerHeight - playerHeight;
@@ -1098,7 +1098,7 @@ playerBullet.style.opacity = 0;
 gameContainer.appendChild(playerBullet);
 let playerBulletTop = 0;
 let playerBulletLeft = 0;
-const playerBulletHeight = 12;
+const playerBulletHeight = 8;
 const playerBulletWidth = 3;
 let playerBulletRemoveMe = false;
 let newPlayerBullet = false;
@@ -2509,6 +2509,7 @@ function update(ticks) {
       if (event.data.player.dead) {
         if (storyMode) {
           isInUfoCutScene = true;
+          ufoBoost = 3;
           music.pause();
           hiddenElementsOnBeam();
           ufoGetPlayer = true;
@@ -2603,7 +2604,6 @@ function update(ticks) {
 
   if (!ufoToggleBeam && ufoGetPlayer && !ufoTakenPlayer) {
     ufoLeft = playerLeft + playerWidth / 2 - ufoWidth / 2;
-    ufoBoost = 3;
   }
 
   if (

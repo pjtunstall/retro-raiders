@@ -1,3 +1,10 @@
+:root {
+  --containerHeight: 770px;
+  --playerHeight: 32px;
+  --playerWidth: 48px;
+  --playerLeft: 50%;
+}
+
 .text {
   padding-left: 1rem;
   color: white;
@@ -26,12 +33,6 @@ body {
   font-size: 10px;
   height: min(960px, 100vh);
   font-family: "Azimov";
-}
-
-:root {
-  --containerHeight: 770px;
-  --playerHeight: 33px;
-  --playerLeft: 50%;
 }
 
 .everything-container {
@@ -203,8 +204,9 @@ body {
   background-repeat: no-repeat;
   background-position: center;
   width: 3px;
-  height: 30px;
+  height: 8px;
   filter: brightness(360%);
+  z-index: -1;
 }
 
 .alien-bullet {
@@ -273,13 +275,13 @@ body {
   top: 40px;
   left: 50%;
   transform: translateX(-50%);
-  width: 45px;
+  width: 52px;
   height: 0;
   background-color: yellow;
   clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
   border-top-left-radius: 20px;
   border-top-right-radius: 20px;
-  animation: bg 0.5s infinite, extendBeam 5s forwards;
+  animation: bg 0.5s infinite, extendBeam 3s forwards;
   padding: 0;
 }
 
@@ -297,20 +299,21 @@ body {
 
 @keyframes extendBeam {
   0% {
-    height: 0px;
+    height: 0;
   }
 
   100% {
-    height: calc((var(--containerHeight) - var(--playerHeight)) - 17px);
+    height: var(--containerHeight);
   }
 }
+
 .opposite-beam {
-  animation: oppositeExtendBeam 3s forwards;
+  animation: oppositeExtendBeam 2s forwards;
 }
 
 @keyframes oppositeExtendBeam {
   0% {
-    height: calc((var(--containerHeight) - var(--playerHeight)) - 10px);
+    height: var(--containerHeight);
   }
   100% {
     height: 0;
@@ -346,9 +349,9 @@ body {
 
 .player {
   position: absolute;
-  width: 33px;
-  height: 33px;
-  background-size: 99px 33px;
+  width: var(--playerWidth);
+  height: var(--playerHeight);
+  background-size: calc(var(--playerWidth) * 3) calc(var(--playerHeight));
   background-repeat: no-repeat;
   top: calc((var(--containerHeight) - var(--playerHeight)));
   background-image: url("assets/sprites/player-lives.png");
@@ -356,24 +359,21 @@ body {
 
 .player.explosion {
   background-image: url("assets/sprites/explosion.png");
-  background-size: 100%;
-  background-position: 0;
+  background-size: 40px 40px;
+  background-position: center;
 }
 
 .player-beam {
-  animation: movePlayerUp 3s forwards;
+  animation: movePlayerUp 2s forwards;
 }
 
 @keyframes movePlayerUp {
   0% {
-    transform: translate(var(--playerLeft), 0);
+    transform: translate(var(--playerLeft), -10px);
   }
 
   100% {
-    transform: translate(
-      var(--playerLeft),
-      calc(-1 * (var(--containerHeight) - var(--playerHeight) - 17px))
-    );
+    transform: translate(var(--playerLeft), calc(-1 * var(--containerHeight)));
     opacity: 0;
   }
 }
@@ -385,12 +385,12 @@ body {
 
 .life-2 {
   /* background-image: url("assets/sprites/player2.png"); */
-  background-position: -33px 0;
+  background-position: calc(-1 * var(--playerWidth)) 0;
 }
 
 .life-3 {
   /* background-image: url("assets/sprites/player1.png"); */
-  background-position: -66px 0;
+  background-position: calc(-2 * var(--playerWidth)) 0;
 }
 
 .life {
@@ -462,7 +462,6 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  /* position: relative; */
   margin-bottom: 2rem;
 }
 
@@ -561,8 +560,6 @@ body {
   font-family: "Times New Roman", Times, serif !important;
 }
 
-/* Score Styles */
-
 #end-game-scoreboard-container {
   position: fixed;
   top: 50%;
@@ -573,14 +570,6 @@ body {
   margin: 0 auto;
   font-size: 1.5rem;
 }
-
-/* #end-game-scoreboard-container {
-  text-align: center;
-  width: 80%;
-  margin: 0 auto;
-  font-size: 1.5rem;
-  top: 32px;
-} */
 
 .pause-menu-modify {
   display: block;
@@ -653,20 +642,9 @@ h1 {
   background-position: center;
 }
 
-/* SCOREINPUT */
-
-/* #end-game-prompt {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  height: 80vh;
-  color: #fff;
-} */
-
 #end-game-prompt {
   position: absolute;
-  top: 50%; /* Adjust this value to position it higher or lower on the screen */
+  top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   text-align: center;
