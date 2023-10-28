@@ -347,14 +347,15 @@ body {
   height: var(--playerHeight);
   background-size: calc(var(--playerWidth) * 3) calc(var(--playerHeight));
   background-repeat: no-repeat;
-  top: calc((var(--containerHeight) - var(--playerHeight)));
+  top: calc(var(--containerHeight) - var(--playerHeight) - 15px);
   background-image: url("assets/sprites/player-lives.png");
 }
 
 .player.explosion {
   background-image: url("assets/sprites/explosion.png");
-  background-size: 40px 40px;
-  background-position: center;
+  width: 36px;
+  height: 36px;
+  background-size: contain;
 }
 
 .player-beam {

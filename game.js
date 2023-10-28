@@ -1724,7 +1724,7 @@ const blockX = {
 // column j of barier k. In other words, the amount of damage it's sustained.
 const barriers = new Array(4);
 const barrierGrids = new Array(4);
-const barrierTop = containerHeight - 185;
+const barrierTop = containerHeight - 195;
 
 let blocks;
 let blocksToChange = [];
