@@ -1081,8 +1081,8 @@ let accumulatedFrameTime = 0;
 
 // Player variables.
 const player = document.getElementById("player");
-const playerWidth = 48;
-const playerHeight = 32;
+const playerWidth = 36;
+const playerHeight = 24;
 let playerDirection = 0;
 let playerLeft = containerWidth / 2 - playerWidth / 2;
 let playerTop = containerHeight - playerHeight;

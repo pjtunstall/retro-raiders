@@ -6,8 +6,8 @@ const frameDuration = 1000 / fps;
 const containerWidth = 1600;
 const containerHeight = 770;
 
-const playerWidth = 48;
-const playerHeight = 32;
+const playerWidth = 36;
+const playerHeight = 24;
 const playerTop = containerHeight - playerHeight;
 let playerStep = 512;
 

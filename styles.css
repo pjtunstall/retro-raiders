@@ -1,7 +1,7 @@
 :root {
   --containerHeight: 770px;
-  --playerHeight: 32px;
-  --playerWidth: 48px;
+  --playerWidth: 36px;
+  --playerHeight: 24px;
   --playerLeft: 50%;
 }
 
