@@ -50,17 +50,11 @@ body {
 
 .game-container {
   position: relative;
-  /* position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%); */
   width: 1600px;
   height: var(--containerHeight);
   background-color: black;
   z-index: 1;
   overflow: hidden;
-  /* margin-top: auto;
-  margin-bottom: auto; */
 }
 
 @keyframes fadeRed {
@@ -364,12 +358,12 @@ body {
 }
 
 .player-beam {
-  animation: movePlayerUp 2s forwards;
+  animation: move-player-up 2s forwards;
 }
 
-@keyframes movePlayerUp {
+@keyframes move-player-up {
   0% {
-    transform: translate(var(--playerLeft), -10px);
+    transform: translate(var(--playerLeft), 0);
   }
 
   100% {
