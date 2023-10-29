@@ -272,7 +272,7 @@ body {
   width: 52px;
   height: 0;
   background-color: yellow;
-  clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+  clip-path: polygon(50% 0%, 0% 93%, 100% 93%);
   border-top-left-radius: 20px;
   border-top-right-radius: 20px;
   animation: bg 0.5s infinite, extendBeam 3s forwards;
@@ -295,9 +295,8 @@ body {
   0% {
     height: 0;
   }
-
   100% {
-    height: var(--containerHeight);
+    height: calc(var(--containerHeight));
   }
 }
 
@@ -307,7 +306,7 @@ body {
 
 @keyframes oppositeExtendBeam {
   0% {
-    height: var(--containerHeight);
+    height: calc(var(--containerHeight));
   }
   100% {
     height: 0;
@@ -366,9 +365,11 @@ body {
   0% {
     transform: translate(var(--playerLeft), 0);
   }
-
   100% {
-    transform: translate(var(--playerLeft), calc(-1 * var(--containerHeight)));
+    transform: translate(
+      var(--playerLeft),
+      calc(-1 * var(--containerHeight) + var(--playerHeight) + 15px)
+    );
     opacity: 0;
   }
 }
