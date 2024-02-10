@@ -1,11 +1,12 @@
 # RETRO RAIDERS
 
-1. [Caution](#4-caution)
+1. [Caution](#1-caution)
 2. [Instructions](#2-instructions)
-3. [Play online](#1-play-online)
-4. [Play offline](#3-play-offline)
+3. [Play online](#3-play-online)
+4. [Play offline](#4-play-offline)
 5. [Context](#5-context)
-6. [Lessons](#-lessons)
+6. [Lessons](#6-lessons)
+7. [Mysteries](#7-mysteries)
 
 ## 1. Caution
 
@@ -110,3 +111,119 @@ My feeling is that `transform` probably did help our game, but `will-change` mad
 - Have an all-purpose `init` (initializer) function. In my ramshackle way, I set up the game on first loading the page using many global variables, then later made an `init` function that refreshes the game state completely on starting a new game or partly on starting a new level, although the initial set-up on first opening loading the page is still performed by my original code. This led to unnecessary repetition and special cases. My teammate Bilal did actually introduce such a function in his refactorization, but, as described [above](#5-context), we reverted to my less elegant code because it had advanced in other ways.
 
 - Re. global variables v. local. Best practice is usually to keep things modular and make most variables local. But, throwing good practice to the winds, and in the spirit of that video that Harry posted recently about how development speed should not necessarily be sacrificed to early optimization, I leapt into making a prototype game with a bunch of global variables. As the project expanded, I didn't go back and refactor this aspect. I found it convenient, and the project was not so huge as to make this confusing, I think. In his version, Bilal thoroughly refactored my early efforts, encapsulating most of these variables into objects, and partitioning the code into modules. Objects are passed by reference in JS, so I think this still has some of the advantages of global variables and saves copying values when they're passed to a function, but also gives structure, readability, and keeps the global namespace tidy.
+
+- A gotcha that somehow managed to catch us out repeatedly: For score-handling, don't use the Go Live server from VS Code. Since it's designed to help you as a developer, it kindly refreshes the page every time you modify your code. For us, that included adding a new entry to the high score table! Alternatively, you can append \*\*/scores.json (or whatever your scores file is called) to liveServer.settings.ignoreFiles in the VS Code settings.json. Then you can use Live Server and it won't cause the page to refresh whenever a new score is added.
+
+## 7. Mysteries
+
+Three mysteries. This concerns CSS.
+
+i. Each alien image is 60px x 60px. For some reason, we needed to specify double the number of pixels the keyhole (my term for the "window" we're looking through at the image to select which part to display) needs to be shifted horizontally. The y-coordinate works as expected; we need to specify the right number of pixels we want shift it vertically, not double. (According to [Mozilla](https://developer.mozilla.org/en-US/docs/Web/CSS/transform-function/scale), when only one number is passed to scale, the element is scaled equally in height and width. Indeed, that's what we see in our game.)
+
+```
+.aliens-grid {
+  display: grid;
+  position: absolute;
+  left: 0;
+  right: 0;
+  grid-template-columns: repeat(11, 1fr);
+  grid-template-rows: repeat(5, 1fr);
+  gap: 0px;
+  width: 660px;
+  height: 300px;
+  z-index: 1;
+}
+
+.aliens-grid > div {
+  width: 60px;
+  height: 60px;
+  background-image: url('aliens.png');
+  transform: scale(0.5);
+}
+
+@keyframes squidAnimation {
+  0% {
+    background-position: 0 0;
+  }
+  50% {
+    background-position: -120px 0;
+  }
+}
+
+
+@keyframes crabAnimation {
+  0% {
+    background-position: 0 -60px;
+  }
+  50% {
+    background-position: -120px -60px;
+  }
+  100% {
+    background-position: 0 -60px;
+  }
+}
+
+@keyframes blobAnimation {
+  0% {
+    background-position: 0 -120px;
+  }
+  50% {
+    background-position: -60px -120px;
+  }
+}
+```
+
+ii. The second mystery is that the animation for the third type of alien, the "blobs" apparently needs to follow a different logic from the animation for the others:
+
+```
+.squid {
+  animation: squidAnimation 1s infinite steps(2);
+}
+
+.crab {
+  animation: crabAnimation 1s infinite steps(2);
+}
+
+.blob {
+  animation: blobAnimation 0.5s infinite steps(1);
+}
+
+.squid-black {
+  animation: squidBlackAnimation 1s infinite steps(2);
+}
+
+.crab-black {
+  animation: crabBlackAnimation 1s infinite steps(2);
+}
+
+.blob-black {
+  animation: blobBlackAnimation 0.5s infinite steps(1);
+}
+```
+
+Each alien is 60px x 60 px. Why do squid and crab require 1s and steps(2) while the blobs need 0.5s and steps(1) to move in sync?
+
+Specifying width and height here is superfluous, more of an annotation than anything:
+
+```
+.aliens-grid > div {
+  width: 60px;
+  height: 60px;
+  background-image: url('aliens.png');
+  transform: scale(0.5);
+}
+```
+
+The width and height of each cell in the grid is determined by the size of the whole grid and the number of cells in it.
+
+Our fellow student, Peter, asked: "Do all the aliens appear at the same sort of time in the game loop? Do some appear when the game is sped up?"
+
+My reply: "There's no difference in when the aliens appear. All types are present at the beginning and as the game speeds up."
+
+iii. Why do the crabs need two have a 100% value specified while the other types only need 0% and 50%. Initial attempts followed the more natural procedure of making all three animations consistent. Since there are two frames, it seemed natural to only specify 0% and 50%. I saw examples online of 0%, 50%, and 100% specified, but the 100% seemed superfluous. I was able to delete it on other animations, and on most of these, but the crabs were different. On ChatGPT's suggestion, I included a 100% which apparently serves the purpose of PREVENTING a third, un-asked-for frame from being displayed.
+
+I find it curious that the blobs were the anomaly in terms of time value and steps, but the crabs are the anomaly in terms of number of frames that need to be specified.
+
+These values work, but we need to understand why if we're going to learn anything from it. I'd be grateful to hear from anyone who understands keyframes animation or who can point me towards a resources that can explain these seeming contradictions.
+
+The most common thing that would go wrong when we had more logical-seeming, consistent values would be that the wrong parts of the spritesheet would be chosen, so that we'd see part of one alien image together with part of another in a single frame, instead of the animation alternating between the two frames of each alien. This, and the anomaly whereby the "blobs" were animated at a different speed from all the rest of them till we had this adjustment.
