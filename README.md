@@ -60,31 +60,28 @@ Some points might not apply to all browser games. Rather they represent my curre
 
 - Reduce layout and painting by using `transform` and `opacity` in CSS. To quote the [01edu public repo](https://github.com/01-edu/public/blob/master/subjects/good-practices/README.md):
 
-```
-// bad
-// this will trigger the layout to recalculate everything and repaint it again
-box.style.left = `${x * 100}px`
+  ```// bad
+  // this will trigger the layout to recalculate everything and repaint it again
+  box.style.left = `${x * 100}px`
 
-// good
-// this way its possible to lose the layout
-box.style.transform = `translateX(${x * 100}px)`
-```
+  // good
+  // this way its possible to lose the layout
+  box.style.transform = `translateX(${x * 100}px)`
+  ```
 
-They also say, "It is possible to remove painting by adding a layer."
+  They also say, "It is possible to remove painting by adding a layer."
 
-```
-/* this will take care of the painting by creating a layer and transform it*/
+  ```/_ this will take care of the painting by creating a layer and transform it_/
   #box {
-    width: 100px;
-    height: 100px;
-    ....
-    will-change: transform;
+  width: 100px;
+  height: 100px;
+  ....
+  will-change: transform;
   }
-```
+  ```
 
-"By creating a new layer you can remove painting, but 'there is always a tradeoff'. If we add to much layers \[sic\] it will increase the composition and update tree. In conclusion you must promote a new layer only if you know you are going to use it."
-
-My feeling is that `transform` probably did help our game, but `will-change` made no clear difference. I've also been told that the decision to create a layer is, utimately, up to the browser, so this is more of a suggestion than a command. Different browsers may decide differently.
+  "By creating a new layer you can remove painting, but 'there is always a tradeoff'. If we add to much layers \[sic\] it will increase the composition and update tree. In conclusion you must promote a new layer only if you know you are going to use it."
+  My feeling is that `transform` probably did help our game, but `will-change` made no clear difference. I've also been told that the decision to create a layer is, utimately, up to the browser, so this is more of a suggestion than a command. Different browsers may decide differently.
 
 - Rather than animating a sprite by alternating between separate images, use a single image (called a sprite sheet, tile set, [tile atlas](https://developer.mozilla.org/en-US/docs/Games/Techniques/Tilemaps), or [texture atlas](https://en.wikipedia.org/wiki/Texture_atlas)) and change the appearance of your sprite by adjusting its CSS `background-position` property so as to display a different portion of this image. This saves time as the browser doesn't have to keep loading new images. You can also pick out portions of a sprite sheet in different arrangements to create different shapes, such as landscapes, or, in our case, the various barrier designs and rearrangements of alien types on each level.
 
@@ -107,10 +104,8 @@ My feeling is that `transform` probably did help our game, but `will-change` mad
 - Learn about the browser's event loop. This is especially important if you're using async functions or web workers. Async functions such as `setTimeout` pass their callback function to Web APIs which can work in the background, concurrently with your JS code, listening for events, such as the end of the timeout interval. When the event occurs, your callback function is placed on the task queue. Callbacks of promises are placed on what's called the microtask queue, which has higher priority. When the call stack is empty, the event loop processes all microtasks in order, then the task at the front of the task queue, and so on. Likewise, the message handler you create to handle messages from a web worker is placed on the task queueu when it receives a message, and executed when its turn comes.
 
 - Separating the update and render functions makes it easier, if you decide it's worth it, to place your update logic in one or more web workers. A web worker actually allows you to have a concurrent thread of JavaScript code. You can place time-consuming calculations in the web worker so that it doesn't block the main thread.
-
-One big thing to know about web workers is that they don't have access to the DOM; they can't read or write properties of HTML objects, hence all rendering has to be done separarely.
-
-Another important fact is that each web worker has its own namespace; communication between it and the main thread happens via methods called `onmessage` and `postMessage`. Any variables have to be passed to the worker in a message. This has a performance overhead too, so test performance before and after implementing, and estimate whether it's worth trying. `onmessage` takes a callback, which will be placed onto the task queue when a message is received, and executed when the call stack and microtask queue are empty. (This is where understanding the event loop comes in. Rewriting our code to use a web worker led to lots of surprising synchronization issues due to my ignorance of the event loop.)
+  One big thing to know about web workers is that they don't have access to the DOM; they can't read or write properties of HTML objects, hence all rendering has to be done separarely.
+  Another important fact is that each web worker has its own namespace; communication between it and the main thread happens via methods called `onmessage` and `postMessage`. Any variables have to be passed to the worker in a message. This has a performance overhead too, so test performance before and after implementing, and estimate whether it's worth trying. `onmessage` takes a callback, which will be placed onto the task queue when a message is received, and executed when the call stack and microtask queue are empty. (This is where understanding the event loop comes in. Rewriting our code to use a web worker led to lots of surprising synchronization issues due to my ignorance of the event loop.)
 
 - Have an all-purpose `init` (initializer) function. In my ramshackle way, I set up the game on first loading the page using many global variables, then later made an `init` function that refreshes the game state completely on starting a new game or partly on starting a new level, although the initial set-up on first opening loading the page is still performed by my original code. This led to unnecessary repetition and special cases. My teammate Bilal did actually introduce such a function in his refactorization, but, as described [above](#5-context), we reverted to my less elegant code because it had advanced in other ways.
 
@@ -119,10 +114,8 @@ Another important fact is that each web worker has its own namespace; communicat
 - A gotcha that somehow managed to catch us out repeatedly: For score-handling, don't use the Go Live server from VS Code. Since it's designed to help you as a developer, it kindly refreshes the page every time you modify your code. For us, that included adding a new entry to the high score table! Alternatively, you can append \*\*/scores.json (or whatever your scores file is called) to liveServer.settings.ignoreFiles in the VS Code settings.json. Then you can use Live Server and it won't cause the page to refresh whenever a new score is added.
 
 - Make the game easily scalable, given that we don't have control over browser zoom settings. Browsers differ in how they scale. When we made our game container too big for 100% zoom, Chrome automatically switched to 80%, and that looks good. Firefox sticks at 100%. Manually changing the zoom to 80% spoils the appearance in Firefox, presumably due to rounding errors with how portions of the spritesheet are selected for blocks that make up the barriers. (Apparently Firefox does the calculation differently to Chrome.) In both cases, the aliens appeared fine, but, uniquely in Safari, they were messed up (completely wrong portions of the spritesheet were selected) till the window was resized and the page refreshed.
-
-(Note: this was a rather old version of Safari. Looking back now, February 2024, the current Safari seems to find the right zoom and display the aliens correctly at that zoom, and the barriers with just the same slight offset anomaly as Firefox. Adjusting the zoom manually, however, still throws the aliens off, garbling them by selecting the wrong portions of the spritesheet, and these mutations can remain even after resetting to the correct zoom.)
-
-Perhaps SVG would be the solution. Much of the complication comes from the choice (in one of our versions) to implement spritesheets of PNG images for different-maps and use CSS animation. At least with my current scattered understanding, CSS animation seems quirky, unpredictable, and sensitive to all sorts of changes and possible interference from other CSS. Maybe modularizing the CSS would help. I'd love to hear that there's a better practice purely using SVG and JS. Maybe the [Web Animations API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Animations_API) is the answer.
+  (Note: this was a rather old version of Safari. Looking back now, February 2024, the current Safari seems to find the right zoom and display the aliens correctly at that zoom, and the barriers with just the same slight offset anomaly as Firefox. Adjusting the zoom manually, however, still throws the aliens off, garbling them by selecting the wrong portions of the spritesheet, and these mutations can remain even after resetting to the correct zoom.)
+  Perhaps SVG would be the solution. Much of the complication comes from the choice (in one of our versions) to implement spritesheets of PNG images for different-maps and use CSS animation. At least with my current scattered understanding, CSS animation seems quirky, unpredictable, and sensitive to all sorts of changes and possible interference from other CSS. Maybe modularizing the CSS would help. I'd love to hear that there's a better practice purely using SVG and JS. Maybe the [Web Animations API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Animations_API) is the answer.
 
 ## 7. Mysteries
 
@@ -131,84 +124,87 @@ Three mysteries. This concerns CSS.
 i. Each alien image is 60px x 60px. For some reason, we needed to specify double the number of pixels the keyhole (my term for the "window" we're looking through at the image to select which part to display) needs to be shifted horizontally. The y-coordinate works as expected; we need to specify the right number of pixels we want shift it vertically, not double. (According to [Mozilla](https://developer.mozilla.org/en-US/docs/Web/CSS/transform-function/scale), when only one number is passed to scale, the element is scaled equally in height and width. Indeed, that's what we see in our game.)
 
 ```
+
 .aliens-grid {
-  display: grid;
-  position: absolute;
-  left: 0;
-  right: 0;
-  grid-template-columns: repeat(11, 1fr);
-  grid-template-rows: repeat(5, 1fr);
-  gap: 0px;
-  width: 660px;
-  height: 300px;
-  z-index: 1;
+display: grid;
+position: absolute;
+left: 0;
+right: 0;
+grid-template-columns: repeat(11, 1fr);
+grid-template-rows: repeat(5, 1fr);
+gap: 0px;
+width: 660px;
+height: 300px;
+z-index: 1;
 }
 
 .aliens-grid > div {
-  width: 60px;
-  height: 60px;
-  background-image: url('aliens.png');
-  transform: scale(0.5);
+width: 60px;
+height: 60px;
+background-image: url('aliens.png');
+transform: scale(0.5);
 }
 
 @keyframes squidAnimation {
-  0% {
-    background-position: 0 0;
-  }
-  50% {
-    background-position: -120px 0;
-  }
+0% {
+background-position: 0 0;
+}
+50% {
+background-position: -120px 0;
+}
 }
 
-
 @keyframes crabAnimation {
-  0% {
-    background-position: 0 -60px;
-  }
-  50% {
-    background-position: -120px -60px;
-  }
-  100% {
-    background-position: 0 -60px;
-  }
+0% {
+background-position: 0 -60px;
+}
+50% {
+background-position: -120px -60px;
+}
+100% {
+background-position: 0 -60px;
+}
 }
 
 @keyframes blobAnimation {
-  0% {
-    background-position: 0 -120px;
-  }
-  50% {
-    background-position: -60px -120px;
-  }
+0% {
+background-position: 0 -120px;
 }
+50% {
+background-position: -60px -120px;
+}
+}
+
 ```
 
 ii. The second mystery is that the animation for the third type of alien, the "blobs" apparently needs to follow a different logic from the animation for the others:
 
 ```
+
 .squid {
-  animation: squidAnimation 1s infinite steps(2);
+animation: squidAnimation 1s infinite steps(2);
 }
 
 .crab {
-  animation: crabAnimation 1s infinite steps(2);
+animation: crabAnimation 1s infinite steps(2);
 }
 
 .blob {
-  animation: blobAnimation 0.5s infinite steps(1);
+animation: blobAnimation 0.5s infinite steps(1);
 }
 
 .squid-black {
-  animation: squidBlackAnimation 1s infinite steps(2);
+animation: squidBlackAnimation 1s infinite steps(2);
 }
 
 .crab-black {
-  animation: crabBlackAnimation 1s infinite steps(2);
+animation: crabBlackAnimation 1s infinite steps(2);
 }
 
 .blob-black {
-  animation: blobBlackAnimation 0.5s infinite steps(1);
+animation: blobBlackAnimation 0.5s infinite steps(1);
 }
+
 ```
 
 Each alien is 60px x 60 px. Why do squid and crab require 1s and steps(2) while the blobs need 0.5s and steps(1) to move in sync?
@@ -216,12 +212,14 @@ Each alien is 60px x 60 px. Why do squid and crab require 1s and steps(2) while 
 Specifying width and height here is superfluous, more of an annotation than anything:
 
 ```
+
 .aliens-grid > div {
-  width: 60px;
-  height: 60px;
-  background-image: url('aliens.png');
-  transform: scale(0.5);
+width: 60px;
+height: 60px;
+background-image: url('aliens.png');
+transform: scale(0.5);
 }
+
 ```
 
 The width and height of each cell in the grid is determined by the size of the whole grid and the number of cells in it.
@@ -237,3 +235,7 @@ I find it curious that the blobs were the anomaly in terms of time value and ste
 These values work, but we need to understand why if we're going to learn anything from it. I'd be grateful to hear from anyone who understands CSS animation or who can point me towards a resources that can explain these seeming contradictions.
 
 The most common thing that would go wrong when we had more logical-seeming, consistent values would be that the wrong parts of the spritesheet would be chosen, so that we'd see part of one alien image together with part of another in a single frame, instead of the animation alternating between the two frames of each alien. This, and the anomaly whereby the "blobs" were animated at a different speed from all the rest of them till we had this adjustment.
+
+```
+
+```
