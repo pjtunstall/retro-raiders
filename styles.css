@@ -81,6 +81,7 @@ body {
   width: 660px;
   height: 300px;
   z-index: 1;
+  transition: transform 0.0167s linear;
 }
 
 .aliens-grid > div {
@@ -189,6 +190,7 @@ body {
 
 .explosion {
   background-image: url("assets/sprites/explosion.png");
+  transition: transform 0.0167s linear;
 }
 
 .player-bullet {
@@ -201,6 +203,7 @@ body {
   height: 8px;
   filter: brightness(360%);
   z-index: -1;
+  transition: transform 0.0167s linear;
 }
 
 .alien-bullet {
@@ -210,12 +213,14 @@ body {
   background-position: center;
   width: 10px;
   height: 30px;
+  transition: transform 0.0167s linear;
 }
 
 .lightning {
   animation: lightningAnimation 0.1s infinite steps(2);
   background-image: url("assets/sprites/lightning.png");
   background-size: cover;
+  transition: transform 0.0167s linear;
 }
 
 @keyframes lightningAnimation {
@@ -241,6 +246,7 @@ body {
 
 .cross {
   background-image: url("assets/sprites/cross.png");
+  transition: transform 0.0167s linear;
 }
 
 .fireball {
@@ -249,10 +255,12 @@ body {
   background-size: 50%;
   width: 30px;
   height: 120px;
+  transition: transform 0.0167s linear;
 }
 
 .ufo-container {
   position: absolute;
+  transition: transform 0.0167s linear;
 }
 
 .ufo {
@@ -262,6 +270,7 @@ body {
   background-position: center;
   width: 40px;
   height: 40px;
+  transition: transform 0.0167s linear;
 }
 
 .beam {
@@ -277,6 +286,7 @@ body {
   border-top-right-radius: 20px;
   animation: bg 0.5s infinite, extendBeam 3s forwards;
   padding: 0;
+  transition: transform 0.0167s linear;
 }
 
 @keyframes bg {
@@ -302,6 +312,7 @@ body {
 
 .opposite-beam {
   animation: oppositeExtendBeam 2s forwards;
+  transition: transform 0.0167s linear;
 }
 
 @keyframes oppositeExtendBeam {
@@ -322,6 +333,7 @@ body {
   background-position: center;
   width: 40px;
   height: 40px;
+  transition: transform 0.0167s linear;
 }
 
 .block {
@@ -348,6 +360,7 @@ body {
   background-repeat: no-repeat;
   top: calc(var(--containerHeight) - var(--playerHeight) - 15px);
   background-image: url("assets/sprites/player-lives.png");
+  transition: transform 0.0167s linear;
 }
 
 .player.explosion {
@@ -355,10 +368,12 @@ body {
   width: 36px;
   height: 36px;
   background-size: contain;
+  transition: transform 0.0167s linear;
 }
 
 .player-beam {
   animation: move-player-up 2s forwards;
+  transition: transform 0.0167s linear;
 }
 
 @keyframes move-player-up {
