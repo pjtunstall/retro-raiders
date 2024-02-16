@@ -1075,8 +1075,7 @@ let displayCredits = false;
 
 // Game loop variables.
 let loopID;
-const fps = 60;
-const frameDuration = 1000 / fps;
+const frameDuration = 1000 / 60;
 let lastTime = 0;
 let accumulatedFrameTime = 0;
 
@@ -3040,19 +3039,26 @@ function gameLoop(timestamp) {
   }
   let elapsedTimeBetweenFrames = timestamp - lastTime;
   lastTime = timestamp;
+
+  // Avoid large time gaps when unpausing.
   if (elapsedTimeBetweenFrames > 1000) {
-    // Avoid large time gaps when unpausing.
     elapsedTimeBetweenFrames = frameDuration;
   }
+
   accumulatedFrameTime += elapsedTimeBetweenFrames;
 
-  let ticks = 0;
-  while (accumulatedFrameTime >= frameDuration) {
-    ticks++;
-    accumulatedFrameTime -= frameDuration;
-  }
-  if (ticks > 1) {
-    console.log("dropped frame with", ticks, "updates needed");
+  // ticks is the number of times the game loop has run since the last frame,
+  // counted in 65ths of a second. Note that frameDuration is 1000/65, rather
+  // that 1000/60 so as to ensure that the game state will be updated even if
+  // the elapsed time since the last frame is slightly under 16.6667ms.
+  // Sprite positions will be updated proportionally to this amount each frame.
+  let ticks = accumulatedFrameTime / frameDuration;
+
+  // Count significant frame drops. For a browser that refreshes at about 60Hz,
+  // trueTicks should be about 1.0, but generally slightly over or slightly under,
+  // hence we ignore small deviations.
+  if (ticks > 1.1) {
+    console.log("dropped frame of", ticks, "ticks.");
     frameDropsPerTenSeconds++;
   }
 
@@ -3062,7 +3068,12 @@ function gameLoop(timestamp) {
     frameDropsPerTenSeconds = 0;
   }
 
-  update(ticks);
+  if (ticks > 0.9) {
+    update(ticks);
+    accumulatedFrameTime = 0;
+  } else {
+    console.log("skipped frame of", ticks, "ticks.");
+  }
   render();
 
   if (pauseOnStart) {
