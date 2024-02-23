@@ -3379,7 +3379,6 @@ const controlScore = async (obj) => {
 };
 
 async function getScores() {
-  console.log("here");
   try {
     const res = await fetch(
       "https://retro-raiders.nw.r.appspot.com/get-scores"
@@ -3481,6 +3480,7 @@ const message = () => {
 };
 
 const sendScoreView = (callback) => {
+  console.log("here");
   let scoreForm = document?.getElementById("score-form");
   scoreForm?.addEventListener("submit", function (e) {
     e.preventDefault();
