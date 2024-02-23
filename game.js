@@ -3363,6 +3363,7 @@ async function updatesGameOver() {
 }
 
 const controlScore = async (obj) => {
+  console.log("here");
   try {
     await sendScore(obj);
     deleteMinimumScore();
@@ -3480,7 +3481,6 @@ const message = () => {
 };
 
 const sendScoreView = (callback) => {
-  console.log("here");
   let scoreForm = document?.getElementById("score-form");
   scoreForm?.addEventListener("submit", function (e) {
     e.preventDefault();
