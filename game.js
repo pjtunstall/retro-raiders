@@ -3380,7 +3380,9 @@ const controlScore = async (obj) => {
 
 async function getScores() {
   try {
-    const res = await fetch("http://localhost:10000/get-scores");
+    const res = await fetch(
+      "https://retro-raiders.nw.r.appspot.com/get-scores"
+    );
     if (!res.ok) {
       throw new Error(`${res.status} ${res.statusText}`);
     }
@@ -3395,18 +3397,21 @@ async function getScores() {
 
 const sendScore = async ({ playerName, score, second, minute }) => {
   try {
-    const response = await fetch("http://localhost:10000/add-score", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        name: playerName,
-        score: parseInt(score),
-        minutes: minute,
-        seconds: second,
-      }),
-    });
+    const response = await fetch(
+      "https://retro-raiders.nw.r.appspot.com/add-score",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name: playerName,
+          score: parseInt(score),
+          minutes: minute,
+          seconds: second,
+        }),
+      }
+    );
 
     if (response.status === 201) {
       console.log("Score submitted successfully.");
