@@ -3379,6 +3379,7 @@ const controlScore = async (obj) => {
 };
 
 async function getScores() {
+  console.log("here");
   try {
     const res = await fetch(
       "https://retro-raiders.nw.r.appspot.com/get-scores"
