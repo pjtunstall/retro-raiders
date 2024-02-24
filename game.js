@@ -3294,6 +3294,7 @@ document.addEventListener("keyup", handleKeyUp);
 loopID = requestAnimationFrame(gameLoop);
 
 const gameOverView = () => {
+  console.log(scores);
   pauseMenu.style.display = "none";
   const overlay = document.getElementById("overlay");
   overlay.innerHTML = "";
