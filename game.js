@@ -3428,7 +3428,7 @@ const sendScore = async ({ playerName, score, second, minute }) => {
 };
 
 function addScore({ Name, Score, Minutes, Seconds }) {
-  const time = formatTime(minutes, seconds);
+  const time = formatTime(Minutes, Seconds);
   scores.push({ Name, Score, time });
   scores.sort((a, b) => b.score - a.score);
 }
