@@ -3417,10 +3417,10 @@ const sendScore = async ({ playerName, score, second, minute }) => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          name: playerName,
-          score: parseInt(score),
-          minutes: minute,
-          seconds: second,
+          Name: playerName,
+          Score: parseInt(score),
+          Minutes: minute,
+          Seconds: second,
         }),
       }
     );
