@@ -3296,6 +3296,9 @@ loopID = requestAnimationFrame(gameLoop);
 const gameOverView = () => {
   console.log(scores);
   console.log("game over");
+  console.log("Score:", score);
+  console.log("Minimum score:", Math.min(...scores.map((el) => el.score)));
+  console.log("Condition:", score > Math.min(...scores.map((el) => el.score)));
   pauseMenu.style.display = "none";
   const overlay = document.getElementById("overlay");
   overlay.innerHTML = "";
