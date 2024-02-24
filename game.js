@@ -3539,7 +3539,7 @@ function displayScoreboard(scores, message) {
   container.appendChild(text);
 
   for (let i = start; i <= end; i++) {
-    const { name, score, time } = scores[i - 1];
+    const { Name, Score, time } = scores[i - 1];
 
     const entry = document.createElement("div");
     entry.className = "score-entry";
