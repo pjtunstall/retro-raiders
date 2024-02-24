@@ -3068,7 +3068,7 @@ function gameLoop(timestamp) {
     frameDropsPerTenSeconds = 0;
   }
 
-  if (ticks > 0.9) {
+  if (ticks > 0.75) {
     update(ticks);
     accumulatedFrameTime = 0;
   } else {
