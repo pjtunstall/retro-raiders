@@ -3438,7 +3438,7 @@ const sendScore = async ({ playerName, score, second, minute }) => {
 function addScore({ Name, Score, Minutes, Seconds }) {
   const time = formatTime(Minutes, Seconds);
   scores.push({ Name, Score, time });
-  scores.sort((a, b) => b.score - a.score);
+  scores.sort((a, b) => b.Score - a.Score);
 }
 
 function formatTime(minutes, seconds) {
@@ -3448,20 +3448,20 @@ function formatTime(minutes, seconds) {
 }
 
 const deleteMinimumScore = () => {
-  const minValue = Math.min(...scores.map((el) => el.score));
-  const minIndex = scores.findIndex((el) => el.score === minValue);
+  const minValue = Math.min(...scores.map((el) => el.Score));
+  const minIndex = scores.findIndex((el) => el.Score === minValue);
   scores.splice(minIndex, 1);
 };
 
 const updateScoresOnAdd = ({ playerName, score, second, minute }) => {
   const time = formatTime(minute, second);
-  scores.push({ name: playerName, score: +score, time });
-  scores.sort((a, b) => b.score - a.score);
+  scores.push({ Name: playerName, Score: +score, time });
+  scores.sort((a, b) => b.Score - a.Score);
 };
 
 const message = () => {
   const position = scores.findIndex(
-    (el) => el.score === score && playerName === el.name
+    (el) => el.Score === score && playerName === el.Name
   );
 
   if (position === -1) {
