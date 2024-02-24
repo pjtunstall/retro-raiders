@@ -3294,16 +3294,6 @@ document.addEventListener("keyup", handleKeyUp);
 loopID = requestAnimationFrame(gameLoop);
 
 const gameOverView = () => {
-  console.log(scores);
-  console.log("game over view");
-  console.log("Score:", score);
-  console.log("Minimum score:", Math.min(...scores.map((el) => el.Score)));
-  console.log("Condition:", score > Math.min(...scores.map((el) => el.Score)));
-  console.log("Scores:", scores);
-  console.log(
-    "Scores:",
-    scores.map((el) => el.Score)
-  );
   pauseMenu.style.display = "none";
   const overlay = document.getElementById("overlay");
   overlay.innerHTML = "";
@@ -3525,7 +3515,6 @@ const sendScoreView = (callback) => {
 
 function displayScoreboard(scores, message) {
   if (currentPage > 1) return;
-  console.log(score);
   const start = currentPage * 10 + 1;
   const end = start + 9;
   const container = document.getElementById("end-game-scoreboard-container");
