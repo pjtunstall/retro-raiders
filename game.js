@@ -3390,6 +3390,7 @@ async function getScores() {
     }
     const data = await res.json();
     data.forEach((element) => {
+      console.log("element", element);
       addScore(element);
     });
   } catch (error) {
