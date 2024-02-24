@@ -3440,9 +3440,11 @@ function formatTime(minutes, seconds) {
 }
 
 const deleteMinimumScore = () => {
-  const minValue = Math.min(...scores.map((el) => el.Score));
-  const minIndex = scores.findIndex((el) => el.Score === minValue);
-  scores.splice(minIndex, 1);
+  while (scores.length > 20) {
+    const minValue = Math.min(...scores.map((el) => el.Score));
+    const minIndex = scores.findIndex((el) => el.Score === minValue);
+    scores.splice(minIndex, 1);
+  }
 };
 
 const updateScoresOnAdd = ({ playerName, score, second, minute }) => {
