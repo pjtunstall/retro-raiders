@@ -3295,6 +3295,7 @@ loopID = requestAnimationFrame(gameLoop);
 
 const gameOverView = () => {
   console.log(scores);
+  console.log("game over");
   pauseMenu.style.display = "none";
   const overlay = document.getElementById("overlay");
   overlay.innerHTML = "";
