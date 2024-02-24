@@ -3295,7 +3295,7 @@ loopID = requestAnimationFrame(gameLoop);
 
 const gameOverView = () => {
   console.log(scores);
-  console.log("game over");
+  console.log("game over view");
   console.log("Score:", score);
   console.log("Minimum score:", Math.min(...scores.map((el) => el.Score)));
   console.log("Condition:", score > Math.min(...scores.map((el) => el.Score)));
@@ -3386,6 +3386,8 @@ const controlScore = async (obj) => {
   } catch (err) {
     console.log(err);
   }
+  console.log("control score");
+  console.log(scores);
 };
 
 async function getScores() {
@@ -3398,13 +3400,11 @@ async function getScores() {
     }
     const data = await res.json();
     data.forEach((element) => {
-      console.log("element", element);
       addScore(element);
     });
   } catch (error) {
     console.log(error);
   }
-  console.log(scores);
 }
 
 const sendScore = async ({ playerName, score, second, minute }) => {
