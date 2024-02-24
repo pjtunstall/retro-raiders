@@ -3554,11 +3554,11 @@ function displayScoreboard(scores, message) {
     entry.appendChild(rank);
 
     const playerName = document.createElement("span");
-    playerName.textContent = name;
+    playerName.textContent = Name;
     entry.appendChild(playerName);
 
     const playerScore = document.createElement("span");
-    playerScore.textContent = `${score}`.padStart(5, "0");
+    playerScore.textContent = `${Score}`.padStart(5, "0");
     entry.appendChild(playerScore);
 
     const playerTime = document.createElement("span");
