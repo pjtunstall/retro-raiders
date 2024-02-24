@@ -3439,7 +3439,7 @@ function formatTime(minutes, seconds) {
 }
 
 const deleteMinimumScore = () => {
-  while (scores.length > 19) {
+  while (scores.length > 20) {
     const minValue = Math.min(...scores.map((el) => el.Score));
     const minIndex = scores.findIndex((el) => el.Score === minValue);
     scores.splice(minIndex, 1);
