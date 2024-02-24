@@ -3364,9 +3364,7 @@ async function updatesGameOver() {
 
 const controlScore = async (obj) => {
   try {
-    console.log("Before sendScore");
     await sendScore(obj);
-    console.log("After sendScore");
     deleteMinimumScore();
     updateScoresOnAdd(obj);
     document.getElementById("overlay").innerHTML = "";
@@ -3438,8 +3436,8 @@ function formatTime(minutes, seconds) {
 }
 
 const deleteMinimumScore = () => {
-  const minValue = Math.min(...scores.map((el) => el.scores));
-  const minIndex = scores.indexOf(minValue);
+  const minValue = Math.min(...scores.map((el) => el.score));
+  const minIndex = scores.findIndex((el) => el.score === minValue);
   scores.splice(minIndex, 1);
 };
 
