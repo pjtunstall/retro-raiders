@@ -22,9 +22,9 @@ Use left and right arrow keys to move, and space to fire. You can only have one 
 
 Desktop only for now.
 
-We haven't hosted the scoreboard yet, so don't take it personally when you get to the end and it says you haven't made it onto the high scores. At some point we will. Till then, just refresh the page to play again.
+Works best on Chrome or Brave. Maximize the window to full-screen mode and make sure the toobar is hidden. Adjust zoom as needed.
 
-Works best on Chrome or Brave. Maximize the window to full-screen mode and make sure the toobar is hidden. Adjust zoom if needed.
+Note: The folder `server` contains a server written in Go to manage a local scoreboard. This is how we implemented the scoreboard originally. The two subfolders contain Go programs for managing a scoreboard stored as a Firestore database, hosted on Firebase. The program `init.go` in `initialize-database` can be run to clear the scoreboard and reset all scores to zero. The program `server.go` in `scoreboard` is hosted on Google Cloud, and manages this Firestore database for our the instance of our game hosted on Netlify.
 
 ## 4. Play offline
 
