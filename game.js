@@ -3048,15 +3048,11 @@ function gameLoop(timestamp) {
   accumulatedFrameTime += elapsedTimeBetweenFrames;
 
   // ticks is the number of times the game loop has run since the last frame,
-  // counted in 65ths of a second. Note that frameDuration is 1000/65, rather
-  // that 1000/60 so as to ensure that the game state will be updated even if
-  // the elapsed time since the last frame is slightly under 16.6667ms.
-  // Sprite positions will be updated proportionally to this amount each frame.
+  // counted in 60ths of a second. Sprite positions will be updated proportionally
+  // to this amount each frame.
   let ticks = accumulatedFrameTime / frameDuration;
 
-  // Count significant frame drops. For a browser that refreshes at about 60Hz,
-  // trueTicks should be about 1.0, but generally slightly over or slightly under,
-  // hence we ignore small deviations.
+  // Count significant frame drops. For a browser that refreshes at about 60Hz.
   if (ticks > 1.1) {
     console.log("dropped frame of", ticks, "ticks.");
     frameDropsPerTenSeconds++;
@@ -3068,6 +3064,11 @@ function gameLoop(timestamp) {
     frameDropsPerTenSeconds = 0;
   }
 
+  // Update even if the frame rate is momentarily greater than 60Hz. Sprite
+  // position are updated proportionally to the real duration of the frame,
+  // so movement is controlled. This avoids skipping occasional frames
+  // unnecessarily, while also not making a device with a 120Hz frame rate
+  // experience the game twice as fast or do twice the work of updating.
   if (ticks > 0.75) {
     update(ticks);
     accumulatedFrameTime = 0;
