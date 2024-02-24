@@ -3374,8 +3374,12 @@ async function updatesGameOver() {
 
 const controlScore = async (obj) => {
   try {
+    console.log("before get scores:", scores);
     await sendScore(obj);
+    console.log("before delte minimum score:", scores);
     deleteMinimumScore();
+    console.log("after delete minimum score:", scores);
+    console.log(scores);
     updateScoresOnAdd(obj);
     document.getElementById("overlay").innerHTML = "";
     playerName = obj.playerName;
@@ -3386,8 +3390,6 @@ const controlScore = async (obj) => {
   } catch (err) {
     console.log(err);
   }
-  console.log("control score");
-  console.log(scores);
 };
 
 async function getScores() {
