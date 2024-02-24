@@ -3395,6 +3395,7 @@ async function getScores() {
   } catch (error) {
     console.log(error);
   }
+  console.log(scores);
 }
 
 const sendScore = async ({ playerName, score, second, minute }) => {
