@@ -36,6 +36,15 @@ var scoresData ScoresData
 var client *firestore.Client
 
 func loadScores() {
+	readMu.Lock()
+	if readCount > 45000 {
+		readMu.Unlock()
+		log.Println("Read limit exceeded")
+		return
+	}
+	readCount++
+	readMu.Unlock()
+
 	ctx := context.Background()
 	iter := client.Collection("scores").Documents(ctx)
 	docs, err := iter.GetAll()
@@ -43,18 +52,13 @@ func loadScores() {
 		log.Fatalf("Failed to retrieve scores: %v", err)
 	}
 	for _, doc := range docs {
-		readMu.Lock()
-		if readCount >= 45000 {
-			readMu.Unlock()
-			break
-		}
-		readCount++
-		readMu.Unlock()
-
 		var score Score
 		doc.DataTo(&score)
+		scoresData.mu.Lock()
 		scoresData.scores = append(scoresData.scores, score)
+		scoresData.mu.Unlock()
 	}
+	log.Println(readCount)
 }
 
 func AddScoreHandler(w http.ResponseWriter, r *http.Request) {
@@ -77,13 +81,19 @@ func AddScoreHandler(w http.ResponseWriter, r *http.Request) {
 	}
 	scoresData.mu.Unlock()
 
-	if writeCount < 15000 {
-		ctx := context.Background()
-		_, _, err = client.Collection("scores").Add(ctx, score)
-		if err != nil {
-			log.Fatalf("Failed adding score: %v", err)
-		}
-		writeCount++
+	writeMu.Lock()
+	if writeCount > 15000 {
+		writeMu.Unlock()
+		w.WriteHeader(http.StatusTooManyRequests) // 429
+		return
+	}
+	writeCount++
+	writeMu.Unlock()
+
+	ctx := context.Background()
+	_, _, err = client.Collection("scores").Add(ctx, score)
+	if err != nil {
+		log.Fatalf("Failed adding score: %v", err)
 	}
 
 	w.WriteHeader(http.StatusCreated) // 201
@@ -106,6 +116,14 @@ func GetScoresHandler(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, "Invalid request method", http.StatusMethodNotAllowed)
 		return
 	}
+
+	readMu.Lock()
+	if readCount > 45000 {
+		readMu.Unlock()
+		http.Error(w, "Read limit exceeded", http.StatusTooManyRequests) // 429
+		return
+	}
+	readMu.Unlock()
 
 	scoresData.mu.RLock()
 	scores := make([]Score, len(scoresData.scores))
