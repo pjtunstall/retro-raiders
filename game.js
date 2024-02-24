@@ -3294,11 +3294,12 @@ document.addEventListener("keyup", handleKeyUp);
 loopID = requestAnimationFrame(gameLoop);
 
 const gameOverView = () => {
+  console.log("Scores:", scores);
+  console.log("game over");
   pauseMenu.style.display = "none";
   const overlay = document.getElementById("overlay");
   overlay.innerHTML = "";
   overlay.style.zIndex = 4;
-  console.log((score, Math.min(...scores.map((el) => el.score))));
   const html = `
   <div id="end-game-prompt">
   <div class="game-over-text">Game Over</div>
