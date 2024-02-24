@@ -3443,6 +3443,8 @@ const deleteMinimumScore = () => {
   while (scores.length > 20) {
     const minValue = Math.min(...scores.map((el) => el.Score));
     const minIndex = scores.findIndex((el) => el.Score === minValue);
+    console.log("minValue", minValue);
+    console.log("minIndex", minIndex);
     scores.splice(minIndex, 1);
   }
 };
