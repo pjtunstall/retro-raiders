@@ -3297,8 +3297,13 @@ const gameOverView = () => {
   console.log(scores);
   console.log("game over");
   console.log("Score:", score);
-  console.log("Minimum score:", Math.min(...scores.map((el) => el.score)));
-  console.log("Condition:", score > Math.min(...scores.map((el) => el.score)));
+  console.log("Minimum score:", Math.min(...scores.map((el) => el.Score)));
+  console.log("Condition:", score > Math.min(...scores.map((el) => el.Score)));
+  console.log("Scores:", scores);
+  console.log(
+    "Scores:",
+    scores.map((el) => el.Score)
+  );
   pauseMenu.style.display = "none";
   const overlay = document.getElementById("overlay");
   overlay.innerHTML = "";
@@ -3307,7 +3312,7 @@ const gameOverView = () => {
   <div id="end-game-prompt">
   <div class="game-over-text">Game Over</div>
     ${
-      score > Math.min(...scores.map((el) => el.score))
+      score > Math.min(...scores.map((el) => el.Score))
         ? `<form id="score-form">
     <div class="game-over-stats">
         <div class="stat-group">
@@ -3357,7 +3362,7 @@ async function updatesGameOver() {
   statsBar.style.display = "none";
   playerBullet.style.opacity = 0;
   gameOverView();
-  if (score < Math.min(...scores.map((el) => el.score))) {
+  if (score < Math.min(...scores.map((el) => el.Score))) {
     document.getElementById("overlay").innerHTML = "";
     displayScoreboard(scores, message);
     showAndAddGameoverMenue();
