@@ -100,13 +100,15 @@ My feeling is that `transform` probably did help our game, but `will-change` mad
 
 - To let players enjoy the advantage of better hardware for smoother animation, use interpolation to fill in intermediate stages when translating a sprite. You can either do this by hand using JavaScript. In `gameLoop`, calculate the actual time elapsed between frames as a proportion of 16.7 milliseconds:
 
-```let alpha = (timestamp - lastTime) / frameDuration;
+```
+let alpha = (timestamp - lastTime) / frameDuration;
 lastTime = timestamp;
 ```
 
 Then (if the result is less than 1), in your `render` function, only position sprites this fraction of the way from their previous position to the position you want to update them to:
 
-```let interpolatedPlayerLeft = previousPlayerLeft + alpha * (playerLeft - previousPlayerLeft);
+```
+let interpolatedPlayerLeft = previousPlayerLeft + alpha * (playerLeft - previousPlayerLeft);
 player.style.transform = `translateX(${interpolatedPlayerLeft}px)`;
 ```
 
