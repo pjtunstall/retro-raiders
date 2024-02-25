@@ -60,7 +60,8 @@ Some points might not apply to all browser games. Rather they represent my curre
 
 - Reduce layout and painting by using `transform` and `opacity` in CSS. To quote the [01edu public repo](https://github.com/01-edu/public/blob/master/subjects/good-practices/README.md):
 
-  ```// bad
+  ```
+  // bad
   // this will trigger the layout to recalculate everything and repaint it again
   box.style.left = `${x * 100}px`
 
@@ -71,7 +72,8 @@ Some points might not apply to all browser games. Rather they represent my curre
 
   They also say, "It is possible to remove painting by adding a layer."
 
-  ```/_ this will take care of the painting by creating a layer and transform it_/
+  ```
+  /_ this will take care of the painting by creating a layer and transform it_/
   #box {
   width: 100px;
   height: 100px;
@@ -260,7 +262,3 @@ I find it curious that the blobs were the anomaly in terms of time value and ste
 These values work, but we need to understand why if we're going to learn anything from it. I'd be grateful to hear from anyone who understands CSS animation or who can point me towards a resources that can explain these seeming contradictions.
 
 The most common thing that would go wrong when we had more logical-seeming, consistent values would be that the wrong parts of the spritesheet would be chosen, so that we'd see part of one alien image together with part of another in a single frame, instead of the animation alternating between the two frames of each alien. This, and the anomaly whereby the "blobs" were animated at a different speed from all the rest of them till we had this adjustment.
-
-```
-
-```
