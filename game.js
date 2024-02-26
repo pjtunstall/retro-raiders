@@ -3473,19 +3473,19 @@ function formatTime(minutes, seconds) {
   return `${formattedMinutes}:${formattedSeconds}`;
 }
 
-// const deleteMinimumScore = () => {
-//   while (scores.length > 20) {
-//     const minValue = Math.min(...scores.map((el) => el.Score));
-//     const minIndex = scores.findIndex((el) => el.Score === minValue);
-//     scores.splice(minIndex, 1);
-//   }
-// };
+const deleteMinimumScore = () => {
+  while (scores.length > 20) {
+    const minValue = Math.min(...scores.map((el) => el.Score));
+    const minIndex = scores.findIndex((el) => el.Score === minValue);
+    scores.splice(minIndex, 1);
+  }
+};
 
-// const updateScoresOnAdd = ({ playerName, score, second, minute }) => {
-//   const time = formatTime(minute, second);
-//   scores.push({ Name: playerName, Score: +score, time });
-//   scores.sort((a, b) => b.Score - a.Score);
-// };
+const updateScoresOnAdd = ({ playerName, score, second, minute }) => {
+  const time = formatTime(minute, second);
+  scores.push({ Name: playerName, Score: +score, time });
+  scores.sort((a, b) => b.Score - a.Score);
+};
 
 const message = () => {
   const position = scores.findIndex(
