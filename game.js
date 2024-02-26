@@ -3353,7 +3353,7 @@ async function updatesGameOver() {
   statsBar.style.display = "none";
   playerBullet.style.opacity = 0;
   gameOverView();
-  if (score < Math.min(...scores.map((el) => el.Score))) {
+  if (score <= Math.min(...scores.map((el) => el.Score))) {
     document.getElementById("overlay").innerHTML = "";
     displayScoreboard(scores, message);
     showAndAddGameoverMenue();
@@ -3509,7 +3509,6 @@ const message = () => {
   );
 
   if (position === -1) {
-    console.log("here");
     return "Unfortunately, your score did not make it to the scoreboard. Keep practicing and try again!";
   }
 
