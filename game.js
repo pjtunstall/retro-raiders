@@ -3370,15 +3370,15 @@ async function updatesGameOver() {
   pauseMenu.innerHTML = "";
   statsBar.style.display = "none";
   playerBullet.style.opacity = 0;
-  gameOverView();
   if (score < Math.min(...scores.map((el) => el.Score))) {
     document.getElementById("overlay").innerHTML = "";
     displayScoreboard(scores, message);
     showAndAddGameoverMenue();
     isScoreBoardShowing = true;
+  } else {
+    gameOverView();
+    sendScoreView(controlScore.bind(null));
   }
-
-  sendScoreView(controlScore.bind(null));
 }
 
 const controlScore = async (obj) => {
