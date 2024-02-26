@@ -3380,6 +3380,22 @@ const controlScore = async (obj) => {
 };
 
 // const controlScore = async (obj) => {
+//   deleteMinimumScore();
+//   try {
+//     await sendScore(obj);
+//     updateScoresOnAdd(obj);
+//     document.getElementById("overlay").innerHTML = "";
+//     playerName = obj.playerName;
+
+//     displayScoreboard(scores, message);
+//     showAndAddGameoverMenue();
+//     isScoreBoardShowing = true;
+//   } catch (err) {
+//     console.log(err);
+//   }
+// };
+
+// const controlScore = async (obj) => {
 //   try {
 //     const response = await fetch(
 //       "https://retro-raiders.nw.r.appspot.com/add-score",
