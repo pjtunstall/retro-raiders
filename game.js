@@ -3325,28 +3325,10 @@ const gameOverView = () => {
     </div>
     </div>
 </form>`
-        : `<div class="game-over-stats">
-<div class="stat-group">
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <label for="score1" class="stat-label">SCORE:</label>
-    <p class="stat-input" id="score1" name="score">${score}</p>
-</div>
-<div class="stat-group">
-    <label for="time" class="stat-label">TIME:</label>
-    <p class="stat-input" id="time" name="time">${timer}</p>
-</div>
-<div class="player-input">
-    <p>Unfortunately, your score did not make it to the scoreboard. Keep practicing and try again!</p>
-</div>
-</div>`
+        : ``
     }
 </div>
-`;
+  `;
   overlay.insertAdjacentHTML("beforeend", html);
 };
 
@@ -3370,15 +3352,15 @@ async function updatesGameOver() {
   pauseMenu.innerHTML = "";
   statsBar.style.display = "none";
   playerBullet.style.opacity = 0;
+  gameOverView();
   if (score < Math.min(...scores.map((el) => el.Score))) {
     document.getElementById("overlay").innerHTML = "";
     displayScoreboard(scores, message);
     showAndAddGameoverMenue();
     isScoreBoardShowing = true;
-  } else {
-    gameOverView();
-    sendScoreView(controlScore.bind(null));
   }
+
+  sendScoreView(controlScore.bind(null));
 }
 
 const controlScore = async (obj) => {
