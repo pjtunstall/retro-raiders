@@ -3363,19 +3363,56 @@ async function updatesGameOver() {
   sendScoreView(controlScore.bind(null));
 }
 
-const controlScore = async (obj) => {
-  deleteMinimumScore();
-  try {
-    await sendScore(obj);
-    updateScoresOnAdd(obj);
-    document.getElementById("overlay").innerHTML = "";
-    playerName = obj.playerName;
+// const controlScore = async (obj) => {
+//   deleteMinimumScore();
+//   try {
+//     await sendScore(obj);
+//     updateScoresOnAdd(obj);
+//     document.getElementById("overlay").innerHTML = "";
+//     playerName = obj.playerName;
 
+//     displayScoreboard(scores, message);
+//     showAndAddGameoverMenue();
+//     isScoreBoardShowing = true;
+//   } catch (err) {
+//     console.log(err);
+//   }
+// };
+
+const controlScore = async (obj) => {
+  try {
+    const response = await fetch(
+      "https://retro-raiders.nw.r.appspot.com/add-score",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          Name: obj.playerName,
+          Score: parseInt(obj.score),
+          Minutes: obj.minute,
+          Seconds: obj.second,
+        }),
+      }
+    );
+
+    if (response.status === 201) {
+      console.log("Score submitted successfully.");
+      playerName = obj.playerName;
+    } else if (response.status === 400) {
+      console.log("Score is not high enough to be added to the scoreboard.");
+    } else {
+      console.log("Failed to submit score.");
+    }
+  } catch (error) {
+    console.log("An error occurred while submitting the score:", error);
+  } finally {
+    await getScores();
+    document.getElementById("overlay").innerHTML = "";
     displayScoreboard(scores, message);
     showAndAddGameoverMenue();
     isScoreBoardShowing = true;
-  } catch (err) {
-    console.log(err);
   }
 };
 
@@ -3424,11 +3461,11 @@ const sendScore = async ({ playerName, score, second, minute }) => {
   }
 };
 
-function addScore({ Name, Score, Minutes, Seconds }) {
-  const time = formatTime(Minutes, Seconds);
-  scores.push({ Name, Score, time });
-  scores.sort((a, b) => b.Score - a.Score);
-}
+// function addScore({ Name, Score, Minutes, Seconds }) {
+//   const time = formatTime(Minutes, Seconds);
+//   scores.push({ Name, Score, time });
+//   scores.sort((a, b) => b.Score - a.Score);
+// }
 
 function formatTime(minutes, seconds) {
   const formattedMinutes = String(minutes).padStart(2, "0");
@@ -3436,19 +3473,19 @@ function formatTime(minutes, seconds) {
   return `${formattedMinutes}:${formattedSeconds}`;
 }
 
-const deleteMinimumScore = () => {
-  while (scores.length > 20) {
-    const minValue = Math.min(...scores.map((el) => el.Score));
-    const minIndex = scores.findIndex((el) => el.Score === minValue);
-    scores.splice(minIndex, 1);
-  }
-};
+// const deleteMinimumScore = () => {
+//   while (scores.length > 20) {
+//     const minValue = Math.min(...scores.map((el) => el.Score));
+//     const minIndex = scores.findIndex((el) => el.Score === minValue);
+//     scores.splice(minIndex, 1);
+//   }
+// };
 
-const updateScoresOnAdd = ({ playerName, score, second, minute }) => {
-  const time = formatTime(minute, second);
-  scores.push({ Name: playerName, Score: +score, time });
-  scores.sort((a, b) => b.Score - a.Score);
-};
+// const updateScoresOnAdd = ({ playerName, score, second, minute }) => {
+//   const time = formatTime(minute, second);
+//   scores.push({ Name: playerName, Score: +score, time });
+//   scores.sort((a, b) => b.Score - a.Score);
+// };
 
 const message = () => {
   const position = scores.findIndex(
