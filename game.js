@@ -3325,10 +3325,28 @@ const gameOverView = () => {
     </div>
     </div>
 </form>`
-        : ``
+        : `<div class="game-over-stats">
+<div class="stat-group">
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <label for="score1" class="stat-label">SCORE:</label>
+    <p class="stat-input" id="score1" name="score">${score}</p>
+</div>
+<div class="stat-group">
+    <label for="time" class="stat-label">TIME:</label>
+    <p class="stat-input" id="time" name="time">${timer}</p>
+</div>
+<div class="player-input">
+    <p>Unfortunately, your score did not make it to the scoreboard. Keep practicing and try again!</p>
+</div>
+</div>`
     }
 </div>
-  `;
+`;
   overlay.insertAdjacentHTML("beforeend", html);
 };
 
