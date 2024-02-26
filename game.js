@@ -3509,6 +3509,7 @@ const message = () => {
   );
 
   if (position === -1) {
+    console.log("here");
     return "Unfortunately, your score did not make it to the scoreboard. Keep practicing and try again!";
   }
 
