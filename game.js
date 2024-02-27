@@ -2008,7 +2008,6 @@ function toggleCredits() {
   if (!paused) {
     return;
   }
-  displayCredits = !displayCredits;
   if (displayCredits) {
     credits.style.visibility = "visible";
     title.style.visibility = "hidden";
@@ -3239,6 +3238,7 @@ function handleKeyDown(event) {
         );
       }
     } else if (key === "c" || key === "C") {
+      displayCredits = !displayCredits;
       toggleCreditsThrottled();
     } else {
       if (displayCredits) {
