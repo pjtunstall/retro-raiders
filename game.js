@@ -3446,6 +3446,7 @@ async function getScores() {
     const data = await res.json();
 
     scores.length = 0;
+    console.log(scores.length);
 
     console.log("data:", data);
     console.log("scores:", scores);
@@ -3486,6 +3487,8 @@ const sendScore = async ({ playerName, score, second, minute }) => {
   } catch (error) {
     console.log("An error occurred while submitting the score:", error);
   }
+
+  console.log(scores);
 };
 
 function addScore({ Name, Score, Minutes, Seconds }) {
