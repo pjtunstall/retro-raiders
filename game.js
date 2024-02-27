@@ -3247,8 +3247,8 @@ function handleKeyDown(event) {
     } else {
       if (displayCredits) {
         turnCreditsOffThrottled();
-        togglePauseThrottled();
       }
+      togglePauseThrottled();
     }
   }
   if (key === "ArrowLeft") {
