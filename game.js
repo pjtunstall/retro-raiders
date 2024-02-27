@@ -3445,7 +3445,8 @@ async function getScores() {
     }
     const data = await res.json();
 
-    scores = [];
+    console.log("data:", data);
+    console.log("scores:", scores);
 
     data.forEach((element) => {
       addScore(element);
@@ -3453,6 +3454,8 @@ async function getScores() {
   } catch (error) {
     console.log(error);
   }
+
+  console.log("scores:", scores);
 }
 
 const sendScore = async ({ playerName, score, second, minute }) => {
