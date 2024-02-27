@@ -3257,6 +3257,9 @@ function handleKeyDown(event) {
     playerDirection = 1;
   }
   if (event.code === "Space") {
+    if (displayCredits) {
+      toggleCreditsThrottled();
+    }
     spaceKeyDown = true;
   }
 }
