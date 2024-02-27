@@ -3369,8 +3369,12 @@ async function updatesGameOver() {
 const controlScore = async (obj) => {
   deleteMinimumScore();
   try {
-    await sendScore(obj);
-    updateScoresOnAdd(obj);
+    const response = await sendScore(obj);
+    if (response.status === 201) {
+      console.log("Score submitted successfully.");
+      // updateScoresOnAdd(obj);
+    }
+    await getScores();
     document.getElementById("overlay").innerHTML = "";
     playerName = obj.playerName;
 
@@ -3480,17 +3484,11 @@ const sendScore = async ({ playerName, score, second, minute }) => {
         }),
       }
     );
-
-    if (response.status === 201) {
-      console.log("Score submitted successfully.");
-    } else {
-      console.log("Failed to submit score.");
-    }
   } catch (error) {
     console.log("An error occurred while submitting the score:", error);
+  } finally {
+    return response.status;
   }
-
-  console.log(scores);
 };
 
 function addScore({ Name, Score, Minutes, Seconds }) {
