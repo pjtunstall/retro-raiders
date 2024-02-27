@@ -3449,6 +3449,7 @@ async function getScores() {
     console.log(scores.length);
 
     console.log("data:", data);
+    console.log("scores copy", [...scores]);
     console.log("scores:", scores);
 
     data.forEach((element) => {
@@ -3458,6 +3459,7 @@ async function getScores() {
     console.log(error);
   }
 
+  console.log("scores copy", [...scores]);
   console.log("scores:", scores);
 }
 
