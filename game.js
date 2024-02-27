@@ -3173,6 +3173,9 @@ function handleKeyDown(event) {
   }
 
   if (key === "p" || key === "P") {
+    if (displayCredits) {
+      turnCreditsOffThrottled();
+    }
     togglePauseThrottled();
     return;
   }
