@@ -1062,6 +1062,10 @@ const chapter = [
   "['The', 'Army'].join(' ') and C++ the Navy",
   "Single or Carriage Return",
   "Brain-Fukkatsu no Hi",
+  "WebSocket to 'Em",
+  "The Node Less Traveled",
+  "The Great Gatsby",
+  "Poor Me, SQLites",
 ];
 let chapterNumber = Math.floor(chapter.length * Math.random());
 title.innerHTML = `Chapter ${level}:<br>${chapter[chapterNumber]}`;
