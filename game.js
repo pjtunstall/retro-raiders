@@ -3468,22 +3468,20 @@ async function getScores() {
 }
 
 const sendScore = async ({ playerName, score, second, minute }) => {
+  let response;
   try {
-    const response = await fetch(
-      "https://retro-raiders.nw.r.appspot.com/add-score",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          Name: playerName,
-          Score: parseInt(score),
-          Minutes: minute,
-          Seconds: second,
-        }),
-      }
-    );
+    response = await fetch("https://retro-raiders.nw.r.appspot.com/add-score", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        Name: playerName,
+        Score: parseInt(score),
+        Minutes: minute,
+        Seconds: second,
+      }),
+    });
   } catch (error) {
     console.log("An error occurred while submitting the score:", error);
   } finally {
