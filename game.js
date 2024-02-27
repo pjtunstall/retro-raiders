@@ -1962,7 +1962,6 @@ function togglePause() {
     }
     title.style.opacity = 1;
   } else {
-    toggleCreditsThrottled.clear();
     pauseMenu.style.opacity = 0;
     title.style.opacity = 0;
     wind.pause();
@@ -2019,27 +2018,7 @@ function toggleCredits() {
   }
 }
 
-function throttleWithCancel(callback, delay) {
-  let timeoutId = null;
-
-  function clear() {
-    if (timeoutId) {
-      clearTimeout(timeoutId);
-      timeoutId = null;
-    }
-  }
-
-  function throttled() {
-    clear();
-    timeoutId = setTimeout(callback, delay);
-  }
-
-  throttled.clear = clear;
-
-  return throttled;
-}
-
-const toggleCreditsThrottled = throttleWithCancel(toggleCredits, 256);
+const toggleCreditsThrottled = throttle(toggleCredits, 256);
 const toggleFlashEffectThrottled = throttle(toggleFlashEffect, 256);
 const togglePauseThrottled = throttle(togglePause, 256);
 const firePlayerBulletThrottled = throttle(firePlayerBullet, 128);
