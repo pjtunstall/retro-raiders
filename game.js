@@ -3444,6 +3444,9 @@ async function getScores() {
       throw new Error(`${res.status} ${res.statusText}`);
     }
     const data = await res.json();
+
+    scores = [];
+
     data.forEach((element) => {
       addScore(element);
     });
