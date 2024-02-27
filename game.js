@@ -3245,7 +3245,7 @@ function handleKeyDown(event) {
         );
       }
     } else if (key === "c" || key === "C") {
-      toggleCredits = true;
+      togglingCredits = true;
       toggleCreditsThrottled();
     } else {
       if (displayCredits) {
