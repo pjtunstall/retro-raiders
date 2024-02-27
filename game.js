@@ -1006,7 +1006,6 @@ let isGameOver = false;
 let playerName = "";
 
 const scores = [];
-await getScores();
 
 // Chapter titles.
 const chapter = [
@@ -3356,9 +3355,9 @@ async function updatesGameOver() {
   pauseMenu.innerHTML = "";
   statsBar.style.display = "none";
   playerBullet.style.opacity = 0;
-  gameOverView();
 
   await getScores();
+  gameOverView();
 
   if (score <= Math.min(...scores.map((el) => el.Score))) {
     document.getElementById("overlay").innerHTML = "";
@@ -3389,59 +3388,6 @@ const controlScore = async (obj) => {
     console.log(err);
   }
 };
-
-// const controlScore = async (obj) => {
-//   deleteMinimumScore();
-//   try {
-//     await sendScore(obj);
-//     updateScoresOnAdd(obj);
-//     document.getElementById("overlay").innerHTML = "";
-//     playerName = obj.playerName;
-
-//     displayScoreboard(scores, message);
-//     showAndAddGameoverMenue();
-//     isScoreBoardShowing = true;
-//   } catch (err) {
-//     console.log(err);
-//   }
-// };
-
-// const controlScore = async (obj) => {
-//   try {
-//     const response = await fetch(
-//       "https://retro-raiders.nw.r.appspot.com/add-score",
-//       {
-//         method: "POST",
-//         headers: {
-//           "Content-Type": "application/json",
-//         },
-//         body: JSON.stringify({
-//           Name: obj.playerName,
-//           Score: parseInt(obj.score),
-//           Minutes: obj.minute,
-//           Seconds: obj.second,
-//         }),
-//       }
-//     );
-
-//     if (response.status === 201) {
-//       console.log("Score submitted successfully.");
-//       playerName = obj.playerName;
-//     } else if (response.status === 400) {
-//       console.log("Score is not high enough to be added to the scoreboard.");
-//     } else {
-//       console.log("Failed to submit score.");
-//     }
-//   } catch (error) {
-//     console.log("An error occurred while submitting the score:", error);
-//   } finally {
-//     await getScores();
-//     document.getElementById("overlay").innerHTML = "";
-//     displayScoreboard(scores, message);
-//     showAndAddGameoverMenue();
-//     isScoreBoardShowing = true;
-//   }
-// };
 
 async function getScores() {
   try {
