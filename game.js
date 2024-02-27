@@ -3245,9 +3245,15 @@ function handleKeyDown(event) {
     }
   }
   if (key === "ArrowLeft") {
+    if (displayCredits) {
+      toggleCreditsThrottled();
+    }
     playerDirection = -1;
   }
   if (key === "ArrowRight") {
+    if (displayCredits) {
+      toggleCreditsThrottled();
+    }
     playerDirection = 1;
   }
   if (event.code === "Space") {
