@@ -1006,7 +1006,6 @@ let isGameOver = false;
 let playerName = "";
 
 const scores = [];
-await getScores();
 
 // Chapter titles.
 const chapter = [
@@ -3445,8 +3444,9 @@ async function getScores() {
     }
     const data = await res.json();
 
-    console.log("data:", data);
-    console.log("scores:", scores);
+    console.log("Before clearing scores:", scores.length); // Add this line
+    scores.length = 0;
+    console.log("After clearing scores:", scores.length); // Add this line
 
     data.forEach((element) => {
       addScore(element);
