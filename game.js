@@ -3244,7 +3244,6 @@ function handleKeyDown(event) {
       togglePauseThrottled();
     }
   }
-
   if (key === "ArrowLeft") {
     playerDirection = -1;
   }
