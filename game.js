@@ -1944,6 +1944,9 @@ function newGame() {
 }
 
 function togglePause() {
+  if (togglingCredits) {
+    return;
+  }
   paused = !paused;
   if (paused) {
     pauseStartTime = Date.now();
@@ -2004,6 +2007,8 @@ function toggleFlashEffect() {
     : "rgb(32, 32, 32)";
 }
 
+let togglingCredits = false;
+
 function toggleCredits() {
   if (!paused) {
     return;
@@ -2016,6 +2021,7 @@ function toggleCredits() {
     credits.style.visibility = "hidden";
     title.style.visibility = "visible";
   }
+  togglingCredits = false;
 }
 
 const toggleCreditsThrottled = throttle(toggleCredits, 256);
@@ -3239,6 +3245,7 @@ function handleKeyDown(event) {
         );
       }
     } else if (key === "c" || key === "C") {
+      toggleCredits = true;
       toggleCreditsThrottled();
     } else {
       if (displayCredits) {
