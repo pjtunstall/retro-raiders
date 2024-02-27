@@ -1937,7 +1937,7 @@ function turnPage() {
 
 function newGame() {
   if (displayCredits) {
-    toggleCreditsThrottled();
+    turnCreditsOffThrottled();
   }
   togglePause();
   reset(true);
@@ -2004,18 +2004,21 @@ function toggleFlashEffect() {
     : "rgb(32, 32, 32)";
 }
 
-function toggleCredits() {
-  displayCredits = !displayCredits;
-  if (displayCredits) {
-    credits.style.visibility = "visible";
-    title.style.visibility = "hidden";
-  } else {
-    credits.style.visibility = "hidden";
-    title.style.visibility = "visible";
-  }
+function turnCreditsOn() {
+  displayCredits = true;
+
+  credits.style.visibility = "visible";
+  title.style.visibility = "hidden";
 }
 
-const toggleCreditsThrottled = throttle(toggleCredits, 256);
+function turnCreditsOff() {
+  displayCredits = false;
+  credits.style.visibility = "hidden";
+  title.style.visibility = "visible";
+}
+
+const turnCreditsOnThrottled = throttle(turnCreditsOn, 256);
+const turnCreditsOffThrottled = throttle(turnCreditsOff, 256);
 const toggleFlashEffectThrottled = throttle(toggleFlashEffect, 256);
 const togglePauseThrottled = throttle(togglePause, 256);
 const firePlayerBulletThrottled = throttle(firePlayerBullet, 128);
@@ -3183,7 +3186,7 @@ function handleKeyDown(event) {
     }
     if (!storyMode && (key === "S" || key === "s")) {
       if (displayCredits) {
-        toggleCreditsThrottled();
+        turnCreditsOffThrottled();
       }
       pauseMenu.innerHTML = "";
       pauseMenu.insertAdjacentHTML(
@@ -3236,12 +3239,15 @@ function handleKeyDown(event) {
         );
       }
     } else if (key === "c" || key === "C") {
-      toggleCreditsThrottled();
+      if (displayCredits) {
+        turnCreditsOffThrottled();
+      } else {
+        turnCreditsOnThrottled();
+      }
     } else {
       if (displayCredits) {
-        toggleCreditsThrottled();
+        turnCreditsOffThrottled();
       }
-      togglePauseThrottled();
     }
   }
   if (key === "ArrowLeft") {
