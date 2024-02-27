@@ -3247,6 +3247,7 @@ function handleKeyDown(event) {
     } else {
       if (displayCredits) {
         turnCreditsOffThrottled();
+        togglePauseThrottled();
       }
     }
   }
