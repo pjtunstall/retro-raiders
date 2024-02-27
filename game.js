@@ -3346,6 +3346,7 @@ const showAndAddGameoverMenue = () => {
 };
 
 async function updatesGameOver() {
+  console.log("updatesGameOver start");
   gameContainer.style.visibility = "hidden";
   title.style.opacity = 0;
   pauseMenu.innerHTML = "";
@@ -3354,6 +3355,7 @@ async function updatesGameOver() {
   gameOverView();
 
   await getScores();
+  console.log("getScores done");
 
   if (score <= Math.min(...scores.map((el) => el.Score))) {
     document.getElementById("overlay").innerHTML = "";
@@ -3362,7 +3364,10 @@ async function updatesGameOver() {
     isScoreBoardShowing = true;
   }
 
+  console.log("displayScoreboard done");
+
   sendScoreView(controlScore.bind(null));
+  console.log("updatesGameOver end");
 }
 
 const controlScore = async (obj) => {
