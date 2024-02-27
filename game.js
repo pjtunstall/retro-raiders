@@ -3353,6 +3353,9 @@ async function updatesGameOver() {
   statsBar.style.display = "none";
   playerBullet.style.opacity = 0;
   gameOverView();
+
+  await getScores();
+
   if (score <= Math.min(...scores.map((el) => el.Score))) {
     document.getElementById("overlay").innerHTML = "";
     displayScoreboard(scores, message);
