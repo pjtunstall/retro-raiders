@@ -2005,6 +2005,9 @@ function toggleFlashEffect() {
 }
 
 function toggleCredits() {
+  if (!paused) {
+    return;
+  }
   displayCredits = !displayCredits;
   if (displayCredits) {
     credits.style.visibility = "visible";
@@ -3244,22 +3247,14 @@ function handleKeyDown(event) {
       togglePauseThrottled();
     }
   }
+
   if (key === "ArrowLeft") {
-    if (displayCredits) {
-      toggleCreditsThrottled();
-    }
     playerDirection = -1;
   }
   if (key === "ArrowRight") {
-    if (displayCredits) {
-      toggleCreditsThrottled();
-    }
     playerDirection = 1;
   }
   if (event.code === "Space") {
-    if (displayCredits) {
-      toggleCreditsThrottled();
-    }
     spaceKeyDown = true;
   }
 }
