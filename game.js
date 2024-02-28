@@ -1072,14 +1072,15 @@ const chapter = [
   "Are my Methods Unsound?",
   "Brave New World Wide Web",
   "The Fantastic Mr. Firefox",
+  "Modzilla Minus One",
   "Go &agrave; Gogo",
+  "A Stitch in Unix Time",
   "i Object",
   "Curly Brace Yourself for It",
   "Gladly the Cross-Origin Bear",
-  "A Stitch in Unix Time",
+  "Frankly, my dear, I Don't Give a DOM",
   "Hip Hip Array",
   "Planet of the APIs",
-  "The Element in the Room",
 ];
 let chapterNumber = Math.floor(chapter.length * Math.random());
 title.innerHTML = `Chapter ${level}:<br>${chapter[chapterNumber]}`;
