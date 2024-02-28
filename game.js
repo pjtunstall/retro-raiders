@@ -1069,6 +1069,8 @@ const chapter = [
   "Iterator, I Hardly Know Her",
   "This!",
   "Murder on the Object Orient",
+  "Brave New World Wide Web",
+  "The Fantastic Mr. Firefox",
 ];
 let chapterNumber = Math.floor(chapter.length * Math.random());
 title.innerHTML = `Chapter ${level}:<br>${chapter[chapterNumber]}`;
@@ -1894,13 +1896,6 @@ function playBombEffect(bullet) {
     soundEffect = Explosion1;
   }
   soundEffect.play();
-  // if (fadeOption) {
-  //   if (bullet.type === "fireball") {
-  //     addFade(2000 + 3000 * bullet.r, 0);
-  //   } else {
-  //     addFade(2024 * bullet.r, bullet.r);
-  //   }
-  // }
 }
 
 // Even though only one player bullet can be on screen at a time, player fire rate is throttled

@@ -16,6 +16,8 @@ If you're sensitive to flashing lights, press `F` while the game is paused to to
 
 Use left and right arrow keys to move, and space to fire. You can only have one bullet on screen at a time, as in the original Space Invaders. Hold down space to keep firing.
 
+Restart at any time by refreshing the page or with P for pause, followed by N for new game.
+
 ## 3. Play online
 
 [Retro Raiders](https://retro-raiders.netlify.app/)
@@ -50,7 +52,7 @@ Bilal also helped with game state transitions and wrote the (SPOILER ALERT) UFO 
 
 ## 6. Lessons
 
-Some of these lessons were learnt at the start or in research as we went along. Others were learnt the hard way by getting them wrong. Some we had a chance into implement, while others will have to wait till the next game--unless, one day, time will permit more tinkering here.
+Some of these lessons were learnt at the start or in research as we went along. Most were learnt the hard way by getting them wrong. Some we had a chance into implement, while others will have to wait till the next game--unless, one day, time will permit more tinkering here.
 
 Some points might not apply to all browser games. Rather they represent my current understanding of best practice for how to make a browser game using raw JS, according to the constraints of our project. There may well be other ways, just as valid.
 
@@ -135,6 +137,8 @@ Another important fact is that each web worker has its own namespace; communicat
 - Re. global variables v. local. Best practice is usually to keep things modular and make most variables local. But, throwing good practice to the winds, and in the spirit of the CodeAesthetic video [Premature Optimization](https://www.youtube.com/watch?v=tKbV6BpH-C8), about how development speed should not necessarily be sacrificed to early optimization, I leapt into making a prototype game with a bunch of global variables. As the project expanded, I didn't go back and refactor this aspect. I found it convenient, and the project was not so huge as to make this confusing. In his version, Bilal thoroughly refactored my early efforts, encapsulating most of these variables into objects, and partitioning the code into modules. Objects are passed by reference in JS, so I think this still has some of the advantages of global variables and saves copying values when they're passed to a function, but also gives structure, readability, and keeps the global namespace tidy. That said, GitHub Copilot opines that encapsulating variables into functions, modules, or objects is "unlikely to have a significant impact on performance."
 
 - Re. another kind of encapsulation, [closures](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Closures#performance_considerations), "each function instance manages its own scope and closure. Therefore, it is unwise to unnecessarily create functions within other functions if closures are not needed for a particular task, as it will negatively affect script performance both in terms of processing speed and memory consumption."
+
+- Clearly, the more complicated your logic, the easier it is for something to go wrong and the harder it is to debug. But which is more complicated: a single function that can be called to do two similar jobs, or two functions that maybe involve some duplication, but keep those tasks separate? At first I thought it would be more elegant to have toggle functions, such as `togglePause` and `toggleCredits`. Now I'm coming to think it's often better to have one function to turn something on, and another to turn it off. That way, you for sure what the result of calling it will be on a given occasion.
 
 - A gotcha that somehow managed to catch us out repeatedly: For score-handling, don't use the Go Live server from VS Code. Since it's designed to help you as a developer, it kindly refreshes the page every time you modify your code. For us, that included adding a new entry to the high score table! Alternatively, you can append \*\*/scores.json (or whatever your scores file is called) to liveServer.settings.ignoreFiles in the VS Code settings.json. Then you can use Live Server and it won't cause the page to refresh whenever a new score is added.
 
