@@ -1069,8 +1069,12 @@ const chapter = [
   "Iterator, I Hardly Know Her",
   "This!",
   "Murder on the Object Orient",
+  "Are my Methods Unsound?",
   "Brave New World Wide Web",
   "The Fantastic Mr. Firefox",
+  "Go &agrave; Gogo",
+  "i Object",
+  "The Element in the Room",
 ];
 let chapterNumber = Math.floor(chapter.length * Math.random());
 title.innerHTML = `Chapter ${level}:<br>${chapter[chapterNumber]}`;
