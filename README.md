@@ -24,8 +24,6 @@ Desktop only for now.
 
 Works best on Chrome or Brave. Maximize the window to full-screen mode and make sure the toobar is hidden. Adjust zoom as needed.
 
-Note: The folder `server` contains a server written in Go to run the game and manage a local scoreboard. `scoreboard` contains Go programs for managing a scoreboard stored as a Firestore database, hosted on Firebase. The program `init.go` in `initialize-database` can be run to clear the scoreboard and reset all scores to zero. The program `server.go` in `scoreboard` is hosted on Google Cloud, and manages this Firestore database for the instance of our game hosted on Netlify.
-
 ## 4. Play offline
 
 Open a terminal and, from the folder called `server`, execute `go run .` to launch the game server on port 8080 and the scoreboard server on port 10000. Enter `localhost:8080` in the address bar of Chrome, for example, maximize the window and enter full-screen mode (CMD+SHIFT+F). Adjust zoom if needed.

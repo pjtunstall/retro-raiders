@@ -1031,9 +1031,11 @@ const chapter = [
   "That Asyncing Feeling",
   "To Summon His Array",
   "Regex Quandam, Regex Futurusque",
+  "Lookbehind in Anger",
   "Snug as a Heisenbug in a Schr&#246;dingrug",
   "A &lt;span&gt;ner in the Works&lt;/span&gt;",
   "Here We Go Loopy Loo",
+  "The Mummy's Recurse",
   "Needle in a Callstack",
   "Burning Chrome",
   "It from Bit",
@@ -1050,7 +1052,6 @@ const chapter = [
   "Lookit, Log it, Lockett",
   "The Bilalgorithm",
   "Nully the Element Packed Her Math.trunc<br>and ...Spread Goodbye to the Circus",
-  "Lookbehind in Anger",
   "The Markup of the Beast",
   "Cache Only",
   "Who requestAnimationFrame(edRogerRabbit?)",
@@ -1062,9 +1063,12 @@ const chapter = [
   "Single or Carriage Return",
   "Brain-Fukkatsu no Hi",
   "WebSocket to 'Em",
-  "The Node Less Traveled",
+  "The Node Less Traversed",
   "The Great Gatsby",
   "Poor Me, SQLites",
+  "Iterator, I Hardly Know Her",
+  "This!",
+  "Murder on the Object Orient",
 ];
 let chapterNumber = Math.floor(chapter.length * Math.random());
 title.innerHTML = `Chapter ${level}:<br>${chapter[chapterNumber]}`;
