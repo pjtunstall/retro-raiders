@@ -1074,6 +1074,11 @@ const chapter = [
   "The Fantastic Mr. Firefox",
   "Go &agrave; Gogo",
   "i Object",
+  "Curly Brace Yourself for It",
+  "Gladly the Cross-Origin Bear",
+  "A Stitch in Unix Time",
+  "Hip Hip Array",
+  "Planet of the APIs",
   "The Element in the Room",
 ];
 let chapterNumber = Math.floor(chapter.length * Math.random());
