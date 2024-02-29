@@ -1043,6 +1043,7 @@ const chapter = [
   "Promises, Promises",
   "Awaiting for Godot",
   "Web Workers of the World, Unite!",
+  "The Urge to Destructure is also a Creative Urge",
   "R(est) I(n) P(arameters)",
   "Props to You",
   "None Shall Parse",
@@ -1108,6 +1109,7 @@ const chapter = [
   "Lucy in the Sky with Radix Sort",
   "Concurrent Bun",
   "The Wizard of OS",
+  "require('invisible');",
 ];
 let chapterNumber = Math.floor(chapter.length * Math.random());
 title.innerHTML = `Chapter ${level}:<br>${chapter[chapterNumber]}`;
@@ -2173,10 +2175,7 @@ function reset(restart) {
     lives = 3;
   }
 
-  chapterNumber++;
-  if (chapterNumber >= chapter.length) {
-    chapterNumber = 0;
-  }
+  let chapterNumber = Math.floor(chapter.length * Math.random());
   title.innerHTML = `Chapter ${level}:<br>${chapter[chapterNumber]}`;
 
   showElementsOnBeam();
