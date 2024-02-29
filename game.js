@@ -1082,6 +1082,7 @@ const chapter = [
   "A Stitch in Unix Time",
   "The Erlang Goodbye",
   "Romeo and Julia",
+  "Scala Naturae",
   "BASIC Instinct",
   "UTF-8al Attraction",
   "Return of the Cloud-Native",
@@ -1113,6 +1114,8 @@ const chapter = [
   "The Wizard of OS",
   "Silent Runtime",
   "require('invisible');",
+  "The Thenable Bede",
+  "Enum-Meeny Miny Mo",
 ];
 let chapterNumber = Math.floor(chapter.length * Math.random());
 title.innerHTML = `Chapter ${level}:<br>${chapter[chapterNumber]}`;
