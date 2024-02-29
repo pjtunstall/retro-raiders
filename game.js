@@ -1121,6 +1121,11 @@ const chapter = [
   "While My Browser Gently Weeps",
   "The Count of Monte Crypto",
   "The Malware Falcon",
+  "FUD and Loathing in Las Vegas",
+  "Bits of Eight",
+  "Foo Bar None",
+  "Malbolge Over Troubled Water",
+  "The Unbearable Lightness of Bing",
 ];
 let chapterNumber = Math.floor(chapter.length * Math.random());
 title.innerHTML = `Chapter ${level}:<br>${chapter[chapterNumber]}`;
