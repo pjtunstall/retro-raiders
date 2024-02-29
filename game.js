@@ -1121,7 +1121,7 @@ const chapter = [
   "Buffer the Vampire Slayer",
   "Stream of Consciousness",
   "Gone with the Window",
-  "Another One Bytes the Dust",
+  "Another One Bytes the Rust",
   "While My Browser Gently Weeps",
   "Do Not Go Gentle into that Good Nightly Build",
   "Yield, Sir Knight!",
