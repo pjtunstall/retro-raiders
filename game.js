@@ -1117,6 +1117,10 @@ const chapter = [
   "The Thenable Bede",
   "Enum-Meeny Miny Mo",
   "Buffer the Vampire Slayer",
+  "Another One Bytes the Dust",
+  "While My Browser Gently Weeps",
+  "The Count of Monte Crypto",
+  "The Malware Falcon",
 ];
 let chapterNumber = Math.floor(chapter.length * Math.random());
 title.innerHTML = `Chapter ${level}:<br>${chapter[chapterNumber]}`;
