@@ -1116,6 +1116,7 @@ const chapter = [
   "require('invisible');",
   "The Thenable Bede",
   "Enum-Meeny Miny Mo",
+  "Buffer the Vampire Slayer",
 ];
 let chapterNumber = Math.floor(chapter.length * Math.random());
 title.innerHTML = `Chapter ${level}:<br>${chapter[chapterNumber]}`;
