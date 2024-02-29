@@ -1105,10 +1105,13 @@ const chapter = [
   "Navigator, Navigator, Rise Up and Be Strong",
   "This Floating Point",
   "My Old Man's a Garbage Collector",
+  "JIT Kune Do",
+  "The Knights Template-Literal",
   "Club des Cryptographic Hashashins",
   "Lucy in the Sky with Radix Sort",
   "Concurrent Bun",
   "The Wizard of OS",
+  "Silent Runtime",
   "require('invisible');",
 ];
 let chapterNumber = Math.floor(chapter.length * Math.random());
@@ -2175,7 +2178,10 @@ function reset(restart) {
     lives = 3;
   }
 
-  let chapterNumber = Math.floor(chapter.length * Math.random());
+  chapterNumber++;
+  if (chapterNumber >= chapter.length) {
+    chapterNumber = 0;
+  }
   title.innerHTML = `Chapter ${level}:<br>${chapter[chapterNumber]}`;
 
   showElementsOnBeam();
