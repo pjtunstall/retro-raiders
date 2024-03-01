@@ -1150,7 +1150,7 @@ const chapter = [
   "First-Class Citizen Kane",
   "No Country for Old main()",
   "Gravity's Rainbow Table",
-  "One Flew Over the Cuckoo's Nesting",
+  "One Flew Over the Cuckoo's Nested Function",
   "The Garden of Forking Paths",
   "Server Side Story",
   "Finnegan's WakeLock",
@@ -2126,7 +2126,7 @@ const turnCreditsOffThrottled = throttle(turnCreditsOff, 256);
 const toggleFlashEffectThrottled = throttle(toggleFlashEffect, 256);
 const togglePauseThrottled = throttle(togglePause, 256);
 const pauseThrottled = throttle(pause, 256);
-const unpauseThrottled = throttle(unpause, 256);
+// const unpauseThrottled = throttle(unpause, 256);
 const firePlayerBulletThrottled = throttle(firePlayerBullet, 128);
 const newGameThrottled = throttle(newGame, 256);
 const turnPageThrottled = throttle(turnPage, 256);
@@ -3152,7 +3152,7 @@ function gameLoop(timestamp) {
   lastTime = timestamp;
 
   // Avoid large time gaps when unpausing.
-  if (elapsedTimeBetweenFrames > 1000) {
+  if (elapsedTimeBetweenFrames > 720) {
     elapsedTimeBetweenFrames = frameDuration;
   }
 
