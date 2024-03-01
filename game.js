@@ -2090,9 +2090,9 @@ function unpause() {
 
 function togglePause() {
   if (paused) {
-    pause();
-  } else {
     unpause();
+  } else {
+    pause();
   }
   paused = !paused;
 }
