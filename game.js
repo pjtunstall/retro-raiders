@@ -2230,6 +2230,7 @@ function reset(restart) {
   ufoDeathInProgress = false;
 
   if (restart) {
+    console.log("restart");
     restartInProgress = true;
     level = 1;
     lives = 3;
