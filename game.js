@@ -2092,6 +2092,15 @@ function unpause() {
 function togglePause() {
   if (paused) {
     if (Date.now() - pauseStartTime < 256) {
+      // This extra piece of throttling is here
+      // to prevent the game from being unpaused
+      // too soon after being paused via the bespoke
+      // pause() function rather than togglePause().
+      // Eventually I'd like to refactor so that
+      // the whole program uses only the separate pause()
+      // and unpause() functions, so as to be more
+      // robust to quirks of timing than this toggle
+      // has been.
       return;
     }
     unpause();
