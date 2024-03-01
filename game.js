@@ -2211,6 +2211,7 @@ const showElementsOnBeam = () => {
 
 function reset(restart) {
   if (resetInProgress) {
+    console.log("resetInProgress");
     return;
   }
   resetInProgress = true;
