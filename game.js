@@ -1126,7 +1126,7 @@ const chapter = [
   "For...of Human Bondage",
   "For...in Relations",
   "The Call of Do...While",
-  "While My Browser Gently Weeps",
+  "While My Git-ar Gently Weeps",
   "forEach According to Need",
   "Another One Bytes the Rust",
   "Do Not Go Gentle into that Good Nightly Build",
