@@ -1124,7 +1124,7 @@ const chapter = [
   "Stream of Consciousness",
   "Gone with the Window",
   "For...of Human Bondage",
-  "For...in Office",
+  "For...in Relations",
   "The Call of Do...While",
   "While My Browser Gently Weeps",
   "forEach According to Need",
@@ -1156,10 +1156,16 @@ const chapter = [
   "Finnegan's WakeLock",
   "The Wages of Syntax",
   "ECMA Cream",
-  "Vanilla Sky",
+  "Vanilla JS Sky",
   "The Postman Always Pings Twice",
   "The Big Sleep()",
   "The Last Template Literal of Christ",
+  "In Media Res",
+  "URLy One Morning",
+  "Surely You Jest",
+  "Debugger It All",
+  "Finally!",
+  "Halley's Comment",
 ];
 let chapterNumber = Math.floor(chapter.length * Math.random());
 title.innerHTML = `Chapter ${level}:<br>${chapter[chapterNumber]}`;
