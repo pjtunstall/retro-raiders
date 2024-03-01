@@ -2031,6 +2031,7 @@ function turnPage() {
 }
 
 function newGame() {
+  console.log("new game function executing");
   if (displayCredits) {
     turnCreditsOffThrottled();
   }
@@ -3312,6 +3313,7 @@ function handleKeyDown(event) {
     }
 
     if (key === "n" || key === "N") {
+      console.log("new game key pressed");
       newGameThrottled();
     } else if (key === "f" || key === "F") {
       pauseMenu.innerHTML = "";
