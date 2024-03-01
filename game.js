@@ -2039,7 +2039,6 @@ function newGame() {
 }
 
 function pause() {
-  pause = true;
   pauseStartTime = Date.now();
   if (ufoActive) {
     voltage.pause();
@@ -2058,7 +2057,6 @@ function pause() {
 }
 
 function unpause() {
-  pause = false;
   pauseMenu.style.opacity = 0;
   title.style.opacity = 0;
   wind.pause();
@@ -2092,10 +2090,11 @@ function unpause() {
 
 function togglePause() {
   if (paused) {
-    unpause();
-  } else {
     pause();
+  } else {
+    unpause();
   }
+  paused = !paused;
 }
 
 function toggleFlashEffect() {
@@ -2340,6 +2339,7 @@ function reset(restart) {
     }
 
     pauseThrottled();
+    paused = true;
 
     levelElement.textContent = level;
     aliensStep = startHeight + 100;
