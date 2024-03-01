@@ -1167,6 +1167,7 @@ const chapter = [
   "Finally!",
   "Halley's Comment",
   "8-Bitten, Twice Shy",
+  "The Event Whisperer",
 ];
 let chapterNumber = Math.floor(chapter.length * Math.random());
 title.innerHTML = `Chapter ${level}:<br>${chapter[chapterNumber]}`;
