@@ -26,9 +26,11 @@ Desktop only for now.
 
 Works best on Chrome or Brave. Maximize the window to full-screen mode and make sure the toobar is hidden. Adjust zoom as needed.
 
+Note: We've hosted a scoreboard at Firebase, in the form of a Firestore Database, and a server, written in Go, as middleware to handle database operations, on Google App Engine, part of Google Cloud. You can find the code for this server in the `firestore` folder. On the other hand, the `server` folder contains Go program for playing offline, and your own local scoreboard in the form of a JSON file.
+
 ## 4. Play offline
 
-Open a terminal and, from the folder called `server`, execute `go run .` to launch the game server on port 8080 and the scoreboard server on port 10000. Enter `localhost:8080` in the address bar of Chrome, for example, maximize the window and enter full-screen mode (CMD+SHIFT+F). Adjust zoom if needed.
+Open a terminal and, from the folder called `server`, execute `go run .` to launch the game server on port 8080 and the scoreboard server on port 10000. Enter `localhost:8080` in your browser's address bar, maximize the window and enter full-screen mode (CMD+SHIFT+F). Adjust zoom if needed.
 
 Alternatively, to make an executable file, uncomment the indicated lines in `main.go` (at the start of the `main` function) in the `server` folder, then build a Go executable according to your operating system, e.g.
 
