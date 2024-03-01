@@ -2091,6 +2091,9 @@ function unpause() {
 
 function togglePause() {
   if (paused) {
+    if (Date.now() - pauseStartTime < 256) {
+      return;
+    }
     unpause();
   } else {
     pause();
@@ -3152,7 +3155,7 @@ function gameLoop(timestamp) {
   lastTime = timestamp;
 
   // Avoid large time gaps when unpausing.
-  if (elapsedTimeBetweenFrames > 500) {
+  if (elapsedTimeBetweenFrames > 250) {
     elapsedTimeBetweenFrames = frameDuration;
   }
 
