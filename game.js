@@ -2034,8 +2034,57 @@ function newGame() {
   if (displayCredits) {
     turnCreditsOffThrottled();
   }
-  togglePause();
   reset(true);
+}
+
+function pause() {
+  pauseStartTime = Date.now();
+  if (ufoActive) {
+    voltage.pause();
+  }
+  wind.play();
+  if (!starting) {
+    music.pause();
+  }
+  pauseMenu.style.opacity = 1;
+  if (resetInProgress) {
+    title.style.backgroundColor = "rgba(0, 0, 0, 1);";
+  } else {
+    title.style.backgroundColor = "rgba(0, 0, 0, 0.7);";
+  }
+  title.style.opacity = 1;
+}
+
+function unpause() {
+  pauseMenu.style.opacity = 0;
+  title.style.opacity = 0;
+  wind.pause();
+  frameDropsPerTenSeconds = 0;
+  frameDropTimer = Date.now();
+  if (resetInProgress || starting) {
+    pickMusic();
+    music.playbackRate = 1;
+    music.currentTime = 0;
+    levelStartTime = Date.now();
+    if (restartInProgress || starting) {
+      startTime = Date.now();
+      pauseStartTime = Date.now();
+      ufoTimeUp = Date.now() + 20000 + Math.random() * 10000;
+      bulletBoostStart = Date.now() - 15000;
+      restartInProgress = false;
+    }
+  } else {
+    const pauseInterval = Date.now() - pauseStartTime;
+    startTime += pauseInterval;
+    ufoTimeUp += pauseInterval;
+    bulletBoostStart += pauseInterval;
+  }
+  if (ufoActive) {
+    voltage.play();
+  }
+  music.play();
+  starting = false;
+  resetInProgress = false;
 }
 
 function togglePause() {
@@ -2116,6 +2165,8 @@ const turnCreditsOnThrottled = throttle(turnCreditsOn, 256);
 const turnCreditsOffThrottled = throttle(turnCreditsOff, 256);
 const toggleFlashEffectThrottled = throttle(toggleFlashEffect, 256);
 const togglePauseThrottled = throttle(togglePause, 256);
+const pauseThrottled = throttle(pause, 256);
+const unpauseThrottled = throttle(unpause, 256);
 const firePlayerBulletThrottled = throttle(firePlayerBullet, 128);
 const newGameThrottled = throttle(newGame, 256);
 const turnPageThrottled = throttle(turnPage, 256);
@@ -2329,7 +2380,7 @@ function reset(restart) {
     }
 
     if (!storyMode) {
-      togglePauseThrottled();
+      pauseThrottled();
     }
 
     levelElement.textContent = level;
