@@ -3152,7 +3152,7 @@ function gameLoop(timestamp) {
   lastTime = timestamp;
 
   // Avoid large time gaps when unpausing.
-  if (elapsedTimeBetweenFrames > 720) {
+  if (elapsedTimeBetweenFrames > 500) {
     elapsedTimeBetweenFrames = frameDuration;
   }
 
