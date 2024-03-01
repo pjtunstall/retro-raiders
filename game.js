@@ -2031,7 +2031,6 @@ function turnPage() {
 }
 
 function newGame() {
-  console.log("new game function executing");
   if (displayCredits) {
     turnCreditsOffThrottled();
   }
@@ -2040,6 +2039,7 @@ function newGame() {
 }
 
 function pause() {
+  pause = true;
   pauseStartTime = Date.now();
   if (ufoActive) {
     voltage.pause();
@@ -2058,6 +2058,7 @@ function pause() {
 }
 
 function unpause() {
+  pause = false;
   pauseMenu.style.opacity = 0;
   title.style.opacity = 0;
   wind.pause();
@@ -2090,7 +2091,6 @@ function unpause() {
 }
 
 function togglePause() {
-  paused = !paused;
   if (paused) {
     pause();
   } else {
@@ -2222,7 +2222,6 @@ const showElementsOnBeam = () => {
 
 function reset(restart) {
   if (resetInProgress) {
-    console.log("reset already in progress");
     return;
   }
   resetInProgress = true;
@@ -2231,7 +2230,6 @@ function reset(restart) {
   ufoDeathInProgress = false;
 
   if (restart) {
-    console.log("restart");
     restartInProgress = true;
     level = 1;
     lives = 3;
@@ -3316,7 +3314,6 @@ function handleKeyDown(event) {
     }
 
     if (key === "n" || key === "N") {
-      console.log("new game key pressed");
       newGameThrottled();
     } else if (key === "f" || key === "F") {
       pauseMenu.innerHTML = "";
@@ -3492,7 +3489,6 @@ const controlScore = async (obj) => {
     const response = await sendScore(obj);
     if (response.status === 201) {
       console.log("Score submitted successfully.");
-      // updateScoresOnAdd(obj);
     }
     await getScores();
     document.getElementById("overlay").innerHTML = "";
@@ -3517,11 +3513,6 @@ async function getScores() {
     const data = await res.json();
 
     scores.length = 0;
-    console.log(scores.length);
-
-    console.log("data:", data);
-    console.log("scores copy", [...scores]);
-    console.log("scores:", scores);
 
     data.forEach((element) => {
       addScore(element);
@@ -3529,9 +3520,6 @@ async function getScores() {
   } catch (error) {
     console.log(error);
   }
-
-  console.log("scores copy", [...scores]);
-  console.log("scores:", scores);
 }
 
 const sendScore = async ({ playerName, score, second, minute }) => {
