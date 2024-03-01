@@ -1085,7 +1085,6 @@ const chapter = [
   "The Erlang Goodbye",
   "Romeo and Julia",
   "Scala Naturae",
-  "Oracle of DelphiScript",
   "In Go we Rust",
   "BASIC Instinct",
   "UTF-8al Attraction",
@@ -1105,6 +1104,7 @@ const chapter = [
   "E.T. In Arcadia Ego",
   "Push, Crackle, and Pop",
   "flatMap() Earth Society",
+  "The Thenable Bede",
   "The Persistence of Memory",
   "Enter the Void",
   "Navigator, Navigator, Rise Up and Be Strong",
@@ -1118,7 +1118,7 @@ const chapter = [
   "The Wizard of OS",
   "Silent Runtime",
   "require('invisible');",
-  "The Thenable Bede",
+  "The Moduellists",
   "Enum-Meeny Miny Mo",
   "Buffer the Vampire Slayer",
   "Stream of Consciousness",
@@ -1168,6 +1168,7 @@ const chapter = [
   "Halley's Comment",
   "8-Bitten, Twice Shy",
   "The Event Whisperer",
+  "All Quiet on the Western Front-End",
 ];
 let chapterNumber = Math.floor(chapter.length * Math.random());
 title.innerHTML = `Chapter ${level}:<br>${chapter[chapterNumber]}`;
