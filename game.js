@@ -2035,6 +2035,7 @@ function newGame() {
   if (displayCredits) {
     turnCreditsOffThrottled();
   }
+  resetInProgress = false;
   reset(true);
 }
 
