@@ -2261,10 +2261,8 @@ function reset(restart) {
     lives = 3;
   }
 
-  chapterNumber++;
-  if (chapterNumber >= chapter.length) {
-    chapterNumber = 0;
-  }
+  chapterIncrement = Math.ceil(Math.random() * 10);
+  chapterNumber = (chapterNumber + chapterIncrement) % chapter.length;
   title.innerHTML = `Chapter ${level}:<br>${chapter[chapterNumber]}`;
 
   showElementsOnBeam();
