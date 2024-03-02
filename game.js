@@ -2719,7 +2719,7 @@ function update(ticks) {
     }
 
     // Launch UFO.
-    if (Date.now() > ufoTimeUp) {
+    if (Date.now() > ufoTimeUp && !isGameOver) {
       launchUfo();
     }
   }
@@ -2802,7 +2802,8 @@ function playerDeath(final, fireball) {
         turnPageThrottled();
         storyEndInProgress = true;
       } else {
-        togglePauseThrottled();
+        paused = true;
+        pause();
         updatesGameOver();
       }
     }, 360);
