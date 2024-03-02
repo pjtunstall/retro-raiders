@@ -2263,6 +2263,9 @@ function reset(restart) {
   }
 
   chapterNumber++;
+  if (chapterNumber >= chapter.length) {
+    chapterNumber = 0;
+  }
   title.innerHTML = `Chapter ${level}:<br>${chapter[chapterNumber]}`;
 
   showElementsOnBeam();
