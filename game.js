@@ -1167,7 +1167,7 @@ const chapter = [
   "Finally!",
   "Halley's Comment",
   "8-Bitten, Twice Shy",
-  "The Event Whisperer",
+  "The eventWhisperer",
   "All Quiet on the Western Front-End",
 ];
 let chapterNumber = Math.floor(chapter.length * Math.random());
