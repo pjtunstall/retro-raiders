@@ -1019,6 +1019,7 @@ const chapter = [
   "Layer Cake",
   "Not (Just) a Number",
   "String or Nothing",
+  "Super Bool",
   "Cold Console",
   "Terminal Velocity",
   "Winds Light to Variable",
@@ -2261,8 +2262,7 @@ function reset(restart) {
     lives = 3;
   }
 
-  const chapterIncrement = Math.ceil(Math.random() * 10);
-  chapterNumber = (chapterNumber + chapterIncrement) % chapter.length;
+  chapterNumber++;
   title.innerHTML = `Chapter ${level}:<br>${chapter[chapterNumber]}`;
 
   showElementsOnBeam();
