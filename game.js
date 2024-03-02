@@ -2261,7 +2261,7 @@ function reset(restart) {
     lives = 3;
   }
 
-  chapterIncrement = Math.ceil(Math.random() * 10);
+  const chapterIncrement = Math.ceil(Math.random() * 10);
   chapterNumber = (chapterNumber + chapterIncrement) % chapter.length;
   title.innerHTML = `Chapter ${level}:<br>${chapter[chapterNumber]}`;
 
