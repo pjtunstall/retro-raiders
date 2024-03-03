@@ -1211,6 +1211,8 @@ const chapter = [
   "Pickle Rick",
   "Run, Run, Run",
   "I'm a Backend Man",
+  "The Grassy Null",
+  "Have a ('b' + 'a' + + 'a' + 'a').toLowerCase()",
 ];
 let chapterNumber = Math.floor(chapter.length * Math.random());
 title.innerHTML = `Chapter ${level}:<br>${chapter[chapterNumber]}`;
