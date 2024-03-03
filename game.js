@@ -1203,7 +1203,7 @@ const chapter = [
   "Beware the IDEs of March",
   "The Dreadful Language of the Varargs",
   "Chicken Proxy",
-  "The little match() Girl",
+  "The Little match() Girl",
   "Fahrenheit 418 I'm a Teapot",
   "Who eventListens the eventListeners?",
   "Bigint: The Life and Times of a Legend",
