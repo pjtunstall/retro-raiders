@@ -1208,7 +1208,7 @@ const chapter = [
   "Fahrenheit 451 Unavailable for Legal Reasons",
   "Fahrenheit 418 I'm a Teapot",
   "Who eventListens the eventListeners?",
-  "SaaS-quatch out for Bigint!",
+  "SaaS-quatch Out for Bigint!",
   "The Currying Game",
   "Pickle Rick",
   "Run, Run, Run",
