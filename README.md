@@ -22,11 +22,11 @@ Restart at any time by refreshing the page or with P for pause, followed by N fo
 
 [Retro Raiders](https://retro-raiders.netlify.app/)
 
-Desktop only for now.
+Desktop only.
 
 Works best on Chrome or Brave. Maximize the window to full-screen mode and make sure the toobar is hidden. Adjust zoom as needed.
 
-Note: We've hosted a scoreboard at Firebase, in the form of a Firestore Database, and a server, written in Go, as middleware to handle database operations, on Google App Engine, part of Google Cloud. You can find the code for this server in the `firestore` folder. On the other hand, the `server` folder contains Go program for playing offline, and your own local scoreboard in the form of a JSON file.
+Note: We've hosted a scoreboard at Firebase, in the form of a Firestore Database, and a server, written in Go, as middleware to handle database operations, on Google App Engine, part of Google Cloud. You can find the code for this server in the `firestore` folder. (The `server` folder contains an earlier version of this Go server that we used for prototyping offline, along with a JSON file to represent the high scores.)
 
 ## 4. Play offline
 

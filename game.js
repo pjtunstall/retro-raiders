@@ -1199,7 +1199,7 @@ const chapter = [
   "Who is the Prettier of them All?",
   "No Peace Beyond Inline",
   "I'm Forever Blowing Bubble Sort",
-  "Hoist by my own Petard",
+  "Hoist by your Own Hadamard",
   "In this Increment Weather",
   "Return of the Shadow DOM",
   "Web Manifest Destiny",
@@ -3091,18 +3091,19 @@ function render() {
     }
   }
 
-  if (newPlayerBullet) {
-    playerBullet.style.transform = `translateY(${playerBulletTop}px)`;
-    playerBullet.style.opacity = 1;
-    newPlayerBullet = false;
-  }
-
   if (playerBulletRemoveMe) {
     playerBullet.style.opacity = 0;
     playerBulletRemoveMe = false;
     playerBulletOnScreen = false;
-  } else {
+  }
+  if (playerBulletOnScreen) {
     playerBullet.style.transform = `translate(${playerBulletLeft}px, ${playerBulletTop}px)`;
+  }
+  if (newPlayerBullet) {
+    // This line is necessary to force a repaint so that the bullet will be rendered in the correct position before it's made opaque again.
+    void playerBullet.offsetHeight;
+    playerBullet.style.opacity = 1;
+    newPlayerBullet = false;
   }
 
   for (const [index, bulletElement] of alienBulletsElementArray.entries()) {
@@ -3308,7 +3309,7 @@ function firePlayerBullet() {
   playerBulletOnScreen = true;
   playerBulletLeft = playerLeft + playerWidth / 2 - playerBulletWidth / 2;
   playerBulletTop = playerTop - playerBulletHeight;
-  playerBullet.style.transform = `translate(${playerBulletLeft}px), ${playerBulletTop}px)`;
+  // playerBullet.style.transform = `translate(${playerBulletLeft}px), ${playerBulletTop}px)`;
   newPlayerBullet = true;
   ufoScorePointer++;
   if (ufoScorePointer > 14) {
