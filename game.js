@@ -1059,6 +1059,7 @@ const chapter = [
   "Cache Only",
   "Who requestAnimationFrame(edRogerRabbit?)",
   "&lt;div&gt;ide &amp; Conquer&lt;/div&gt;",
+  "The Lesson is, Never Try",
   "Catch as Catch Can",
   "Escape \\Sequence from New York",
   "Midnight in Parity",
@@ -1068,6 +1069,7 @@ const chapter = [
   "Brain-Fukkatsu no Hi",
   "WebSocket to 'Em",
   "The Node Less Traversed",
+  "Edmonds-Carpe Diem",
   "The Great Gatsby",
   "Poor Me, SQLites",
   "Hello, Cruel World!",
@@ -1189,7 +1191,7 @@ const chapter = [
   "fs Up",
   "DDOS House",
   "Viewport Convention",
-  "Alias Smith and Jones",
+  "Alias Split and Joins",
   "Let Slip the Logs of Var",
   "Pipe Dream",
   "Resolve et Coagula",
@@ -1215,6 +1217,10 @@ const chapter = [
   "I'm a Backend Man",
   "The Grassy Null",
   "Have a ('b' + 'a' + + 'a' + 'a').toLowerCase()",
+  "Charlie and the Chocolate Factory Function",
+  "To His Coin-Op Mistress",
+  "Meat and Two Fetch",
+  "Journey to the Endpoint of the Night",
 ];
 let chapterNumber = Math.floor(chapter.length * Math.random());
 title.innerHTML = `Chapter ${level}:<br>${chapter[chapterNumber]}`;
