@@ -3162,7 +3162,7 @@ function render() {
 
   // Triggers a repaint so that the DOM will be updated with all pending changed, i.e. with all the changes
   // that were prepared while rendering was switched off.
-  gameContainer.offsetHeight;
+  void gameContainer.offsetHeight;
 }
 
 const cutScene = () => {
