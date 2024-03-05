@@ -1182,6 +1182,7 @@ const chapter = [
   "A.I., Cap'n",
   "That's my Queue",
   "Ghost in the Shell",
+  "The Legend of Whitespace FAANG",
   "The Bourne Again Legacy Code",
   "The Good, the Bad, and the Unminify",
   "Pixel Dust",
@@ -1207,12 +1208,10 @@ const chapter = [
   "The Dreadful Language of the Varargs",
   "Chicken Proxy",
   "The Little match() Girl",
-  "Fahrenheit 451 Unavailable for Legal Reasons",
   "Fahrenheit 418 I'm a Teapot",
   "Who eventListens the eventListeners?",
   "SaaS-quatch Out for Bigint!",
   "The Currying Game",
-  "Pickle Rick",
   "Run, Run, Run",
   "I'm a Backend Man",
   "The Grassy Null",
@@ -1221,6 +1220,11 @@ const chapter = [
   "To His Coin-Op Mistress",
   "Meat and Two Fetch",
   "Journey to the Endpoint of the Night",
+  "Snow Whitespace and the Seven Tabs",
+  "I Transpile with my Little Eye",
+  "O Happy Segfault!",
+  "Header over Heels",
+  "I Sing the Response.body Electric",
 ];
 let chapterNumber = Math.floor(chapter.length * Math.random());
 title.innerHTML = `Chapter ${level}:<br>${chapter[chapterNumber]}`;
