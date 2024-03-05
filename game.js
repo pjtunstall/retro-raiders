@@ -1831,7 +1831,7 @@ const snakesInTogetherBarrier = [
 ];
 
 const snakesOutTogetherBarrier = [
-  ["empty", "innerRightt", "innerLeft", "empty"],
+  ["empty", "innerRight", "innerLeft", "empty"],
   ["empty", "innerLeft", "innerRight", "empty"],
   ["empty", "innerRight", "innerLeft", "empty"],
 ];
