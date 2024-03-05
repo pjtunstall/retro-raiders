@@ -1812,6 +1812,30 @@ const openBridgeBarrier = [
   ["square", "empty", "empty", "square"],
 ];
 
+const inwardSnakesBarrier = [
+  ["innerLeft", "empty", "empty", "innerRight"],
+  ["innerRight", "empty", "empty", "innerLeft"],
+  ["innerLeft", "empty", "empty", "innerRight"],
+];
+
+const outwardSnakesBarrier = [
+  ["innerRight", "empty", "empty", "innerLeft"],
+  ["innerLeft", "empty", "empty", "innerRight"],
+  ["innerRight", "empty", "empty", "innerLeft"],
+];
+
+const snakesInTogetherBarrier = [
+  ["empty", "innerLeft", "innerRight", "empty"],
+  ["empty", "innerRight", "innerLeft", "empty"],
+  ["empty", "innerLeft", "innerRight", "empty"],
+];
+
+const snakesOutTogetherBarrier = [
+  ["empty", "innerRightt", "innerLeft", "empty"],
+  ["empty", "innerLeft", "innerRight", "empty"],
+  ["empty", "innerRight", "innerLeft", "empty"],
+];
+
 const barrierList = [
   regularBarrier,
   tentBarrier,
@@ -1866,6 +1890,10 @@ const barrierList = [
   boxTreeBarrier,
   towerBridgeBarrier,
   openBridgeBarrier,
+  inwardSnakesBarrier,
+  outwardSnakesBarrier,
+  snakesInTogetherBarrier,
+  snakesOutTogetherBarrier,
 ];
 
 let blockType;
