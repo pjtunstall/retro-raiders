@@ -1227,7 +1227,8 @@ const chapter = [
   "I Sing the Response.body Electric",
   "XOR Loser",
   "Reflog a Dead Horse",
-  "When I was Born I was in a Detached HEAD state,\nmy Eye was Single,\nand my Whole Body was Full of Light",
+  "Jai Guru Dev-a",
+  "When I was Born I was in a Detached HEAD state,<br>my Eye was Single,<br>and my Whole Body was Full of Light",
 ];
 let chapterNumber = Math.floor(chapter.length * Math.random());
 title.innerHTML = `Chapter ${level}:<br>${chapter[chapterNumber]}`;
@@ -2484,6 +2485,8 @@ function reset(restart) {
     crabs = [];
     blobs = [];
 
+    aliens.style.visibility = "hidden";
+
     // On restart or after 10 etc. levels, removes and re-appends the aliens so
     // that they will be in sync (i.e. in phase). Otherwise, just removes the
     // alien-type classes and restores visibility.
@@ -2507,7 +2510,6 @@ function reset(restart) {
             "blob",
             "blob-black"
           );
-          alien.style.opacity = 1;
         }
         const alienChoice = Math.floor(3 * Math.random());
         if (level % 5 === 1) {
@@ -2531,6 +2533,7 @@ function reset(restart) {
               break;
           }
         }
+        alien.style.opacity = 1;
       }
     }
 
@@ -2619,7 +2622,12 @@ function reset(restart) {
       player.classList.remove(`life-${4 - i}`);
     }
     player.classList.add(`life-${4 - lives}`);
+
     render();
+
+    setTimeout(() => {
+      aliens.style.visibility = "visible";
+    }, 64);
 
     document.addEventListener("keydown", handleKeyDown);
     document.addEventListener("keyup", handleKeyUp);
@@ -3103,7 +3111,7 @@ function render() {
     playerBullet.style.transform = `translate(${playerBulletLeft}px, ${playerBulletTop}px)`;
   }
   if (newPlayerBullet) {
-    // This line is necessary to force a repaint so that the bullet will be rendered in the correct position before it's made opaque again.
+    // This line is here to force a repaint so that the bullet will be rendered in the correct position before it's made opaque again.
     void playerBullet.offsetHeight;
     playerBullet.style.opacity = 1;
     newPlayerBullet = false;
