@@ -1226,6 +1226,8 @@ const chapter = [
   "Header over Heels",
   "I Sing the Response.body Electric",
   "XOR Loser",
+  "Reflog a Dead Horse",
+  "When I was Born I was in a Detached HEAD state,\nmy Eye was Single,\nand my Whole Body was Full of Light",
 ];
 let chapterNumber = Math.floor(chapter.length * Math.random());
 title.innerHTML = `Chapter ${level}:<br>${chapter[chapterNumber]}`;
