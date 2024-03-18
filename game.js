@@ -1030,6 +1030,7 @@ const chapter = [
   "Gain of Function",
   "JSON and the Arguments",
   "Romanes eunt DOMus",
+  "Alea Reacta Est",
   "There's Node Business<br>Like Show Business",
   "That Asyncing Feeling",
   "To Summon His Array",
