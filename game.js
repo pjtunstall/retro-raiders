@@ -1241,7 +1241,7 @@ const chapter = [
   "Jai Guru Dev-a",
   "When I was Born,<br>I was in a Detached HEAD state,<br>my Eye was Single,<br>and my Whole Body was Filled with Light",
   "Monsters from the Id",
-  "Init(), bro?",
+  "Init(), Bro?",
   "BATman: Under the Hood",
   "I Believe in Bugs",
 ];
