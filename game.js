@@ -1234,13 +1234,16 @@ const chapter = [
   "And Fools Seldom Diff",
   "O Happy Segfault!",
   "Header over Heels",
-  "I Sing the Response.body Electric",
+  "I Sing the response.body Electric",
   "XOR Loser",
   "Reflog a Dead Horse",
   "DOM and DOMmer",
   "Jai Guru Dev-a",
   "When I was Born,<br>I was in a Detached HEAD state,<br>my Eye was Single,<br>and my Whole Body was Filled with Light",
   "Monsters from the Id",
+  "Init(), bro?",
+  "BATman: Under the Hood",
+  "I Believe in Bugs",
 ];
 let chapterNumber = Math.floor(chapter.length * Math.random());
 title.innerHTML = `Chapter ${level}:<br>${chapter[chapterNumber]}`;
