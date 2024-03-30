@@ -1173,7 +1173,7 @@ const chapter = [
   "The Last Template Literal of Christ",
   "In Media Res",
   "URLy One Morning",
-  "Surely You Jest",
+  "Infinite Jest",
   "Debugger It All",
   "Finally!",
   "Halley's Comment",
