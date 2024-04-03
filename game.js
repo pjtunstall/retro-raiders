@@ -1232,6 +1232,7 @@ const chapter = [
   "Snow Whitespace and the Seven Tabs",
   "I Transpile with my Little Eye",
   "And Fools Seldom Diff",
+  "Where Angle Brackets Fear to Tread",
   "O Happy Segfault!",
   "Header over Heels",
   "I Sing the response.body Electric",
@@ -1244,6 +1245,10 @@ const chapter = [
   "Init(), Bro?",
   "BATman: Under the Hood",
   "I Believe in Bugs",
+  "Babel-17",
+  "For Scroll Lang Syne",
+  "Bash Street Kids",
+  "Childe Process to the Dark Tower Came",
 ];
 let chapterNumber = Math.floor(chapter.length * Math.random());
 title.innerHTML = `Chapter ${level}:<br>${chapter[chapterNumber]}`;
