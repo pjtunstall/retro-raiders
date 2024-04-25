@@ -1139,11 +1139,13 @@ const chapter = [
   "Thy Fearful Synchrony",
   "Another One Bytes the Rust",
   "Do Not Go Gentle into that Good Nightly Build",
+  "&amp;str Crazy",
   "Yield, Sir Knight!",
   "The Count of Monte Crypto",
   "The Malware Falcon",
   "FUD and Loathing in Las Vegas",
   "The Italian Cron Job",
+  "Chew the CRUD",
   "Bits of Eight",
   "Foo Bar None",
   "Malbolge Over Troubled Water",
@@ -1198,7 +1200,6 @@ const chapter = [
   "Viewport Convention",
   "Alias Split and Joins",
   "Let Slip the Logs of Var",
-  "Pipe Dream",
   "Resolve et Coagula",
   "Who is the Prettier of them All?",
   "You Never Enjoy the World Aright<br>till C itself Floweth in your Veins",
@@ -1240,7 +1241,7 @@ const chapter = [
   "Reflog a Dead Horse",
   "DOM and DOMmer",
   "Jai Guru Dev-a",
-  "When I was Born,<br>I was in a Detached HEAD state,<br>my Eye was Single,<br>and my Whole Body was Filled with Light",
+  "When I was Born,<br>I was in a Detached HEAD state,<br>my iCloud was Single,<br>and my Whole Document.body was Filled with Light",
   "Monsters from the Id",
   "Init(), Bro?",
   "BATman: Under the Hood",
@@ -1249,6 +1250,7 @@ const chapter = [
   "For Scroll Lang Syne",
   "Bash Street Kids",
   "Childe Process to the Dark Tower Came",
+  "This is Not a Pipe",
 ];
 let chapterNumber = Math.floor(chapter.length * Math.random());
 title.innerHTML = `Chapter ${level}:<br>${chapter[chapterNumber]}`;
