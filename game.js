@@ -2,6 +2,8 @@
 const gameContainer = document.querySelector(".game-container");
 const containerWidth = 1600;
 const containerHeight = 770;
+const underlay = gameContainer.querySelector(".underlay");
+let underlayOpacity = 0;
 
 let frameDropsPerTenSeconds;
 let frameDropTimer;
@@ -1514,7 +1516,6 @@ const bulletHeight = 30;
 // skyline.classList.add("forest");
 
 // Variables to do with the flash effect for when alien bullets hit the ground.
-const backgroundColor = [0, 0, 0];
 let quake = false;
 
 // Barrier variables.
@@ -2226,9 +2227,7 @@ function toggleFlashEffect() {
   if (!fadeOption) {
     quake = false;
   }
-  gameContainer.style.backgroundColor = fadeOption
-    ? "black"
-    : "rgb(32, 32, 32)";
+  underlay.style.opacity = fadeOption ? 0 : 0.125;
 }
 
 function turnCreditsOn() {
@@ -2692,7 +2691,7 @@ function update(ticks) {
       levelStartTime: levelStartTime,
       fadeOption: fadeOption,
       quake: quake,
-      backgroundColor: backgroundColor,
+      underlayOpacity: underlayOpacity,
       ufoGetPlayer: ufoGetPlayer,
       player: {
         left: playerLeft,
@@ -2738,9 +2737,7 @@ function update(ticks) {
     });
     worker.onmessage = function (event) {
       if (fadeOption) {
-        for (let i in backgroundColor) {
-          backgroundColor[i] = event.data.backgroundColor[i];
-        }
+        underlayOpacity = event.data.underlayOpacity;
         quake = event.data.quake;
       }
       playerLeft = event.data.player.left;
@@ -2963,8 +2960,7 @@ function render() {
   }
 
   if (fadeOption) {
-    const colorString = `rgb(${backgroundColor.join(", ")})`;
-    gameContainer.style.backgroundColor = colorString;
+    underlay.style.opacity = underlayOpacity;
   }
 
   player.style.transform = `translateX(${playerLeft}px)`;

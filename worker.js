@@ -91,9 +91,7 @@ self.onmessage = function (event) {
     if (fadesCount === 0) {
       event.data.quake = false;
     }
-    for (let i = 0; i < 3; i++) {
-      event.data.backgroundColor[i] = 255 * (1 - brightest);
-    }
+    event.data.underlayOpacity = 1 - brightest;
   }
 
   if (event.data.ufo.getPlayer) {
