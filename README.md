@@ -26,7 +26,7 @@ Desktop only.
 
 Works best on Chrome or Brave. Maximize the window to full-screen mode and make sure the toobar is hidden. Adjust zoom as needed.
 
-Note: We've hosted a scoreboard at Firebase, in the form of a Firestore Database, and a server, written in Go, as middleware to handle database operations, on Google App Engine, part of Google Cloud. You can find the code for this server in the `firestore` folder. (The `server` folder contains an earlier version of this Go server that we used for prototyping offline, along with a JSON file to represent the high scores.)
+Note: we've hosted a scoreboard at Firebase, in the form of a Firestore Database, and a server, written in Go, as middleware to handle database operations, on Google App Engine, part of Google Cloud. You can find the code for this server in the `firestore` folder. (The `server` folder contains an earlier version of this Go server that we used for prototyping offline, along with a JSON file to represent the high scores.)
 
 ## 4. Play offline
 
@@ -46,11 +46,13 @@ This was our first JavaScript project for 01Founders, a branch of the 01Edu educ
 
 Hence, the JavaScript lives mostly in one big file, albeit divided fairly neatly into functions. I made heavy use of global variables. There's a lot I'd do differently if I was starting again from scratch.
 
-I wrote the core game and, at some point, handed it over to my teammate Bilal who refactored it into a modular, object-oriented style, and connected it to the scoreboard that another teammate, Shane, had written in Go. Our fourth teammate, Daisy, designed the sprites.
+We were a team of four. I did the game logic, Shane wrote the original, local scoreboard server, Daisy drew the spites, and Bilal, who has more experience of JavaScript, brought it all together.
 
-But while Bilal was working on that, I couldn't resist the urge to continue developing my version. I introduced a spritesheet to animate the aliens more efficiently, and eventually a web worker to take care of movement and collision detection. I also fixed various bugs. So it was this less elegantly structured rendition that came to be presented as the "finished" version.
+Bilal actually refactored the whole thing into a modular, object-oriented style, but while he was working on that, I couldn't resist the urge to continue developing my version. I introduced a spritesheet to animate the aliens more efficiently, and eventually a web worker to take care of movement and collision detection. I also fixed various bugs. So it was this less elegantly structured rendition that came to be presented as the "finished" version.
 
-Bilal also helped with game state transitions and wrote the (SPOILER ALERT) UFO abduction cut scene, as well as attaching the story elements that I wrote. Thanks to my brother, Richard, who cultivated the AI art from Stable Diffusion.
+Bilal also helped with game state transitions and wrote the (SPOILER ALERT) UFO abduction cut scene, as well as attaching my story elements.
+
+Thanks to my brother, Richard, who cultivated the AI art from Stable Diffusion.
 
 ## 6. Lessons
 
@@ -96,7 +98,7 @@ My feeling is that `transform` probably did help our game, but `will-change` mad
 
 - The browser caches style values from the previous frame (iteration of the event loop). If you need to read style values relating to layout, do so in a batch before making any style changes that might affect the layout. If you read such a value after a layout-related change, it forces the browser to recalculate the page layout. Be especially careful not to do force lots of layout changes in quick succession. This is called [layout thrashing](https://web.dev/avoid-large-complex-layouts-and-layout-thrashing/).
 
-- Your game loop function--let's call it `gameLoop`--will be a callback passed to `requestAnimationFrame` to launch the game. Somewhere inside `gameLoop`, call `requestAnimationFrame(gameLoop)` to keep it going recursively. (I gather it's best for timing to place this call at the start of the game loop function.) This doesn't overwhelm the call stack, because `requestAnimationFrame` clears it after each iteration. The `requestAnimationFrame` API helps coordinate your game loop with the browser's own event loop for smoother animation.
+- Your game loop function--let's call it `gameLoop`--will be a callback passed to `requestAnimationFrame` to launch the game. Somewhere inside `gameLoop`, call `requestAnimationFrame(gameLoop)` to keep it going recursively. (I gather it's best for timing to place this call at the start of the game loop function.) This doesn't overwhelm the call stack, because `requestAnimationFrame` clears it after each iteration--or, more precisely, `requestAnimationFrame` only schedules the next iteration of your `gameLoop` when the callstack is empty, i.e. after all top level code has run, and after any of your asynchronous callbacks, that browser APIs have placed onto the task queue and microtask queues, have run. The `requestAnimationFrame` API helps coordinate your game loop with the browser's own event loop for smoother animation. It does this by timing your function to be called towards the end of the event loop, right before rendering. I'd like to know more about how this coordination works: whether the browser is able to adjust the timing of `gameLoop`, starting it earlier if it knows it will take longer. I believe that rendering will be delayed if `gameLoop` takes too long to run, but that's not what you want. Such a delay, a frame drop, can also happen due to the browser, including the JavaScript engine, taking too long to finish its tasks, such as garbage collection. (See below.) According to my current understanding (not yet acted on), the important thing is for the part of your code with rendering instructions to run right before the browser repaints. This suggests that it would be better to place other code into asynchonous callbacks so that it can run earlier in the (next) event loop.
 
 - `gameLoop` can call an `update` function to update the game state (all the purely JS stuff), then a `render` function to apply changes to the DOM.
 
@@ -144,7 +146,7 @@ Another important fact is that each web worker has its own namespace; communicat
 
 - Clearly, the more complicated your logic, the easier it is for something to go wrong and the harder it is to debug. But which is more complicated: a single function that can be called to do two similar jobs, or two functions that maybe involve some duplication, but keep those tasks separate? At first I thought it would be more elegant to have toggle functions, such as `togglePause` and `toggleCredits`. Now I'm coming to think it's often better to have one function to turn something on, and another to turn it off. That way, you for sure what the result of calling it will be on a given occasion.
 
-- A gotcha that somehow managed to catch us out repeatedly: For score-handling, don't use the Go Live server from VS Code. Since it's designed to help you as a developer, it kindly refreshes the page every time you modify your code. For us, that included adding a new entry to the high score table! Alternatively, you can append \*\*/scores.json (or whatever your scores file is called) to liveServer.settings.ignoreFiles in the VS Code settings.json. Then you can use Live Server and it won't cause the page to refresh whenever a new score is added.
+- A gotcha that somehow managed to catch us out repeatedly: for score-handling, don't use the Go Live server from VS Code. Since it's designed to help you as a developer, it kindly refreshes the page every time you modify your code. For us, that included adding a new entry to the high score table! Alternatively, you can append \*\*/scores.json (or whatever your scores file is called) to liveServer.settings.ignoreFiles in the VS Code settings.json. Then you can use Live Server and it won't cause the page to refresh whenever a new score is added.
 
 - Make the game easily scalable, given that we don't have control over browser zoom settings. Browsers differ in how they scale. When we made our game container too big for 100% zoom, Chrome automatically switched to 80%, and that looks good. Firefox sticks at 100%. Manually changing the zoom to 80% spoils the appearance in Firefox, presumably due to rounding errors with how portions of the spritesheet are selected for blocks that make up the barriers. (Apparently Firefox does the calculation differently to Chrome.) In both cases, the aliens appeared fine, but, uniquely in Safari, they were messed up (completely wrong portions of the spritesheet were selected) till the window was resized and the page refreshed.
 
