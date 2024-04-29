@@ -1227,6 +1227,7 @@ const chapter = [
   "Grassy Null",
   "DOM and (Re)Base",
   "Have a ('b' + 'a' + + 'a' + 'a').toLowerCase()",
+  "!!!in' on Heaven's Door",
   "Charlie and the Chocolate Factory Function",
   "To His Coin-Op Mistress",
   "Meat and Two Fetch",
