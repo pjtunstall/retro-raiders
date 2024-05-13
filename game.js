@@ -859,7 +859,7 @@ so join our conquering host.
 Your world's a cinder, nothing left.
 Of our offer make the most."
 
-"You oceans dry, your lands ablaze,
+"Your oceans dry, your lands ablaze,
 there's nothing left for thee.
 If I were you, I'd gladly leap
 at this opportunity."
@@ -1198,6 +1198,7 @@ const chapter = [
   "Shape Unshifter",
   "Spirited Array",
   "The Secret World of Arity",
+  "OOPs!",
   "fs Up",
   "DDOS House",
   "Roger Red-Hat",
