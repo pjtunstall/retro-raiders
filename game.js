@@ -1260,6 +1260,8 @@ const chapter = [
   "Seeking Closure",
   "Be on your Best Undefined Behavior, Now",
   "U'RAIA Heap",
+  "Jack Be Nimble, Jack Be Quicksort",
+  "Jack Be Nimble, Jack GPT",
   "Another One Bytes the Rust",
   "The Borrowers",
   "Let Mut Swan",
@@ -1965,15 +1967,8 @@ const blockTop = new Array(48);
 const blockVis = new Array(48);
 
 function resetBarriers() {
-  // A barrier type is chosen at random each level apart from the first
-  // and after the state variables are reset after every 10th level, in
-  // other words, when level % 10 === 1.
-  if (level % 10 === 1) {
-    blockType = regularBarrier;
-  } else {
-    const rand = Math.floor(Math.random() * barrierList.length);
-    blockType = barrierList[rand];
-  }
+  const rand = Math.floor(Math.random() * barrierList.length);
+  blockType = barrierList[rand];
 
   for (let k = 0; k < 4; k++) {
     barrierGrids[k] = document.createElement("div");
@@ -2170,7 +2165,9 @@ function pause() {
   if (ufoActive) {
     voltage.pause();
   }
-  wind.play();
+  if (!starting) {
+    wind.play();
+  }
   if (!starting) {
     music.pause();
   }
