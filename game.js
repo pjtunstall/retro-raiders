@@ -1007,7 +1007,12 @@ let isScoreBoardShowing = false;
 let isGameOver = false;
 let playerName = "";
 
-const scores = [];
+let scores = new Array(20).fill({
+  name: "...",
+  score: 0,
+  minutes: 0,
+  seconds: 0,
+});
 
 // Chapter titles.
 const chapter = [
@@ -3573,11 +3578,13 @@ const gameOverView = () => {
   const overlay = document.getElementById("overlay");
   overlay.innerHTML = "";
   overlay.style.zIndex = 4;
+  console.log(score);
+  console.log(scores);
   const html = `
   <div id="end-game-prompt">
   <div class="game-over-text">Game Over</div>
     ${
-      score > Math.min(...scores.map((el) => el.Score))
+      score > Math.min(...scores.map((el) => el.score))
         ? `<form id="score-form">
     <div class="game-over-stats">
         <div class="stat-group">
@@ -3620,17 +3627,17 @@ const showAndAddGameoverMenue = () => {
   pauseMenu.style.opacity = 1;
 };
 
-async function updatesGameOver() {
+function updatesGameOver() {
   gameContainer.style.visibility = "hidden";
   title.style.opacity = 0;
   pauseMenu.innerHTML = "";
   statsBar.style.display = "none";
   playerBullet.style.opacity = 0;
 
-  await getScores();
+  getScores();
   gameOverView();
 
-  if (score <= Math.min(...scores.map((el) => el.Score))) {
+  if (score <= Math.min(...scores.map((el) => el.score))) {
     document.getElementById("overlay").innerHTML = "";
     displayScoreboard(scores, message);
     showAndAddGameoverMenue();
@@ -3640,71 +3647,36 @@ async function updatesGameOver() {
   sendScoreView(controlScore.bind(null));
 }
 
-const controlScore = async (obj) => {
-  deleteMinimumScore();
-  try {
-    const response = await sendScore(obj);
-    if (response.status === 201) {
-      console.log("Score submitted successfully.");
-    }
-    await getScores();
-    document.getElementById("overlay").innerHTML = "";
-    playerName = obj.playerName;
+function controlScore(obj) {
+  saveScore(obj);
+  document.getElementById("overlay").innerHTML = "";
+  playerName = obj.playerName;
+  displayScoreboard(scores, message);
+  showAndAddGameoverMenue();
+  isScoreBoardShowing = true;
+}
 
-    displayScoreboard(scores, message);
-    showAndAddGameoverMenue();
-    isScoreBoardShowing = true;
-  } catch (err) {
-    console.log(err);
-  }
-};
-
-async function getScores() {
-  try {
-    const res = await fetch(
-      "https://retro-raiders.nw.r.appspot.com/get-scores"
-    );
-    if (!res.ok) {
-      throw new Error(`${res.status} ${res.statusText}`);
-    }
-    const data = await res.json();
-
-    scores.length = 0;
-
-    data.forEach((element) => {
-      addScore(element);
-    });
-  } catch (error) {
-    console.log(error);
+function getScores() {
+  const data = JSON.parse(localStorage.getItem("scores"));
+  if (data) {
+    scores = data;
   }
 }
 
-const sendScore = async ({ playerName, score, second, minute }) => {
-  let response;
-  try {
-    response = await fetch("https://retro-raiders.nw.r.appspot.com/add-score", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        Name: playerName,
-        Score: parseInt(score),
-        Minutes: minute,
-        Seconds: second,
-      }),
-    });
-  } catch (error) {
-    console.log("An error occurred while submitting the score:", error);
-  } finally {
-    return response.status;
-  }
-};
+function saveScore({ playerName, score, minutes, seconds }) {
+  addScore({
+    name: playerName,
+    score: parseInt(score),
+    minutes: minutes,
+    seconds: seconds,
+  });
+  localStorage.setItem("scores", JSON.stringify(scores));
+}
 
-function addScore({ Name, Score, Minutes, Seconds }) {
-  const time = formatTime(Minutes, Seconds);
-  scores.push({ Name, Score, time });
-  scores.sort((a, b) => b.Score - a.Score);
+function addScore({ name, score, minutes, seconds }) {
+  scores.push({ name, score, minutes, seconds });
+  scores.sort((a, b) => b.score - a.score);
+  scores = scores.slice(0, 20);
 }
 
 function formatTime(minutes, seconds) {
@@ -3713,23 +3685,9 @@ function formatTime(minutes, seconds) {
   return `${formattedMinutes}:${formattedSeconds}`;
 }
 
-const deleteMinimumScore = () => {
-  while (scores.length > 20) {
-    const minValue = Math.min(...scores.map((el) => el.Score));
-    const minIndex = scores.findIndex((el) => el.Score === minValue);
-    scores.splice(minIndex, 1);
-  }
-};
-
-const updateScoresOnAdd = ({ playerName, score, second, minute }) => {
-  const time = formatTime(minute, second);
-  scores.push({ Name: playerName, Score: +score, time });
-  scores.sort((a, b) => b.Score - a.Score);
-};
-
 const message = () => {
   const position = scores.findIndex(
-    (el) => el.Score === score && playerName === el.Name
+    (el) => el.score === score && playerName === el.name
   );
 
   if (position === -1) {
@@ -3760,7 +3718,7 @@ const message = () => {
 };
 
 const sendScoreView = (callback) => {
-  let scoreForm = document?.getElementById("score-form");
+  let scoreForm = document.getElementById("score-form");
   scoreForm?.addEventListener("submit", function (e) {
     e.preventDefault();
 
@@ -3782,10 +3740,10 @@ const sendScoreView = (callback) => {
       return;
     }
 
-    let minute = parseInt(time[0]);
-    let second = parseInt(time[1]);
+    let minutes = parseInt(time[0]);
+    let seconds = parseInt(time[1]);
 
-    callback({ playerName, score, second, minute });
+    callback({ playerName, score, minutes, seconds });
   });
 };
 
@@ -3806,7 +3764,8 @@ function displayScoreboard(scores, message) {
   container.appendChild(text);
 
   for (let i = start; i <= end; i++) {
-    const { Name, Score, time } = scores[i - 1];
+    const { name, score, minutes, seconds } = scores[i - 1];
+    const time = formatTime(minutes, seconds);
 
     const entry = document.createElement("div");
     entry.className = "score-entry";
@@ -3821,11 +3780,11 @@ function displayScoreboard(scores, message) {
     entry.appendChild(rank);
 
     const playerName = document.createElement("span");
-    playerName.textContent = Name;
+    playerName.textContent = name;
     entry.appendChild(playerName);
 
     const playerScore = document.createElement("span");
-    playerScore.textContent = `${Score}`.padStart(5, "0");
+    playerScore.textContent = `${score}`.padStart(5, "0");
     entry.appendChild(playerScore);
 
     const playerTime = document.createElement("span");
