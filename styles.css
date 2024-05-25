@@ -77,8 +77,47 @@ body {
   }
 }
 
+@keyframes fadeYellow {
+  0% {
+    background-color: yellow;
+  }
+  100% {
+    background-color: black;
+  }
+}
+
+@keyframes fadeBlue {
+  0% {
+    background-color: blue;
+  }
+  100% {
+    background-color: black;
+  }
+}
+
+@keyframes fadeGreen {
+  0% {
+    background-color: rgb(0, 255, 0);
+  }
+  100% {
+    background-color: black;
+  }
+}
+
 .fade-red {
   animation: fadeRed 1s forwards;
+}
+
+.fade-yellow {
+  animation: fadeYellow 1s forwards;
+}
+
+.fade-blue {
+  animation: fadeBlue 1s forwards;
+}
+
+.fade-green {
+  animation: fadeGreen 1s forwards;
 }
 
 .aliens-grid {
@@ -215,6 +254,7 @@ body {
   filter: brightness(360%);
   z-index: -1;
   transition: transform 0.0167s linear;
+  box-shadow: 0 0 10px 5px lawngreen;
 }
 
 .alien-bullet {
@@ -274,8 +314,38 @@ body {
   transition: transform 0.0167s linear;
 }
 
-.ufo {
+.ufo-red {
   background-image: url("assets/sprites/RedShip128wx64H.png");
+  background-size: 100%;
+  background-repeat: no-repeat;
+  background-position: center;
+  width: 40px;
+  height: 40px;
+  transition: transform 0.0167s linear;
+}
+
+.ufo-yellow {
+  background-image: url("assets/sprites/YellowShip.png");
+  background-size: 100%;
+  background-repeat: no-repeat;
+  background-position: center;
+  width: 40px;
+  height: 40px;
+  transition: transform 0.0167s linear;
+}
+
+.ufo-green {
+  background-image: url("assets/sprites/GreenShip.png");
+  background-size: 100%;
+  background-repeat: no-repeat;
+  background-position: center;
+  width: 40px;
+  height: 40px;
+  transition: transform 0.0167s linear;
+}
+
+.ufo-blue {
+  background-image: url("assets/sprites/BlueShip.png");
   background-size: 100%;
   background-repeat: no-repeat;
   background-position: center;

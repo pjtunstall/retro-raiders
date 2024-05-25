@@ -1261,7 +1261,7 @@ const chapter = [
   "Be on your Best Undefined Behavior, Now",
   "U'RAIA Heap",
   "Jack Be Nimble, Jack Be Quicksort",
-  "Jack Be Nimble, Jack GPT",
+  "Jack Be Nimble, Jack-GPT",
   "Another One Bytes the Rust",
   "The Borrowers",
   "Let Mut Swan",
@@ -1335,7 +1335,7 @@ ufo.classList.add("ufo-container");
 let ufoLeft;
 ufo.style.transform = `translateX(${-16 * ufoWidth}px)`;
 const html = `
-    <div id="ufo"class="ufo"></div>
+    <div id="ufo"</div>
     <div class="beam hidden"></div>
     `;
 ufo.insertAdjacentHTML("beforeend", html);
@@ -1343,8 +1343,9 @@ let hasUfoBeenShot = false;
 let removeBean = false;
 gameContainer.appendChild(ufo);
 let ufoBeam = document.querySelector(".beam");
-let ufoShip = document.querySelector(".ufo");
+let ufoShip = document.getElementById("ufo");
 let ufoDeathInProgress = false;
+let ufoColor;
 
 // Alien variables.
 const aliens = document.getElementById("aliens");
@@ -2335,6 +2336,21 @@ function launchUfo() {
     ufoDirection = -1;
     ufoLeft = containerWidth;
   }
+  ufoShip.classList.remove(`ufo-${ufoColor}`);
+  const ufoColorRandomizer = Math.random();
+  if (ufoColorRandomizer < 0.05) {
+    ufoShip.classList.add("ufo-green");
+    ufoColor = "green";
+  } else if (ufoColorRandomizer < 0.1) {
+    ufoShip.classList.add("ufo-blue");
+    ufoColor = "blue";
+  } else if (ufoColorRandomizer < 0.15) {
+    ufoShip.classList.add("ufo-yellow");
+    ufoColor = "yellow";
+  } else {
+    ufoShip.classList.add("ufo-red");
+    ufoColor = "red";
+  }
   ufo.style.transform = `translateX(${ufoLeft}px)`;
 }
 
@@ -2342,7 +2358,6 @@ const hiddenElementsOnBeam = () => {
   aliens.style.opacity = 0;
   barrierGrids.forEach((el) => (el.style.opacity = 0));
   alienBulletsElementArray.forEach((el) => (el.element.style.opacity = 0));
-
   playerBullet.style.opacity = 0;
 };
 
@@ -2388,6 +2403,7 @@ function reset(restart) {
   ufoTakenPlayer = false;
   isInUfoCutScene = false;
   player.classList.remove("player-beam");
+  player.style.opacity = 1;
 
   currentPage = 0;
 
@@ -3097,7 +3113,7 @@ function render() {
       voltage.pause();
       killUfo = false;
       ufoShip.classList.add("ufo-explosion");
-      gameContainer.classList.add("fade-red");
+      gameContainer.classList.add(`fade-${ufoColor}`);
       if (storyMode && !hasUfoBeenShot && !isGameOver && !isInUfoCutScene) {
         storyPart = "ufoShot";
         cutScene();
@@ -3115,7 +3131,7 @@ function render() {
         }
       }, 500);
       setTimeout(() => {
-        gameContainer.classList.remove("fade-red");
+        gameContainer.classList.remove(`fade-${ufoColor}`);
       }, 1000);
     }
     if (removeUfo) {
@@ -3542,6 +3558,7 @@ gameContainer.addEventListener("animationend", (event) => {
     animationName === "oppositeExtendBeam"
   ) {
     ufoTakenPlayer = true;
+    player.style.opacity = 0;
   }
 });
 
