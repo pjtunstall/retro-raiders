@@ -1090,6 +1090,8 @@ const chapter = [
   "Modzilla Minus One",
   "The Fantastic Mr. Firefox",
   "The Chromium of the Masses",
+  "A Night at the Opera",
+  "Edge Case",
   "Brave New World Wide Web",
   "BATman: Under the Hood",
   "Go &agrave; Gogo",
