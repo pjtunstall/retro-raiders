@@ -1289,6 +1289,7 @@ const chapter = [
   "Hot Fuzz-Test",
   "Temp File Fugit",
   "Util the Cows Come Home",
+  "Royal OOPSLA",
   "Nice, Nice, Very Nice,<br>So Many People in the Same Device",
   "Another One Bytes the Rust",
   "The Borrowers",
@@ -1298,6 +1299,7 @@ const chapter = [
   "Tuple Mania",
   "Do Not Go Gentle into that Good Nightly Build",
   "&amp;str Crazy",
+  "Glob of the Gaps",
 ];
 let chapterNumber = Math.floor(chapter.length * Math.random());
 title.innerHTML = `Chapter ${level}:<br>${chapter[chapterNumber]}`;
