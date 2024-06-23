@@ -334,8 +334,8 @@ body {
   transition: transform 0.0167s linear;
 }
 
-.ufo-green {
-  background-image: url("assets/sprites/GreenShip.png");
+.ufo-white {
+  background-image: url("assets/sprites/WhiteShip.png");
   background-size: 100%;
   background-repeat: no-repeat;
   background-position: center;

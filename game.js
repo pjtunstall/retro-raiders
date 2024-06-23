@@ -2386,7 +2386,7 @@ function launchUfo() {
   ufoShip.classList.remove(`ufo-${ufoColor}`);
   const ufoColorRandomizer = Math.random();
   if (ufoColorRandomizer < 0.05) {
-    ufoShip.classList.add("ufo-green");
+    ufoShip.classList.add("ufo-white");
     ufoColor = "green";
   } else if (ufoColorRandomizer < 0.1) {
     ufoShip.classList.add("ufo-blue");
