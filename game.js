@@ -2387,7 +2387,7 @@ function launchUfo() {
   const ufoColorRandomizer = Math.random();
   if (ufoColorRandomizer < 0.05) {
     ufoShip.classList.add("ufo-white");
-    ufoColor = "green";
+    ufoColor = "white";
   } else if (ufoColorRandomizer < 0.1) {
     ufoShip.classList.add("ufo-blue");
     ufoColor = "blue";
@@ -2449,6 +2449,8 @@ function reset(restart) {
   ufoToggleBeam = false;
   ufoTakenPlayer = false;
   isInUfoCutScene = false;
+  ufoBeam.classList.add("hidden");
+  ufoBeam.classList.remove("opposite-beam");
   player.classList.remove("player-beam");
   player.style.opacity = 1;
 
