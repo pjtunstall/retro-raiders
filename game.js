@@ -14,8 +14,10 @@ let frameDropsPerTenSeconds;
 let frameDropTimer;
 
 // State variables
+let isEasyMode = false;
 let powerup = false;
 let powerupStartTime = Date.now() - 15000;
+let clearLevel = false;
 let starting = true;
 const statsBar = document.querySelector(".stats-bar");
 let fadeOption = true;
@@ -2392,14 +2394,13 @@ function launchUfo() {
   }
   ufoShip.classList.remove(`ufo-${ufoColor}`);
   const ufoColorRandomizer = Math.random();
-  if (ufoColorRandomizer < 0.1) {
+  if (isEasyMode || ufoColorRandomizer < 0.1) {
     ufoColor = "white";
   } else if (ufoColorRandomizer < 0.2) {
     ufoColor = "blue";
   } else if (ufoColorRandomizer < 0.3) {
     ufoColor = "yellow";
   } else {
-    ufoShip.classList.add("ufo-red");
     ufoColor = "red";
   }
   ufoShip.classList.add(`ufo-${ufoColor}`);
@@ -2428,6 +2429,7 @@ function reset(restart) {
   endBounce = false;
   endFlit = false;
   ufoDeathInProgress = false;
+  clearLevel = false;
 
   if (restart) {
     restartInProgress = true;
@@ -2769,6 +2771,7 @@ function update(ticks) {
       ticks: ticks,
       powerup: powerup,
       ufoColor: ufoColor,
+      clearLevel: clearLevel,
       resetInProgress: resetInProgress,
       level: level,
       levelStartTime: levelStartTime,
@@ -3095,6 +3098,8 @@ function render() {
       alienElements[poorDoomedAlien.row][poorDoomedAlien.col].style.opacity = 0;
       if (poorDoomedAlien.isLastOne && !isGameOver) {
         level++;
+        clearLevel = false;
+        ufoTimeUp = Date.now() + 20000 + Math.random() * 10000;
         if (storyMode) {
           switch (level % 10) {
             case 2:
@@ -3173,11 +3178,6 @@ function render() {
       ufoDeathInProgress = true;
       voltage.pause();
       killUfo = false;
-      powerup = true;
-      powerupStartTime = Date.now();
-      if (ufoColor === "blue") {
-        player.classList.add("shield");
-      }
       ufoShip.classList.add("ufo-explosion");
       gameContainer.classList.add(`fade-${ufoColor}`);
       if (storyMode && !hasUfoBeenShot && !isGameOver && !isInUfoCutScene) {
@@ -3186,6 +3186,11 @@ function render() {
         renderStory(story.ufoShot[0]);
         storyPageNumber = 0;
         hasUfoBeenShot = true;
+      }
+      powerup = true;
+      powerupStartTime = Date.now();
+      if (ufoColor === "blue") {
+        player.classList.add("shield");
       }
       setTimeout(() => {
         ufoDeathInProgress = false;
@@ -3198,6 +3203,9 @@ function render() {
       }, 500);
       setTimeout(() => {
         gameContainer.classList.remove(`fade-${ufoColor}`);
+        if (ufoColor === "white") {
+          clearLevel = true;
+        }
       }, 1000);
     }
     if (removeUfo) {

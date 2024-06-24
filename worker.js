@@ -104,11 +104,14 @@ self.onmessage = function (event) {
   event.data.aliens.toRemove = null;
 
   // Move player.
+  const playerBoost =
+    event.data.powerup && event.data.ufoColor === "yellow" ? 2 : 1;
   event.data.player.left +=
     (event.data.player.direction *
       playerStep *
       frameDuration *
-      event.data.ticks) /
+      event.data.ticks *
+      playerBoost) /
     1000;
   event.data.player.left = Math.max(
     0,
@@ -222,25 +225,29 @@ self.onmessage = function (event) {
   }
 
   if (
-    event.data.player.bullet.isOnScreen &&
-    !event.data.player.bullet.removeMeMessageToWorker &&
-    !event.data.aliens.beingRemoved
+    (event.data.player.bullet.isOnScreen &&
+      !event.data.player.bullet.removeMeMessageToWorker &&
+      !event.data.aliens.beingRemoved) ||
+    (event.data.clearLevel && !event.data.aliens.beingRemoved)
   ) {
     alienIsHit: for (let row = 0; row < alienGridHeight; row++) {
       for (let col = 0; col < alienGridWidth; col++) {
         if (event.data.aliens.alive[row][col]) {
           if (
-            event.data.player.bullet.top <=
+            event.data.clearLevel ||
+            (event.data.player.bullet.top <=
               event.data.aliens.top + alienTopInGrid[row][col] + scaledHeight &&
-            event.data.player.bullet.top + playerBulletHeight >=
-              event.data.aliens.top + alienTopInGrid[row][col] &&
-            event.data.player.bullet.left >=
-              event.data.aliens.left + alienLeftInGrid[row][col] + gap * col &&
-            event.data.player.bullet.left <=
-              event.data.aliens.left +
-                alienLeftInGrid[row][col] +
-                scaledWidth +
-                gap * col
+              event.data.player.bullet.top + playerBulletHeight >=
+                event.data.aliens.top + alienTopInGrid[row][col] &&
+              event.data.player.bullet.left >=
+                event.data.aliens.left +
+                  alienLeftInGrid[row][col] +
+                  gap * col &&
+              event.data.player.bullet.left <=
+                event.data.aliens.left +
+                  alienLeftInGrid[row][col] +
+                  scaledWidth +
+                  gap * col)
           ) {
             event.data.player.bullet.removeMeMessageFromWorker = true;
             event.data.aliens.alive[row][col] = false;
