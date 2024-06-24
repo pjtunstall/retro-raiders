@@ -1,19 +1,21 @@
-// Game container and background variables.
+// Layout and background variables
 const gameContainer = document.querySelector(".game-container");
 const containerWidth = 1600;
 const containerHeight = 770;
 const underlay = gameContainer.querySelector(".underlay");
 let underlayOpacity = 0;
-
-let frameDropsPerTenSeconds;
-let frameDropTimer;
-
 let skyline = document.getElementById("skyline");
 skyline.classList.add("london");
 const credits = document.querySelector(".credits");
 const title = document.querySelector(".title");
 
-// State variables.
+// Benchmarking variables
+let frameDropsPerTenSeconds;
+let frameDropTimer;
+
+// State variables
+let powerup = false;
+let powerupStartTime = Date.now() - 15000;
 let starting = true;
 const statsBar = document.querySelector(".stats-bar");
 let fadeOption = true;
@@ -30,6 +32,269 @@ let minutes = 0;
 let formattedMinutes = "00";
 let formattedSeconds = "00";
 let currentPage = 0;
+
+// Pause variables.
+const pauseMenu = document.querySelector(".pause-menu");
+let paused = false;
+let pauseStartTime = 0;
+let pauseOnStart = true;
+let displayCredits = false;
+
+// Game loop variables.
+let loopID;
+const frameDuration = 1000 / 60;
+let lastTime = 0;
+let accumulatedFrameTime = 0;
+
+// Player variables.
+const player = document.getElementById("player");
+const playerWidth = 36;
+const playerHeight = 24;
+let playerDirection = 0;
+let playerLeft = containerWidth / 2 - playerWidth / 2;
+let playerTop = containerHeight - playerHeight;
+player.classList.add("life-1");
+
+// Get the computed value of the CSS variable
+let CSSVariable = getComputedStyle(player).getPropertyValue("--playerLeft");
+
+// Player bullet variables.
+let playerBullet = document.createElement("div");
+playerBullet.classList.add("player-bullet");
+playerBullet.style.opacity = 0;
+gameContainer.appendChild(playerBullet);
+let playerBulletTop = 0;
+let playerBulletLeft = 0;
+const playerBulletHeight = 8;
+const playerBulletWidth = 3;
+let playerBulletRemoveMe = false;
+let newPlayerBullet = false;
+let playerBulletOnScreen = false;
+
+// Ufo variables.
+const mysteryScore = [
+  100, 50, 50, 100, 150, 100, 100, 50, 300, 100, 100, 100, 50, 150, 100, 50,
+];
+let ufoScorePointer = 0;
+let ufoBoost = 1;
+let ufoTimeUp = Date.now() + 20000 + Math.random() * 10000;
+let ufoActive = false;
+let ufoDirection;
+const ufoHeight = 40;
+const ufoWidth = 40;
+let killUfo = false;
+let removeUfo = false;
+let ufoTop = 0;
+let ufoToggleBeam = false;
+let ufoGetPlayer = false;
+let ufoTakenPlayer = false;
+let isInUfoCutScene = false;
+const ufo = document.createElement("div");
+ufo.classList.add("ufo-container");
+let ufoLeft;
+ufo.style.transform = `translateX(${-16 * ufoWidth}px)`;
+const html = `
+    <div id="ufo"</div>
+    <div class="beam hidden"></div>
+    `;
+ufo.insertAdjacentHTML("beforeend", html);
+let hasUfoBeenShot = false;
+let removeBean = false;
+gameContainer.appendChild(ufo);
+let ufoBeam = document.querySelector(".beam");
+let ufoShip = document.getElementById("ufo");
+let ufoDeathInProgress = false;
+let ufoColor;
+
+// Alien variables.
+const aliens = document.getElementById("aliens");
+const alienGridWidth = 11;
+const alienGridHeight = 5;
+const gap = parseFloat(getComputedStyle(aliens).gap);
+
+let alienTimeoutID;
+
+let bottomRow = 4;
+let lowestInColumn = Array(alienGridWidth).fill(alienGridHeight - 1);
+let aliensGroundSensor = 320;
+
+const computed = window.getComputedStyle(aliens);
+const alienGridPixelWidth = parseFloat(
+  computed.getPropertyValue("width").replace("px", "")
+);
+const alienGridPixelHeight = parseFloat(
+  computed.getPropertyValue("height").replace("px", "")
+);
+const alienWidth = alienGridPixelWidth / alienGridWidth;
+const alienHeight = alienGridPixelHeight / alienGridHeight;
+const scale = 0.5;
+const scaledHeight = scale * alienHeight;
+const scaledWidth = scale * alienWidth;
+let aliensRemaining = alienGridWidth * alienGridHeight;
+let alienToRemove = null;
+const alienAlive = Array(alienGridHeight);
+const alienElements = Array(alienGridHeight);
+for (let i = 0; i < alienGridHeight; i++) {
+  alienAlive[i] = Array(alienGridWidth);
+  alienElements[i] = Array(alienGridWidth);
+  for (let j = 0; j < alienGridWidth; j++) {
+    alienAlive[i][j] = true;
+    const alien = document.createElement("div");
+    aliens.appendChild(alien);
+    alienElements[i][j] = alien;
+  }
+}
+
+let alienAnimationDuration = 1;
+let alienAnimationIncrement = 0.03;
+let aliensDanceFaster = false;
+
+let squids = [
+  ...document.querySelectorAll(
+    `.aliens-grid > div:nth-child(-n+${alienGridWidth})`
+  ),
+];
+let crabs = [
+  ...document.querySelectorAll(
+    `.aliens-grid > div:nth-child(n+${alienGridWidth + 1}):nth-child(-n+${
+      alienGridWidth * 3
+    })`
+  ),
+];
+let blobs = [
+  ...document.querySelectorAll(
+    `.aliens-grid > div:nth-child(n+${alienGridWidth * 3 + 1}):nth-child(-n+${
+      alienGridWidth * 5
+    })`
+  ),
+];
+
+for (const squid of squids) {
+  squid.classList.add("squid");
+}
+
+for (const crab of crabs) {
+  crab.classList.add("crab");
+}
+
+for (const blob of blobs) {
+  blob.classList.add("blob");
+}
+
+// // Testing dark level:
+
+// for (const squid of squids) {
+//   squid.classList.remove('alien-explosion');
+//   squid.classList.remove('squid');
+//   squid.classList.remove('squid-black');
+//   if (level % 3 === 0) {
+//     squid.classList.add('squid-black');
+//   } else {
+//     squid.classList.add('squid');
+//   }
+// }
+
+// for (const crab of crabs) {
+//   crab.classList.remove('alien-explosion');
+//   crab.classList.remove('crab');
+//   crab.classList.remove('black-black');
+//   if (level % 3 === 0) {
+//     crab.classList.add('crab-black');
+//   } else {
+//     crab.classList.add('crab');
+//   }
+// }
+
+// for (const blob of blobs) {
+//   blob.classList.remove('alien-explosion');
+//   blob.classList.remove('blob');
+//   blob.classList.remove('blob-black');
+//   if (level % 3 === 0) {
+//     blob.classList.add('blob-black');
+//   } else {
+//     blob.classList.add('blob');
+//   }
+// }
+
+// // end test.
+
+let aliensDirection = 1;
+if (Math.random() < 0.5) {
+  aliensDirection = -1;
+}
+const maxAlienSpeed = 512;
+let startHeight = 40;
+let aliensStep = startHeight + 100;
+let aliensLeft = containerWidth / 2 - alienGridPixelWidth / 2;
+let aliensTop = startHeight;
+let insetLeft = 0;
+let insetRight = 0;
+let leftCol = 0;
+let rightCol = 10;
+
+// Variables relating to alien movement patterns on later levels.
+let endBounce = false;
+let endFlit = false;
+
+// Alien bullet variables.
+let alienBulletsArray = [];
+let alienBulletsElementArray = [];
+function* IDGenerator() {
+  let i = 0;
+  while (true) {
+    yield ++i;
+  }
+}
+const ids = IDGenerator();
+let alienRateOfFire = level;
+let alienBulletDue = Date.now() + (5000 * Math.random()) / alienRateOfFire;
+const maxAlienBullets = 16;
+const bulletWidth = 10;
+const bulletHeight = 30;
+
+// Uncomment to test level parameters: background image and difficulty parameters,
+// but not selection of alien types or choice or black vs white aliens.
+
+// level = 5;
+// startHeight = 60;
+// aliensStep = 160;
+// alienRateOfFire = 5;
+// skyline.classList.add('berlin');
+
+// level = 6;
+// startHeight = 60;
+// aliensStep = 160;
+// alienRateOfFire = 6;
+// skyline.classList.add('rome');
+
+// level = 7;
+// startHeight = 70;
+// aliensStep = 170;
+// alienRateOfFire = 7;
+// skyline.classList.add('austin');
+
+// level = 8;
+// startHeight = 70;
+// aliensStep = 170;
+// alienRateOfFire = 8;
+// skyline.classList.add('mountains');
+
+// level = 9;
+// startHeight = 80;
+// aliensStep = 180;
+// alienRateOfFire = 9;
+// skyline.classList.add('wood');
+
+// level = 10;
+// startHeight = 40;
+// aliensStep = 180;
+// alienRateOfFire = 10;
+// skyline.classList.add("forest");
+
+// Variables to do with the flash effect for when alien bullets hit the ground.
+let quake = false;
+
+// Story variables
 let storyMode = false;
 let isInCutScene = false;
 let storyPart = "beginning";
@@ -1032,7 +1297,6 @@ const chapter = [
   "Terminal Velocity",
   "Winds Light to Variable",
   "Man of Constant Sorrow",
-  "Let it Be",
   "Let Slip the Logs of Var",
   "Sweet Sprites the Burthen Bear",
   "Azure Like It",
@@ -1076,6 +1340,7 @@ const chapter = [
   "The Markup of the Beast",
   "Cache Only",
   "Who requestAnimationFrame(edRogerRabbit?)",
+  "The Devil Makes Work for Idle Callbacks",
   "&lt;div&gt;ide &amp; Conquer&lt;/div&gt;",
   "The Lesson is, Never Try",
   "Catch as Catch Can",
@@ -1093,6 +1358,7 @@ const chapter = [
   "Iterator, I Hardly Know Her",
   "This!",
   "Murder on the Object Orient",
+  "Polymorphic Perversity",
   "Are my Methods Unsound?",
   "I/O Canto",
   "Burning Chrome",
@@ -1319,268 +1585,6 @@ const chapter = [
 ];
 let chapterNumber = Math.floor(chapter.length * Math.random());
 title.innerHTML = `Chapter ${level}:<br>${chapter[chapterNumber]}`;
-
-// Pause variables.
-const pauseMenu = document.querySelector(".pause-menu");
-let paused = false;
-let pauseStartTime = 0;
-let pauseOnStart = true;
-let displayCredits = false;
-
-// Game loop variables.
-let loopID;
-const frameDuration = 1000 / 60;
-let lastTime = 0;
-let accumulatedFrameTime = 0;
-
-// Player variables.
-const player = document.getElementById("player");
-const playerWidth = 36;
-const playerHeight = 24;
-let playerDirection = 0;
-let playerLeft = containerWidth / 2 - playerWidth / 2;
-let playerTop = containerHeight - playerHeight;
-player.classList.add("life-1");
-
-// Get the computed value of the CSS variable
-let CSSVariable = getComputedStyle(player).getPropertyValue("--playerLeft");
-
-// Player bullet variables.
-let playerBullet = document.createElement("div");
-playerBullet.classList.add("player-bullet");
-playerBullet.style.opacity = 0;
-gameContainer.appendChild(playerBullet);
-let playerBulletTop = 0;
-let playerBulletLeft = 0;
-const playerBulletHeight = 8;
-const playerBulletWidth = 3;
-let playerBulletRemoveMe = false;
-let newPlayerBullet = false;
-let playerBulletOnScreen = false;
-let bulletBoostStart = Date.now() - 15000;
-
-// Ufo variables.
-const mysteryScore = [
-  100, 50, 50, 100, 150, 100, 100, 50, 300, 100, 100, 100, 50, 150, 100, 50,
-];
-let ufoScorePointer = 0;
-let ufoBoost = 1;
-let ufoTimeUp = Date.now() + 20000 + Math.random() * 10000;
-let ufoActive = false;
-let ufoDirection;
-const ufoHeight = 40;
-const ufoWidth = 40;
-let killUfo = false;
-let removeUfo = false;
-let ufoTop = 0;
-let ufoToggleBeam = false;
-let ufoGetPlayer = false;
-let ufoTakenPlayer = false;
-let isInUfoCutScene = false;
-const ufo = document.createElement("div");
-ufo.classList.add("ufo-container");
-let ufoLeft;
-ufo.style.transform = `translateX(${-16 * ufoWidth}px)`;
-const html = `
-    <div id="ufo"</div>
-    <div class="beam hidden"></div>
-    `;
-ufo.insertAdjacentHTML("beforeend", html);
-let hasUfoBeenShot = false;
-let removeBean = false;
-gameContainer.appendChild(ufo);
-let ufoBeam = document.querySelector(".beam");
-let ufoShip = document.getElementById("ufo");
-let ufoDeathInProgress = false;
-let ufoColor;
-
-// Alien variables.
-const aliens = document.getElementById("aliens");
-const alienGridWidth = 11;
-const alienGridHeight = 5;
-const gap = parseFloat(getComputedStyle(aliens).gap);
-
-let alienTimeoutID;
-
-let bottomRow = 4;
-let lowestInColumn = Array(alienGridWidth).fill(alienGridHeight - 1);
-let aliensGroundSensor = 320;
-
-const computed = window.getComputedStyle(aliens);
-const alienGridPixelWidth = parseFloat(
-  computed.getPropertyValue("width").replace("px", "")
-);
-const alienGridPixelHeight = parseFloat(
-  computed.getPropertyValue("height").replace("px", "")
-);
-const alienWidth = alienGridPixelWidth / alienGridWidth;
-const alienHeight = alienGridPixelHeight / alienGridHeight;
-const scale = 0.5;
-const scaledHeight = scale * alienHeight;
-const scaledWidth = scale * alienWidth;
-let aliensRemaining = alienGridWidth * alienGridHeight;
-let alienToRemove = null;
-const alienAlive = Array(alienGridHeight);
-const alienElements = Array(alienGridHeight);
-for (let i = 0; i < alienGridHeight; i++) {
-  alienAlive[i] = Array(alienGridWidth);
-  alienElements[i] = Array(alienGridWidth);
-  for (let j = 0; j < alienGridWidth; j++) {
-    alienAlive[i][j] = true;
-    const alien = document.createElement("div");
-    aliens.appendChild(alien);
-    alienElements[i][j] = alien;
-  }
-}
-
-let alienAnimationDuration = 1;
-let alienAnimationIncrement = 0.03;
-let aliensDanceFaster = false;
-
-let squids = [
-  ...document.querySelectorAll(
-    `.aliens-grid > div:nth-child(-n+${alienGridWidth})`
-  ),
-];
-let crabs = [
-  ...document.querySelectorAll(
-    `.aliens-grid > div:nth-child(n+${alienGridWidth + 1}):nth-child(-n+${
-      alienGridWidth * 3
-    })`
-  ),
-];
-let blobs = [
-  ...document.querySelectorAll(
-    `.aliens-grid > div:nth-child(n+${alienGridWidth * 3 + 1}):nth-child(-n+${
-      alienGridWidth * 5
-    })`
-  ),
-];
-
-for (const squid of squids) {
-  squid.classList.add("squid");
-}
-
-for (const crab of crabs) {
-  crab.classList.add("crab");
-}
-
-for (const blob of blobs) {
-  blob.classList.add("blob");
-}
-
-// // Testing dark level:
-
-// for (const squid of squids) {
-//   squid.classList.remove('alien-explosion');
-//   squid.classList.remove('squid');
-//   squid.classList.remove('squid-black');
-//   if (level % 3 === 0) {
-//     squid.classList.add('squid-black');
-//   } else {
-//     squid.classList.add('squid');
-//   }
-// }
-
-// for (const crab of crabs) {
-//   crab.classList.remove('alien-explosion');
-//   crab.classList.remove('crab');
-//   crab.classList.remove('black-black');
-//   if (level % 3 === 0) {
-//     crab.classList.add('crab-black');
-//   } else {
-//     crab.classList.add('crab');
-//   }
-// }
-
-// for (const blob of blobs) {
-//   blob.classList.remove('alien-explosion');
-//   blob.classList.remove('blob');
-//   blob.classList.remove('blob-black');
-//   if (level % 3 === 0) {
-//     blob.classList.add('blob-black');
-//   } else {
-//     blob.classList.add('blob');
-//   }
-// }
-
-// // end test.
-
-let aliensDirection = 1;
-if (Math.random() < 0.5) {
-  aliensDirection = -1;
-}
-const maxAlienSpeed = 512;
-let startHeight = 40;
-let aliensStep = startHeight + 100;
-let aliensLeft = containerWidth / 2 - alienGridPixelWidth / 2;
-let aliensTop = startHeight;
-let insetLeft = 0;
-let insetRight = 0;
-let leftCol = 0;
-let rightCol = 10;
-
-// Variables relating to alien movement patterns on later levels.
-let endBounce = false;
-let endFlit = false;
-
-// Alien bullet variables.
-let alienBulletsArray = [];
-let alienBulletsElementArray = [];
-function* IDGenerator() {
-  let i = 0;
-  while (true) {
-    yield ++i;
-  }
-}
-const ids = IDGenerator();
-let alienRateOfFire = level;
-let alienBulletDue = Date.now() + (5000 * Math.random()) / alienRateOfFire;
-const maxAlienBullets = 16;
-const bulletWidth = 10;
-const bulletHeight = 30;
-
-// Uncomment to test level parameters: background image and difficulty parameters,
-// but not selection of alien types or choice or black vs white aliens.
-
-// level = 5;
-// startHeight = 60;
-// aliensStep = 160;
-// alienRateOfFire = 5;
-// skyline.classList.add('berlin');
-
-// level = 6;
-// startHeight = 60;
-// aliensStep = 160;
-// alienRateOfFire = 6;
-// skyline.classList.add('rome');
-
-// level = 7;
-// startHeight = 70;
-// aliensStep = 170;
-// alienRateOfFire = 7;
-// skyline.classList.add('austin');
-
-// level = 8;
-// startHeight = 70;
-// aliensStep = 170;
-// alienRateOfFire = 8;
-// skyline.classList.add('mountains');
-
-// level = 9;
-// startHeight = 80;
-// aliensStep = 180;
-// alienRateOfFire = 9;
-// skyline.classList.add('wood');
-
-// level = 10;
-// startHeight = 40;
-// aliensStep = 180;
-// alienRateOfFire = 10;
-// skyline.classList.add("forest");
-
-// Variables to do with the flash effect for when alien bullets hit the ground.
-let quake = false;
 
 // Barrier variables.
 
@@ -2243,14 +2247,14 @@ function unpause() {
       startTime = Date.now();
       pauseStartTime = Date.now();
       ufoTimeUp = Date.now() + 20000 + Math.random() * 10000;
-      bulletBoostStart = Date.now() - 15000;
+      powerupStartTime = Date.now() - 15000;
       restartInProgress = false;
     }
   } else {
     const pauseInterval = Date.now() - pauseStartTime;
     startTime += pauseInterval;
     ufoTimeUp += pauseInterval;
-    bulletBoostStart += pauseInterval;
+    powerupStartTime += pauseInterval;
   }
   if (ufoActive) {
     voltage.play();
@@ -2385,13 +2389,13 @@ function launchUfo() {
   }
   ufoShip.classList.remove(`ufo-${ufoColor}`);
   const ufoColorRandomizer = Math.random();
-  if (ufoColorRandomizer < 0.05) {
+  if (ufoColorRandomizer < 0.1) {
     ufoShip.classList.add("ufo-white");
     ufoColor = "white";
-  } else if (ufoColorRandomizer < 0.1) {
+  } else if (ufoColorRandomizer < 0.2) {
     ufoShip.classList.add("ufo-blue");
     ufoColor = "blue";
-  } else if (ufoColorRandomizer < 0.15) {
+  } else if (ufoColorRandomizer < 0.3) {
     ufoShip.classList.add("ufo-yellow");
     ufoColor = "yellow";
   } else {
@@ -2759,9 +2763,12 @@ function update(ticks) {
     playerDeath(true);
   }
 
+  powerup = Date.now() - powerupStartTime < 10000;
+
   if (fadeOption || !ufoGetPlayer) {
     worker.postMessage({
       ticks: ticks,
+      powerup: powerup,
       resetInProgress: resetInProgress,
       level: level,
       levelStartTime: levelStartTime,
@@ -2777,7 +2784,6 @@ function update(ticks) {
           top: playerBulletTop,
           left: playerBulletLeft,
           removeMeMessageToWorker: playerBulletRemoveMe,
-          boostStart: bulletBoostStart,
         },
       },
       aliens: {
@@ -2796,7 +2802,7 @@ function update(ticks) {
         leftCol: leftCol,
         rightCol: rightCol,
         bottomRow: bottomRow,
-        beingRemoved: !!alienToRemove,
+        beingRemoved: alienToRemove,
       },
       endBounce: endBounce,
       endFlit: endFlit,
@@ -2869,7 +2875,7 @@ function update(ticks) {
       }
       if (event.data.ufo.kill) {
         killUfo = true;
-        bulletBoostStart = Date.now();
+        powerupStartTime = Date.now();
         score += mysteryScore[ufoScorePointer];
         incrementScore = true;
         ufoTimeUp = Date.now() + 20000 + Math.random() * 10000;

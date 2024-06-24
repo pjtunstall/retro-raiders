@@ -452,6 +452,20 @@ body {
   transition: transform 0.0167s linear;
 }
 
+.shield {
+  animation: pulseAnimation 2s infinite;
+}
+
+@keyframes pulseAnimation {
+  0%,
+  100% {
+    box-shadow: 0 0 8px 2px lightblue;
+  }
+  50% {
+    box-shadow: 0 0 8px 12px lightblue;
+  }
+}
+
 .player-beam {
   animation: move-player-up 2s forwards;
   transition: transform 0.0167s linear;

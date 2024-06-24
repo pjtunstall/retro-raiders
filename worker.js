@@ -117,8 +117,7 @@ self.onmessage = function (event) {
 
   // Move player bullet.
   if (event.data.player.bullet.isOnScreen) {
-    const boost =
-      Date.now() - event.data.player.bullet.boostStart < 10000 ? 2 : 1;
+    const boost = event.data.powerup ? 2 : 1;
     event.data.player.bullet.top -=
       (boost * playerBulletSpeed * frameDuration * event.data.ticks) / 1000;
   } else {
