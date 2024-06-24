@@ -1300,6 +1300,7 @@ const chapter = [
   "Let Slip the Logs of Var",
   "Sweet Sprites the Burthen Bear",
   "Azure Like It",
+  "This Too Too Solid State",
   "Life's but a Walking Shadow DOM",
   "A Poor Player that Structs and Frets his Hour upon the Stage",
   "Gain of Function",
