@@ -1548,6 +1548,7 @@ const chapter = [
   "Reflog a Dead Horse",
   "DOM and DOMmer",
   "Jai Guru Dev-a",
+  "The Places you'll Go",
   "When I was Born,<br>I was in a Detached HEAD state,<br>my iCloud was Single,<br>and my Whole Document.body was Filled with Light",
   "Monsters from the Id",
   "Init(), Bro?",
@@ -3403,9 +3404,9 @@ function gameLoop(timestamp) {
   if (ticks > 0.75) {
     update(ticks);
     accumulatedFrameTime = 0;
-  } else {
+  } /* else {
     console.log("skipped frame of", ticks, "ticks.");
-  }
+  } */
   render();
 
   if (pauseOnStart) {
