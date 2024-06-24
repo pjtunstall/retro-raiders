@@ -2247,6 +2247,7 @@ function unpause() {
       startTime = Date.now();
       pauseStartTime = Date.now();
       ufoTimeUp = Date.now() + 20000 + Math.random() * 10000;
+      powerup = false;
       powerupStartTime = Date.now() - 15000;
       restartInProgress = false;
     }
@@ -2390,18 +2391,16 @@ function launchUfo() {
   ufoShip.classList.remove(`ufo-${ufoColor}`);
   const ufoColorRandomizer = Math.random();
   if (ufoColorRandomizer < 0.1) {
-    ufoShip.classList.add("ufo-white");
     ufoColor = "white";
   } else if (ufoColorRandomizer < 0.2) {
-    ufoShip.classList.add("ufo-blue");
     ufoColor = "blue";
   } else if (ufoColorRandomizer < 0.3) {
-    ufoShip.classList.add("ufo-yellow");
     ufoColor = "yellow";
   } else {
     ufoShip.classList.add("ufo-red");
     ufoColor = "red";
   }
+  ufoShip.classList.add(`ufo-${ufoColor}`);
   ufo.style.transform = `translateX(${ufoLeft}px)`;
 }
 
@@ -2763,12 +2762,11 @@ function update(ticks) {
     playerDeath(true);
   }
 
-  powerup = Date.now() - powerupStartTime < 10000;
-
   if (fadeOption || !ufoGetPlayer) {
     worker.postMessage({
       ticks: ticks,
       powerup: powerup,
+      ufoColor: ufoColor,
       resetInProgress: resetInProgress,
       level: level,
       levelStartTime: levelStartTime,
@@ -2875,7 +2873,6 @@ function update(ticks) {
       }
       if (event.data.ufo.kill) {
         killUfo = true;
-        powerupStartTime = Date.now();
         score += mysteryScore[ufoScorePointer];
         incrementScore = true;
         ufoTimeUp = Date.now() + 20000 + Math.random() * 10000;
@@ -3033,6 +3030,13 @@ function render() {
     if (music.playbackRate < 3.9) {
       music.playbackRate += musicSpeedIncreaseAmount * (frameDuration / 5000);
     }
+
+    if (powerup && Date.now() - powerupStartTime > 10000) {
+      powerup = false;
+      if (ufoColor === "blue") {
+        player.classList.remove("shield");
+      }
+    }
   }
 
   if (quake) {
@@ -3167,6 +3171,11 @@ function render() {
       ufoDeathInProgress = true;
       voltage.pause();
       killUfo = false;
+      powerup = true;
+      powerupStartTime = Date.now();
+      if (ufoColor === "blue") {
+        player.classList.add("shield");
+      }
       ufoShip.classList.add("ufo-explosion");
       gameContainer.classList.add(`fade-${ufoColor}`);
       if (storyMode && !hasUfoBeenShot && !isGameOver && !isInUfoCutScene) {
@@ -3373,17 +3382,17 @@ function gameLoop(timestamp) {
   // to this amount each frame.
   let ticks = accumulatedFrameTime / frameDuration;
 
-  // Count significant frame drops. For a browser that refreshes at about 60Hz.
-  if (ticks > 1.1) {
-    console.log("dropped frame of", ticks, "ticks.");
-    frameDropsPerTenSeconds++;
-  }
+  // // Count significant frame drops. For a browser that refreshes at about 60Hz.
+  // if (ticks > 1.1) {
+  //   console.log("dropped frame of", ticks, "ticks.");
+  //   frameDropsPerTenSeconds++;
+  // }
 
-  if (Date.now() - frameDropTimer > 10000) {
-    console.log("frame drops per second:", frameDropsPerTenSeconds / 10);
-    frameDropTimer = Date.now();
-    frameDropsPerTenSeconds = 0;
-  }
+  // if (Date.now() - frameDropTimer > 10000) {
+  //   console.log("frame drops per second:", frameDropsPerTenSeconds / 10);
+  //   frameDropTimer = Date.now();
+  //   frameDropsPerTenSeconds = 0;
+  // }
 
   // Update even if the frame rate is momentarily greater than 60Hz. Sprite
   // position are updated proportionally to the real duration of the frame,

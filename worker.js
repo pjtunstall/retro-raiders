@@ -409,9 +409,10 @@ self.onmessage = function (event) {
       bullet.left + alienBulletWidth >= event.data.player.left &&
       bullet.left <= event.data.player.left + playerWidth
     ) {
-      // Cheat mode:
-      // Comment out this line to be invulnerable to alien bullets for testing.
-      event.data.player.hitByBullet = true;
+      if (!(event.data.powerup && event.data.ufoColor === "blue")) {
+        // i.e. if player is not invincible due to shield powerup
+        event.data.player.hitByBullet = true;
+      }
       bullet.removeMe = true;
       continue;
     }
