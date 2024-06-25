@@ -14,7 +14,7 @@ let frameDropsPerTenSeconds;
 let frameDropTimer;
 
 // State variables
-let isEasyMode = false;
+let mode = 1;
 let powerup = false;
 let powerupStartTime = Date.now() - 15000;
 let clearLevel = false;
@@ -36,7 +36,10 @@ let formattedSeconds = "00";
 let currentPage = 0;
 
 // Pause variables.
-const pauseMenu = document.querySelector(".pause-menu");
+const pauseMenu = document.querySelectorAll(".pause-menu");
+const easyIndicator = document.getElementById("e");
+const defaultIndicator = document.getElementById("d");
+const hardIndicator = document.getElementById("h");
 let paused = false;
 let pauseStartTime = 0;
 let pauseOnStart = true;
@@ -2227,7 +2230,10 @@ function pause() {
   if (!starting) {
     music.pause();
   }
-  pauseMenu.style.opacity = 1;
+  pauseMenu[0].style.display = "flex";
+  pauseMenu[1].style.display = "flex";
+  // pauseMenu[0].style.opacity = 1;
+  // pauseMenu[1].style.opacity = 1;
   if (resetInProgress) {
     title.style.backgroundColor = "rgba(0, 0, 0, 1);";
   } else {
@@ -2237,7 +2243,10 @@ function pause() {
 }
 
 function unpause() {
-  pauseMenu.style.opacity = 0;
+  pauseMenu[0].style.display = "none";
+  pauseMenu[1].style.display = "none";
+  // pauseMenu[0].style.opacity = 0;
+  // pauseMenu[1].style.opacity = 0;
   title.style.opacity = 0;
   wind.pause();
   frameDropsPerTenSeconds = 0;
@@ -2394,7 +2403,7 @@ function launchUfo() {
   }
   ufoShip.classList.remove(`ufo-${ufoColor}`);
   const ufoColorRandomizer = Math.random();
-  if (isEasyMode || ufoColorRandomizer < 0.1) {
+  if (mode === 0 || ufoColorRandomizer < 0.1) {
     ufoColor = "white";
   } else if (ufoColorRandomizer < 0.2) {
     ufoColor = "blue";
@@ -2439,6 +2448,7 @@ function reset(restart) {
     ufoBoost = 1;
     randomizeStory();
     modifyStory();
+    pauseMenu[1].style.display = "flex";
   }
 
   if (level % 10 === 0 || level % 10 > 4) {
@@ -2490,9 +2500,9 @@ function reset(restart) {
     if (restart) {
       if (storyMode) {
         // Restore story option on pause menu if we were previously in story mode.
-        pauseMenu.innerHTML = "";
+        pauseMenu[0].innerHTML = "";
         if (fadeOption) {
-          pauseMenu.insertAdjacentHTML(
+          pauseMenu[0].insertAdjacentHTML(
             "beforeend",
             `
           <div><span id="n">[N]ew game</span></div>
@@ -2503,7 +2513,7 @@ function reset(restart) {
           `
           );
         } else {
-          pauseMenu.insertAdjacentHTML(
+          pauseMenu[0].insertAdjacentHTML(
             "beforeend",
             `
           <div><span id="n">[N]ew game</span></div>
@@ -3303,14 +3313,16 @@ const cutScene = () => {
     togglePauseThrottled();
   }
   isInCutScene = true;
-  pauseMenu.style.display = "none";
+  pauseMenu[0].style.display = "none";
+  pauseMenu[1].style.display = "none";
   title.style.display = "none";
   gameContainer.style.display = "none";
   statsBar.style.display = "none";
 };
 
 const unCutScene = () => {
-  pauseMenu.style.display = "flex";
+  pauseMenu[0].style.display = "flex";
+  pauseMenu[1].style.display = "flex";
   title.style.display = "flex";
   gameContainer.style.display = "block";
   statsBar.style.display = "flex";
@@ -3465,15 +3477,15 @@ function handleKeyDown(event) {
     document.querySelector("#end-game-scoreboard-container").innerHTML = "";
     gameContainer.style.visibility = "visible";
     statsBar.style.display = "flex";
-    pauseMenu.innerHTML = "";
-    pauseMenu.classList.remove("pause-menu-modify");
+    pauseMenu[0].innerHTML = "";
+    pauseMenu[0].classList.remove("pause-menu-modify");
     let onOrOff;
     if (fadeOption) {
       onOrOff = "off";
     } else {
       onOrOff = "on";
     }
-    pauseMenu.insertAdjacentHTML(
+    pauseMenu[0].insertAdjacentHTML(
       "beforeend",
       `
       <div><span id="n">[N]ew game</span></div>
@@ -3525,8 +3537,8 @@ function handleKeyDown(event) {
       if (displayCredits) {
         turnCreditsOffThrottled();
       }
-      pauseMenu.innerHTML = "";
-      pauseMenu.insertAdjacentHTML(
+      pauseMenu[0].innerHTML = "";
+      pauseMenu[0].insertAdjacentHTML(
         "beforeend",
         `
         <div><span id="n">[N]ew game</span></div>
@@ -3546,7 +3558,7 @@ function handleKeyDown(event) {
     if (key === "n" || key === "N") {
       newGameThrottled();
     } else if (key === "f" || key === "F") {
-      pauseMenu.innerHTML = "";
+      pauseMenu[0].innerHTML = "";
       toggleFlashEffectThrottled();
       if (fadeOption) {
         onOrOff = "off";
@@ -3554,7 +3566,7 @@ function handleKeyDown(event) {
         onOrOff = "on";
       }
       if (storyMode) {
-        pauseMenu.insertAdjacentHTML(
+        pauseMenu[0].insertAdjacentHTML(
           "beforeend",
           `
         <div><span id="n">[N]ew game</span></div>
@@ -3564,7 +3576,7 @@ function handleKeyDown(event) {
         `
         );
       } else {
-        pauseMenu.insertAdjacentHTML(
+        pauseMenu[0].insertAdjacentHTML(
           "beforeend",
           `
         <div><span id="n">[N]ew game</span></div>
@@ -3575,6 +3587,24 @@ function handleKeyDown(event) {
         `
         );
       }
+    } else if (key === "e") {
+      mode = 0;
+      alienRateOfFire = level;
+      easyIndicator.classList.add("highlighted-difficulty");
+      defaultIndicator.classList.remove("highlighted-difficulty");
+      hardIndicator.classList.remove("highlighted-difficulty");
+    } else if (key === "d") {
+      mode = 1;
+      alienRateOfFire = level;
+      easyIndicator.classList.remove("highlighted-difficulty");
+      defaultIndicator.classList.add("highlighted-difficulty");
+      hardIndicator.classList.remove("highlighted-difficulty");
+    } else if (key === "h") {
+      mode = 2;
+      alienRateOfFire = 16;
+      easyIndicator.classList.remove("highlighted-difficulty");
+      defaultIndicator.classList.remove("highlighted-difficulty");
+      hardIndicator.classList.add("highlighted-difficulty");
     } else if (key === "c" || key === "C") {
       if (displayCredits) {
         turnCreditsOffThrottled();
@@ -3643,12 +3673,11 @@ document.addEventListener("keyup", handleKeyUp);
 loopID = requestAnimationFrame(gameLoop);
 
 const gameOverView = () => {
-  pauseMenu.style.display = "none";
+  pauseMenu[0].style.display = "none";
+  pauseMenu[1].style.display = "none";
   const overlay = document.getElementById("overlay");
   overlay.innerHTML = "";
   overlay.style.zIndex = 4;
-  console.log(score);
-  console.log(scores);
   const html = `
   <div id="end-game-prompt">
   <div class="game-over-text">Game Over</div>
@@ -3683,23 +3712,23 @@ const gameOverView = () => {
 };
 
 const showAndAddGameoverMenue = () => {
-  pauseMenu.innerHTML = "";
-  pauseMenu.style.display = "flex";
-  pauseMenu.classList.add("pause-menu-modify");
-  pauseMenu.insertAdjacentHTML(
+  pauseMenu[0].innerHTML = "";
+  pauseMenu[0].style.display = "flex";
+  pauseMenu[0].classList.add("pause-menu-modify");
+  pauseMenu[0].insertAdjacentHTML(
     "beforeend",
     `
 <div><span id="n">[N]ew game</span></div>
 <div class="hidden" ><span id="any"> [P]age toggle</span></div> 
 `
   );
-  pauseMenu.style.opacity = 1;
+  pauseMenu[0].style.opacity = 1;
 };
 
 function updatesGameOver() {
   gameContainer.style.visibility = "hidden";
   title.style.opacity = 0;
-  pauseMenu.innerHTML = "";
+  pauseMenu[0].innerHTML = "";
   statsBar.style.display = "none";
   playerBullet.style.opacity = 0;
 

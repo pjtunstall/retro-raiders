@@ -588,14 +588,20 @@ body {
   width: 1200px;
   padding-left: 200px;
   padding-right: 200px;
-  padding-bottom: 50px;
+  padding-bottom: 30px;
   text-align: center;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  position: relative;
-  visibility: visible;
   z-index: 2;
+  position: absolute;
+}
+#pause-menu-1 {
+  bottom: 80px;
+}
+
+#pause-menu-2 {
+  bottom: 30px;
 }
 
 .pause-menu div {
@@ -606,6 +612,11 @@ body {
 .pause-menu span {
   font-weight: bold;
   font-size: 27px;
+}
+
+.highlighted-difficulty {
+  color: orange;
+  text-shadow: 0px 0px 2px red;
 }
 
 .title {
