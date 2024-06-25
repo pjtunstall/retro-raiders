@@ -583,36 +583,29 @@ body {
 }
 
 .pause-menu {
-  background-color: black;
+  background-color: rgba(0, 0, 0, 0.8);
+  transition: opacity 0.2s ease-in-out;
+  display: flex;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 27px;
   color: red;
-  width: 1200px;
-  padding-left: 200px;
-  padding-right: 200px;
-  padding-bottom: 30px;
   text-align: center;
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  width: 1200px;
+  padding-left: 200px;
+  padding-right: 200px;
+  padding-bottom: 10px;
   z-index: 2;
-  position: absolute;
-}
-#pause-menu-1 {
-  bottom: 80px;
 }
 
-#pause-menu-2 {
-  bottom: 30px;
-}
-
-.pause-menu div {
-  display: inline-block;
-  font-size: 27px;
-}
-
-.pause-menu span {
+/* .pause-menu span {
   font-weight: bold;
   font-size: 27px;
-}
+} */
 
 .highlighted-difficulty {
   color: orange;
@@ -701,7 +694,7 @@ h1 {
   margin-bottom: 2px;
 }
 
-.score-entry:nth-child(3) {
+/* .score-entry:nth-child(3) {
   color: white;
 }
 
@@ -738,7 +731,8 @@ h1 {
 
 .score-entry:nth-child(12) {
   color: grey;
-}
+} */
+
 .score-entry {
   display: flex;
   justify-content: center;

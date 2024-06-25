@@ -37,6 +37,7 @@ let currentPage = 0;
 
 // Pause variables.
 const pauseMenu = document.querySelectorAll(".pause-menu");
+const pausemenuItems = document.querySelectorAll(".pause-menu span");
 const easyIndicator = document.getElementById("e");
 const defaultIndicator = document.getElementById("d");
 const hardIndicator = document.getElementById("h");
@@ -1282,6 +1283,7 @@ let scores = new Array(20).fill({
   score: 0,
   minutes: 0,
   seconds: 0,
+  mode: "easy",
 });
 
 // Chapter titles.
@@ -1332,7 +1334,7 @@ const chapter = [
   "Props to You",
   "The Great Gatsby",
   "Whatever Next",
-  "The Kwik and the Dead",
+  "The Quik and the Dead",
   "ROM with a Vue",
   "Concurrent Bun",
   "Non Angli, sed Angulari",
@@ -2230,10 +2232,13 @@ function pause() {
   if (!starting) {
     music.pause();
   }
-  pauseMenu[0].style.display = "flex";
-  pauseMenu[1].style.display = "flex";
-  // pauseMenu[0].style.opacity = 1;
-  // pauseMenu[1].style.opacity = 1;
+  pauseMenu[0].style.opacity = 1;
+  pauseMenu[1].style.opacity = 1;
+  // for (const item of pausemenuItems) {
+  //   if (item.id) {
+  //     item.style.opacity = 1;
+  //   }
+  // }
   if (resetInProgress) {
     title.style.backgroundColor = "rgba(0, 0, 0, 1);";
   } else {
@@ -2243,10 +2248,13 @@ function pause() {
 }
 
 function unpause() {
-  pauseMenu[0].style.display = "none";
-  pauseMenu[1].style.display = "none";
-  // pauseMenu[0].style.opacity = 0;
-  // pauseMenu[1].style.opacity = 0;
+  // pauseMenu[0].style.display = "none";
+  // pauseMenu[1].style.display = "none";
+  pauseMenu[0].style.opacity = 0;
+  pauseMenu[1].style.opacity = 0;
+  // for (const item of pausemenuItems) {
+  //   item.style.opacity = 0;
+  // }
   title.style.opacity = 0;
   wind.pause();
   frameDropsPerTenSeconds = 0;
@@ -2449,6 +2457,10 @@ function reset(restart) {
     randomizeStory();
     modifyStory();
     pauseMenu[1].style.display = "flex";
+    mode = 1;
+    easyIndicator.classList.remove("highlighted-difficulty");
+    defaultIndicator.classList.add("highlighted-difficulty");
+    hardIndicator.classList.remove("highlighted-difficulty");
   }
 
   if (level % 10 === 0 || level % 10 > 4) {
@@ -2572,7 +2584,9 @@ function reset(restart) {
     }
 
     aliensRemaining = alienGridHeight * alienGridWidth;
-    if (level % 10 === 0) {
+    if (mode === 2) {
+      alienRateOfFire = 16;
+    } else if (level % 10 === 0) {
       alienRateOfFire = 10;
     } else {
       alienRateOfFire = level % 10;
@@ -3589,22 +3603,20 @@ function handleKeyDown(event) {
       }
     } else if (key === "e") {
       mode = 0;
-      alienRateOfFire = level;
-      easyIndicator.classList.add("highlighted-difficulty");
-      defaultIndicator.classList.remove("highlighted-difficulty");
-      hardIndicator.classList.remove("highlighted-difficulty");
+      setMode();
     } else if (key === "d") {
       mode = 1;
       alienRateOfFire = level;
-      easyIndicator.classList.remove("highlighted-difficulty");
-      defaultIndicator.classList.add("highlighted-difficulty");
-      hardIndicator.classList.remove("highlighted-difficulty");
+      setMode();
     } else if (key === "h") {
       mode = 2;
-      alienRateOfFire = 16;
-      easyIndicator.classList.remove("highlighted-difficulty");
-      defaultIndicator.classList.remove("highlighted-difficulty");
-      hardIndicator.classList.add("highlighted-difficulty");
+      setMode();
+    } else if (key === "ArrowRight") {
+      mode = (mode + 1) % 3;
+      setMode();
+    } else if (key === "ArrowLeft") {
+      mode = (mode + 3 - 1) % 3;
+      setMode();
     } else if (key === "c" || key === "C") {
       if (displayCredits) {
         turnCreditsOffThrottled();
@@ -3626,6 +3638,36 @@ function handleKeyDown(event) {
   }
   if (event.code === "Space") {
     spaceKeyDown = true;
+  }
+}
+
+function setMode() {
+  switch (mode) {
+    case 0:
+      if (level % 10 === 0) {
+        alienRateOfFire = 10;
+      } else {
+        alienRateOfFire = level % 10;
+      }
+      easyIndicator.classList.add("highlighted-difficulty");
+      defaultIndicator.classList.remove("highlighted-difficulty");
+      hardIndicator.classList.remove("highlighted-difficulty");
+      break;
+    case 1:
+      if (level % 10 === 0) {
+        alienRateOfFire = 10;
+      } else {
+        alienRateOfFire = level % 10;
+      }
+      easyIndicator.classList.remove("highlighted-difficulty");
+      defaultIndicator.classList.add("highlighted-difficulty");
+      hardIndicator.classList.remove("highlighted-difficulty");
+      break;
+    case 2:
+      alienRateOfFire = 16;
+      easyIndicator.classList.remove("highlighted-difficulty");
+      defaultIndicator.classList.remove("highlighted-difficulty");
+      hardIndicator.classList.add("highlighted-difficulty");
   }
 }
 
@@ -3718,8 +3760,10 @@ const showAndAddGameoverMenue = () => {
   pauseMenu[0].insertAdjacentHTML(
     "beforeend",
     `
-<div><span id="n">[N]ew game</span></div>
-<div class="hidden" ><span id="any"> [P]age toggle</span></div> 
+<span style="opacity: 0">...</span>
+<span id="n">[N]ew game</span>
+<span id="any"> [P]age toggle</span>
+<span style="opacity: 0">...</span>
 `
   );
   pauseMenu[0].style.opacity = 1;
@@ -3760,19 +3804,36 @@ function getScores() {
     scores = data;
   }
 }
+function getModeName() {
+  let modeName;
+  switch (mode) {
+    case 0:
+      modeName = "easy";
+      break;
+    case 1:
+      modeName = "default";
+      break;
+    case 2:
+      modeName = "hard";
+  }
+  return modeName;
+}
 
 function saveScore({ playerName, score, minutes, seconds }) {
+  const modeName = getModeName();
   addScore({
     name: playerName,
     score: parseInt(score),
     minutes: minutes,
     seconds: seconds,
+    mode: modeName,
   });
   localStorage.setItem("scores", JSON.stringify(scores));
 }
 
 function addScore({ name, score, minutes, seconds }) {
-  scores.push({ name, score, minutes, seconds });
+  const modeName = getModeName();
+  scores.push({ name, score, minutes, seconds, mode: modeName });
   scores.sort((a, b) => b.score - a.score);
   scores = scores.slice(0, 20);
 }
@@ -3862,7 +3923,7 @@ function displayScoreboard(scores, message) {
   container.appendChild(text);
 
   for (let i = start; i <= end; i++) {
-    const { name, score, minutes, seconds } = scores[i - 1];
+    const { name, score, minutes, seconds, mode } = scores[i - 1];
     const time = formatTime(minutes, seconds);
 
     const entry = document.createElement("div");
@@ -3888,6 +3949,21 @@ function displayScoreboard(scores, message) {
     const playerTime = document.createElement("span");
     playerTime.textContent = time;
     entry.appendChild(playerTime);
+
+    const playerMode = document.createElement("span");
+    playerMode.textContent = mode;
+    entry.appendChild(playerMode);
+
+    switch (mode) {
+      case "easy":
+        entry.style.color = "gray";
+        break;
+      case "default":
+        entry.style.color = "white";
+        break;
+      case "hard":
+        entry.style.color = "gold";
+    }
 
     container.appendChild(entry);
   }
