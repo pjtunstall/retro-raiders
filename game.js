@@ -2232,6 +2232,10 @@ function pause() {
   if (!starting) {
     music.pause();
   }
+  // pauseMenu[0].style.display = "flex";
+  // pauseMenu[1].style.display = "flex";
+  // pauseMenu[0].style.visibility = "visible";
+  // pauseMenu[1].style.visibility = "visible";
   pauseMenu[0].style.opacity = 1;
   pauseMenu[1].style.opacity = 1;
   // for (const item of pausemenuItems) {
@@ -2248,6 +2252,8 @@ function pause() {
 }
 
 function unpause() {
+  // pauseMenu[0].style.visibility = "hidden";
+  // pauseMenu[1].style.visibility = "hidden";
   // pauseMenu[0].style.display = "none";
   // pauseMenu[1].style.display = "none";
   pauseMenu[0].style.opacity = 0;
@@ -2456,6 +2462,7 @@ function reset(restart) {
     ufoBoost = 1;
     randomizeStory();
     modifyStory();
+    pauseMenu[0].style.display = "flex";
     pauseMenu[1].style.display = "flex";
     mode = 1;
     easyIndicator.classList.remove("highlighted-difficulty");
