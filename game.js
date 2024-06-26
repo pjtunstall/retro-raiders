@@ -36,8 +36,9 @@ let formattedSeconds = "00";
 let currentPage = 0;
 
 // Pause variables.
+const pauseContainer = document.querySelector(".pause-container");
 const pauseMenu = document.querySelectorAll(".pause-menu");
-const pausemenuItems = document.querySelectorAll(".pause-menu span");
+const pauseMenuItems = document.querySelectorAll(".pause-menu span");
 const easyIndicator = document.getElementById("e");
 const defaultIndicator = document.getElementById("d");
 const hardIndicator = document.getElementById("h");
@@ -1583,7 +1584,7 @@ const chapter = [
   "Goto Jail, Do Not Pass Go",
   "Another One Bytes the Rust",
   "The Borrowers",
-  "Raiders of the Lost Arc<T>",
+  "Raiders of the Lost Arc&lt;T&gt;",
   "let mut swan",
   "pub mod grub",
   "Enum Enum Miny Mo",
@@ -2232,17 +2233,8 @@ function pause() {
   if (!starting) {
     music.pause();
   }
-  // pauseMenu[0].style.display = "flex";
-  // pauseMenu[1].style.display = "flex";
-  // pauseMenu[0].style.visibility = "visible";
-  // pauseMenu[1].style.visibility = "visible";
   pauseMenu[0].style.opacity = 1;
   pauseMenu[1].style.opacity = 1;
-  // for (const item of pausemenuItems) {
-  //   if (item.id) {
-  //     item.style.opacity = 1;
-  //   }
-  // }
   if (resetInProgress) {
     title.style.backgroundColor = "rgba(0, 0, 0, 1);";
   } else {
@@ -2252,15 +2244,8 @@ function pause() {
 }
 
 function unpause() {
-  // pauseMenu[0].style.visibility = "hidden";
-  // pauseMenu[1].style.visibility = "hidden";
-  // pauseMenu[0].style.display = "none";
-  // pauseMenu[1].style.display = "none";
   pauseMenu[0].style.opacity = 0;
   pauseMenu[1].style.opacity = 0;
-  // for (const item of pausemenuItems) {
-  //   item.style.opacity = 0;
-  // }
   title.style.opacity = 0;
   wind.pause();
   frameDropsPerTenSeconds = 0;
@@ -3499,7 +3484,7 @@ function handleKeyDown(event) {
     gameContainer.style.visibility = "visible";
     statsBar.style.display = "flex";
     pauseMenu[0].innerHTML = "";
-    pauseMenu[0].classList.remove("pause-menu-modify");
+    pauseContainer.classList.remove("pause-menu-modify");
     let onOrOff;
     if (fadeOption) {
       onOrOff = "off";
@@ -3763,7 +3748,7 @@ const gameOverView = () => {
 const showAndAddGameoverMenue = () => {
   pauseMenu[0].innerHTML = "";
   pauseMenu[0].style.display = "flex";
-  pauseMenu[0].classList.add("pause-menu-modify");
+  pauseContainer.classList.add("pause-menu-modify");
   pauseMenu[0].insertAdjacentHTML(
     "beforeend",
     `

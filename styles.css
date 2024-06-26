@@ -582,23 +582,27 @@ body {
   font-family: "Computo Monospace" !important;
 }
 
-.pause-menu {
+.pause-container {
+  position: fixed;
+  width: 1600px;
   background-color: transparent;
+  z-index: 2;
   transition: opacity 0.2s ease-in-out;
+  font-size: 27px;
+  color: red;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, 300%);
+}
+
+.pause-menu {
   display: flex;
   text-align: center;
   align-items: center;
-  justify-content: center;
-  font-weight: bold;
-  font-size: 27px;
-  color: red;
-  text-align: center;
   justify-content: space-between;
-  width: 1200px;
   padding-left: 200px;
   padding-right: 200px;
   padding-bottom: 30px;
-  z-index: 2;
 }
 
 .highlighted-difficulty {
@@ -615,11 +619,13 @@ body {
   z-index: 2;
   transition: opacity 0.2s ease-in-out;
   display: flex;
+  flex-direction: column;
   text-align: center;
   align-items: center;
   justify-content: center;
   font-size: 64px;
-  color: red;
+  color: white;
+  /* text-shadow: 2px 2px 8px orange; */
 }
 
 .credits {
@@ -676,6 +682,10 @@ body {
 }
 
 .pause-menu-modify {
+  transform: translate(-50%, 600%);
+}
+
+/* .pause-menu-modify {
   display: block;
   text-align: center;
   position: relative;
@@ -686,7 +696,7 @@ body {
 }
 h1 {
   margin-bottom: 2px;
-}
+} */
 
 /* .score-entry:nth-child(3) {
   color: white;
