@@ -3948,13 +3948,13 @@ function displayScoreboard(scores, message) {
 
     switch (mode) {
       case "easy":
-        entry.style.color = "gray";
+        entry.style.color = "rgb(64, 64, 64)";
         break;
       case "default":
-        entry.style.color = "white";
+        entry.style.color = "rgb(128, 128, 128)";
         break;
       case "hard":
-        entry.style.color = "gold";
+        entry.style.color = "white";
     }
 
     container.appendChild(entry);

@@ -586,7 +586,7 @@ body {
   position: fixed;
   width: 1600px;
   background-color: transparent;
-  z-index: 2;
+  z-index: 3;
   transition: opacity 0.2s ease-in-out;
   font-size: 27px;
   color: red;
@@ -625,7 +625,6 @@ body {
   justify-content: center;
   font-size: 64px;
   color: white;
-  /* text-shadow: 2px 2px 8px orange; */
 }
 
 .credits {
@@ -684,19 +683,6 @@ body {
 .pause-menu-modify {
   transform: translate(-50%, 600%);
 }
-
-/* .pause-menu-modify {
-  display: block;
-  text-align: center;
-  position: relative;
-  top: 32px;
-}
-.pause-menu-modify div {
-  margin: 0rem 12rem;
-}
-h1 {
-  margin-bottom: 2px;
-} */
 
 /* .score-entry:nth-child(3) {
   color: white;
