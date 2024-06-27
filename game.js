@@ -42,9 +42,8 @@ const pauseMenuItems = document.querySelectorAll(".pause-menu span");
 const easyIndicator = document.getElementById("e");
 const defaultIndicator = document.getElementById("d");
 const hardIndicator = document.getElementById("h");
-let paused = false;
+let paused = true;
 let pauseStartTime = 0;
-let pauseOnStart = true;
 let displayCredits = false;
 
 // Game loop variables.
@@ -3434,11 +3433,6 @@ function gameLoop(timestamp) {
     console.log("skipped frame of", ticks, "ticks.");
   } */
   render();
-
-  if (pauseOnStart) {
-    togglePauseThrottled();
-    pauseOnStart = false;
-  }
 }
 
 // Pick which column an alien bullet will be fired from. If the column chosen is empty,
@@ -3702,9 +3696,6 @@ gameContainer.addEventListener("animationend", (event) => {
 
 document.addEventListener("keydown", handleKeyDown);
 document.addEventListener("keyup", handleKeyUp);
-
-// Launch game loop.
-loopID = requestAnimationFrame(gameLoop);
 
 const gameOverView = () => {
   pauseMenu[0].style.display = "none";
@@ -3971,3 +3962,7 @@ function displayScoreboard(scores, message) {
     container.appendChild(entry);
   }
 }
+
+// Launch game loop.
+reset(true);
+loopID = requestAnimationFrame(gameLoop);
