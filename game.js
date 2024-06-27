@@ -1484,7 +1484,7 @@ const chapter = [
   "The Event Whisperer",
   "All Quiet on the Western Front-End",
   "Awaiting for Hashbangs to Send me to Sleep",
-  "All Worker Thread<br>and No Media Playback<br>Makes Jack a Null Boy",
+  "All Worker Thread<br>and No Media Playback<br>Makes Jack-GPT a Null Boy",
   "That's the Way the Cookie Crumbles",
   "Instance Karma",
   "A.I., Cap'n",
@@ -3734,7 +3734,7 @@ const gameOverView = () => {
             <p class="stat-input" id="time" name="time">${timer}</p>
         </div>
         <div class="player-input">
-        <input type="text" id="player-name" name="player-name" placeholder="TYPE NAME, HUMAN SCUM!" autocomplete="off" maxlength="24">
+        <input type="text" id="player-name" name="player-name" placeholder="TYPE NAME, HUMAN SCUM!" autofocus autocomplete="off" maxlength="24">
     </div>
     </div>
 </form>`
@@ -3743,6 +3743,17 @@ const gameOverView = () => {
 </div>
   `;
   overlay.insertAdjacentHTML("beforeend", html);
+
+  const inputField = document.getElementById("player-name");
+
+  if (inputField) {
+    inputField.addEventListener("input", function () {
+      const value = this.value.trim();
+      if (value === "") {
+        this.value = "";
+      }
+    });
+  }
 };
 
 const showAndAddGameoverMenue = () => {
