@@ -360,9 +360,6 @@ let earthOrTerra;
 let amazonOrRifleman;
 let hatchlingOrBroodling;
 
-randomizeStory();
-modifyStory();
-
 function randomizeStory() {
   const genderRandomizer = Math.round(Math.random());
   const otherRandomizer = !Math.round(Math.random());
@@ -1356,9 +1353,10 @@ const chapter = [
   "Escape \\Sequence from New York",
   "Midnight in Parity",
   "ANSI Boys",
-  "['The', 'Army'].join(' ') and C++ the Navy",
+  "['The', 'Army'].join(' ') and C the Navy",
   "Single or Carriage Return",
   "Brain-Fukkatsu no Hi",
+  "Malbolge Over Troubled Water",
   "WebSocket to 'Em",
   "The Node Less Traversed",
   "Edmonds-Carpe Diem",
@@ -1447,7 +1445,6 @@ const chapter = [
   "Chew the CRUD",
   "Bits of Eight",
   "Foo Bar None",
-  "Malbolge Over Troubled Water",
   "The Unbearable Lightness of Bing",
   "Duck Duck Type GOOS",
   "Mixin' It Up",

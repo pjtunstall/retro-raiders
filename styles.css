@@ -635,14 +635,15 @@ body {
   visibility: hidden;
   z-index: 2;
   transition: opacity 0.2s ease-in-out;
-  text-align: center;
   display: flex;
   justify-content: space-between;
+  align-items: center;
 }
 
 .credits-column {
   width: 48%;
   padding: 10px;
+  text-align: center;
 }
 
 .h0 {
