@@ -1292,7 +1292,6 @@ const chapter = [
   "With Forks and Hope",
   "ASCII Not for Whom<br>the Bell Labs Toll",
   "Render unto Caesar",
-  "Not One JWT",
   "Layer Cake",
   "Not (Just) a Number",
   "String or Nothing",
@@ -1375,12 +1374,10 @@ const chapter = [
   "Edge Case",
   "The Chromium of the Masses",
   "Brave New World Wide Web",
-  "BATman: Under the Hood",
   "Go &agrave; Gogo",
   "A Stitch in Unix Time",
   "Perl Before Swine",
   "The Erlang Goodbye",
-  "WASMR",
   "Water-Lua Sunset",
   "Haskell me no Questions and I'll Tell you no Lies",
   "Zig Stardust",
@@ -1419,6 +1416,7 @@ const chapter = [
   "This Floating Point",
   "My Old Man's a Garbage Collector",
   "JIT Kune Do",
+  "Not One JWT",
   "The Exception that Proves the Rule",
   "The Wizard of OS",
   "Club des Cryptographic Hashashins",
@@ -1454,7 +1452,6 @@ const chapter = [
   "Through a Scanln(&Darkly)",
   "Sometimes when you're O(n)",
   "The Go-Between",
-  "Heill DAGr",
   "Royal OOPSLA",
   "Det &auml;r ingen konst, det &auml;r mycket l&auml;tt",
   "First-Class Citizen Kane",
@@ -2304,15 +2301,18 @@ function toggleFlashEffect() {
 
 function turnCreditsOn() {
   displayCredits = true;
-
   credits.style.visibility = "visible";
   title.style.visibility = "hidden";
+  pauseMenu[0].style.color = "gray";
+  pauseMenu[1].style.color = "gray";
 }
 
 function turnCreditsOff() {
   displayCredits = false;
   credits.style.visibility = "hidden";
   title.style.visibility = "visible";
+  pauseMenu[0].style.color = "red";
+  pauseMenu[1].style.color = "red";
 }
 
 const turnCreditsOnThrottled = throttle(turnCreditsOn, 256);
