@@ -1438,7 +1438,7 @@ const chapter = [
   "Yield, Sir Knight!",
   "The Count of Monte Crypto",
   "The Malware Falcon",
-  "FUD and Loathing in Las Vegas",
+  "Oh FOUC",
   "The Italian Cron Job",
   "Chew the CRUD",
   "Bits of Eight",
