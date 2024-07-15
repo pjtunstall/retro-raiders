@@ -32,7 +32,9 @@ Note note: Google Cloud free trial ran out and I didn't renew, so for now the sc
 
 ## 4. Play offline
 
-Open a terminal and, from the folder called `server`, execute `go run .` to launch the game server on port 8080 and the scoreboard server on port 10000. Enter `localhost:8080` in your browser's address bar, maximize the window and enter full-screen mode (CMD+SHIFT+F). Adjust zoom if needed.
+Any server will do, e.g. run `python3 -m http.server` while in the root folder of the project. The Go server referred to below is a relic of an earlier setup, before I moved all the scoreboard logic to the client, which now saves the data in local storage. So the rest of this section is a bit superfuous, but I'll leave it in posterity.
+
+Open a terminal and, from the folder called `server`, execute `go run .` to launch the game server on port 8080 (and originally also the scoreboard server on port 10000). Enter `localhost:8080` in your browser's address bar, maximize the window and enter full-screen mode (CMD+SHIFT+F). Adjust zoom if needed.
 
 Alternatively, to make an executable file, uncomment the indicated lines in `main.go` (at the start of the `main` function) in the `server` folder, then build a Go executable according to your operating system, e.g.
 
@@ -46,7 +48,7 @@ Comment them back to ensure that `go run .` still works. Now you can double clic
 
 This was our first JavaScript project for 01Founders, a branch of the 01Edu education system, and our first attempt at making a browser game. I saw the project as an exploration of new ideas, focusing on speed of development and cool effects, rather than writing pretty code.
 
-Hence, the JavaScript lives mostly in one big file, albeit divided fairly neatly into functions. I made heavy use of global variables. There's a lot I'd do differently if I was starting again from scratch.
+Hence, the JavaScript lives mostly in one big file, albeit divided fairly neatly into functions. I made heavy use of global variables and gave the garbage collector plenty of work by not recycling alien bullets. There's a lot I'd do differently if I was starting again from scratch.
 
 We were a team of four. I did the game logic, Shane wrote the original, local scoreboard server, Daisy drew the spites, and Bilal, who has more experience of JavaScript, brought it all together.
 
@@ -58,7 +60,7 @@ Thanks to my brother, Richard, who cultivated the AI art from Stable Diffusion.
 
 ## 6. Lessons
 
-Some of these lessons were learnt at the start or in research as we went along. Most were learnt the hard way by getting them wrong. Some we had a chance into implement, while others will have to wait till the next game--unless, one day, time will permit more tinkering here.
+Some of these lessons were learnt at the start or in research as we went along. Most were learnt the hard way by getting them wrong. Some we had a chance into implement, while others will have to wait till the next game--unless, one day, time will allow more tinkering.
 
 Some points might not apply to all browser games. Rather they represent my current understanding of best practice for how to make a browser game using raw JS, according to the constraints of our project. There may well be other ways, just as valid.
 
@@ -128,7 +130,7 @@ Or you can let CSS transition take care of it. Assuming you're using CSS `transf
 
 - Let's say a frame took twice the amount of time it should have taken. There are several ways to compensate for this. LARGE DELTA, which is what we're using: double the size of the steps by which positions are incremented. CATCH-UP: perform two updates this frame to make up for the delay. You can imagine the sort of pros and cons each has. Under conditions of extremely bad performance, large delta could lead to objects skipping through each other without colliding while catch-up might execerbate the problem if all those extra updates take too long. This is known as the spiral of death. Nevertheless, either technique can keep your game running at normal speed if there is a moderate or occasional drops in performance, albeit at the cost of a visible jump when catching up from a particularly long frame. To test this, you can play on low battery (not good for your battery life!) or add time-consuming loops (preferable). There are of course, more sophisticated techniques ...
 
-- Reuse variables if possible, especially HTML elements, rather than creating, attaching, and removing them from the DOM. For example, we switched from creating a new UFO each time one is due, to resuing a single UFO and positioning it off-screen when not visible. When aliens are destroyed, their opacity is set to 0, and back to 1 when they're restored. Not yet implemented: a pool for alien bullets. Reusing JS variables means less work for the garbage collector, which can take a significant toll on performance. But also be careful to minimize the amount of active variables, as the garbage collector needs to periodically check through them to see if any can be disposed of yet. Garbage collection happens outside of your control, at the browser's discretion. This makes for unpredictable delays that can lead to frame drops. Besides being good style, encapsulating variables as object properties could help in this regard as JS objects are passed by reference. Fewer objects created by copying would mean less work for the garbage collector.
+- Reuse variables if possible, especially HTML elements, rather than creating, attaching, and removing them from the DOM. For example, we switched from creating a new UFO each time one is due, to resuing a single UFO and positioning it off-screen when not visible. When aliens are destroyed, their opacity is set to 0, and back to 1 when they're restored. Not yet implemented: a pool for alien bullets (so as to recycle both the alien bullet JS objects and the corresponding HTMLElements). Reusing JS variables means less work for the garbage collector, which can take a significant toll on performance. But also be careful to minimize the amount of active variables, as I think the garbage collector needs to periodically check through them to see if any can be disposed of yet. Garbage collection happens outside of your control, at the browser's discretion. This makes for unpredictable delays that can lead to frame drops. Besides being good style, encapsulating variables as object properties could help in this regard as JS objects are passed by reference. Fewer objects created by copying would mean less work for the garbage collector.
 
 - Benchmark! Log details about frame drops so that you can compare performance before and after implementing ideas that you hope will improve it. In particular, I wish I'd done this before implementing the web worker, as it requires a significant amount of data to be copied, and the calculations that are offloaded to it are relatively simple.
 
