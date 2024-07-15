@@ -1063,7 +1063,7 @@ in token of our sorrow."
 
 "Accept now, Mrs. Gunner, please,
 since we've achieved our goal,
-as consolation in your grief
+as consolation for your grief
 this antique games console.
 
 "A video game is always fun.
@@ -1296,7 +1296,6 @@ const chapter = [
   "Not (Just) a Number",
   "String or Nothing",
   "Query Lodgings",
-  "Super Bool",
   "Cold Console",
   "Terminal Velocity",
   "Winds Light to Variable",
@@ -1486,6 +1485,7 @@ const chapter = [
   "Finally!",
   "Halley's Comment",
   "8-Bitten, Twice Shy",
+  "And that Inverted Bool we Call the Sky",
   "The Event Whisperer",
   "All Quiet on the Western Front-End",
   "Awaiting for Hashbangs to Send me to Sleep",
