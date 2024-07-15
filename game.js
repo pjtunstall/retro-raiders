@@ -2227,6 +2227,9 @@ function newGame() {
 }
 
 function pause() {
+  if (paused) {
+    return;
+  }
   pauseStartTime = Date.now();
   if (ufoActive) {
     voltage.pause();
@@ -2267,12 +2270,11 @@ function unpause() {
       powerupStartTime = Date.now() - 15000;
       restartInProgress = false;
     }
-  } else {
-    const pauseInterval = Date.now() - pauseStartTime;
-    startTime += pauseInterval;
-    ufoTimeUp += pauseInterval;
-    powerupStartTime += pauseInterval;
   }
+  const pauseInterval = Date.now() - pauseStartTime;
+  startTime += pauseInterval;
+  ufoTimeUp += pauseInterval;
+  powerupStartTime += pauseInterval;
   if (ufoActive) {
     voltage.play();
   }
