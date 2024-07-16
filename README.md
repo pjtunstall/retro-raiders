@@ -48,7 +48,7 @@ Comment them back to ensure that `go run .` still works. Now you can double clic
 
 This was our first JavaScript project for 01Founders, a branch of the 01Edu education system, and our first attempt at making a browser game. I saw the project as an exploration of new ideas, focusing on speed of development and cool effects, rather than writing pretty code.
 
-Hence, the JavaScript lives mostly in one big file, albeit divided fairly neatly into functions. I made heavy use of global variables and gave the garbage collector plenty of work by not recycling alien bullets. There's a lot I'd do differently if I was starting again from scratch.
+Hence, the JavaScript lives mostly in one big file, albeit divided fairly neatly into functions. I made heavy use of global variables and gave the garbage collector plenty of unnecessary work. There's a lot I'd do differently if I was starting again from scratch.
 
 We were a team of four. I did the game logic, Shane wrote the original, local scoreboard server, Daisy drew the spites, and Bilal, who has more experience of JavaScript, brought it all together.
 

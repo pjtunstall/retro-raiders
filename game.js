@@ -1589,6 +1589,7 @@ const chapter = [
   "Another One Bytes the Rust",
   "The Borrowers",
   "Raiders of the Lost Arc&lt;T&gt;",
+  "u8 for It",
   "let mut swan",
   "pub mod grub",
   "Enum Enum Miny Mo",
