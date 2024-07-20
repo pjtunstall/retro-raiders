@@ -1535,7 +1535,7 @@ const chapter = [
   "The Currying Game",
   "The Ties that.bind()",
   ".apply(yourself)",
-  "Show Me the Interface you Had before you Were Born",
+  "Show Me the Interface<br>you Had<br>before you Were Born",
   "Run, Run, Run",
   "I'm a Backend Man",
   "Grassy Null",
@@ -1597,10 +1597,13 @@ const chapter = [
   "pub mod grub",
   "Enum Enum Miny Mo",
   "Tuple Mania",
+  "Trait-or's Gate",
   "Do Not Go Gentle into that Good Nightly Build",
   "&amp;str Crazy",
-  "Glob of the Gaps",
+  "The Lincoln Impl",
   "Kyrie Lifetime Elision",
+  "Glob of the Gaps",
+  "The Lord of the RNGs",
 ];
 let chapterNumber = Math.floor(chapter.length * Math.random());
 title.innerHTML = `Chapter ${level}:<br>${chapter[chapterNumber]}`;
