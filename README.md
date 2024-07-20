@@ -132,6 +132,12 @@ Or you can let CSS transition take care of it. Assuming you're using CSS `transf
 
 - Reuse variables if possible, especially HTML elements, rather than creating, attaching, and removing them from the DOM. For example, we switched from creating a new UFO each time one is due, to resuing a single UFO and positioning it off-screen when not visible. When aliens are destroyed, their opacity is set to 0, and back to 1 when they're restored. Not yet implemented: a pool for alien bullets (so as to recycle both the alien bullet JS objects and the corresponding HTMLElements). Reusing JS variables means less work for the garbage collector, which can take a significant toll on performance. But also be careful to minimize the amount of active variables, as I think the garbage collector needs to periodically check through them to see if any can be disposed of yet. (But I don't have a quantitative sense of how this all stacks up yet.) Garbage collection happens outside of your control, at the browser's discretion. This makes for unpredictable delays that can lead to frame drops. Besides being good style, encapsulating variables as object properties could help in this regard as JS objects are passed by reference. Fewer objects created and abandonned would mean less work for the garbage collector.
 
+- On the topic of reusing variables, a message to a web worker is a special case as the data is copied anyway. Gemini AI suggests the following strategy to reduce the amount of data to be copied:
+
+  - Track Changes: Maintain a separate object or set to track which properties of messageToWorker have been modified since the last update.
+  - Selective Copying: When posting a message, create a new object containing only the changed properties (and their values) from messageToWorker.
+  - Merge in Worker: In the worker, merge the received updates into the existing game state object.
+
 - Benchmark! Log details about frame drops so that you can compare performance before and after implementing ideas that you hope will improve it. In particular, I wish I'd done this before implementing the web worker, as it requires a significant amount of data to be copied, and the calculations that are offloaded to it are relatively simple.
 
 - `requestIdleCallback` makes a nice complement to `requestAnimationFrame`. It can be used to defer non-urgent work to idle frames.
