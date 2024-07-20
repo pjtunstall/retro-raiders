@@ -1571,7 +1571,7 @@ const chapter = [
   "Childe Process to the Dark Tower Came",
   "This is Not a Pipe",
   "Stack Overflow my Tears the Policeman Said",
-  "Stay Away from the Cities; Stay Away from the Towns;<br>Stay away from the Man Pushin' Codin' Around",
+  "Stay Away from the Cities;<br>Stay Away from the Towns;<br>Stay away from the Man Pushin' Codin' Around",
   "Seeking Closure",
   "Be on your Best Undefined Behavior, Now",
   "U'RAIA Heap",
