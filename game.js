@@ -1596,7 +1596,7 @@ const chapter = [
   "The Fearless Concurrency Killers",
   "The Little Pattern Match Girl",
   "Un grand roy deref-rayeur",
-  "let mut swan",
+  "dastardly &mut ley",
   "pub mod grub",
   "Enum Enum Miny Mo",
   "Tuple Mania",
