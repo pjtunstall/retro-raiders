@@ -1607,7 +1607,7 @@ const chapter = [
   "Trait-or's Gate",
   "Do Not Go Gentle into that Good Nightly Build",
   "&amp;str Crazy",
-  "<Cow<str>'s Last Stand",
+  "Cow&lt;str&gt;'s Last Stand",
   "The Lincoln Impl",
   "Kyrie Lifetime Elision",
   "Glob of the Gaps",
