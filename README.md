@@ -34,7 +34,7 @@ Note note: Google Cloud free trial ran out and I didn't renew, so for now the sc
 
 Any server will do, e.g. open a terminal and run `python3 -m http.server` while in the root folder of the project and enter `localhost:8000` in the address bar of your browser.
 
-The Go server referred to below is a relic of an earlier setup, before I moved all the scoreboard logic to the client, which now saves the data in local storage. So the rest of this section is a bit superfuous, but I'll leave it in posterity. It can be used to server the static files for the game. Open a terminal and, from the folder called `server`, execute `go run .` to launch the game server on port 8080 (and originally also the scoreboard server on port 10000). Enter `localhost:8080` in your browser's address bar, maximize the window and enter full-screen mode (CMD+SHIFT+F). Adjust zoom if needed.
+The Go server referred to below is a relic of an earlier setup, before I moved all the scoreboard logic to the client, which now saves the data in local storage. So the rest of this section is a bit superfuous, but I'll leave it in posterity. It can be used to serve the static files for the game. Open a terminal and, from the folder called `server`, execute `go run .` to launch the game server on port 8080 (and originally also the scoreboard server on port 10000). Enter `localhost:8080` in your browser's address bar, maximize the window and enter full-screen mode (CMD+SHIFT+F). Adjust zoom if needed.
 
 Alternatively, to make an executable file, uncomment the indicated lines in `main.go` (at the start of the `main` function) in the `server` folder, then build a Go executable according to your operating system, e.g.
 
