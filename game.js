@@ -1585,6 +1585,7 @@ const chapter = [
   "Math.max(furyNode)",
   "CPU Core Blimey",
   "Concurrent Bun",
+  "The DOMbusters",
   "Hot Fuzz-Test",
   "Mutex-Mex",
   "Temp File Fugit",

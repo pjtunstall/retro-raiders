@@ -48,7 +48,7 @@ Comment them back to ensure that `go run .` still works. Now you can double clic
 
 This was our first JavaScript project for 01Founders, a branch of the 01Edu education system, and our first attempt at making a browser game. I saw the project as an exploration of new ideas, focusing on speed of development and cool effects, rather than writing pretty code.
 
-We were a team of four. I did the game logic, Shane wrote the original, local scoreboard server, Daisy drew the spites, and Bilal, who has more experience of JavaScript, brought it all together.
+We were a team of four. I did the game logic, Shane wrote the original, local scoreboard server, Daisy drew the sprites, and Bilal, who has more experience of JavaScript, brought it all together.
 
 Bilal actually refactored the whole thing into a modular, object-oriented style, but while he was working on that, I couldn't resist the urge to continue developing my version. I introduced a spritesheet to animate the aliens more efficiently, and eventually a web worker to take care of movement and collision detection. I also fixed various bugs. So it was this less elegantly structured rendition that came to be presented as the "finished" version.
 
@@ -66,25 +66,24 @@ Some points might not apply to all browser games. Rather they represent my curre
 
 - Reduce layout and painting by using `transform` and `opacity` in CSS. To quote the [01edu public repo](https://github.com/01-edu/public/blob/master/subjects/good-practices/README.md):
 
-  ```
+  ```javascript
   // bad
   // this will trigger the layout to recalculate everything and repaint it again
-  box.style.left = `${x * 100}px`
+  box.style.left = `${x * 100}px`;
 
   // good
   // this way its possible to lose the layout
-  box.style.transform = `translateX(${x * 100}px)`
+  box.style.transform = `translateX(${x * 100}px)`;
   ```
 
   They also say, "It is possible to remove painting by adding a layer."
 
-  ```
-  /_ this will take care of the painting by creating a layer and transform it_/
+  ```css
+  /* this will take care of the painting by creating a layer and transform it */
   #box {
-  width: 100px;
-  height: 100px;
-  ....
-  will-change: transform;
+    width: 100px;
+    height: 100px;
+    will-change: transform;
   }
   ```
 
@@ -170,103 +169,97 @@ Three mysteries. This concerns CSS.
 
 i. Each alien image is 60px x 60px. For some reason, we needed to specify double the number of pixels the keyhole (my term for the "window" we're looking through at the image to select which part to display) needs to be shifted horizontally. The y-coordinate works as expected; we need to specify the right number of pixels we want shift it vertically, not double. (According to [Mozilla](https://developer.mozilla.org/en-US/docs/Web/CSS/transform-function/scale), when only one number is passed to scale, the element is scaled equally in height and width. Indeed, that's what we see in our game.)
 
-```
-
+```css
 .aliens-grid {
-display: grid;
-position: absolute;
-left: 0;
-right: 0;
-grid-template-columns: repeat(11, 1fr);
-grid-template-rows: repeat(5, 1fr);
-gap: 0px;
-width: 660px;
-height: 300px;
-z-index: 1;
+  display: grid;
+  position: absolute;
+  left: 0;
+  right: 0;
+  grid-template-columns: repeat(11, 1fr);
+  grid-template-rows: repeat(5, 1fr);
+  gap: 0px;
+  width: 660px;
+  height: 300px;
+  z-index: 1;
 }
 
 .aliens-grid > div {
-width: 60px;
-height: 60px;
-background-image: url('aliens.png');
-transform: scale(0.5);
+  width: 60px;
+  height: 60px;
+  background-image: url("aliens.png");
+  transform: scale(0.5);
 }
 
 @keyframes squidAnimation {
-0% {
-background-position: 0 0;
-}
-50% {
-background-position: -120px 0;
-}
+  0% {
+    background-position: 0 0;
+  }
+  50% {
+    background-position: -120px 0;
+  }
 }
 
 @keyframes crabAnimation {
-0% {
-background-position: 0 -60px;
-}
-50% {
-background-position: -120px -60px;
-}
-100% {
-background-position: 0 -60px;
-}
+  0% {
+    background-position: 0 -60px;
+  }
+  50% {
+    background-position: -120px -60px;
+  }
+  100% {
+    background-position: 0 -60px;
+  }
 }
 
 @keyframes blobAnimation {
-0% {
-background-position: 0 -120px;
+  0% {
+    background-position: 0 -120px;
+  }
+  50% {
+    background-position: -60px -120px;
+  }
 }
-50% {
-background-position: -60px -120px;
-}
-}
-
 ```
 
 ii. The second mystery is that the animation for the third type of alien, the "blobs" apparently needs to follow a different logic from the animation for the others:
 
-```
-
+```css
 .squid {
-animation: squidAnimation 1s infinite steps(2);
+  animation: squidAnimation 1s infinite steps(2);
 }
 
 .crab {
-animation: crabAnimation 1s infinite steps(2);
+  animation: crabAnimation 1s infinite steps(2);
 }
 
 .blob {
-animation: blobAnimation 0.5s infinite steps(1);
+  animation: blobAnimation 0.5s infinite steps(1);
 }
 
 .squid-black {
-animation: squidBlackAnimation 1s infinite steps(2);
+  animation: squidBlackAnimation 1s infinite steps(2);
 }
 
 .crab-black {
-animation: crabBlackAnimation 1s infinite steps(2);
+  animation: crabBlackAnimation 1s infinite steps(2);
 }
 
 .blob-black {
-animation: blobBlackAnimation 0.5s infinite steps(1);
+  animation: blobBlackAnimation 0.5s infinite steps(1);
 }
-
 ```
 
 Each alien is 60px x 60 px. Why do squid and crab require 1s and steps(2) while the blobs need 0.5s and steps(1) to move in sync?
 
 Specifying width and height here is superfluous, more of an annotation than anything:
 
-```
-
+```css
 .aliens-grid > div {
-width: 60px;
-height: 60px;
-background-image: url('aliens.png');
-transform: scale(0.5);
+  width: 60px;
+  height: 60px;
+  background-image: url("aliens.png");
+  transform: scale(0.5);
 }
-
 ```
 
 The width and height of each cell in the grid is determined by the size of the whole grid and the number of cells in it.
@@ -275,7 +268,7 @@ Our fellow student, Peter, asked: "Do all the aliens appear at the same sort of 
 
 My reply: "There's no difference in when the aliens appear. All types are present at the beginning and as the game speeds up."
 
-iii. Why do the crabs need two have a 100% value specified while the other types only need 0% and 50%. Initial attempts followed the more natural procedure of making all three animations consistent. Since there are two frames, it seemed natural to only specify 0% and 50%. I saw examples online of 0%, 50%, and 100% specified, but the 100% seemed superfluous. I was able to delete it on other animations, and on most of these, but the crabs were different. On ChatGPT's suggestion, I included a 100% which apparently serves the purpose of PREVENTING a third, un-asked-for frame from being displayed.
+iii. Why do the crabs need to have a 100% value specified while the other types only need 0% and 50%. Initial attempts followed the more natural procedure of making all three animations consistent. Since there are two frames, it seemed natural to only specify 0% and 50%. I saw examples online of 0%, 50%, and 100% specified, but the 100% seemed superfluous. I was able to delete it on other animations, and on most of these, but the crabs were different. On ChatGPT's suggestion, I included a 100% which apparently serves the purpose of PREVENTING a third, un-asked-for frame from being displayed.
 
 I find it curious that the blobs were the anomaly in terms of time value and steps, but the crabs are the anomaly in terms of number of frames that need to be specified.
 
