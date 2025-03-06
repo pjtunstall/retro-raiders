@@ -8,6 +8,8 @@
 6. [Lessons](#6-lessons)
 7. [Mysteries](#7-mysteries)
 
+![crystal](crystal.jpg)
+
 ## 1. Caution
 
 If you're sensitive to flashing lights, press `F` while the game is paused to toggle off the flash effect. (The game starts in paused mode.)
