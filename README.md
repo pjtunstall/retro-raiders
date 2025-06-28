@@ -1,5 +1,7 @@
 # RETRO RAIDERS
 
+![crystal](crystal.jpg)
+
 1. [Caution](#1-caution)
 2. [Instructions](#2-instructions)
 3. [Play online](#3-play-online)
@@ -7,8 +9,6 @@
 5. [Context](#5-context)
 6. [Lessons](#6-lessons)
 7. [Mysteries](#7-mysteries)
-
-![crystal](crystal.jpg)
 
 ## 1. Caution
 
