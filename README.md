@@ -28,23 +28,9 @@ Desktop only.
 
 Works best on Chrome or Brave. Maximize the window to full-screen mode and make sure the toobar is hidden. Adjust zoom as needed. (In Safari you may need to refresh the page after changing the zoom.)
 
-Note: at some point, we hosted a scoreboard at Firebase, in the form of a Firestore Database, and a server, written in Go, as middleware to handle database operations, on Google App Engine, part of Google Cloud. You can find the code for this server in the `firestore` folder. (The `server` folder contains an earlier version of this Go server that we used for prototyping offline, along with a JSON file to represent the high scores.)
-
-Note note: Google Cloud free trial ran out and I didn't renew, so for now the scoreboard will just be in local storage on your browser.
-
 ## 4. Play offline
 
 Any server will do, e.g. open a terminal and run `python3 -m http.server` while in the root folder of the project and enter `localhost:8000` in the address bar of your browser.
-
-The Go server referred to below is a relic of an earlier setup, before I moved all the scoreboard logic to the client, which now saves the data in local storage. So the rest of this section is a bit superfuous, but I'll leave it in posterity. It can be used to serve the static files for the game. Open a terminal and, from the folder called `server`, execute `go run .` to launch the game server on port 8080 (and originally also the scoreboard server on port 10000). Enter `localhost:8080` in your browser's address bar, maximize the window and enter full-screen mode (CMD+SHIFT+F). Adjust zoom if needed.
-
-Alternatively, to make an executable file, uncomment the indicated lines in `main.go` (at the start of the `main` function) in the `server` folder, then build a Go executable according to your operating system, e.g.
-
-`go build -o main_linux`
-`GOOS=windows GOARCH=amd64 go build -o main.exe`
-`GOOS=darwin GOARCH=amd64 go build -o main_mac`
-
-Comment them back to ensure that `go run .` still works. Now you can double click on the executable file instead of typing `go run .` in a terminal.
 
 ## 5. Context
 
