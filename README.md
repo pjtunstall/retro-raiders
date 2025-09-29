@@ -149,11 +149,19 @@ Another important fact is that each web worker has its own namespace; communicat
 
 (Note: this was a rather old version of Safari. Looking back now, February 2024, the current Safari seems to find the right zoom and display the aliens correctly at that zoom, and the barriers with just the same slight offset anomaly as Firefox. Adjusting the zoom manually, however, still throws the aliens off, garbling them by selecting the wrong portions of the spritesheet, and these mutations can remain even after resetting to the correct zoom.)
 
-Perhaps SVG would be the solution. Much of the complication comes from the choice (in one of our versions) to implement spritesheets of PNG images for different-maps and use CSS animation. At least with my current scattered understanding, CSS animation seems quirky, unpredictable, and sensitive to all sorts of changes and possible interference from other CSS. Maybe modularizing the CSS would help. I'd love to hear that there's a better practice purely using SVG and JS. Maybe the [Web Animations API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Animations_API) is the answer.
+Perhaps SVG or Canvas would be the solution. Much of the complication comes from the choice (in one of our versions) to implement spritesheets of PNG images for different-maps and use CSS animation. At least with my current scattered understanding, CSS animation seems quirky, unpredictable, and sensitive to all sorts of changes and possible interference from other CSS. Maybe modularizing the CSS would help. I'd love to hear that there's a better practice purely using SVG and JS. Maybe the [Web Animations API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Animations_API) is the answer.
 
 ## 7. Mysteries
 
-Three mysteries. This concerns CSS.
+Although now, to some extent, solved (2025), I'll leave these three mysteries in here as they may hold the clue to further mysteries. The essence of the misunderstanding is that I didn't understand how CSS animation works. In particular, I didn't realise that there are two ways to divide up the total duration: keyframes, marked with %, which, by default, specify the state from that % of the total duration till the next keyframe. By default, values transition smoothly between the values specified at keyframes. When only a 0% keyframe is given, the is an implicit 100% keyframe that has the original, pre-animation style.
+
+Meanwhile, independently of that system, each subinterval between keyframes can be divided up into `n` equal intervals (steps) by specifying `steps(n)`. This is the way to achieve animations where there are discrete steps rather than smooth transitions between values. Suppose we've specified `steps(n)`. Let the steps be counted from `k = 0` to `k = n - 1`. Let the value at one keyframe be `v(i)` and the value at the next keyframe be `v(f)`. Then the value on the `k`th step between them is
+
+```
+v(k) = v(i) + k * ((v(f) - v(i)) / n)
+```
+
+Here are the three mysteries that intrigued me when I made this game.
 
 i. Each alien image is 60px x 60px. For some reason, we needed to specify double the number of pixels the keyhole (my term for the "window" we're looking through at the image to select which part to display) needs to be shifted horizontally. The y-coordinate works as expected; we need to specify the right number of pixels we want shift it vertically, not double. (According to [Mozilla](https://developer.mozilla.org/en-US/docs/Web/CSS/transform-function/scale), when only one number is passed to scale, the element is scaled equally in height and width. Indeed, that's what we see in our game.)
 
@@ -263,3 +271,87 @@ I find it curious that the blobs were the anomaly in terms of time value and ste
 These values work, but we need to understand why if we're going to learn anything from it. I'd be grateful to hear from anyone who understands CSS animation or who can point me towards a resources that can explain these seeming contradictions.
 
 The most common thing that would go wrong when we had more logical-seeming, consistent values would be that the wrong parts of the spritesheet would be chosen, so that we'd see part of one alien image together with part of another in a single frame, instead of the animation alternating between the two frames of each alien. This, and the anomaly whereby the "blobs" were animated at a different speed from all the rest of them till we had this adjustment.
+
+UPDATE: With our new undersanding, the animations can be brought into line as follows, but with an unacceptable side effect, detailed below. (Don't forget to adjust `main.js` similarly, changing `step(2)` to `step(1)`.)
+
+```javascript
+keyframes squidAnimation {
+  0% {
+    background-position: 0 0;
+  }
+  50% {
+    background-position: -60px 0;
+  }
+}
+
+@keyframes crabAnimation {
+  0% {
+    background-position: 0 -60px;
+  }
+  50% {
+    background-position: -60px -60px;
+  }
+}
+
+@keyframes blobAnimation {
+  0% {
+    background-position: 0 -120px;
+  }
+  50% {
+    background-position: -60px -120px;
+  }
+}
+
+.squid {
+  animation: squidAnimation 1s steps(1) infinite;
+}
+
+.crab {
+  animation: crabAnimation 1s steps(1) infinite;
+}
+
+.blob {
+  animation: blobAnimation 1s steps(1) infinite;
+}
+
+@keyframes squidBlackAnimation {
+  0% {
+    background-position: 0 -180px;
+  }
+  50% {
+    background-position: -60px -180px;
+  }
+}
+
+@keyframes crabBlackAnimation {
+  0% {
+    background-position: 0 -240px;
+  }
+  50% {
+    background-position: -60px -240px;
+  }
+}
+
+@keyframes blobBlackAnimation {
+  0% {
+    background-position: 0 -300px;
+  }
+  50% {
+    background-position: -60px -300px;
+  }
+}
+
+.squid-black {
+  animation: squidBlackAnimation 1s infinite steps(1);
+}
+
+.crab-black {
+  animation: crabBlackAnimation 1s infinite steps(1);
+}
+
+.blob-black {
+  animation: blobBlackAnimation 1s infinite steps(1);
+}
+```
+
+The side effect is that, for the first few seconds of holding down the space bar (fire), all aliens stop flapping. One suggestion is that this is jank due to them being better synchronized, but I'm not convinced.
