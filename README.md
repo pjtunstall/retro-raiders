@@ -274,7 +274,7 @@ The most common thing that would go wrong when we had more logical-seeming, cons
 
 UPDATE: With our new undersanding, the animations can be brought into line as follows, but with an unacceptable side effect, detailed below. (Don't forget to adjust the JavaScript similarly, changing `step(2)` to `step(1)`.)
 
-```javascript
+```css
 keyframes squidAnimation {
   0% {
     background-position: 0 0;
