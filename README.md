@@ -342,15 +342,15 @@ UPDATE: With the new undersanding described at the start of this section, the an
 }
 
 .squid-black {
-  animation: squidBlackAnimation 0.5s infinite steps(1);
+  animation: squidBlackAnimation 0.5s steps(1) infinite;
 }
 
 .crab-black {
-  animation: crabBlackAnimation 0.5s infinite steps(1);
+  animation: crabBlackAnimation 0.5s steps(1) infinite;
 }
 
 .blob-black {
-  animation: blobBlackAnimation 0.5s infinite steps(1);
+  animation: blobBlackAnimation 0.5s steps(1) infinite;
 }
 ```
 
