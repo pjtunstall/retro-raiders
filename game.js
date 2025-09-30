@@ -3200,27 +3200,23 @@ function render() {
   if (aliensDanceFaster) {
     for (const squid of squids) {
       if (squid.classList.contains("squid")) {
-        squid.style.animation = `squidAnimation ${alienAnimationDuration}s infinite steps(2)`;
+        squid.style.animation = `squidAnimation ${alienAnimationDuration}s steps(1) infinite`;
       } else if (squid.classList.contains("squid-black")) {
-        squid.style.animation = `squidBlackAnimation ${alienAnimationDuration}s infinite steps(2)`;
+        squid.style.animation = `squidBlackAnimation ${alienAnimationDuration}s steps(1) infinite`;
       }
     }
     for (const crab of crabs) {
       if (crab.classList.contains("crab")) {
-        crab.style.animation = `crabAnimation ${alienAnimationDuration}s infinite steps(2)`;
+        crab.style.animation = `crabAnimation ${alienAnimationDuration}s steps(1) infinite`;
       } else if (crab.classList.contains("crab-black")) {
-        crab.style.animation = `crabBlackAnimation ${alienAnimationDuration}s infinite steps(2)`;
+        crab.style.animation = `crabBlackAnimation ${alienAnimationDuration}s steps(1) infinite`;
       }
     }
     for (const blob of blobs) {
       if (blob.classList.contains("blob")) {
-        blob.style.animation = `blobAnimation ${
-          0.5 * alienAnimationDuration
-        }s infinite steps(1)`;
+        blob.style.animation = `blobAnimation ${alienAnimationDuration}s steps(1) infinite`;
       } else if (blob.classList.contains("blob-black")) {
-        blob.style.animation = `blobBlackAnimation ${
-          0.5 * alienAnimationDuration
-        }s infinite steps(1)`;
+        blob.style.animation = `blobBlackAnimation ${alienAnimationDuration}s steps(1) infinite`;
       }
     }
     aliensDanceFaster = false;

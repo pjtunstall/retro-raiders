@@ -272,10 +272,10 @@ These values work, but we need to understand why if we're going to learn anythin
 
 The most common thing that would go wrong when we had more logical-seeming, consistent values would be that the wrong parts of the spritesheet would be chosen, so that we'd see part of one alien image together with part of another in a single frame, instead of the animation alternating between the two frames of each alien. This, and the anomaly whereby the "blobs" were animated at a different speed from all the rest of them till we had this adjustment.
 
-UPDATE: With our new undersanding, the animations can be brought into line as follows, but with an unacceptable side effect, detailed below. (Don't forget to adjust the JavaScript similarly, changing `step(2)` to `step(1)`.)
+UPDATE: With the new undersanding described at the start of this section, the animations have been brought into line as follows. Similarly the `if (aliensDanceFaster) {` block in the JavaScript main thread.
 
 ```css
-keyframes squidAnimation {
+@keyframes squidAnimation {
   0% {
     background-position: 0 0;
   }
@@ -303,15 +303,15 @@ keyframes squidAnimation {
 }
 
 .squid {
-  animation: squidAnimation 1s steps(1) infinite;
+  animation: squidAnimation 0.5s steps(1) infinite;
 }
 
 .crab {
-  animation: crabAnimation 1s steps(1) infinite;
+  animation: crabAnimation 0.5s steps(1) infinite;
 }
 
 .blob {
-  animation: blobAnimation 1s steps(1) infinite;
+  animation: blobAnimation 0.5s steps(1) infinite;
 }
 
 @keyframes squidBlackAnimation {
@@ -342,16 +342,16 @@ keyframes squidAnimation {
 }
 
 .squid-black {
-  animation: squidBlackAnimation 1s infinite steps(1);
+  animation: squidBlackAnimation 0.5s infinite steps(1);
 }
 
 .crab-black {
-  animation: crabBlackAnimation 1s infinite steps(1);
+  animation: crabBlackAnimation 0.5s infinite steps(1);
 }
 
 .blob-black {
-  animation: blobBlackAnimation 1s infinite steps(1);
+  animation: blobBlackAnimation 0.5s infinite steps(1);
 }
 ```
 
-The side effect is that, for the first few seconds of holding down the space bar (fire), all aliens stop flapping. One suggestion is that this is jank due to them being better synchronized, but I'm not convinced.
+One final curiosity: When I initially did this, I left the total duration at 1s, forgetting that it wsa in fact twice as fast in the original. This had the side effect that, for the first few seconds of holding down the space bar (fire) and hitting aliens, all aliens stop flap for most of each second and just flap on what looks like half of the second. One suggestion was that this is jank due to them being better synchronized, but I'm not convinced; the pattern is so regular and dev tools show no especial strain there. It only happens when I hold fire, not when I fire shots one by one. It doesn't happen when I hold fire and don't hit aliens. I suspect it's something to do with the mechanism whereby the aliens speed up the more of them are hit, that maybe hasn't been brought into line with the new way of doing things, but commenting out the `if (aliensDanceFaster) {` block didn't resolve it.

@@ -146,7 +146,7 @@ body {
     background-position: 0 0;
   }
   50% {
-    background-position: -120px 0;
+    background-position: -60px 0;
   }
 }
 
@@ -155,10 +155,7 @@ body {
     background-position: 0 -60px;
   }
   50% {
-    background-position: -120px -60px;
-  }
-  100% {
-    background-position: 0 -60px;
+    background-position: -60px -60px;
   }
 }
 
@@ -171,15 +168,24 @@ body {
   }
 }
 
+.squid {
+  animation: squidAnimation 0.5s steps(1) infinite;
+}
+
+.crab {
+  animation: crabAnimation 0.5s steps(1) infinite;
+}
+
+.blob {
+  animation: blobAnimation 0.5s steps(1) infinite;
+}
+
 @keyframes squidBlackAnimation {
   0% {
     background-position: 0 -180px;
   }
   50% {
-    background-position: -120px -180px;
-  }
-  100% {
-    background-position: 0 -180px;
+    background-position: -60px -180px;
   }
 }
 
@@ -188,10 +194,7 @@ body {
     background-position: 0 -240px;
   }
   50% {
-    background-position: -120px -240px;
-  }
-  100% {
-    background-position: 0 -240px;
+    background-position: -60px -240px;
   }
 }
 
@@ -204,24 +207,12 @@ body {
   }
 }
 
-.squid {
-  animation: squidAnimation 1s infinite steps(2);
-}
-
-.crab {
-  animation: crabAnimation 1s infinite steps(2);
-}
-
-.blob {
-  animation: blobAnimation 0.5s infinite steps(1);
-}
-
 .squid-black {
-  animation: squidBlackAnimation 1s infinite steps(2);
+  animation: squidBlackAnimation 0.5s infinite steps(1);
 }
 
 .crab-black {
-  animation: crabBlackAnimation 1s infinite steps(2);
+  animation: crabBlackAnimation 0.5s infinite steps(1);
 }
 
 .blob-black {
