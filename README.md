@@ -272,7 +272,7 @@ These values work, but we need to understand why if we're going to learn anythin
 
 The most common thing that would go wrong when we had more logical-seeming, consistent values would be that the wrong parts of the spritesheet would be chosen, so that we'd see part of one alien image together with part of another in a single frame, instead of the animation alternating between the two frames of each alien. This, and the anomaly whereby the "blobs" were animated at a different speed from all the rest of them till we had this adjustment.
 
-UPDATE: With our new undersanding, the animations can be brought into line as follows, but with an unacceptable side effect, detailed below. (Don't forget to adjust `main.js` similarly, changing `step(2)` to `step(1)`.)
+UPDATE: With our new undersanding, the animations can be brought into line as follows, but with an unacceptable side effect, detailed below. (Don't forget to adjust the JavaScript similarly, changing `step(2)` to `step(1)`.)
 
 ```javascript
 keyframes squidAnimation {
